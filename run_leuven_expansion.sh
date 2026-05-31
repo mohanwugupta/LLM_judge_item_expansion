@@ -90,8 +90,8 @@ PROJECT_DIR=/scratch/gpfs/JORDANAT/mg9965/FalseMemoryISC-CI/LLM_judge_item_expan
 MODEL_DIR_NAME=Qwen--Qwen2.5-72B-Instruct
 MODEL_PATH=/scratch/gpfs/JORDANAT/mg9965/models/$MODEL_DIR_NAME
 SERVED_MODEL_NAME=Qwen2.5-72B-Instruct
-CONDA_ENV=FalseMemoryISC
-TENSOR_PARALLEL_SIZE=2
+CONDA_ENV=PromptControlText
+TENSOR_PARALLEL_SIZE=4
 MAX_MODEL_LEN=4096
 GPU_MEMORY_UTILIZATION=0.92
 
@@ -149,7 +149,7 @@ export TRANSFORMERS_OFFLINE=1
 # ------------------------------------------------------------------
 # 4. GPU / Memory optimizations
 # ------------------------------------------------------------------
-export CUDA_VISIBLE_DEVICES=0,1
+export CUDA_VISIBLE_DEVICES=0,1,2,3
 export OMP_NUM_THREADS=32
 export TOKENIZERS_PARALLELISM=true
 export PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True
