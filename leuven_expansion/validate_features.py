@@ -173,13 +173,14 @@ def _build_pairs_for_cells(
     cells: List[Tuple],
     df: pd.DataFrame,
     feature_columns: List[str],
+    item_column: str = "word_normalized",
 ) -> List[Dict]:
     """Convert cell tuples to pair dicts for the job runner."""
     pairs = []
     for word_normalized, fid, fcol, _ in cells:
         orig_rows = df[df["word_normalized"] == word_normalized]
         word_original = (
-            orig_rows.iloc[0]["Name"] if len(orig_rows) > 0 else word_normalized
+            orig_rows.iloc[0][item_column] if len(orig_rows) > 0 else word_normalized
         )
         pairs.append({
             "word_original": word_original,
@@ -215,7 +216,7 @@ def run_cell_holdout(
         "Cell holdout: %d train cells, %d test cells", len(train_cells), len(test_cells)
     )
 
-    pairs = _build_pairs_for_cells(test_cells, df, schema["feature_columns"])
+    pairs = _build_pairs_for_cells(test_cells, df, schema["feature_columns"], item_column=schema["item_column"])
     run_atomic_jobs(
         job_id=job_id,
         pairs=pairs,
@@ -301,7 +302,7 @@ def run_word_holdout(
     for _, row in test_df.iterrows():
         for fid, fcol in enumerate(feature_columns):
             pairs.append({
-                "word_original": str(row.get("Name", row["word_normalized"])),
+                "word_original": str(row.get(schema["item_column"], row["word_normalized"])),
                 "word_normalized": str(row["word_normalized"]),
                 "feature_id": fid,
                 "feature_text": fcol,
