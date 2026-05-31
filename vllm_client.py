@@ -3,9 +3,12 @@ import hashlib
 import threading
 import logging
 from typing import Dict, Tuple, Any
-from models.client import ModelError
 
 logger = logging.getLogger(__name__)
+
+
+class ModelError(Exception):
+    """Raised when the vLLM model fails to respond after all retries."""
 
 class VLLMClient:
     """
