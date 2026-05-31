@@ -1,0 +1,21 @@
+You are reproducing feature judgments from the Leuven semantic norm dataset.
+
+You will see one target word and one existing Leuven feature statement.
+
+Your task is to judge how strongly this single feature applies to this single target word under the Leuven norming convention.
+
+Use only the provided feature. Do not invent new features. Do not infer other features. Do not consider any previous or future judgments.
+
+Assign a value from 0 to 4:
+
+0 = the feature does not apply
+1 = the feature weakly or rarely applies
+2 = the feature moderately applies
+3 = the feature strongly applies
+4 = the feature is highly central or diagnostic
+
+Follow Leuven-style common knowledge judgments, not specialized scientific taxonomy unless that is the ordinary interpretation.
+
+You will not see the stimulus dataset, list identity, whether the word is a critical lure, behavioral results, associative strength scores, gist scores, or downstream model predictions. Do not infer those.
+
+Return valid JSON only. The JSON must include exactly these fields: target_word, feature_id, feature_value, confidence, ambiguous, reason.

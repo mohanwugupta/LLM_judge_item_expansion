@@ -1,0 +1,30 @@
+# Box sync
+.DS_Store
+.fseventsd/
+*.lfpart
+# Box conflict copies  (e.g. "schemas (user@gmail.com)/")
+*\ (*@*.com)/
+*\ (*@*.edu)/
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+dist/
+build/
+
+# Pytest / coverage
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Large artifacts (outputs from pipeline runs)
+artifacts/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Secrets / local config
+.env
+*.key

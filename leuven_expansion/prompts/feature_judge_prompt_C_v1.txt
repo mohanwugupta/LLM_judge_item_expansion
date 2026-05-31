@@ -1,0 +1,17 @@
+Judge this single target_word × feature pair using the fixed Leuven feature schema.
+
+Check:
+
+- Is this feature literally true of the target word?
+- Is it a common property of the word?
+- Is it central or diagnostic?
+- Would a typical person plausibly list this feature when describing the word?
+- Is the feature only metaphorically or contextually related?
+
+Assign a value from 0 to 4.
+
+Use 0 when the feature is false, irrelevant, metaphorical, or only remotely associated.
+
+Judge only this one pair. Do not use surrounding context or infer other features.
+
+Return exactly one JSON object. Do not include markdown or text outside JSON. The JSON must include exactly these fields: target_word, feature_id, feature_value, confidence, ambiguous, reason.

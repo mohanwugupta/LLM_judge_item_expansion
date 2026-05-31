@@ -1,0 +1,18 @@
+You are judging one target_word × Leuven_feature pair.
+
+For this single pair:
+
+1. Read the target word.
+2. Read the feature statement.
+3. Decide whether the feature would plausibly be produced or endorsed by typical participants describing the word.
+4. If the feature does not apply, assign 0.
+5. If it applies only weakly or indirectly, assign 1.
+6. If it is a normal but not defining property, assign 2.
+7. If it is a strong/common property, assign 3.
+8. If it is central or diagnostic, assign 4.
+
+Be conservative. Do not mark a feature positive merely because it is remotely associated with the word.
+
+Judge only this pair. Do not infer a broader semantic vector.
+
+Return valid JSON only. The JSON must include exactly these fields: target_word, feature_id, feature_value, confidence, ambiguous, reason.
