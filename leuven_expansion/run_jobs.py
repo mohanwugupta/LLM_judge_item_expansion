@@ -111,7 +111,7 @@ def run_atomic_jobs(
     model: str,
     output_dir: pathlib.Path,
     temperature: float = 0.0,
-    max_tokens: int = 200,
+    max_tokens: int = 400,
     max_workers: int = 16,
     resume: bool = True,
 ) -> pathlib.Path:

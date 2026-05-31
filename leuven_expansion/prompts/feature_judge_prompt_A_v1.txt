@@ -19,3 +19,4 @@ Follow Leuven-style common knowledge judgments, not specialized scientific taxon
 You will not see the stimulus dataset, list identity, whether the word is a critical lure, behavioral results, associative strength scores, gist scores, or downstream model predictions. Do not infer those.
 
 Return valid JSON only. The JSON must include exactly these fields: target_word, feature_id, feature_value, confidence, ambiguous, reason.
+Respond in English only. Keep your reason to one concise sentence (maximum 100 characters).

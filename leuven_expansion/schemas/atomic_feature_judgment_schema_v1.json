@@ -3,11 +3,11 @@
   "additionalProperties": false,
   "required": ["target_word","feature_id","feature_value","confidence","ambiguous","reason"],
   "properties": {
-    "target_word": {"type": "string"},
-    "feature_id":  {"type": "integer"},
+    "target_word":   {"type": "string"},
+    "feature_id":    {"type": "integer"},
     "feature_value": {"type": "number","minimum": 0,"maximum": 4},
-    "confidence":  {"type": "number","minimum": 0,"maximum": 1},
-    "ambiguous":   {"type": "boolean"},
-    "reason":      {"type": "string","maxLength": 180}
+    "confidence":    {"type": "number","minimum": 0,"maximum": 1},
+    "ambiguous":     {"type": "boolean"},
+    "reason":        {"type": "string","maxLength": 100}
   }
 }

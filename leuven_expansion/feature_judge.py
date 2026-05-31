@@ -25,6 +25,7 @@ _JUDGE_RESPONSE_FORMAT: dict = {
     "type": "json_schema",
     "json_schema": {
         "name": "AtomicFeatureJudgment",
+        "strict": True,
         "schema": load_json_schema(),
     },
 }
@@ -77,7 +78,7 @@ def judge_pair(
     client,
     model: str,
     temperature: float = 0.0,
-    max_tokens: int = 200,
+    max_tokens: int = 400,
 ) -> List[Dict]:
     """
     Run three independent first-pass judgments for one word × feature pair.

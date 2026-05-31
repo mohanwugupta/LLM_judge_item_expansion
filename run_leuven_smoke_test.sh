@@ -63,10 +63,10 @@ LEUVEN_CATEGORIES=data/leuven_categories.csv
 JOB_ID=leuven_smoke_cell_holdout
 OUTPUT_DIR=artifacts/leuven_feature_expansion/smoke_test/$JOB_ID
 
-# Smoke-test-specific knobs: tiny 2 % cell holdout → ~25 pairs
-TEST_SIZE=0.02
+# Smoke-test-specific knobs: tiny 0.5 % cell holdout → ~2900 pairs
+TEST_SIZE=0.005
 SEED=42
-MAX_WORKERS=8      # conservative for the test partition
+MAX_WORKERS=32     # vLLM with TP=4 on 4×80G handles 32+ concurrent requests
 
 # ------------------------------------------------------------------
 # 2. Environment setup
