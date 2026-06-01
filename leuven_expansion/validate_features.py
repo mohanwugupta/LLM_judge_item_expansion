@@ -100,6 +100,41 @@ def _stratified_cell_split(
     return train_pos + train_zero, test_pos + test_zero
 
 
+def _compute_threshold_sweep(
+    y_true: List[float],
+    y_pred: List[float],
+    thresholds: List[float] = (1.0, 1.5, 2.0, 2.5, 3.0),
+) -> List[Dict]:
+    """
+    For each candidate positivity threshold on final_feature_value, compute
+    binary classification metrics.  Gold positivity is always val > 0.
+
+    Returns a list of dicts, one per threshold, sorted by threshold ascending.
+    The entry for threshold=1.0 reproduces the default pipeline behaviour
+    (predicted positive if final_feature_value > 0, i.e. >= 1).
+    """
+    y_true_arr = np.array(y_true)
+    y_pred_arr = np.array(y_pred)
+    y_true_bin = (y_true_arr > 0).astype(int)
+
+    rows = []
+    for t in thresholds:
+        y_pred_bin = (y_pred_arr >= t).astype(int)
+        prec, rec, f1, _ = precision_recall_fscore_support(
+            y_true_bin, y_pred_bin, average="binary", zero_division=0
+        )
+        acc = float(np.mean(y_true_bin == y_pred_bin))
+        rows.append({
+            "threshold": t,
+            "binary_accuracy": round(acc, 4),
+            "positive_precision": round(float(prec), 4),
+            "positive_recall": round(float(rec), 4),
+            "positive_f1": round(float(f1), 4),
+            "n_pred_positive": int(y_pred_bin.sum()),
+        })
+    return sorted(rows, key=lambda r: r["threshold"])
+
+
 def _compute_cell_metrics(
     y_true: List[float],
     y_pred: List[float],
@@ -140,6 +175,9 @@ def _compute_cell_metrics(
             )
         except Exception:
             pass
+
+    # Post-hoc threshold sweep
+    metrics["threshold_sweep"] = _compute_threshold_sweep(y_true, y_pred)
 
     return metrics
 
@@ -260,7 +298,13 @@ def run_cell_holdout(
     (output_dir / "feature_validation_metrics.json").write_text(
         json.dumps(metrics, indent=2)
     )
-    logger.info("Cell holdout metrics: %s", metrics)
+
+    # Write threshold sweep to a standalone CSV for easy inspection
+    sweep_df = pd.DataFrame(metrics["threshold_sweep"])
+    sweep_df.to_csv(output_dir / "threshold_sweep.csv", index=False)
+    logger.info("Threshold sweep:\n%s", sweep_df.to_string(index=False))
+
+    logger.info("Cell holdout metrics: %s", {k: v for k, v in metrics.items() if k != "threshold_sweep"})
     return metrics
 
 
