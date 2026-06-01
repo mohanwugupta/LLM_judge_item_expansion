@@ -207,6 +207,161 @@ def _compute_word_metrics(
     }
 
 
+def _compute_geometry_metrics(
+    gold_matrix: np.ndarray,
+    pred_matrix: np.ndarray,
+    words: List[str],
+    category_map: Optional[Dict[str, str]] = None,
+    top_k_neighbors: int = 5,
+) -> Dict:
+    """
+    Compute geometry-level metrics comparing the LLM feature matrix to the
+    human Leuven matrix across held-out words.
+
+    Parameters
+    ----------
+    gold_matrix : (n_words, n_features) human Leuven values
+    pred_matrix : (n_words, n_features) LLM predicted values, same ordering
+    words       : list of word_normalized strings, same ordering as rows
+    category_map: optional {word_normalized: category_label}
+    top_k_neighbors: k for nearest-neighbor overlap
+
+    Returns
+    -------
+    dict with geometry metrics
+    """
+    n = len(words)
+    eps = 1e-12
+
+    def _norm(mat):
+        norms = np.linalg.norm(mat, axis=1, keepdims=True)
+        return mat / (norms + eps)
+
+    gold_n = _norm(gold_matrix)
+    pred_n = _norm(pred_matrix)
+
+    # ------------------------------------------------------------------
+    # 1. Per-word cosine similarity (already in word_level_metrics.csv,
+    #    but summarised here for the geometry dict too)
+    # ------------------------------------------------------------------
+    per_word_cos = np.einsum("ij,ij->i", gold_n, pred_n)
+    mean_cos = float(np.mean(per_word_cos))
+    median_cos = float(np.median(per_word_cos))
+
+    # ------------------------------------------------------------------
+    # 2. Pairwise similarity matrix correlation
+    #    Flatten upper triangle of human pairwise cosine matrix vs LLM's.
+    # ------------------------------------------------------------------
+    gold_pw = gold_n @ gold_n.T          # (n, n)
+    pred_pw = pred_n @ pred_n.T
+    triu_idx = np.triu_indices(n, k=1)
+    gold_flat = gold_pw[triu_idx]
+    pred_flat = pred_pw[triu_idx]
+    if len(gold_flat) >= 2:
+        pw_pearson, _ = pearsonr(gold_flat, pred_flat)
+        pw_spearman, _ = spearmanr(gold_flat, pred_flat)
+    else:
+        pw_pearson = pw_spearman = float("nan")
+
+    # ------------------------------------------------------------------
+    # 3. Nearest-neighbor overlap
+    #    For each word, find its top-k gold neighbors and top-k pred
+    #    neighbors (excluding itself) and measure Jaccard overlap.
+    # ------------------------------------------------------------------
+    nn_overlaps = []
+    for i in range(n):
+        gold_sims = gold_pw[i].copy(); gold_sims[i] = -np.inf
+        pred_sims = pred_pw[i].copy(); pred_sims[i] = -np.inf
+        gold_nn = set(np.argsort(gold_sims)[::-1][:top_k_neighbors])
+        pred_nn = set(np.argsort(pred_sims)[::-1][:top_k_neighbors])
+        overlap = len(gold_nn & pred_nn) / len(gold_nn | pred_nn) if gold_nn else 0.0
+        nn_overlaps.append(overlap)
+    mean_nn_jaccard = float(np.mean(nn_overlaps))
+
+    # ------------------------------------------------------------------
+    # 4. Category clustering (silhouette-style: within vs between cosine)
+    #    Only computed when category_map is provided.
+    # ------------------------------------------------------------------
+    category_clustering: Optional[Dict] = None
+    if category_map and n >= 4:
+        cats = [category_map.get(w, "unknown") for w in words]
+        unique_cats = [c for c in set(cats) if cats.count(c) >= 2]
+        if len(unique_cats) >= 2:
+            within_sims, between_sims = [], []
+            for i in range(n):
+                for j in range(i + 1, n):
+                    sim_g = float(gold_pw[i, j])
+                    sim_p = float(pred_pw[i, j])
+                    if cats[i] == cats[j] and cats[i] in unique_cats:
+                        within_sims.append((sim_g, sim_p))
+                    elif cats[i] != cats[j]:
+                        between_sims.append((sim_g, sim_p))
+            if within_sims and between_sims:
+                category_clustering = {
+                    "gold_within_mean": round(float(np.mean([s[0] for s in within_sims])), 4),
+                    "gold_between_mean": round(float(np.mean([s[0] for s in between_sims])), 4),
+                    "pred_within_mean": round(float(np.mean([s[1] for s in within_sims])), 4),
+                    "pred_between_mean": round(float(np.mean([s[1] for s in between_sims])), 4),
+                    "gold_separation": round(
+                        float(np.mean([s[0] for s in within_sims])) -
+                        float(np.mean([s[0] for s in between_sims])), 4),
+                    "pred_separation": round(
+                        float(np.mean([s[1] for s in within_sims])) -
+                        float(np.mean([s[1] for s in between_sims])), 4),
+                }
+
+    # ------------------------------------------------------------------
+    # 5. Feature-density calibration
+    #    Compare mean number of positive features per word (threshold > 0).
+    # ------------------------------------------------------------------
+    gold_density = float(np.mean((gold_matrix > 0).sum(axis=1)))
+    pred_density = float(np.mean((pred_matrix > 0).sum(axis=1)))
+
+    # ------------------------------------------------------------------
+    # 6. Feature-prevalence calibration
+    #    Pearson/Spearman correlation between per-feature means across words.
+    # ------------------------------------------------------------------
+    gold_feat_means = gold_matrix.mean(axis=0)
+    pred_feat_means = pred_matrix.mean(axis=0)
+    feat_pearson, _ = pearsonr(gold_feat_means, pred_feat_means)
+    feat_spearman, _ = spearmanr(gold_feat_means, pred_feat_means)
+
+    # ------------------------------------------------------------------
+    # 7. Human split-half ceiling estimate
+    #    Leuven had 4 raters per cell; simulate a 2 vs 2 split.
+    #    Even-rater sum vs odd-rater sum is not possible from the aggregate
+    #    matrix, so we approximate the ceiling using Spearman-Brown:
+    #      r_SB = 2 * r_halfhalf / (1 + r_halfhalf)
+    #    We estimate r_halfhalf from the observed inter-word variability
+    #    relative to the 0-4 scale range, using a conservative assumption.
+    #    NOTE: this is only a rough estimate; report it as such.
+    # ------------------------------------------------------------------
+    # Since we don't have the raw 4-rater responses, we report NaN and
+    # a note for the user to supply if available.
+    human_ceiling_note = (
+        "Not computable from aggregate matrix. "
+        "Supply raw 4-rater data to estimate split-half ceiling."
+    )
+
+    geometry: Dict = {
+        "n_words": n,
+        "mean_cosine_similarity": round(mean_cos, 4),
+        "median_cosine_similarity": round(median_cos, 4),
+        "pairwise_sim_pearson_r": round(float(pw_pearson), 4),
+        "pairwise_sim_spearman_r": round(float(pw_spearman), 4),
+        f"mean_nn_jaccard_top{top_k_neighbors}": round(mean_nn_jaccard, 4),
+        "gold_mean_positive_features_per_word": round(gold_density, 2),
+        "pred_mean_positive_features_per_word": round(pred_density, 2),
+        "feature_prevalence_pearson_r": round(float(feat_pearson), 4),
+        "feature_prevalence_spearman_r": round(float(feat_spearman), 4),
+        "human_ceiling_note": human_ceiling_note,
+    }
+    if category_clustering:
+        geometry["category_clustering"] = category_clustering
+
+    return geometry
+
+
 def _build_pairs_for_cells(
     cells: List[Tuple],
     df: pd.DataFrame,
@@ -386,7 +541,7 @@ def run_word_holdout(
         pred_vec = np.zeros(len(feature_columns))
         for _, row in pred_rows.iterrows():
             fid = int(row["feature_id"])
-            if row["final_feature_value"] is not None:
+            if pd.notna(row["final_feature_value"]):
                 pred_vec[fid] = float(row["final_feature_value"])
 
         wm = _compute_word_metrics(gold_vec, pred_vec)
@@ -400,18 +555,62 @@ def run_word_holdout(
     word_df = pd.DataFrame(word_metrics_rows)
     word_df.to_csv(output_dir / "word_level_metrics.csv", index=False)
 
+    # ------------------------------------------------------------------
+    # Geometry metrics: build aligned gold / pred matrices then evaluate
+    # ------------------------------------------------------------------
+    ordered_words = [r["word_normalized"] for r in word_metrics_rows]
+    gold_matrix = np.array([
+        [float(df[df["word_normalized"] == wn].iloc[0][fcol]) for fcol in feature_columns]
+        for wn in ordered_words
+    ])
+    pred_matrix = np.array([
+        [
+            float(
+                res_df[
+                    (res_df["word_normalized"] == wn) & (res_df["feature_id"] == fid)
+                ]["final_feature_value"].dropna().values[0]
+            ) if len(
+                res_df[
+                    (res_df["word_normalized"] == wn) & (res_df["feature_id"] == fid)
+                ]["final_feature_value"].dropna()
+            ) > 0 else 0.0
+            for fid, _ in enumerate(feature_columns)
+        ]
+        for wn in ordered_words
+    ])
+
+    geometry = _compute_geometry_metrics(
+        gold_matrix=gold_matrix,
+        pred_matrix=pred_matrix,
+        words=ordered_words,
+        category_map=category_map if category_map else None,
+    )
+    geometry_path = output_dir / "geometry_metrics.json"
+    geometry_path.write_text(json.dumps(geometry, indent=2))
+    logger.info("Geometry metrics: %s", {k: v for k, v in geometry.items() if k != "category_clustering"})
+
     summary = {
         "mode": "word_holdout",
         "n_test_words": len(test_word_set),
         "mean_cosine_similarity": round(float(np.mean(all_cos_sims)), 4),
         "median_cosine_similarity": round(float(np.median(all_cos_sims)), 4),
+        "pairwise_sim_pearson_r": geometry.get("pairwise_sim_pearson_r"),
+        "pairwise_sim_spearman_r": geometry.get("pairwise_sim_spearman_r"),
+        "mean_nn_jaccard_top5": geometry.get("mean_nn_jaccard_top5"),
+        "feature_prevalence_pearson_r": geometry.get("feature_prevalence_pearson_r"),
+        "feature_prevalence_spearman_r": geometry.get("feature_prevalence_spearman_r"),
+        "gold_mean_positive_features_per_word": geometry.get("gold_mean_positive_features_per_word"),
+        "pred_mean_positive_features_per_word": geometry.get("pred_mean_positive_features_per_word"),
         "test_size": test_size,
         "seed": seed,
     }
+    if "category_clustering" in geometry:
+        summary["category_clustering"] = geometry["category_clustering"]
+
     (output_dir / "feature_validation_metrics.json").write_text(
         json.dumps(summary, indent=2)
     )
-    logger.info("Word holdout summary: %s", summary)
+    logger.info("Word holdout summary: %s", {k: v for k, v in summary.items() if k != "category_clustering"})
     return summary
 
 

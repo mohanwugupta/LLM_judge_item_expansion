@@ -57,10 +57,10 @@ def load_prompt(path: str | pathlib.Path) -> str:
 def load_default_prompts() -> Dict[str, str]:
     """Return the three judge system prompts and adjudicator prompt keyed by role."""
     return {
-        "A": load_prompt(_PROMPT_DIR / "feature_judge_prompt_A_v2_production.txt"),
-        "B": load_prompt(_PROMPT_DIR / "feature_judge_prompt_B_v2_production.txt"),
-        "C": load_prompt(_PROMPT_DIR / "feature_judge_prompt_C_v2_production.txt"),
-        "adjudicator": load_prompt(_PROMPT_DIR / "feature_adjudicator_prompt_v2_production.txt"),
+        "A": load_prompt(_PROMPT_DIR / "feature_judge_prompt_A_v3_applicability.txt"),
+        "B": load_prompt(_PROMPT_DIR / "feature_judge_prompt_B_v3_applicability.txt"),
+        "C": load_prompt(_PROMPT_DIR / "feature_judge_prompt_C_v3_applicability.txt"),
+        "adjudicator": load_prompt(_PROMPT_DIR / "feature_adjudicator_prompt_v3_applicability.txt"),
     }
 
 

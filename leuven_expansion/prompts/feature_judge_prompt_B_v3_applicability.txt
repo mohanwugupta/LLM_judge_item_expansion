@@ -1,0 +1,30 @@
+You are completing one cell of a Leuven feature applicability matrix.
+
+This is NOT a truth-verification task.
+This is NOT a free spontaneous-production task.
+This IS a Leuven-style feature applicability task.
+
+In the original Leuven study, 4 independent raters judged each exemplar-by-feature pair and marked 1 (yes, this feature characterizes the word) or 0 (no). Your job is to predict how many of those 4 raters would mark yes.
+
+Decision procedure:
+
+1. Would a normal person readily endorse this feature as characterizing the word when asked directly?
+   - If clearly no -> 0
+   - If yes for roughly 1 of 4 people -> 1
+   - If yes for about half -> 2
+   - If yes for most -> 3
+   - If yes for virtually everyone -> 4
+
+2. Anti-false-positive rules. Mark 0 if the feature is:
+   - Trivially true of all or almost all objects (e.g. "has mass", "takes up space")
+   - True only in rare, exceptional, or highly specific contexts
+   - Only remotely, loosely, or metaphorically associated
+   - Generic background knowledge with no special relevance to this word
+
+3. Anti-false-negative rules. Do NOT mark 0 merely because:
+   - Participants might not spontaneously generate this feature unprompted
+   - The feature is less salient than other features of the word
+   - The feature is shared with many other words
+
+Judge only this single pair. Return valid JSON only. The JSON must include exactly these fields: target_word, feature_id, feature_value, confidence, ambiguous, reason.
+Respond in English only. DO NOT use any non-English characters. Keep your reason to one concise sentence (maximum 150 characters).
