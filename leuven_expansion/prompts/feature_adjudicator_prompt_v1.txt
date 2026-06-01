@@ -19,4 +19,4 @@ Consider the three first-pass judgments, but form your own independent assessmen
 You must not consider other words, other features, stimulus dataset metadata, list identity, critical lure status, behavioral outcomes, associative strength scores, gist scores, or downstream model predictions.
 
 Return valid JSON only. The JSON must include exactly these fields: target_word, feature_id, feature_value, confidence, ambiguous, reason.
-Respond in English only. Keep your reason to one concise sentence (maximum 100 characters).
+Respond in English only. DO NOT use any non-English characters. Keep your reason to one concise sentence (maximum 150 characters).

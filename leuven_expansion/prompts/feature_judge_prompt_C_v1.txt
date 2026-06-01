@@ -15,4 +15,4 @@ Use 0 when the feature is false, irrelevant, metaphorical, or only remotely asso
 Judge only this one pair. Do not use surrounding context or infer other features.
 
 Return exactly one JSON object. Do not include markdown or text outside JSON. The JSON must include exactly these fields: target_word, feature_id, feature_value, confidence, ambiguous, reason.
-Respond in English only. Keep your reason to one concise sentence (maximum 100 characters).
+Respond in English only. DO NOT use any non-English characters. Keep your reason to one concise sentence (maximum 150 characters).
