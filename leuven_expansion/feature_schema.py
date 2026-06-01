@@ -114,10 +114,21 @@ def validate_judge_output(
         lines = [l for l in text.splitlines() if not l.strip().startswith("```")]
         text = "\n".join(lines).strip()
 
+    # Normalise Python literals that LLMs occasionally emit instead of JSON
+    # Must be done as whole-word replacements to avoid corrupting string values.
+    import re
+    text = re.sub(r'(?<!["\w])None(?!["\w])', 'null', text)
+    text = re.sub(r'(?<!["\w])True(?!["\w])', 'true', text)
+    text = re.sub(r'(?<!["\w])False(?!["\w])', 'false', text)
+
     try:
         obj = json.loads(text)
     except json.JSONDecodeError as e:
         return None, f"JSON parse error: {e}"
+
+    # Coerce null booleans: model sometimes emits None for ambiguous
+    if obj.get("ambiguous") is None:
+        obj["ambiguous"] = False
 
     try:
         jsonschema.validate(instance=obj, schema=_JSON_SCHEMA)

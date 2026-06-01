@@ -8,6 +8,6 @@
     "feature_value": {"type": "number","minimum": 0,"maximum": 4},
     "confidence":    {"type": "number","minimum": 0,"maximum": 1},
     "ambiguous":     {"type": "boolean"},
-    "reason":        {"type": "string","maxLength": 100}
+    "reason":        {"type": "string","maxLength": 300}
   }
 }
