@@ -243,7 +243,7 @@ def run_cell_holdout(
     y_true, y_pred = [], []
     for _, row in res_df.iterrows():
         key = (str(row["word_normalized"]), int(row["feature_id"]))
-        if key in gold_map and row["final_feature_value"] is not None:
+        if key in gold_map and pd.notna(row["final_feature_value"]):
             y_true.append(gold_map[key])
             y_pred.append(float(row["final_feature_value"]))
 

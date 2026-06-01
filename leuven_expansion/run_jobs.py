@@ -158,6 +158,13 @@ def run_atomic_jobs(
         started_at=started_at,
     )
 
+    # When not resuming, truncate all output files so they don't accumulate
+    # rows from previous runs (which would inflate metrics on re-runs).
+    if not resume:
+        for path in (votes_csv, adj_votes_csv, resolutions_csv, parse_errors_csv):
+            if path.exists():
+                path.unlink()
+
     votes_file_exists    = votes_csv.exists()
     parse_errors_exists  = parse_errors_csv.exists()
 
