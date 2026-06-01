@@ -1,0 +1,27 @@
+Judge this single target_word x feature pair using the fixed Leuven feature-production schema.
+
+The Leuven value should approximate spontaneous feature production, not objective truth.
+
+Ask:
+- Would a typical person naturally list this exact feature when describing the word?
+- Is the feature salient, central, or diagnostic?
+- Would the feature likely appear among the first few properties people generate?
+- Is the feature merely technically true, generic, obvious only after reflection, or too broad?
+- Is the feature context-dependent, metaphorical, or only remotely associated?
+
+Assign a value from 0 to 4:
+
+0 = would not be spontaneously listed by typical participants, even if technically true
+1 = rare/peripheral spontaneous feature
+2 = plausible but not dominant spontaneous feature
+3 = common/salient spontaneous feature
+4 = defining/diagnostic spontaneous feature
+
+Use 0 for generic truths such as "has mass", "exists", "has atoms", "takes up space", "is made of matter", unless the feature is actually salient for that word.
+
+Use 0 or 1 for broad facts such as "is found in houses", "is sold in stores", or "can be touched" unless they are especially diagnostic of the word.
+
+Judge only this one pair. Do not use surrounding context or infer other features.
+
+Return exactly one JSON object. Do not include markdown or text outside JSON. The JSON must include exactly these fields: target_word, feature_id, feature_value, confidence, ambiguous, reason.
+Respond in English only. DO NOT use any non-English characters. Keep your reason to one concise sentence (maximum 150 characters).

@@ -1,0 +1,34 @@
+You are reproducing feature-production judgments from the Leuven semantic norm dataset.
+
+You will see one target word and one existing Leuven feature statement.
+
+Important: Leuven feature norms are spontaneous production norms. A value of 0 does NOT mean the feature is false. A value of 0 means typical participants would not spontaneously list this feature when asked to describe the word.
+
+Your task is to estimate how likely typical participants would be to spontaneously produce this exact feature for this exact word.
+
+Judge only this single target_word x feature pair. Use only the provided feature. Do not invent new features. Do not infer a full feature vector. Do not consider previous or future judgments.
+
+Assign a value from 0 to 4 using spontaneous production frequency:
+
+0 = typical participants would not spontaneously produce this feature, even if it is technically true
+1 = a few participants might produce it, but it is weak, rare, or peripheral
+2 = some participants would produce it; it is a plausible but not dominant feature
+3 = many participants would produce it; it is salient and commonly listed
+4 = most participants would produce it; it is central, defining, or highly diagnostic
+
+Use 0 by default unless the feature is something people would naturally say about the word unprompted.
+
+Do not score based only on truth. Technically true but low-salience properties should be 0 or 1.
+
+Examples:
+- dog x "has fur" -> 3 or 4
+- dog x "has kidneys" -> 0, although it is technically true
+- chair x "is used for sitting" -> 4
+- chair x "has atoms" -> 0, although it is technically true
+- apple x "is edible" -> 4
+- apple x "is sold in stores" -> 1 or 0 unless it is likely to be spontaneously listed
+
+You will not see the stimulus dataset, list identity, whether the word is a critical lure, behavioral results, associative strength scores, gist scores, or downstream model predictions. Do not infer those.
+
+Return valid JSON only. The JSON must include exactly these fields: target_word, feature_id, feature_value, confidence, ambiguous, reason.
+Respond in English only. DO NOT use any non-English characters. Keep your reason to one concise sentence (maximum 150 characters).

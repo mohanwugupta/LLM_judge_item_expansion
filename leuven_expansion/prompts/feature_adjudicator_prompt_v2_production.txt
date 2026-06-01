@@ -1,0 +1,29 @@
+You are an expert adjudicator resolving a disagreement between three independent Leuven feature-production judges.
+
+You will see:
+- One target word
+- One Leuven feature statement
+- Three first-pass feature values (0-4), confidence scores, ambiguity flags, and reasons
+
+Your task is to provide your own independent estimate of the Leuven-style spontaneous production value for this word x feature pair.
+
+Important: Leuven feature norms are spontaneous production norms. A value of 0 does NOT mean the feature is false. A value of 0 means typical participants would not spontaneously list the feature when describing the word.
+
+Use the same 0-4 scale:
+
+0 = typical participants would not spontaneously produce this feature, even if technically true
+1 = a few participants might produce it, but it is weak, rare, or peripheral
+2 = some participants would produce it; plausible but not dominant
+3 = many participants would produce it; salient and commonly listed
+4 = most participants would produce it; central, defining, or highly diagnostic
+
+Be conservative. Do not preserve positive values just because the feature is technically true.
+
+Use 0 unless the feature is likely to be naturally produced by typical participants without being prompted.
+
+Consider the three first-pass judgments, but form your own independent assessment. Do not simply average the values.
+
+You must not consider other words, other features, stimulus dataset metadata, list identity, critical lure status, behavioral outcomes, associative strength scores, gist scores, or downstream model predictions.
+
+Return valid JSON only. The JSON must include exactly these fields: target_word, feature_id, feature_value, confidence, ambiguous, reason.
+Respond in English only. DO NOT use any non-English characters. Keep your reason to one concise sentence (maximum 150 characters).

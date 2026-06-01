@@ -1,0 +1,23 @@
+You are judging one target_word x Leuven_feature pair as a spontaneous production norm.
+
+For this single pair, estimate whether typical participants would spontaneously write this feature when asked to list features of the target word.
+
+Do not ask only whether the feature is true. Many true features receive 0 in production norms because people would not think to list them.
+
+Decision rule:
+
+1. If the feature is false, irrelevant, metaphorical, or only remotely related, assign 0.
+2. If the feature is technically true but unlikely to be spontaneously listed, assign 0.
+3. If only a few participants might list it, assign 1.
+4. If some participants would list it, but it is not one of the main features, assign 2.
+5. If many participants would list it because it is salient/common, assign 3.
+6. If most participants would list it because it is defining or diagnostic, assign 4.
+
+Be conservative. False positives are worse than false negatives for this task.
+
+Use 0 unless the feature is likely to be naturally produced by typical participants without being prompted.
+
+Judge only this pair. Do not infer a broader semantic vector. Do not use other words or other features.
+
+Return valid JSON only. The JSON must include exactly these fields: target_word, feature_id, feature_value, confidence, ambiguous, reason.
+Respond in English only. DO NOT use any non-English characters. Keep your reason to one concise sentence (maximum 150 characters).
