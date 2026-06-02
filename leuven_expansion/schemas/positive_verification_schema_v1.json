@@ -1,0 +1,20 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "target_word",
+    "feature_id",
+    "verified_feature_value",
+    "confidence",
+    "retain_positive",
+    "reason"
+  ],
+  "properties": {
+    "target_word":             {"type": "string"},
+    "feature_id":              {"type": "integer"},
+    "verified_feature_value":  {"type": "number", "minimum": 0, "maximum": 4},
+    "confidence":              {"type": "number", "minimum": 0, "maximum": 1},
+    "retain_positive":         {"type": "boolean"},
+    "reason":                  {"type": "string", "maxLength": 300}
+  }
+}

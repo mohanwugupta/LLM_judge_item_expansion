@@ -37,6 +37,17 @@ RESOLUTION_COLUMNS = [
     "job_id", "word_normalized", "feature_id", "feature_text",
     "final_feature_value", "resolution_method", "needs_human_audit",
     "adjudicated", "adjudication_trigger",
+    # positive verification columns (populated only when verification is enabled)
+    "pre_verification_feature_value",
+    "verified_feature_value",
+    "positive_verification_status",
+    "positive_verification_confidence",
+    "positive_verification_reason",
+]
+
+VERIFIER_VOTE_COLUMNS = [
+    "job_id", "word_normalized", "feature_id",
+    "verified_feature_value", "retain_positive", "confidence", "reason",
 ]
 
 PARSE_ERROR_COLUMNS = [

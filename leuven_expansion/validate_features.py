@@ -100,6 +100,88 @@ def _stratified_cell_split(
     return train_pos + train_zero, test_pos + test_zero
 
 
+def _compute_verification_delta(
+    resolutions: "pd.DataFrame",
+    ground_truth: "pd.DataFrame",
+    positive_threshold: float = 1.0,
+    value_col: str = "feature_value",
+) -> Dict:
+    """
+    Compute pre- and post-verification precision/recall/F1 and verification counts.
+
+    Parameters
+    ----------
+    resolutions   : DataFrame with columns including
+                    final_feature_value, pre_verification_feature_value,
+                    positive_verification_status, word_normalized, feature_id
+    ground_truth  : DataFrame with columns word_normalized, feature_id, feature_value
+    positive_threshold : threshold above which a prediction is "positive"
+    value_col     : column name in ground_truth for the gold value
+
+    Returns
+    -------
+    dict with pre_precision, post_precision, pre_recall, post_recall,
+    pre_f1, post_f1, n_candidate_positives, n_verified_retained, n_verified_rejected
+    """
+    merged = resolutions.merge(
+        ground_truth[["word_normalized", "feature_id", value_col]],
+        on=["word_normalized", "feature_id"],
+        how="inner",
+    )
+
+    gold_pos = (merged[value_col] > 0).astype(int)
+
+    # Pre-verification prediction (use pre_verification_feature_value if available)
+    pre_col = "pre_verification_feature_value"
+    if pre_col in merged.columns:
+        pre_values = merged[pre_col].fillna(merged["final_feature_value"])
+    else:
+        pre_values = merged["final_feature_value"]
+    pre_pred = (pre_values >= positive_threshold).astype(int)
+
+    # Post-verification prediction (final_feature_value after verifier may have zeroed)
+    post_pred = (merged["final_feature_value"] >= positive_threshold).astype(int)
+
+    def _prf(pred):
+        tp = int(((pred == 1) & (gold_pos == 1)).sum())
+        fp = int(((pred == 1) & (gold_pos == 0)).sum())
+        fn = int(((pred == 0) & (gold_pos == 1)).sum())
+        precision = tp / (tp + fp) if (tp + fp) > 0 else float("nan")
+        recall = tp / (tp + fn) if (tp + fn) > 0 else float("nan")
+        f1 = (2 * precision * recall / (precision + recall)
+              if (precision + recall) > 0 else float("nan"))
+        return precision, recall, f1
+
+    pre_p, pre_r, pre_f = _prf(pre_pred)
+    post_p, post_r, post_f = _prf(post_pred)
+
+    status_col = "positive_verification_status"
+    n_candidate = int(
+        merged[status_col].isin(["retained", "rejected"]).sum()
+        if status_col in merged.columns else 0
+    )
+    n_retained = int(
+        (merged[status_col] == "retained").sum()
+        if status_col in merged.columns else 0
+    )
+    n_rejected = int(
+        (merged[status_col] == "rejected").sum()
+        if status_col in merged.columns else 0
+    )
+
+    return {
+        "pre_precision": pre_p,
+        "post_precision": post_p,
+        "pre_recall": pre_r,
+        "post_recall": post_r,
+        "pre_f1": pre_f,
+        "post_f1": post_f,
+        "n_candidate_positives": n_candidate,
+        "n_verified_retained": n_retained,
+        "n_verified_rejected": n_rejected,
+    }
+
+
 def _compute_threshold_sweep(
     y_true: List[float],
     y_pred: List[float],

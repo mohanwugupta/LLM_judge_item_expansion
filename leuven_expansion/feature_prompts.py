@@ -124,6 +124,47 @@ def build_adjudicator_user_message(
     return "\n".join(lines)
 
 
+def load_verifier_prompt() -> str:
+    """Return the system prompt for the positive verifier (v1)."""
+    return load_prompt(_PROMPT_DIR / "feature_positive_verifier_prompt_v1.txt")
+
+
+def build_verifier_user_message(
+    word_normalized: str,
+    feature_id: int,
+    feature_text: str,
+    resolved_feature_value: float,
+    resolved_confidence: float,
+    resolution_method: str,
+    first_pass_votes: List[Dict],
+) -> str:
+    """
+    Build the user-turn content sent to the positive verifier.
+
+    Includes the atomic word × feature pair, the resolved value from the
+    first-pass pipeline, and the individual judge votes for context.
+    Must NOT include DRM metadata or ISC-CI context.
+    """
+    lines = [
+        f"target_word:\n{word_normalized}",
+        f"\nfeature_id:\n{feature_id}",
+        f"\nfeature_text:\n{feature_text}",
+        f"\nvalue_scale:\n{_VALUE_SCALE_TEXT}",
+        f"\nresolved_feature_value: {resolved_feature_value}",
+        f"resolved_confidence: {resolved_confidence:.2f}",
+        f"resolution_method: {resolution_method}",
+        "\nfirst_pass_judge_votes:",
+    ]
+    for v in first_pass_votes:
+        judge_label = v.get("judge", v.get("judge_id", "?"))
+        lines.append(
+            f"  {judge_label}: feature_value={v.get('feature_value', 'N/A')}  "
+            f"confidence={float(v.get('confidence', 0.0)):.2f}  "
+            f"reason={v.get('reason', '')}"
+        )
+    return "\n".join(lines)
+
+
 def prompt_hash(system_prompt: str, user_message: str) -> str:
     """Stable SHA-256 hash uniquely identifying the atomic prompt."""
     content = f"{system_prompt}\n---\n{user_message}"

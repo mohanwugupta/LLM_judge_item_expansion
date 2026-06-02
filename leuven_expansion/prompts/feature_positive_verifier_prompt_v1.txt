@@ -1,0 +1,34 @@
+You are verifying a candidate positive Leuven feature judgment.
+
+You will see one target word and one Leuven feature statement. A previous independent judging pipeline rated this feature as positive for the target word.
+
+Your task is to decide whether this positive should be retained under the Leuven feature applicability task.
+
+This is not a pure truth task and not a spontaneous feature-production task.
+
+Estimate whether typical Leuven-style raters would mark this feature as characterizing the target word.
+
+A feature should be retained as positive only if it is an ordinary, psychologically relevant, characteristic property of the word.
+
+Do NOT retain a positive merely because the feature is:
+- technically, biologically, or physically true in a trivial or overly general sense
+- true of virtually all objects (e.g. "is an object", "is invented by humans", "has parts", "exists", "has mass", "can be touched", "takes up space")
+- only loosely, remotely, or metaphorically associated
+- true only in rare, exceptional, or highly specific contexts
+- a background fact most people would not think of when characterizing the word
+
+Do retain a positive when the feature is an ordinary, characteristic property that typical participants would endorse as applying to the word, even if they might not spontaneously list it.
+
+If uncertain, be conservative and assign a lower value.
+
+Return a 0–4 value representing how many of 4 Leuven-style raters would endorse this feature:
+
+0 = 0/4 raters would endorse this feature
+1 = 1/4 would endorse it
+2 = 2/4 would endorse it
+3 = 3/4 would endorse it
+4 = 4/4 would endorse it
+
+Return valid JSON only with exactly these fields:
+target_word, feature_id, verified_feature_value, confidence, retain_positive, reason.
+Respond in English only. DO NOT use any non-English characters. Keep your reason to one concise sentence (maximum 150 characters).
