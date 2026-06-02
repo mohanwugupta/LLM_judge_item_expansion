@@ -21,6 +21,12 @@ import pandas as pd
 from leuven_expansion.feature_judge import judge_pair
 from leuven_expansion.feature_adjudicate import resolve_first_pass
 from leuven_expansion.feature_schema import get_feature_text
+from leuven_expansion.positive_verifier import (
+    route_for_verification,
+    verify_positive,
+    POSITIVE_THRESHOLD,
+    VERIFICATION_THRESHOLD,
+)
 
 logger = logging.getLogger(__name__)
 
@@ -125,6 +131,12 @@ def run_atomic_jobs(
     max_tokens: int = 400,
     max_workers: int = 16,
     resume: bool = True,
+    # positive verification options
+    enable_positive_verification: bool = False,
+    positive_threshold: float = POSITIVE_THRESHOLD,
+    verification_threshold: float = VERIFICATION_THRESHOLD,
+    verifier_prompt: Optional[str] = None,
+    verifier_model: Optional[str] = None,
 ) -> pathlib.Path:
     """
     Run independent atomic judging jobs for all word × feature pairs.
@@ -144,6 +156,7 @@ def run_atomic_jobs(
     adj_votes_csv    = output_dir / "feature_adjudication_votes.csv"
     resolutions_csv  = output_dir / "feature_resolutions.csv"
     parse_errors_csv = output_dir / "parse_errors.csv"
+    verifier_votes_csv = output_dir / "positive_verification_votes.csv"
 
     # Attach per-job file logger
     fh = _add_file_log_handler(output_dir, job_id)
@@ -172,12 +185,18 @@ def run_atomic_jobs(
     # When not resuming, truncate all output files so they don't accumulate
     # rows from previous runs (which would inflate metrics on re-runs).
     if not resume:
-        for path in (votes_csv, adj_votes_csv, resolutions_csv, parse_errors_csv):
+        for path in (votes_csv, adj_votes_csv, resolutions_csv, parse_errors_csv,
+                     verifier_votes_csv):
             if path.exists():
                 path.unlink()
 
     votes_file_exists    = votes_csv.exists()
     parse_errors_exists  = parse_errors_csv.exists()
+    verifier_votes_exists = verifier_votes_csv.exists()
+
+    # Resolve the effective verifier model and prompt once
+    _verifier_model  = verifier_model or model
+    _verifier_prompt = verifier_prompt  # None means caller must supply if enable_positive_verification
 
     def _judge_one(pair: Dict) -> List[Dict]:
         return judge_pair(
@@ -197,10 +216,11 @@ def run_atomic_jobs(
     n_parse_errors = 0
 
     with (
-        open(votes_csv, "a", newline="")        as vf,
-        open(adj_votes_csv, "a", newline="")    as af,
-        open(resolutions_csv, "a", newline="")  as rf,
-        open(parse_errors_csv, "a", newline="") as pef,
+        open(votes_csv, "a", newline="")          as vf,
+        open(adj_votes_csv, "a", newline="")      as af,
+        open(resolutions_csv, "a", newline="")    as rf,
+        open(parse_errors_csv, "a", newline="")   as pef,
+        open(verifier_votes_csv, "a", newline="") as vvf,
     ):
         vwriter  = csv.DictWriter(vf,  fieldnames=VOTE_COLUMNS,        extrasaction="ignore")
         awriter  = csv.DictWriter(af,  fieldnames=[
@@ -210,6 +230,7 @@ def run_atomic_jobs(
         ], extrasaction="ignore")
         rwriter  = csv.DictWriter(rf,  fieldnames=RESOLUTION_COLUMNS,  extrasaction="ignore")
         pewriter = csv.DictWriter(pef, fieldnames=PARSE_ERROR_COLUMNS, extrasaction="ignore")
+        vvwriter = csv.DictWriter(vvf, fieldnames=VERIFIER_VOTE_COLUMNS, extrasaction="ignore")
 
         if not votes_file_exists:
             vwriter.writeheader()
@@ -217,6 +238,8 @@ def run_atomic_jobs(
             rwriter.writeheader()
         if not parse_errors_exists:
             pewriter.writeheader()
+        if not verifier_votes_exists:
+            vvwriter.writeheader()
 
         with ThreadPoolExecutor(max_workers=max_workers) as executor:
             futures = {executor.submit(_judge_one, p): p for p in pending}
@@ -256,14 +279,58 @@ def run_atomic_jobs(
                     awriter.writerow(av)
                 af.flush()
 
-                rwriter.writerow({
+                # Build base resolution row
+                res_row = {
                     "job_id": job_id,
                     "word_normalized": pair["word_normalized"],
                     "feature_id": pair["feature_id"],
                     "feature_text": pair["feature_text"],
                     **{k: resolution.get(k, "") for k in RESOLUTION_COLUMNS if k not in
-                       ("job_id", "word_normalized", "feature_id", "feature_text")},
-                })
+                       ("job_id", "word_normalized", "feature_id", "feature_text",
+                        "pre_verification_feature_value", "verified_feature_value",
+                        "positive_verification_status", "positive_verification_confidence",
+                        "positive_verification_reason")},
+                    # verification columns default to empty
+                    "pre_verification_feature_value": "",
+                    "verified_feature_value": "",
+                    "positive_verification_status": "not_candidate",
+                    "positive_verification_confidence": "",
+                    "positive_verification_reason": "",
+                }
+
+                # Positive verification pass
+                if enable_positive_verification and _verifier_prompt:
+                    fv = resolution.get("final_feature_value")
+                    routing = route_for_verification(fv, positive_threshold=positive_threshold)
+                    if routing == "candidate":
+                        ver_update, ver_vote = verify_positive(
+                            job_id=job_id,
+                            word_normalized=pair["word_normalized"],
+                            feature_id=pair["feature_id"],
+                            feature_text=pair["feature_text"],
+                            resolved_feature_value=float(fv),
+                            resolved_confidence=float(resolution.get("confidence") or 0.0),
+                            resolution_method=str(resolution.get("resolution_method", "")),
+                            first_pass_votes=votes,
+                            prompt=_verifier_prompt,
+                            client=client,
+                            model=_verifier_model,
+                            verification_threshold=verification_threshold,
+                            temperature=temperature,
+                            max_tokens=max_tokens,
+                        )
+                        res_row["pre_verification_feature_value"] = fv
+                        res_row["final_feature_value"] = ver_update.get("final_feature_value", fv)
+                        res_row["verified_feature_value"] = ver_update.get("verified_feature_value", "")
+                        res_row["positive_verification_status"] = ver_update.get("positive_verification_status", "")
+                        res_row["positive_verification_confidence"] = ver_update.get("positive_verification_confidence", "")
+                        res_row["positive_verification_reason"] = ver_update.get("positive_verification_reason", "")
+                        if ver_update.get("needs_human_audit"):
+                            res_row["needs_human_audit"] = True
+                        vvwriter.writerow({k: ver_vote.get(k, "") for k in VERIFIER_VOTE_COLUMNS})
+                        vvf.flush()
+
+                rwriter.writerow(res_row)
                 rf.flush()
 
                 n_completed += 1

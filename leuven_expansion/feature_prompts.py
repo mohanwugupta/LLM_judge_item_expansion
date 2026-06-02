@@ -64,6 +64,31 @@ def load_default_prompts() -> Dict[str, str]:
     }
 
 
+def load_prompts_by_version(version: str) -> Dict[str, str]:
+    """
+    Return the three judge + adjudicator system prompts for a given prompt version.
+
+    Parameters
+    ----------
+    version : "v2" (spontaneous-production framing) or "v3" (applicability framing)
+
+    Returns
+    -------
+    dict with keys "A", "B", "C", "adjudicator"
+    """
+    if version == "v2":
+        return {
+            "A": load_prompt(_PROMPT_DIR / "feature_judge_prompt_A_v2_production.txt"),
+            "B": load_prompt(_PROMPT_DIR / "feature_judge_prompt_B_v2_production.txt"),
+            "C": load_prompt(_PROMPT_DIR / "feature_judge_prompt_C_v2_production.txt"),
+            "adjudicator": load_prompt(_PROMPT_DIR / "feature_adjudicator_prompt_v2_production.txt"),
+        }
+    elif version == "v3":
+        return load_default_prompts()
+    else:
+        raise ValueError(f"Unknown prompt version: {version!r}. Expected 'v2' or 'v3'.")
+
+
 def build_judge_user_message(
     word_normalized: str,
     feature_id: int,

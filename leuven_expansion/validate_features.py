@@ -42,7 +42,7 @@ from sklearn.metrics import (
 from scipy.stats import pearsonr, spearmanr
 
 from leuven_expansion.feature_schema import load_leuven_feature_schema, get_feature_text
-from leuven_expansion.feature_prompts import load_default_prompts
+from leuven_expansion.feature_prompts import load_default_prompts, load_prompts_by_version
 from leuven_expansion.category_metadata import (
     load_categories,
     get_category_map,
@@ -696,11 +696,79 @@ def run_word_holdout(
     return summary
 
 
+def run_full_leuven(
+    *,
+    features_csv: str | pathlib.Path,
+    categories_csv: Optional[str | pathlib.Path],
+    job_id: str,
+    output_dir: pathlib.Path,
+    client,
+    model: str,
+    prompts: Dict[str, str],
+    max_workers: int = 16,
+    resume: bool = True,
+    enable_positive_verification: bool = False,
+    verifier_prompt: Optional[str] = None,
+    verifier_model: Optional[str] = None,
+    positive_threshold: float = 1.0,
+    verification_threshold: float = 1.0,
+) -> Dict:
+    """
+    Judge every word × feature pair in the existing Leuven matrix.
+
+    No train/test split — all items are labeled.  Produces the same output
+    files as the holdout modes (votes, resolutions, parse_errors, manifest)
+    plus, when positive verification is enabled, positive_verification_votes.csv.
+
+    Returns an empty dict (no ground-truth holdout to score against).
+    """
+    schema = load_leuven_feature_schema(features_csv)
+    df = _load_leuven_matrix(features_csv)
+    feature_columns = schema["feature_columns"]
+
+    pairs: List[Dict] = []
+    for _, row in df.iterrows():
+        word_normalized = str(row["word_normalized"])
+        word_original   = str(row.get(schema["item_column"], word_normalized))
+        for fid, fcol in enumerate(feature_columns):
+            pairs.append({
+                "word_original":  word_original,
+                "word_normalized": word_normalized,
+                "feature_id":     fid,
+                "feature_text":   fcol,
+            })
+
+    logger.info(
+        "Full Leuven expansion: %d words × %d features = %d pairs",
+        len(df), len(feature_columns), len(pairs),
+    )
+
+    run_atomic_jobs(
+        job_id=job_id,
+        pairs=pairs,
+        prompts=prompts,
+        client=client,
+        model=model,
+        output_dir=output_dir,
+        max_workers=max_workers,
+        resume=resume,
+        enable_positive_verification=enable_positive_verification,
+        positive_threshold=positive_threshold,
+        verification_threshold=verification_threshold,
+        verifier_prompt=verifier_prompt,
+        verifier_model=verifier_model,
+    )
+
+    logger.info("Full Leuven expansion complete. Outputs in: %s", output_dir)
+    return {}
+
+
 def _parse_args(argv=None):
     p = argparse.ArgumentParser(
         description="Validate Leuven feature reconstruction."
     )
-    p.add_argument("--mode", required=True, choices=["cell_holdout", "word_holdout"])
+    p.add_argument("--mode", required=True,
+                   choices=["cell_holdout", "word_holdout", "full_leuven"])
     p.add_argument("--leuven-features", required=True)
     p.add_argument("--leuven-categories", default=None)
     p.add_argument("--job-id", required=True)
@@ -711,6 +779,16 @@ def _parse_args(argv=None):
     p.add_argument("--seed", type=int, default=42)
     p.add_argument("--max-workers", type=int, default=16)
     p.add_argument("--resume", action="store_true")
+    p.add_argument("--prompt-version", default="v3", choices=["v2", "v3"],
+                   help="Prompt set to use: v2 (production framing) or v3 (applicability framing, default)")
+    p.add_argument("--enable-positive-verification", action="store_true",
+                   help="Run a second-stage verifier on candidate-positive resolutions")
+    p.add_argument("--positive-threshold", type=float, default=1.0,
+                   help="final_feature_value >= this to be a candidate for verification (default 1.0)")
+    p.add_argument("--verification-threshold", type=float, default=1.0,
+                   help="verified_feature_value >= this to retain a positive (default 1.0)")
+    p.add_argument("--verifier-model", default=None,
+                   help="Model name for the positive verifier (defaults to --model)")
     return p.parse_args(argv)
 
 
@@ -723,24 +801,51 @@ if __name__ == "__main__":
     VLLMClient = vllm_client_mod.VLLMClient
 
     client = VLLMClient(model_name=args.model, base_url=args.base_url)
-    prompts = load_default_prompts()
+    prompts = load_prompts_by_version(args.prompt_version)
     output_dir = pathlib.Path(args.output_dir)
 
-    kwargs = dict(
-        features_csv=args.leuven_features,
-        categories_csv=args.leuven_categories,
-        job_id=args.job_id,
-        output_dir=output_dir,
-        client=client,
-        model=args.model,
-        prompts=prompts,
-        test_size=args.test_size,
-        seed=args.seed,
-        max_workers=args.max_workers,
-        resume=args.resume,
-    )
+    # Load verifier prompt if verification is enabled
+    verifier_prompt_text: Optional[str] = None
+    if args.enable_positive_verification:
+        from leuven_expansion.feature_prompts import load_verifier_prompt
+        verifier_prompt_text = load_verifier_prompt()
+        logger.info(
+            "Positive verification ENABLED (positive_threshold=%.1f, verification_threshold=%.1f)",
+            args.positive_threshold, args.verification_threshold,
+        )
 
-    if args.mode == "cell_holdout":
-        run_cell_holdout(**kwargs)
+    if args.mode == "full_leuven":
+        run_full_leuven(
+            features_csv=args.leuven_features,
+            categories_csv=args.leuven_categories,
+            job_id=args.job_id,
+            output_dir=output_dir,
+            client=client,
+            model=args.model,
+            prompts=prompts,
+            max_workers=args.max_workers,
+            resume=args.resume,
+            enable_positive_verification=args.enable_positive_verification,
+            verifier_prompt=verifier_prompt_text,
+            verifier_model=args.verifier_model,
+            positive_threshold=args.positive_threshold,
+            verification_threshold=args.verification_threshold,
+        )
     else:
-        run_word_holdout(**kwargs)
+        kwargs = dict(
+            features_csv=args.leuven_features,
+            categories_csv=args.leuven_categories,
+            job_id=args.job_id,
+            output_dir=output_dir,
+            client=client,
+            model=args.model,
+            prompts=prompts,
+            test_size=args.test_size,
+            seed=args.seed,
+            max_workers=args.max_workers,
+            resume=args.resume,
+        )
+        if args.mode == "cell_holdout":
+            run_cell_holdout(**kwargs)
+        else:
+            run_word_holdout(**kwargs)
