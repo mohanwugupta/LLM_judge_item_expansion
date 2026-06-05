@@ -231,6 +231,10 @@ fi
 # 8. Count total pairs (informational)
 # ------------------------------------------------------------------
 echo ""
+# Pass env vars needed by the heredoc below
+export PROJECT_DIR_PY="$PROJECT_DIR"
+export LEUVEN_FEATURES_PY="$LEUVEN_FEATURES"
+
 python3 - <<'PYEOF'
 import pandas as pd, pathlib, os
 feat_csv = os.path.join(os.environ["PROJECT_DIR_PY"],
@@ -240,9 +244,6 @@ n_words = len(df)
 n_feats = len(df.columns) - 1   # exclude word column
 print(f"  Leuven matrix: {n_words} words × {n_feats} features = {n_words * n_feats:,} pairs")
 PYEOF
-# Pass env vars needed by the heredoc above
-export PROJECT_DIR_PY="$PROJECT_DIR"
-export LEUVEN_FEATURES_PY="$LEUVEN_FEATURES"
 
 # ------------------------------------------------------------------
 # 9. Build python command
