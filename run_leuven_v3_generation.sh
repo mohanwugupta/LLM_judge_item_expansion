@@ -24,7 +24,7 @@
 #   sbatch run_leuven_v3_generation.sh
 # =============================================================================
 
-set -Eeo pipefail
+set -eo pipefail
 
 on_error() {
     local exit_code=$?
