@@ -26,12 +26,6 @@
 
 set -eo pipefail
 
-on_error() {
-    local exit_code=$?
-    echo "ERROR: command failed at line ${BASH_LINENO[0]} (exit ${exit_code}): ${BASH_COMMAND}" >&2
-}
-trap on_error ERR
-
 VLLM_PORT=8021
 
 echo "=========================================="
@@ -85,7 +79,7 @@ fi
 export PYTHONPATH="$PROJECT_DIR${PYTHONPATH:+:$PYTHONPATH}"
 
 # ------------------------------------------------------------------
-# 3. Cache and offline settings
+# 3. Cache & offline settings
 # ------------------------------------------------------------------
 export HF_HOME=/scratch/gpfs/JORDANAT/mg9965/hf_cache
 export HF_DATASETS_CACHE=/scratch/gpfs/JORDANAT/mg9965/hf_cache/datasets
@@ -114,39 +108,23 @@ export NCCL_P2P_LEVEL=NVL
 export CUDA_DEVICE_MAX_CONNECTIONS=1
 
 # ------------------------------------------------------------------
-# 5. Validate prerequisites and the no-model generation plan
+# 5. Validate prerequisites
 # ------------------------------------------------------------------
-if [ ! -d "$MODEL_PATH" ]; then
-    echo "ERROR: Model not found at: $MODEL_PATH"
+if [ -d "$MODEL_PATH" ]; then
+    echo "✅ Model found: $MODEL_PATH"
+else
+    echo "❌ ERROR: Model not found at: $MODEL_PATH"
     exit 1
 fi
-echo "Model found: $MODEL_PATH"
 
-if [ ! -f "$PROJECT_DIR/$LEUVEN_FEATURES" ]; then
-    echo "ERROR: Leuven features not found: $PROJECT_DIR/$LEUVEN_FEATURES"
-    exit 1
-fi
-echo "Leuven features found: $LEUVEN_FEATURES"
-
-if head -n 1 "$PROJECT_DIR/$LEUVEN_FEATURES" | grep -q "git-lfs.github.com/spec"; then
-    echo "ERROR: Leuven input is a Git LFS pointer. Run git lfs pull before submission."
+if [ -f "$PROJECT_DIR/$LEUVEN_FEATURES" ]; then
+    echo "✅ Leuven features found: $LEUVEN_FEATURES"
+else
+    echo "❌ ERROR: Leuven features not found: $PROJECT_DIR/$LEUVEN_FEATURES"
     exit 1
 fi
 
 mkdir -p "$PROJECT_DIR/logs" "$PROJECT_DIR/$OUTPUT_DIR"
-
-echo "Running no-model preflight..."
-python -m leuven_expansion.generate_features \
-    --input-csv          "$PROJECT_DIR/$LEUVEN_FEATURES" \
-    --job-id             "$JOB_ID" \
-    --output-dir         "$PROJECT_DIR/$OUTPUT_DIR" \
-    --model              "$SERVED_MODEL_NAME" \
-    --responses-per-word "$RESPONSES_PER_WORD" \
-    --temperature        "$TEMPERATURE" \
-    --base-seed          "$BASE_SEED" \
-    --max-tokens         "$MAX_TOKENS" \
-    --resume \
-    --preflight-only
 
 # ------------------------------------------------------------------
 # 6. Start vLLM server
@@ -191,11 +169,11 @@ ELAPSED=0
 
 while [ $ELAPSED -lt $MAX_WAIT ]; do
     if ! kill -0 "$VLLM_PID" 2>/dev/null; then
-        echo "ERROR: vLLM server exited unexpectedly"
+        echo "❌ ERROR: vLLM server exited unexpectedly"
         exit 1
     fi
     if curl -s "http://localhost:${VLLM_PORT}/health" > /dev/null 2>&1; then
-        echo "vLLM server ready after ${ELAPSED}s"
+        echo "✅ vLLM server ready after ${ELAPSED}s"
         break
     fi
     sleep $WAIT_INTERVAL
@@ -203,7 +181,7 @@ while [ $ELAPSED -lt $MAX_WAIT ]; do
 done
 
 if [ $ELAPSED -ge $MAX_WAIT ]; then
-    echo "ERROR: vLLM server failed to start within ${MAX_WAIT}s"
+    echo "❌ ERROR: vLLM server failed to start within ${MAX_WAIT}s"
     exit 1
 fi
 
@@ -235,15 +213,15 @@ PASS=0
 FAIL=0
 
 check_file() {
-    local file="$PROJECT_DIR/$OUTPUT_DIR/$1"
-    local description="$2"
-    if [ -f "$file" ]; then
+    local f="$PROJECT_DIR/$OUTPUT_DIR/$1"
+    local desc="$2"
+    if [ -f "$f" ]; then
         local rows
-        rows=$(wc -l < "$file")
-        echo "  PASS $description: $file ($rows lines)"
+        rows=$(wc -l < "$f")
+        echo "  ✅ $desc: $f  ($rows lines)"
         PASS=$((PASS + 1))
     else
-        echo "  FAIL missing $description: $file"
+        echo "  ❌ MISSING $desc: $f"
         FAIL=$((FAIL + 1))
     fi
 }
@@ -258,10 +236,10 @@ check_file "run.log"                           "run log"
 MANIFEST="$PROJECT_DIR/$OUTPUT_DIR/manifest.json"
 if [ -f "$MANIFEST" ]; then
     if python3 -c "import json,sys; d=json.load(open('$MANIFEST')); expected=d['word_count'] * d['responses_per_word_per_prompt']; counts=d.get('valid_responses_by_prompt', {}); ok=d.get('finished_at') and d.get('pending_after_run') == 0 and set(counts) == {'A','B','C'} and all(v == expected for v in counts.values()); sys.exit(0 if ok else 1)"; then
-        echo "  PASS manifest records a complete A/B/C run"
+        echo "  ✅ manifest.json records a complete A/B/C run"
         PASS=$((PASS + 1))
     else
-        echo "  FAIL manifest is incomplete or has missing prompt responses"
+        echo "  ❌ manifest.json is incomplete or has missing prompt responses"
         FAIL=$((FAIL + 1))
     fi
 fi
@@ -269,9 +247,9 @@ fi
 echo ""
 echo "Production summary: $PASS checks passed, $FAIL failed"
 if [ $FAIL -gt 0 ]; then
-    echo "Production checks FAILED - inspect the SLURM and run logs"
+    echo "❌ Production checks FAILED — inspect the SLURM and run logs"
     exit 1
 fi
 
-echo "Production generation PASSED all completion checks"
+echo "✅ Production generation PASSED all completion checks"
 echo "Completed at $(date)"

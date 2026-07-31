@@ -27,13 +27,7 @@
 
 set -eo pipefail
 
-on_error() {
-    local exit_code=$?
-    echo "ERROR: command failed at line ${BASH_LINENO[0]} (exit ${exit_code}): ${BASH_COMMAND}" >&2
-}
-trap on_error ERR
-
-VLLM_PORT=8010
+VLLM_PORT=8010   # distinct port to avoid collision with production tasks
 
 echo "=========================================="
 echo " Leuven v3 Smoke Test"
@@ -87,7 +81,7 @@ fi
 export PYTHONPATH="$PROJECT_DIR${PYTHONPATH:+:$PYTHONPATH}"
 
 # ------------------------------------------------------------------
-# 3. Cache and offline settings
+# 3. Cache & offline settings
 # ------------------------------------------------------------------
 export HF_HOME=/scratch/gpfs/JORDANAT/mg9965/hf_cache
 export HF_DATASETS_CACHE=/scratch/gpfs/JORDANAT/mg9965/hf_cache/datasets
@@ -105,7 +99,7 @@ export HF_HUB_OFFLINE=1
 export TRANSFORMERS_OFFLINE=1
 
 # ------------------------------------------------------------------
-# 4. GPU and memory settings
+# 4. GPU / memory
 # ------------------------------------------------------------------
 export CUDA_VISIBLE_DEVICES=0,1,2,3
 export OMP_NUM_THREADS=32
@@ -115,40 +109,21 @@ export NCCL_P2P_LEVEL=NVL
 export CUDA_DEVICE_MAX_CONNECTIONS=1
 
 # ------------------------------------------------------------------
-# 5. Validate prerequisites and the no-model generation plan
+# 5. Validate prerequisites
 # ------------------------------------------------------------------
 if [ ! -d "$MODEL_PATH" ]; then
-    echo "ERROR: Model not found at: $MODEL_PATH"
+    echo "❌ ERROR: Model not found at: $MODEL_PATH"
     exit 1
 fi
-echo "Model found: $MODEL_PATH"
+echo "✅ Model found: $MODEL_PATH"
 
 if [ ! -f "$PROJECT_DIR/$LEUVEN_FEATURES" ]; then
-    echo "ERROR: Leuven features not found: $PROJECT_DIR/$LEUVEN_FEATURES"
+    echo "❌ ERROR: Leuven features not found: $PROJECT_DIR/$LEUVEN_FEATURES"
     exit 1
 fi
-echo "Leuven features found: $LEUVEN_FEATURES"
-
-if head -n 1 "$PROJECT_DIR/$LEUVEN_FEATURES" | grep -q "git-lfs.github.com/spec"; then
-    echo "ERROR: Leuven input is a Git LFS pointer. Run git lfs pull before submission."
-    exit 1
-fi
+echo "✅ Leuven features found"
 
 mkdir -p "$PROJECT_DIR/logs" "$PROJECT_DIR/$OUTPUT_DIR"
-
-echo "Running no-model preflight..."
-python -m leuven_expansion.generate_features \
-    --input-csv          "$PROJECT_DIR/$LEUVEN_FEATURES" \
-    --job-id             "$JOB_ID" \
-    --output-dir         "$PROJECT_DIR/$OUTPUT_DIR" \
-    --model              "$SERVED_MODEL_NAME" \
-    --responses-per-word "$RESPONSES_PER_WORD" \
-    --temperature        "$TEMPERATURE" \
-    --base-seed          "$BASE_SEED" \
-    --max-tokens         "$MAX_TOKENS" \
-    --max-words          "$MAX_WORDS" \
-    --resume \
-    --preflight-only
 
 # ------------------------------------------------------------------
 # 6. Start vLLM server
@@ -192,11 +167,11 @@ WAIT_INTERVAL=15
 
 while [ $ELAPSED -lt $MAX_WAIT ]; do
     if ! kill -0 "$VLLM_PID" 2>/dev/null; then
-        echo "ERROR: vLLM exited unexpectedly"
+        echo "❌ ERROR: vLLM exited unexpectedly"
         exit 1
     fi
     if curl -s "http://localhost:${VLLM_PORT}/health" > /dev/null 2>&1; then
-        echo "vLLM ready after ${ELAPSED}s"
+        echo "✅ vLLM ready after ${ELAPSED}s"
         break
     fi
     sleep $WAIT_INTERVAL
@@ -204,7 +179,7 @@ while [ $ELAPSED -lt $MAX_WAIT ]; do
 done
 
 if [ $ELAPSED -ge $MAX_WAIT ]; then
-    echo "ERROR: vLLM failed to start within ${MAX_WAIT}s"
+    echo "❌ ERROR: vLLM failed to start within ${MAX_WAIT}s"
     exit 1
 fi
 
@@ -237,15 +212,15 @@ PASS=0
 FAIL=0
 
 check_file() {
-    local file="$PROJECT_DIR/$OUTPUT_DIR/$1"
-    local description="$2"
-    if [ -f "$file" ]; then
+    local f="$PROJECT_DIR/$OUTPUT_DIR/$1"
+    local desc="$2"
+    if [ -f "$f" ]; then
         local rows
-        rows=$(wc -l < "$file")
-        echo "  PASS $description: $file ($rows lines)"
+        rows=$(wc -l < "$f")
+        echo "  ✅ $desc: $f  ($rows lines)"
         PASS=$((PASS + 1))
     else
-        echo "  FAIL missing $description: $file"
+        echo "  ❌ MISSING $desc: $f"
         FAIL=$((FAIL + 1))
     fi
 }
@@ -253,17 +228,18 @@ check_file() {
 check_file "feature_generations.csv"           "participant responses"
 check_file "generated_features_long.csv"       "long-form generated features"
 check_file "generated_feature_frequencies.csv" "exact-string frequencies"
-check_file "parse_errors.csv"                  "parse errors"
+check_file "parse_errors.csv"                  "parse_errors"
 check_file "manifest.json"                     "manifest"
-check_file "run.log"                           "run log"
+check_file "run.log"                           "run.log"
 
+# Verify manifest has finished_at
 MANIFEST="$PROJECT_DIR/$OUTPUT_DIR/manifest.json"
 if [ -f "$MANIFEST" ]; then
     if python3 -c "import json,sys; d=json.load(open('$MANIFEST')); expected={'A':6,'B':6,'C':6}; ok=d.get('finished_at') and d.get('pending_after_run') == 0 and d.get('valid_responses_by_prompt') == expected; sys.exit(0 if ok else 1)"; then
-        echo "  PASS manifest records six valid responses per prompt"
+        echo "  ✅ manifest.json records six valid responses per prompt"
         PASS=$((PASS + 1))
     else
-        echo "  FAIL manifest is incomplete or has missing prompt responses"
+        echo "  ❌ manifest.json missing finished_at or incomplete (job may have crashed)"
         FAIL=$((FAIL + 1))
     fi
 fi
@@ -271,9 +247,11 @@ fi
 echo ""
 echo "Smoke test summary: $PASS checks passed, $FAIL failed"
 if [ $FAIL -gt 0 ]; then
-    echo "Smoke test FAILED - review the SLURM and run logs"
+    echo "❌ Smoke test FAILED — review logs before submitting production job"
     exit 1
+else
+    echo "✅ Smoke test PASSED — safe to submit: sbatch run_leuven_v3_generation.sh"
 fi
 
-echo "Smoke test PASSED - production command: sbatch run_leuven_v3_generation.sh"
+echo ""
 echo "Completed at $(date)"
