@@ -59,21 +59,14 @@ The dedicated launcher submits only v3:
 sbatch run_leuven_v3_generation.sh
 ```
 
-Defaults produce 20 responses for every item under each of the three prompts
-using one Qwen2.5-72B-Instruct model. For the 293 Leuven words, this is 17,580
-calls. Submit only after the smoke test passes. To run a different model or
-sampling configuration later, provide a unique run label and model
-configuration through exported variables:
-
-```bash
-sbatch --export=ALL,V3_RUN_LABEL=my_model,V3_RESPONSES_PER_WORD=20,V3_TEMPERATURE=0.8,MODEL_DIR_NAME=model-directory,SERVED_MODEL_NAME=served-model run_leuven_v3_generation.sh
-```
-
-`MODEL_PATH` can also be supplied explicitly. Each `V3_RUN_LABEL` writes to a
-separate directory under:
+The submitted job is intentionally fixed to the same Qwen2.5-72B-Instruct
+model, `PromptControlText` environment, four 80 GB GPUs, cache paths, and vLLM
+configuration used by the established Leuven production jobs. It produces 20
+responses for every item under each prompt. For 293 Leuven words, this is
+17,580 calls. Submit only after the smoke test passes. Output is written to:
 
 ```text
-artifacts/leuven_feature_generation/leuven_v3_<run label>/
+artifacts/leuven_feature_generation/leuven_v3_qwen2_5_72b/
 ```
 
 The input CSV must contain the actual Git LFS content on the cluster. The runner
@@ -89,19 +82,19 @@ Run this first:
 sbatch run_leuven_v3_smoke_test.sh
 ```
 
-The smoke test uses the same model server, prompts, schema, runner, output
-derivation, and completion checks as the full experiment. It selects three
-evenly spaced words from the input and collects two responses under each prompt,
-for 18 calls total. Its default output is isolated by SLURM job ID:
+The smoke test is a standalone copy of the established Leuven smoke-job
+structure. It uses the `test` partition and the same hard-coded cluster paths,
+environment setup, model, and vLLM launch pattern. It selects three evenly
+spaced words and collects two responses under each prompt, for 18 calls total.
+Output is written to:
 
 ```text
-artifacts/leuven_feature_generation/leuven_v3_smoke_<job id>/
+artifacts/leuven_feature_generation/smoke_test/leuven_v3_smoke/
 ```
 
 The job succeeds only when all expected A, B, and C responses are valid and all
-six output files exist. `V3_MAX_WORDS`, `V3_RESPONSES_PER_WORD`, and
-`V3_RUN_LABEL` can be overridden with `sbatch --export=ALL,...` when repeating a
-targeted smoke run.
+six output files exist. An error trap prints the failed command and source line
+to the SLURM error log when a setup or execution step exits.
 
 ## Outputs
 
