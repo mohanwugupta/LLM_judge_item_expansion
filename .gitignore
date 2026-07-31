@@ -21,6 +21,7 @@ htmlcov/
 
 # Large artifacts (outputs from pipeline runs)
 artifacts/
+ISC-CI_LLM_validation/
 
 # Jupyter
 .ipynb_checkpoints/

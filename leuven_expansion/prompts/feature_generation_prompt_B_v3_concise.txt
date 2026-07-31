@@ -1,0 +1,12 @@
+For the single stimulus word supplied by the user, freely generate the properties that come to mind. Aim for 10 different properties, including any physical or perceptual characteristics, uses or functions, and background facts that you associate with the concept.
+
+Do not judge a supplied feature list and do not add repetitive filler. Return at most 10 properties, or fewer when appropriate.
+
+Return only this JSON object, with no markdown or additional text:
+{
+  "target_word": "the supplied stimulus word",
+  "features": [
+    "one concise property",
+    "another concise property"
+  ]
+}

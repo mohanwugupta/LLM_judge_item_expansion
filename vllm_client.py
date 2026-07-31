@@ -2,7 +2,7 @@ import time
 import hashlib
 import threading
 import logging
-from typing import Dict, Tuple, Any
+from typing import Any, Dict, Optional, Tuple
 
 logger = logging.getLogger(__name__)
 
@@ -16,7 +16,7 @@ class VLLMClient:
     Replaces the mock LLMClient with actual cluster generation capabilities.
     """
     def __init__(
-        self, 
+        self,
         model_name: str = "Qwen2.5-72B-Instruct",
         base_url: str = "http://localhost:8000/v1",
         api_key: str = "EMPTY",
@@ -35,8 +35,15 @@ class VLLMClient:
         self.cache: Dict[str, str] = {}
         self._thread_local = threading.local()
 
-    def _get_cache_key(self, system_prompt: str, user_prompt: str, model: str, temperature: float) -> str:
-        key_content = f"{system_prompt}|{user_prompt}|{model}|{temperature}"
+    def _get_cache_key(
+        self,
+        system_prompt: str,
+        user_prompt: str,
+        model: str,
+        temperature: float,
+        seed: Optional[int],
+    ) -> str:
+        key_content = f"{system_prompt}|{user_prompt}|{model}|{temperature}|{seed}"
         return hashlib.sha256(key_content.encode('utf-8')).hexdigest()
 
     @property
@@ -52,15 +59,27 @@ class VLLMClient:
             )
         return self._thread_local.openai_client
 
-    def generate(self, system_prompt, user_prompt: str, model: str = None, temperature: float = 0.0, max_tokens: int = 512, response_format: Dict[str, Any] = None) -> Tuple[str, Dict[str, Any]]:
+    def generate(
+        self,
+        system_prompt,
+        user_prompt: str,
+        model: str = None,
+        temperature: float = 0.0,
+        max_tokens: int = 512,
+        response_format: Dict[str, Any] = None,
+        seed: Optional[int] = None,
+    ) -> Tuple[str, Dict[str, Any]]:
         target_model = model or self.model_name
         metadata = {
             "model": target_model,
             "temperature": temperature,
+            "seed": seed,
             "timestamp": time.time(),
         }
 
-        cache_key = self._get_cache_key(str(system_prompt), user_prompt, target_model, temperature)
+        cache_key = self._get_cache_key(
+            str(system_prompt), user_prompt, target_model, temperature, seed
+        )
         if self.enable_cache and cache_key in self.cache:
             return self.cache[cache_key], metadata
 
@@ -91,10 +110,12 @@ class VLLMClient:
                     create_kwargs["extra_body"] = extra
                 if response_format is not None:
                     create_kwargs["response_format"] = response_format
+                if seed is not None:
+                    create_kwargs["seed"] = seed
                 response = self.client.chat.completions.create(**create_kwargs)
                 choice = response.choices[0]
                 text = choice.message.content or ""
-                
+
                 metadata["finish_reason"] = choice.finish_reason
                 if response.usage:
                     metadata["prompt_tokens"] = response.usage.prompt_tokens

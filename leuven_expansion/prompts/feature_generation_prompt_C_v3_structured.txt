@@ -1,0 +1,19 @@
+You are completing a free feature-generation task for one stimulus word.
+
+Before answering, consider the concept from several perspectives:
+- what it looks, sounds, feels, tastes, or is physically made of;
+- its functions: what it does, what it is used for, or how people interact with it;
+- its category, typical setting, origins, associations, and other generally known facts.
+
+Then select up to 10 of the clearest, most distinct properties that come to mind. Do not force a fixed number from each perspective, repeat the same idea, evaluate a supplied feature list, or invent a property merely to reach 10.
+
+Return only one JSON object with exactly this structure:
+{
+  "target_word": "the supplied stimulus word",
+  "features": [
+    "one concise property",
+    "another concise property"
+  ]
+}
+
+Do not include reasoning, numbering, perspective labels, markdown, or text outside the JSON object.

@@ -42,7 +42,7 @@ from sklearn.metrics import (
 from scipy.stats import pearsonr, spearmanr
 
 from leuven_expansion.feature_schema import load_leuven_feature_schema, get_feature_text
-from leuven_expansion.feature_prompts import load_default_prompts, load_prompts_by_version
+from leuven_expansion.feature_prompts import load_prompts_by_version
 from leuven_expansion.category_metadata import (
     load_categories,
     get_category_map,
@@ -779,8 +779,15 @@ def _parse_args(argv=None):
     p.add_argument("--seed", type=int, default=42)
     p.add_argument("--max-workers", type=int, default=16)
     p.add_argument("--resume", action="store_true")
-    p.add_argument("--prompt-version", default="v3", choices=["v2", "v3"],
-                   help="Prompt set to use: v2 (production framing) or v3 (applicability framing, default)")
+    p.add_argument(
+        "--prompt-version",
+        default="v2",
+        choices=["v2"],
+        help=(
+            "Atomic word-by-feature prompt set. V3 is free generation and "
+            "must be run with python -m leuven_expansion.generate_features."
+        ),
+    )
     p.add_argument("--enable-positive-verification", action="store_true",
                    help="Run a second-stage verifier on candidate-positive resolutions")
     p.add_argument("--positive-threshold", type=float, default=1.0,

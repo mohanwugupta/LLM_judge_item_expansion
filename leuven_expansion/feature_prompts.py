@@ -1,9 +1,4 @@
-"""
-leuven_expansion/feature_prompts.py
-
-Build atomic judge prompts for word × feature judgments.
-Enforces that no forbidden metadata enters the judge input.
-"""
+"""Build isolated prompts for Leuven atomic judging and free generation."""
 from __future__ import annotations
 
 import hashlib
@@ -31,6 +26,12 @@ _FORBIDDEN_FIELDS = frozenset([
 ])
 
 _PROMPT_DIR = pathlib.Path(__file__).parent / "prompts"
+GENERATION_PROMPT_VARIANTS = ("A", "B", "C")
+_GENERATION_PROMPT_FILES = {
+    "A": "feature_generation_prompt_A_v3_original.txt",
+    "B": "feature_generation_prompt_B_v3_concise.txt",
+    "C": "feature_generation_prompt_C_v3_structured.txt",
+}
 
 # Fixed few-shot examples (same for all atomic prompts)
 _DEFAULT_FEW_SHOT: List[Dict] = [
@@ -55,13 +56,8 @@ def load_prompt(path: str | pathlib.Path) -> str:
 
 
 def load_default_prompts() -> Dict[str, str]:
-    """Return the three judge system prompts and adjudicator prompt keyed by role."""
-    return {
-        "A": load_prompt(_PROMPT_DIR / "feature_judge_prompt_A_v3_applicability.txt"),
-        "B": load_prompt(_PROMPT_DIR / "feature_judge_prompt_B_v3_applicability.txt"),
-        "C": load_prompt(_PROMPT_DIR / "feature_judge_prompt_C_v3_applicability.txt"),
-        "adjudicator": load_prompt(_PROMPT_DIR / "feature_adjudicator_prompt_v3_applicability.txt"),
-    }
+    """Return the retained v2 atomic word-by-feature prompt set."""
+    return load_prompts_by_version("v2")
 
 
 def load_prompts_by_version(version: str) -> Dict[str, str]:
@@ -70,7 +66,7 @@ def load_prompts_by_version(version: str) -> Dict[str, str]:
 
     Parameters
     ----------
-    version : "v2" (spontaneous-production framing) or "v3" (applicability framing)
+    version : "v2" for the retained atomic word-by-feature experiment
 
     Returns
     -------
@@ -83,10 +79,40 @@ def load_prompts_by_version(version: str) -> Dict[str, str]:
             "C": load_prompt(_PROMPT_DIR / "feature_judge_prompt_C_v2_production.txt"),
             "adjudicator": load_prompt(_PROMPT_DIR / "feature_adjudicator_prompt_v2_production.txt"),
         }
-    elif version == "v3":
-        return load_default_prompts()
-    else:
-        raise ValueError(f"Unknown prompt version: {version!r}. Expected 'v2' or 'v3'.")
+    if version == "v3":
+        raise ValueError(
+            "v3 is a free feature-generation task, not an atomic applicability "
+            "prompt set; use load_generation_prompts('v3') and "
+            "leuven_expansion.generate_features"
+        )
+    raise ValueError(f"Unknown prompt version: {version!r}. Expected 'v2'.")
+
+
+def load_generation_prompts(version: str = "v3") -> Dict[str, str]:
+    """Return the three Leuven-style free-generation prompt conditions."""
+    if version != "v3":
+        raise ValueError(f"Unknown generation prompt version: {version!r}")
+    return {
+        variant: load_prompt(_PROMPT_DIR / filename)
+        for variant, filename in _GENERATION_PROMPT_FILES.items()
+    }
+
+
+def load_generation_prompt(version: str = "v3", variant: str = "A") -> str:
+    """Return one generation condition; variant A is the faithful default."""
+    if variant not in GENERATION_PROMPT_VARIANTS:
+        raise ValueError(
+            f"Unknown v3 generation prompt variant: {variant!r}; "
+            f"expected one of {GENERATION_PROMPT_VARIANTS}"
+        )
+    return load_generation_prompts(version)[variant]
+
+
+def build_generation_user_message(word_normalized: str) -> str:
+    """Build a one-word free-generation trial without feature-schema leakage."""
+    message = f"stimulus_word:\n{word_normalized}"
+    assert_no_forbidden_fields(message)
+    return message
 
 
 def build_judge_user_message(

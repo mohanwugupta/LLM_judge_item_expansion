@@ -8,8 +8,12 @@ import pytest
 from leuven_expansion.feature_prompts import (
     build_judge_user_message,
     build_adjudicator_user_message,
+    build_generation_user_message,
     assert_no_forbidden_fields,
     load_default_prompts,
+    load_generation_prompt,
+    load_generation_prompts,
+    load_prompts_by_version,
     prompt_hash,
     _FORBIDDEN_FIELDS,
 )
@@ -167,10 +171,10 @@ def test_all_prompts_nonempty():
         assert len(text) > 50, f"Prompt {key} seems too short"
 
 
-def test_prompt_A_emphasizes_independence():
+def test_default_atomic_prompt_is_v2_production_protocol():
     prompts = load_default_prompts()
-    lower = prompts["A"].lower()
-    assert any(kw in lower for kw in ["independent", "do not consider", "only the provided"])
+    assert "spontaneous production" in prompts["A"].lower()
+    assert prompts == load_prompts_by_version("v2")
 
 
 def test_prompt_B_is_conservative():
@@ -179,10 +183,9 @@ def test_prompt_B_is_conservative():
     assert "conservative" in lower
 
 
-def test_prompt_C_uses_checklist_style():
-    prompts = load_default_prompts()
-    lower = prompts["C"].lower()
-    assert "check" in lower
+def test_v3_cannot_be_loaded_as_an_atomic_prompt_set():
+    with pytest.raises(ValueError, match="free feature-generation"):
+        load_prompts_by_version("v3")
 
 
 def test_no_prompt_contains_drm_fields():
@@ -192,3 +195,39 @@ def test_no_prompt_contains_drm_fields():
         lower = text.lower()
         for f in forbidden:
             assert f not in lower, f"Prompt {key} contains forbidden field '{f}'"
+
+
+def test_v3_generation_prompt_recreates_free_listing_task():
+    prompts = load_generation_prompts("v3")
+    assert set(prompts) == {"A", "B", "C"}
+    assert len(set(prompts.values())) == 3
+    assert load_generation_prompt("v3") == prompts["A"]
+    assert "preferably 10" in prompts["A"].lower()
+    for prompt in prompts.values():
+        lower = prompt.lower()
+        assert "physical" in lower
+        assert "function" in lower
+        assert "background" in lower or "generally known facts" in lower
+        assert '"target_word"' in prompt
+        assert '"features"' in prompt
+        assert "0 of 4" not in lower
+        assert "feature applicability" not in lower
+        assert "supplied feature list" in lower
+
+
+def test_v3_generation_prompt_hashes_are_distinct_for_comparison():
+    message = build_generation_user_message("dog")
+    hashes = {
+        prompt_hash(prompt, message)
+        for prompt in load_generation_prompts().values()
+    }
+    assert len(hashes) == 3
+
+
+def test_v3_generation_user_message_contains_only_the_stimulus_word():
+    message = build_generation_user_message("dog")
+    assert message == "stimulus_word:\ndog"
+    assert "feature_id" not in message
+    assert "feature_text" not in message
+    assert "category" not in message
+    assert_no_forbidden_fields(message)
