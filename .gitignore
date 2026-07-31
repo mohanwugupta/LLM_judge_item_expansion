@@ -28,3 +28,6 @@ artifacts/
 # Secrets / local config
 .env
 *.key
+
+# Smoke test artifacts – not stored in Git
+artifacts/leuven_feature_expansion/smoke_test/
