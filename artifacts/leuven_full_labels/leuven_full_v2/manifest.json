@@ -1,0 +1,12 @@
+{
+  "job_id": "leuven_full_v2",
+  "model": "Qwen2.5-72B-Instruct",
+  "n_total_pairs": 584535,
+  "n_skipped_resume": 221120,
+  "n_pending": 363415,
+  "n_completed_this_run": 363415,
+  "n_parse_errors": 56,
+  "started_at": "2026-06-21T16:49:51.255903Z",
+  "finished_at": "2026-06-24T03:04:46.784997Z",
+  "schema_version": "leuven_feature_schema_v1"
+}
