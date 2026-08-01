@@ -1,3 +1,294 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:9deb096488ce1ee576019d23d04cd60d6f1c42f1e0e5c2922fd70ea1087c9733
-size 9128
+Name,Category 1,Category 2,Category 3
+monkey,Mammal,Living,Object
+beaver,Mammal,Living,Object
+bison,Mammal,Living,Object
+dromedary,Mammal,Living,Object
+squirrel,Mammal,Living,Object
+hedgehog,Mammal,Living,Object
+donkey,Mammal,Living,Object
+giraffe,Mammal,Living,Object
+hamster,Mammal,Living,Object
+deer,Mammal,Living,Object
+dog,Mammal,Living,Object
+polar bear,Mammal,Living,Object
+kangaroo,Mammal,Living,Object
+cat,Mammal,Living,Object
+cow,Mammal,Living,Object
+rabbit,Mammal,Living,Object
+llama,Mammal,Living,Object
+lion,Mammal,Living,Object
+mouse,Mammal,Living,Object
+rhinoceros,Mammal,Living,Object
+hippopotamus,Mammal,Living,Object
+elephant,Mammal,Living,Object
+horse,Mammal,Living,Object
+sheep,Mammal,Living,Object
+tiger,Mammal,Living,Object
+pig,Mammal,Living,Object
+bat,Mammal,Living,Object
+fox,Mammal,Living,Object
+wolf,Mammal,Living,Object
+zebra,Mammal,Living,Object
+eagle,Bird,Living,Object
+dove,Bird,Living,Object
+duck,Bird,Living,Object
+magpie,Bird,Living,Object
+pheasant,Bird,Living,Object
+vulture,Bird,Living,Object
+rooster,Bird,Living,Object
+turkey,Bird,Living,Object
+canary,Bird,Living,Object
+chicken,Bird,Living,Object
+cuckoo,Bird,Living,Object
+crow,Bird,Living,Object
+chickadee,Bird,Living,Object
+seagull,Bird,Living,Object
+blackbird,Bird,Living,Object
+sparrow,Bird,Living,Object
+stork,Bird,Living,Object
+parrot,Bird,Living,Object
+parakeet,Bird,Living,Object
+peacock,Bird,Living,Object
+pelican,Bird,Living,Object
+penguin,Bird,Living,Object
+heron,Bird,Living,Object
+robin,Bird,Living,Object
+woodpecker,Bird,Living,Object
+ostrich,Bird,Living,Object
+owl,Bird,Living,Object
+falcon,Bird,Living,Object
+swan,Bird,Living,Object
+swallow,Bird,Living,Object
+anchovy,Fish,Living,Object
+dolphin,Fish,Living,Object
+trout,Fish,Living,Object
+goldfish,Fish,Living,Object
+shark,Fish,Living,Object
+herring,Fish,Living,Object
+squid,Fish,Living,Object
+cod,Fish,Living,Object
+carp,Fish,Living,Object
+orca,Fish,Living,Object
+eel,Fish,Living,Object
+piranha,Fish,Living,Object
+plaice,Fish,Living,Object
+flatfish,Fish,Living,Object
+sperm whale,Fish,Living,Object
+ray,Fish,Living,Object
+sardine,Fish,Living,Object
+pike,Fish,Living,Object
+stickleback,Fish,Living,Object
+sole,Fish,Living,Object
+whale,Fish,Living,Object
+salmon,Fish,Living,Object
+swordfish,Fish,Living,Object
+bee,Insect,Living,Object
+leech,Insect,Living,Object
+horsefly,Insect,Living,Object
+centipede,Insect,Living,Object
+fruit fly,Insect,Living,Object
+bumblebee,Insect,Living,Object
+cockroach,Insect,Living,Object
+beetle,Insect,Living,Object
+cricket,Insect,Living,Object
+dragonfly,Insect,Living,Object
+ladybug,Insect,Living,Object
+louse,Insect,Living,Object
+maybug,Insect,Living,Object
+ant,Insect,Living,Object
+moth,Insect,Living,Object
+mosquito,Insect,Living,Object
+earwig,Insect,Living,Object
+wood louse,Insect,Living,Object
+caterpillar,Insect,Living,Object
+spider,Insect,Living,Object
+grasshopper,Insect,Living,Object
+fly,Insect,Living,Object
+butterfly,Insect,Living,Object
+flee,Insect,Living,Object
+wasp,Insect,Living,Object
+worm,Insect,Living,Object
+viper,Reptile,Living,Object
+alligator,Reptile,Living,Object
+boa,Reptile,Living,Object
+cobra,Reptile,Living,Object
+dinosaur,Reptile,Living,Object
+gecko,Reptile,Living,Object
+lizard,Reptile,Living,Object
+blindworm,Reptile,Living,Object
+caiman,Reptile,Living,Object
+chameleon,Reptile,Living,Object
+frog,Reptile,Living,Object
+crocodile,Reptile,Living,Object
+iguana,Reptile,Living,Object
+toad,Reptile,Living,Object
+python,Reptile,Living,Object
+salamander,Reptile,Living,Object
+tortoise,Reptile,Living,Object
+snake,Reptile,Living,Object
+monitor lizard,Reptile,Living,Object
+turtle,Reptile,Living,Object
+can opener,Kitchen,Artifact,Object
+plate,Kitchen,Artifact,Object
+toaster,Kitchen,Artifact,Object
+bottle,Kitchen,Artifact,Object
+stove,Kitchen,Artifact,Object
+fridge,Kitchen,Artifact,Object
+glass,Kitchen,Artifact,Object
+towel,Kitchen,Artifact,Object
+kettle,Kitchen,Artifact,Object
+whisk,Kitchen,Artifact,Object
+percolator,Kitchen,Artifact,Object
+bowl,Kitchen,Artifact,Object
+spoon,Kitchen,Artifact,Object
+microwave oven,Kitchen,Artifact,Object
+mixer,Kitchen,Artifact,Object
+nutcracker,Kitchen,Artifact,Object
+place mat,Kitchen,Artifact,Object
+oven,Kitchen,Artifact,Object
+pan,Kitchen,Artifact,Object
+pot,Kitchen,Artifact,Object
+grater,Kitchen,Artifact,Object
+scissors,Kitchen,Artifact,Object
+apron,Kitchen,Artifact,Object
+spatula,Kitchen,Artifact,Object
+mug,Kitchen,Artifact,Object
+teaspoon,Kitchen,Artifact,Object
+colander,Kitchen,Artifact,Object
+fork,Kitchen,Artifact,Object
+electric kettle,Kitchen,Artifact,Object
+scales,Kitchen,Artifact,Object
+wok,Kitchen,Artifact,Object
+sieve,Kitchen,Artifact,Object
+bra,Clothing,Artifact,Object
+blouse,Clothing,Artifact,Object
+pants,Clothing,Artifact,Object
+tie,Clothing,Artifact,Object
+shirt,Clothing,Artifact,Object
+hat,Clothing,Artifact,Object
+coat,Clothing,Artifact,Object
+jeans,Clothing,Artifact,Object
+tracksuit,Clothing,Artifact,Object
+dress,Clothing,Artifact,Object
+suit,Clothing,Artifact,Object
+boots,Clothing,Artifact,Object
+beanie,Clothing,Artifact,Object
+cap,Clothing,Artifact,Object
+pyjamas,Clothing,Artifact,Object
+belt,Clothing,Artifact,Object
+skirt,Clothing,Artifact,Object
+dungarees,Clothing,Artifact,Object
+shoes,Clothing,Artifact,Object
+shorts,Clothing,Artifact,Object
+scarf,Clothing,Artifact,Object
+panties,Clothing,Artifact,Object
+socks,Clothing,Artifact,Object
+sweater,Clothing,Artifact,Object
+top,Clothing,Artifact,Object
+pullover,Clothing,Artifact,Object
+t-shirt,Clothing,Artifact,Object
+mittens,Clothing,Artifact,Object
+bathing suit,Clothing,Artifact,Object
+accordion,Instrument,Artifact,Object
+banjo,Instrument,Artifact,Object
+bass guitar,Instrument,Artifact,Object
+cello,Instrument,Artifact,Object
+cymbals,Instrument,Artifact,Object
+double bass,Instrument,Artifact,Object
+bagpipe,Instrument,Artifact,Object
+drum set,Instrument,Artifact,Object
+flute,Instrument,Artifact,Object
+bassoon,Instrument,Artifact,Object
+recorder,Instrument,Artifact,Object
+guitar,Instrument,Artifact,Object
+harp,Instrument,Artifact,Object
+clarinet,Instrument,Artifact,Object
+harpsichord,Instrument,Artifact,Object
+harmonica,Instrument,Artifact,Object
+organ,Instrument,Artifact,Object
+pan flute,Instrument,Artifact,Object
+piano,Instrument,Artifact,Object
+saxophone,Instrument,Artifact,Object
+synthesizer,Instrument,Artifact,Object
+tambourine,Instrument,Artifact,Object
+triangle,Instrument,Artifact,Object
+trombone,Instrument,Artifact,Object
+drum,Instrument,Artifact,Object
+trumpet,Instrument,Artifact,Object
+violin,Instrument,Artifact,Object
+car,Vehicle,Artifact,Object
+boat,Vehicle,Artifact,Object
+scooter,Vehicle,Artifact,Object
+motorbike,Vehicle,Artifact,Object
+bus,Vehicle,Artifact,Object
+truck,Vehicle,Artifact,Object
+van,Vehicle,Artifact,Object
+trailer,Vehicle,Artifact,Object
+submarine,Vehicle,Artifact,Object
+bicycle,Vehicle,Artifact,Object
+go-cart,Vehicle,Artifact,Object
+helicopter,Vehicle,Artifact,Object
+hovercraft,Vehicle,Artifact,Object
+jeep,Vehicle,Artifact,Object
+cart,Vehicle,Artifact,Object
+carriage,Vehicle,Artifact,Object
+(hot air) balloon,Vehicle,Artifact,Object
+subway train,Vehicle,Artifact,Object
+motorcycle,Vehicle,Artifact,Object
+rocket,Vehicle,Artifact,Object
+skateboard,Vehicle,Artifact,Object
+sled,Vehicle,Artifact,Object
+kick scooter,Vehicle,Artifact,Object
+taxi,Vehicle,Artifact,Object
+tractor,Vehicle,Artifact,Object
+tram,Vehicle,Artifact,Object
+train,Vehicle,Artifact,Object
+airplane,Vehicle,Artifact,Object
+zeppelin,Vehicle,Artifact,Object
+bazooka,Weapon,Artifact,Object
+knuckle dusters,Weapon,Artifact,Object
+bow,Weapon,Artifact,Object
+dagger,Weapon,Artifact,Object
+rifle,Weapon,Artifact,Object
+grenade,Weapon,Artifact,Object
+canon,Weapon,Artifact,Object
+slingshot,Weapon,Artifact,Object
+club,Weapon,Artifact,Object
+machine gun,Weapon,Artifact,Object
+pistol,Weapon,Artifact,Object
+shield,Weapon,Artifact,Object
+spear,Weapon,Artifact,Object
+stick,Weapon,Artifact,Object
+tank,Weapon,Artifact,Object
+double barrelled shotgun,Weapon,Artifact,Object
+sword,Weapon,Artifact,Object
+whip,Weapon,Artifact,Object
+anvil,Tool,Artifact,Object
+chisel,Tool,Artifact,Object
+axe,Tool,Artifact,Object
+drill,Tool,Artifact,Object
+crowbar,Tool,Artifact,Object
+adjustable spanner,Tool,Artifact,Object
+lawn mower,Tool,Artifact,Object
+hammer,Tool,Artifact,Object
+clamp,Tool,Artifact,Object
+pickaxe,Tool,Artifact,Object
+wheelbarrow,Tool,Artifact,Object
+knife,Tool,Artifact,Object
+wrench,Tool,Artifact,Object
+oilcan,Tool,Artifact,Object
+filling knife,Tool,Artifact,Object
+plough,Tool,Artifact,Object
+plane,Tool,Artifact,Object
+shovel,Tool,Artifact,Object
+screwdriver,Tool,Artifact,Object
+grinding disc,Tool,Artifact,Object
+nail,Tool,Artifact,Object
+wire brush,Tool,Artifact,Object
+vacuum cleaner,Tool,Artifact,Object
+tongs,Tool,Artifact,Object
+rope,Tool,Artifact,Object
+paint brush,Tool,Artifact,Object
+file,Tool,Artifact,Object
+level,Tool,Artifact,Object
+saw,Tool,Artifact,Object
