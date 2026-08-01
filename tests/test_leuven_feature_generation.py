@@ -55,6 +55,15 @@ def test_generation_output_accepts_fewer_than_ten_features():
     assert record["features"] == ["has fur", "is a pet"]
 
 
+def test_generation_output_deduplicates_features_case_insensitively():
+    record, error = validate_generation_output(
+        '{"target_word":"dog","features":["Has fur","has fur","is a pet"]}',
+        expected_word="dog",
+    )
+    assert error is None
+    assert record["features"] == ["Has fur", "is a pet"]
+
+
 def test_generation_output_rejects_wrong_word_and_extra_fields():
     _, word_error = validate_generation_output(
         '{"target_word":"cat","features":[]}', expected_word="dog"
@@ -157,6 +166,9 @@ def test_mock_generation_writes_resumable_raw_and_derived_outputs(
     )
 
     generations = pd.read_csv(output_dir / "feature_generations.csv")
+    response_schema = client.calls[0][2]["response_format"]["json_schema"]["schema"]
+    assert "uniqueItems" not in response_schema["properties"]["features"]
+
     long_features = pd.read_csv(output_dir / "generated_features_long.csv")
     frequencies = pd.read_csv(output_dir / "generated_feature_frequencies.csv")
     manifest = json.loads((output_dir / "manifest.json").read_text())
