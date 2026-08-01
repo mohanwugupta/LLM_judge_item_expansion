@@ -33,3 +33,19 @@ def test_v3_production_has_fixed_comparable_protocol():
     assert "BASE_SEED=20260801" in PRODUCTION
     assert "JOB_ID=leuven_v3_qwen2_5_72b" in PRODUCTION
     assert "--max-words" not in PRODUCTION
+
+
+def test_v3_production_runs_materialization_and_protocol_preflight_first():
+    assert 'INPUT_CSV="$PROJECT_DIR/$LEUVEN_FEATURES"' in PRODUCTION
+    assert '[ ! -s "$INPUT_CSV" ]' in PRODUCTION
+    assert "version https://git-lfs.github.com/spec/v1" in PRODUCTION
+    assert '"${GENERATION_ARGS[@]}"' in PRODUCTION
+    assert "--preflight-only" in PRODUCTION
+    assert PRODUCTION.index("--preflight-only") < PRODUCTION.index(
+        "python -m vllm.entrypoints.openai.api_server"
+    )
+    assert "export VLLM_HOST_IP=127.0.0.1" in PRODUCTION
+    assert 'export OMP_NUM_THREADS="${SLURM_CPUS_PER_TASK:-8}"' in PRODUCTION
+    assert "TRANSFORMERS_CACHE=" not in PRODUCTION
+    assert "VLLM_CACHE_DIR=" not in PRODUCTION
+    assert "VLLM_USAGE_STATS_DIR=" not in PRODUCTION

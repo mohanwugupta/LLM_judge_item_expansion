@@ -83,16 +83,14 @@ export PYTHONPATH="$PROJECT_DIR${PYTHONPATH:+:$PYTHONPATH}"
 # ------------------------------------------------------------------
 export HF_HOME=/scratch/gpfs/JORDANAT/mg9965/hf_cache
 export HF_DATASETS_CACHE=/scratch/gpfs/JORDANAT/mg9965/hf_cache/datasets
-export TRANSFORMERS_CACHE=/scratch/gpfs/JORDANAT/mg9965/hf_cache
 export HF_DATASETS_DISK_DIR=$HF_DATASETS_CACHE
-export VLLM_CACHE_DIR=/scratch/gpfs/JORDANAT/mg9965/vLLM-cache
-export VLLM_USAGE_STATS_DIR=/scratch/gpfs/JORDANAT/mg9965/vLLM-cache/usage_stats
 export TRITON_CACHE_DIR=/scratch/gpfs/JORDANAT/mg9965/vLLM-cache/triton
 export XDG_CACHE_HOME=/scratch/gpfs/JORDANAT/mg9965/vLLM-cache/xdg
 export TIKTOKEN_CACHE_DIR=$HOME/.tiktoken_cache
+export VLLM_HOST_IP=127.0.0.1
 
-mkdir -p "$HF_HOME" "$HF_DATASETS_CACHE" "$TRANSFORMERS_CACHE"
-mkdir -p "$VLLM_CACHE_DIR" "$VLLM_USAGE_STATS_DIR" "$TRITON_CACHE_DIR" "$XDG_CACHE_HOME"
+mkdir -p "$HF_HOME" "$HF_DATASETS_CACHE"
+mkdir -p "$TRITON_CACHE_DIR" "$XDG_CACHE_HOME"
 
 export HF_HUB_OFFLINE=1
 export TRANSFORMERS_OFFLINE=1
@@ -101,7 +99,7 @@ export TRANSFORMERS_OFFLINE=1
 # 4. GPU and memory settings
 # ------------------------------------------------------------------
 export CUDA_VISIBLE_DEVICES=0,1,2,3
-export OMP_NUM_THREADS=32
+export OMP_NUM_THREADS="${SLURM_CPUS_PER_TASK:-8}"
 export TOKENIZERS_PARALLELISM=true
 export PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True
 export NCCL_P2P_LEVEL=NVL
@@ -110,21 +108,50 @@ export CUDA_DEVICE_MAX_CONNECTIONS=1
 # ------------------------------------------------------------------
 # 5. Validate prerequisites
 # ------------------------------------------------------------------
-if [ -d "$MODEL_PATH" ]; then
-    echo "✅ Model found: $MODEL_PATH"
-else
+if [ ! -d "$MODEL_PATH" ]; then
     echo "❌ ERROR: Model not found at: $MODEL_PATH"
     exit 1
 fi
+echo "✅ Model found: $MODEL_PATH"
 
-if [ -f "$PROJECT_DIR/$LEUVEN_FEATURES" ]; then
-    echo "✅ Leuven features found: $LEUVEN_FEATURES"
-else
-    echo "❌ ERROR: Leuven features not found: $PROJECT_DIR/$LEUVEN_FEATURES"
+INPUT_CSV="$PROJECT_DIR/$LEUVEN_FEATURES"
+
+if [ ! -s "$INPUT_CSV" ]; then
+    echo "❌ ERROR: Leuven features missing or empty: $INPUT_CSV"
     exit 1
 fi
 
-mkdir -p "$PROJECT_DIR/logs" "$PROJECT_DIR/$OUTPUT_DIR"
+if head -n 3 "$INPUT_CSV" | grep -q '^version https://git-lfs.github.com/spec/v1$'; then
+    echo "❌ ERROR: $INPUT_CSV is a Git LFS pointer"
+    echo "Run: git lfs pull"
+    exit 1
+fi
+
+echo "✅ Leuven features materialized: $(wc -c < "$INPUT_CSV") bytes"
+
+mkdir -p "$PROJECT_DIR/logs"
+
+GENERATION_ARGS=(
+    --input-csv "$INPUT_CSV"
+    --job-id "$JOB_ID"
+    --output-dir "$PROJECT_DIR/$OUTPUT_DIR"
+    --model "$SERVED_MODEL_NAME"
+    --base-url "http://localhost:${VLLM_PORT}/v1"
+    --responses-per-word "$RESPONSES_PER_WORD"
+    --temperature "$TEMPERATURE"
+    --base-seed "$BASE_SEED"
+    --max-workers "$MAX_WORKERS"
+    --max-tokens "$MAX_TOKENS"
+    --resume
+)
+
+echo ""
+echo "Running no-model production preflight..."
+python -m leuven_expansion.generate_features \
+    "${GENERATION_ARGS[@]}" \
+    --preflight-only
+
+mkdir -p "$PROJECT_DIR/$OUTPUT_DIR"
 
 # ------------------------------------------------------------------
 # 6. Start vLLM server
@@ -192,17 +219,7 @@ echo ""
 echo "Running full v3 generation: 293 words x 3 prompts x $RESPONSES_PER_WORD responses"
 
 python -m leuven_expansion.generate_features \
-    --input-csv          "$PROJECT_DIR/$LEUVEN_FEATURES" \
-    --job-id             "$JOB_ID" \
-    --output-dir         "$PROJECT_DIR/$OUTPUT_DIR" \
-    --model              "$SERVED_MODEL_NAME" \
-    --base-url           "http://localhost:${VLLM_PORT}/v1" \
-    --responses-per-word "$RESPONSES_PER_WORD" \
-    --temperature        "$TEMPERATURE" \
-    --base-seed          "$BASE_SEED" \
-    --max-workers        "$MAX_WORKERS" \
-    --max-tokens         "$MAX_TOKENS" \
-    --resume
+    "${GENERATION_ARGS[@]}"
 
 # ------------------------------------------------------------------
 # 9. Post-run checks
