@@ -1,0 +1,57 @@
+{
+  "protocol_version": "leuven_free_generation_v3_three_prompt_comparison",
+  "experimental_unit": "one stimulus word x one prompt condition x one simulated participant",
+  "job_id": "leuven_v3_smoke",
+  "model": "Qwen2.5-72B-Instruct",
+  "prompt_variants": [
+    "A",
+    "B",
+    "C"
+  ],
+  "prompt_sha256_by_variant": {
+    "A": "bde0542683306c2231a9aae42940bf2f7bc90153399b2968f5c01537cd32a660",
+    "B": "e5bd14d20517d7abce3a9d053ab7c00490ef9af908daab2d3513d0bdec0e6af0",
+    "C": "9a07007d5a76f11cdb6b29584271bb0122b53ec83619c110f99250de4bc1b9b1"
+  },
+  "prompt_text_by_variant": {
+    "A": "You are taking part in a feature-generation study about conceptual knowledge.\n\nFor the single stimulus word supplied by the user, write down as many properties of the concept as you can think of, preferably 10 different properties. Properties may include perceptual or physical characteristics, functional information such as how the concept is used, and other background or factual knowledge about the concept.\n\nReport features that you genuinely associate with the concept. Do not pad the list with weak repetitions, and do not evaluate a supplied feature list. This is a free-generation task.\n\nReturn only one JSON object with exactly this structure:\n{\n  \"target_word\": \"the supplied stimulus word\",\n  \"features\": [\n    \"one concise property\",\n    \"another concise property\"\n  ]\n}\n\nRules:\n- Return at most 10 different features.\n- A shorter list is acceptable when fewer properties come to mind.\n- Each feature must be a brief, understandable statement about the target concept.\n- Do not include explanations, numbering, category headings, markdown, or text outside the JSON object.",
+    "B": "For the single stimulus word supplied by the user, freely generate the properties that come to mind. Aim for 10 different properties, including any physical or perceptual characteristics, uses or functions, and background facts that you associate with the concept.\n\nDo not judge a supplied feature list and do not add repetitive filler. Return at most 10 properties, or fewer when appropriate.\n\nReturn only this JSON object, with no markdown or additional text:\n{\n  \"target_word\": \"the supplied stimulus word\",\n  \"features\": [\n    \"one concise property\",\n    \"another concise property\"\n  ]\n}",
+    "C": "You are completing a free feature-generation task for one stimulus word.\n\nBefore answering, consider the concept from several perspectives:\n- what it looks, sounds, feels, tastes, or is physically made of;\n- its functions: what it does, what it is used for, or how people interact with it;\n- its category, typical setting, origins, associations, and other generally known facts.\n\nThen select up to 10 of the clearest, most distinct properties that come to mind. Do not force a fixed number from each perspective, repeat the same idea, evaluate a supplied feature list, or invent a property merely to reach 10.\n\nReturn only one JSON object with exactly this structure:\n{\n  \"target_word\": \"the supplied stimulus word\",\n  \"features\": [\n    \"one concise property\",\n    \"another concise property\"\n  ]\n}\n\nDo not include reasoning, numbering, perspective labels, markdown, or text outside the JSON object."
+  },
+  "response_schema_sha256": "472fdf6fb6cae3a857ff5635f2af4a64068cc4396e6a592cced3c45257f48b33",
+  "input_csv": "/scratch/gpfs/JORDANAT/mg9965/FalseMemoryISC-CI/LLM_judge_item_expansion/data/leuven_combined_features_consolidated.csv",
+  "input_sha256": "0c99ceb4e28f58150d0886c99c5b012f0e12b658fa6f965e6cc32ca85dc3102a",
+  "item_column": "Unnamed: 0",
+  "source_word_count": 293,
+  "word_count": 3,
+  "max_words": 3,
+  "selected_words": [
+    "monkey",
+    "oven",
+    "saw"
+  ],
+  "selected_words_sha256": "7b73536965047cb7a097ace615d4fd67ff668efb3629f64f374d107f3671c676",
+  "responses_per_word_per_prompt": 2,
+  "temperature": 0.8,
+  "max_tokens": 500,
+  "base_seed": 20260801,
+  "existing_feature_schema_shown_to_model": false,
+  "semantic_feature_merging_performed": false,
+  "sampling_design": "paired seeds across prompt variants",
+  "total_planned_responses": 18,
+  "completed_before_run": 0,
+  "pending_at_start": 18,
+  "started_at": "2026-08-01T17:29:44.341054Z",
+  "finished_at": "2026-08-01T17:29:53.455070Z",
+  "completed_this_run": 0,
+  "request_errors_this_run": 18,
+  "valid_responses_total": 0,
+  "valid_responses_by_prompt": {
+    "A": 0,
+    "B": 0,
+    "C": 0
+  },
+  "parse_errors_total": 18,
+  "generated_feature_tokens_total": 0,
+  "pending_after_run": 18
+}

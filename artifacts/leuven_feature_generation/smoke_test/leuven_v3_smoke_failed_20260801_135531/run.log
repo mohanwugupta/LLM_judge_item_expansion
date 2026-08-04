@@ -1,0 +1,110 @@
+2026-08-01 13:29:44,360 INFO __main__: v3 generation: 3 words x 3 prompts x 2 responses = 18; pending=18
+2026-08-01 13:29:47,244 INFO httpx: HTTP Request: POST http://localhost:8010/v1/chat/completions "HTTP/1.1 400 Bad Request"
+2026-08-01 13:29:47,244 INFO httpx: HTTP Request: POST http://localhost:8010/v1/chat/completions "HTTP/1.1 400 Bad Request"
+2026-08-01 13:29:47,244 INFO httpx: HTTP Request: POST http://localhost:8010/v1/chat/completions "HTTP/1.1 400 Bad Request"
+2026-08-01 13:29:47,244 INFO httpx: HTTP Request: POST http://localhost:8010/v1/chat/completions "HTTP/1.1 400 Bad Request"
+2026-08-01 13:29:47,245 INFO httpx: HTTP Request: POST http://localhost:8010/v1/chat/completions "HTTP/1.1 400 Bad Request"
+2026-08-01 13:29:47,245 INFO httpx: HTTP Request: POST http://localhost:8010/v1/chat/completions "HTTP/1.1 400 Bad Request"
+2026-08-01 13:29:47,245 INFO httpx: HTTP Request: POST http://localhost:8010/v1/chat/completions "HTTP/1.1 400 Bad Request"
+2026-08-01 13:29:47,245 INFO httpx: HTTP Request: POST http://localhost:8010/v1/chat/completions "HTTP/1.1 400 Bad Request"
+2026-08-01 13:29:47,246 INFO httpx: HTTP Request: POST http://localhost:8010/v1/chat/completions "HTTP/1.1 400 Bad Request"
+2026-08-01 13:29:47,246 WARNING vllm_client: vLLM request failed (attempt 1/3): Error code: 400 - {'error': {'message': 'Grammar error: Unimplemented keys: ["uniqueItems"]', 'type': 'BadRequestError', 'param': None, 'code': 400}}
+2026-08-01 13:29:47,247 WARNING vllm_client: vLLM request failed (attempt 1/3): Error code: 400 - {'error': {'message': 'Grammar error: Unimplemented keys: ["uniqueItems"]', 'type': 'BadRequestError', 'param': None, 'code': 400}}
+2026-08-01 13:29:47,247 WARNING vllm_client: vLLM request failed (attempt 1/3): Error code: 400 - {'error': {'message': 'Grammar error: Unimplemented keys: ["uniqueItems"]', 'type': 'BadRequestError', 'param': None, 'code': 400}}
+2026-08-01 13:29:47,247 WARNING vllm_client: vLLM request failed (attempt 1/3): Error code: 400 - {'error': {'message': 'Grammar error: Unimplemented keys: ["uniqueItems"]', 'type': 'BadRequestError', 'param': None, 'code': 400}}
+2026-08-01 13:29:47,248 WARNING vllm_client: vLLM request failed (attempt 1/3): Error code: 400 - {'error': {'message': 'Grammar error: Unimplemented keys: ["uniqueItems"]', 'type': 'BadRequestError', 'param': None, 'code': 400}}
+2026-08-01 13:29:47,248 WARNING vllm_client: vLLM request failed (attempt 1/3): Error code: 400 - {'error': {'message': 'Grammar error: Unimplemented keys: ["uniqueItems"]', 'type': 'BadRequestError', 'param': None, 'code': 400}}
+2026-08-01 13:29:47,248 WARNING vllm_client: vLLM request failed (attempt 1/3): Error code: 400 - {'error': {'message': 'Grammar error: Unimplemented keys: ["uniqueItems"]', 'type': 'BadRequestError', 'param': None, 'code': 400}}
+2026-08-01 13:29:47,248 WARNING vllm_client: vLLM request failed (attempt 1/3): Error code: 400 - {'error': {'message': 'Grammar error: Unimplemented keys: ["uniqueItems"]', 'type': 'BadRequestError', 'param': None, 'code': 400}}
+2026-08-01 13:29:47,249 WARNING vllm_client: vLLM request failed (attempt 1/3): Error code: 400 - {'error': {'message': 'Grammar error: Unimplemented keys: ["uniqueItems"]', 'type': 'BadRequestError', 'param': None, 'code': 400}}
+2026-08-01 13:29:47,281 INFO httpx: HTTP Request: POST http://localhost:8010/v1/chat/completions "HTTP/1.1 400 Bad Request"
+2026-08-01 13:29:47,282 INFO httpx: HTTP Request: POST http://localhost:8010/v1/chat/completions "HTTP/1.1 400 Bad Request"
+2026-08-01 13:29:47,282 INFO httpx: HTTP Request: POST http://localhost:8010/v1/chat/completions "HTTP/1.1 400 Bad Request"
+2026-08-01 13:29:47,282 INFO httpx: HTTP Request: POST http://localhost:8010/v1/chat/completions "HTTP/1.1 400 Bad Request"
+2026-08-01 13:29:47,282 INFO httpx: HTTP Request: POST http://localhost:8010/v1/chat/completions "HTTP/1.1 400 Bad Request"
+2026-08-01 13:29:47,282 INFO httpx: HTTP Request: POST http://localhost:8010/v1/chat/completions "HTTP/1.1 400 Bad Request"
+2026-08-01 13:29:47,283 INFO httpx: HTTP Request: POST http://localhost:8010/v1/chat/completions "HTTP/1.1 400 Bad Request"
+2026-08-01 13:29:47,283 INFO httpx: HTTP Request: POST http://localhost:8010/v1/chat/completions "HTTP/1.1 400 Bad Request"
+2026-08-01 13:29:47,283 INFO httpx: HTTP Request: POST http://localhost:8010/v1/chat/completions "HTTP/1.1 400 Bad Request"
+2026-08-01 13:29:47,283 WARNING vllm_client: vLLM request failed (attempt 1/3): Error code: 400 - {'error': {'message': 'Grammar error: Unimplemented keys: ["uniqueItems"]', 'type': 'BadRequestError', 'param': None, 'code': 400}}
+2026-08-01 13:29:47,283 WARNING vllm_client: vLLM request failed (attempt 1/3): Error code: 400 - {'error': {'message': 'Grammar error: Unimplemented keys: ["uniqueItems"]', 'type': 'BadRequestError', 'param': None, 'code': 400}}
+2026-08-01 13:29:47,284 WARNING vllm_client: vLLM request failed (attempt 1/3): Error code: 400 - {'error': {'message': 'Grammar error: Unimplemented keys: ["uniqueItems"]', 'type': 'BadRequestError', 'param': None, 'code': 400}}
+2026-08-01 13:29:47,284 WARNING vllm_client: vLLM request failed (attempt 1/3): Error code: 400 - {'error': {'message': 'Grammar error: Unimplemented keys: ["uniqueItems"]', 'type': 'BadRequestError', 'param': None, 'code': 400}}
+2026-08-01 13:29:47,284 WARNING vllm_client: vLLM request failed (attempt 1/3): Error code: 400 - {'error': {'message': 'Grammar error: Unimplemented keys: ["uniqueItems"]', 'type': 'BadRequestError', 'param': None, 'code': 400}}
+2026-08-01 13:29:47,286 WARNING vllm_client: vLLM request failed (attempt 1/3): Error code: 400 - {'error': {'message': 'Grammar error: Unimplemented keys: ["uniqueItems"]', 'type': 'BadRequestError', 'param': None, 'code': 400}}
+2026-08-01 13:29:47,286 WARNING vllm_client: vLLM request failed (attempt 1/3): Error code: 400 - {'error': {'message': 'Grammar error: Unimplemented keys: ["uniqueItems"]', 'type': 'BadRequestError', 'param': None, 'code': 400}}
+2026-08-01 13:29:47,286 WARNING vllm_client: vLLM request failed (attempt 1/3): Error code: 400 - {'error': {'message': 'Grammar error: Unimplemented keys: ["uniqueItems"]', 'type': 'BadRequestError', 'param': None, 'code': 400}}
+2026-08-01 13:29:47,286 WARNING vllm_client: vLLM request failed (attempt 1/3): Error code: 400 - {'error': {'message': 'Grammar error: Unimplemented keys: ["uniqueItems"]', 'type': 'BadRequestError', 'param': None, 'code': 400}}
+2026-08-01 13:29:49,305 INFO httpx: HTTP Request: POST http://localhost:8010/v1/chat/completions "HTTP/1.1 400 Bad Request"
+2026-08-01 13:29:49,305 INFO httpx: HTTP Request: POST http://localhost:8010/v1/chat/completions "HTTP/1.1 400 Bad Request"
+2026-08-01 13:29:49,305 INFO httpx: HTTP Request: POST http://localhost:8010/v1/chat/completions "HTTP/1.1 400 Bad Request"
+2026-08-01 13:29:49,306 INFO httpx: HTTP Request: POST http://localhost:8010/v1/chat/completions "HTTP/1.1 400 Bad Request"
+2026-08-01 13:29:49,306 INFO httpx: HTTP Request: POST http://localhost:8010/v1/chat/completions "HTTP/1.1 400 Bad Request"
+2026-08-01 13:29:49,306 INFO httpx: HTTP Request: POST http://localhost:8010/v1/chat/completions "HTTP/1.1 400 Bad Request"
+2026-08-01 13:29:49,306 INFO httpx: HTTP Request: POST http://localhost:8010/v1/chat/completions "HTTP/1.1 400 Bad Request"
+2026-08-01 13:29:49,306 INFO httpx: HTTP Request: POST http://localhost:8010/v1/chat/completions "HTTP/1.1 400 Bad Request"
+2026-08-01 13:29:49,306 INFO httpx: HTTP Request: POST http://localhost:8010/v1/chat/completions "HTTP/1.1 400 Bad Request"
+2026-08-01 13:29:49,307 WARNING vllm_client: vLLM request failed (attempt 2/3): Error code: 400 - {'error': {'message': 'Grammar error: Unimplemented keys: ["uniqueItems"]', 'type': 'BadRequestError', 'param': None, 'code': 400}}
+2026-08-01 13:29:49,307 WARNING vllm_client: vLLM request failed (attempt 2/3): Error code: 400 - {'error': {'message': 'Grammar error: Unimplemented keys: ["uniqueItems"]', 'type': 'BadRequestError', 'param': None, 'code': 400}}
+2026-08-01 13:29:49,307 WARNING vllm_client: vLLM request failed (attempt 2/3): Error code: 400 - {'error': {'message': 'Grammar error: Unimplemented keys: ["uniqueItems"]', 'type': 'BadRequestError', 'param': None, 'code': 400}}
+2026-08-01 13:29:49,308 WARNING vllm_client: vLLM request failed (attempt 2/3): Error code: 400 - {'error': {'message': 'Grammar error: Unimplemented keys: ["uniqueItems"]', 'type': 'BadRequestError', 'param': None, 'code': 400}}
+2026-08-01 13:29:49,308 WARNING vllm_client: vLLM request failed (attempt 2/3): Error code: 400 - {'error': {'message': 'Grammar error: Unimplemented keys: ["uniqueItems"]', 'type': 'BadRequestError', 'param': None, 'code': 400}}
+2026-08-01 13:29:49,308 WARNING vllm_client: vLLM request failed (attempt 2/3): Error code: 400 - {'error': {'message': 'Grammar error: Unimplemented keys: ["uniqueItems"]', 'type': 'BadRequestError', 'param': None, 'code': 400}}
+2026-08-01 13:29:49,308 WARNING vllm_client: vLLM request failed (attempt 2/3): Error code: 400 - {'error': {'message': 'Grammar error: Unimplemented keys: ["uniqueItems"]', 'type': 'BadRequestError', 'param': None, 'code': 400}}
+2026-08-01 13:29:49,309 WARNING vllm_client: vLLM request failed (attempt 2/3): Error code: 400 - {'error': {'message': 'Grammar error: Unimplemented keys: ["uniqueItems"]', 'type': 'BadRequestError', 'param': None, 'code': 400}}
+2026-08-01 13:29:49,309 WARNING vllm_client: vLLM request failed (attempt 2/3): Error code: 400 - {'error': {'message': 'Grammar error: Unimplemented keys: ["uniqueItems"]', 'type': 'BadRequestError', 'param': None, 'code': 400}}
+2026-08-01 13:29:49,352 INFO httpx: HTTP Request: POST http://localhost:8010/v1/chat/completions "HTTP/1.1 400 Bad Request"
+2026-08-01 13:29:49,352 INFO httpx: HTTP Request: POST http://localhost:8010/v1/chat/completions "HTTP/1.1 400 Bad Request"
+2026-08-01 13:29:49,353 INFO httpx: HTTP Request: POST http://localhost:8010/v1/chat/completions "HTTP/1.1 400 Bad Request"
+2026-08-01 13:29:49,353 INFO httpx: HTTP Request: POST http://localhost:8010/v1/chat/completions "HTTP/1.1 400 Bad Request"
+2026-08-01 13:29:49,353 INFO httpx: HTTP Request: POST http://localhost:8010/v1/chat/completions "HTTP/1.1 400 Bad Request"
+2026-08-01 13:29:49,353 INFO httpx: HTTP Request: POST http://localhost:8010/v1/chat/completions "HTTP/1.1 400 Bad Request"
+2026-08-01 13:29:49,353 WARNING vllm_client: vLLM request failed (attempt 2/3): Error code: 400 - {'error': {'message': 'Grammar error: Unimplemented keys: ["uniqueItems"]', 'type': 'BadRequestError', 'param': None, 'code': 400}}
+2026-08-01 13:29:49,353 INFO httpx: HTTP Request: POST http://localhost:8010/v1/chat/completions "HTTP/1.1 400 Bad Request"
+2026-08-01 13:29:49,354 INFO httpx: HTTP Request: POST http://localhost:8010/v1/chat/completions "HTTP/1.1 400 Bad Request"
+2026-08-01 13:29:49,354 INFO httpx: HTTP Request: POST http://localhost:8010/v1/chat/completions "HTTP/1.1 400 Bad Request"
+2026-08-01 13:29:49,354 WARNING vllm_client: vLLM request failed (attempt 2/3): Error code: 400 - {'error': {'message': 'Grammar error: Unimplemented keys: ["uniqueItems"]', 'type': 'BadRequestError', 'param': None, 'code': 400}}
+2026-08-01 13:29:49,354 WARNING vllm_client: vLLM request failed (attempt 2/3): Error code: 400 - {'error': {'message': 'Grammar error: Unimplemented keys: ["uniqueItems"]', 'type': 'BadRequestError', 'param': None, 'code': 400}}
+2026-08-01 13:29:49,355 WARNING vllm_client: vLLM request failed (attempt 2/3): Error code: 400 - {'error': {'message': 'Grammar error: Unimplemented keys: ["uniqueItems"]', 'type': 'BadRequestError', 'param': None, 'code': 400}}
+2026-08-01 13:29:49,355 WARNING vllm_client: vLLM request failed (attempt 2/3): Error code: 400 - {'error': {'message': 'Grammar error: Unimplemented keys: ["uniqueItems"]', 'type': 'BadRequestError', 'param': None, 'code': 400}}
+2026-08-01 13:29:49,355 WARNING vllm_client: vLLM request failed (attempt 2/3): Error code: 400 - {'error': {'message': 'Grammar error: Unimplemented keys: ["uniqueItems"]', 'type': 'BadRequestError', 'param': None, 'code': 400}}
+2026-08-01 13:29:49,355 WARNING vllm_client: vLLM request failed (attempt 2/3): Error code: 400 - {'error': {'message': 'Grammar error: Unimplemented keys: ["uniqueItems"]', 'type': 'BadRequestError', 'param': None, 'code': 400}}
+2026-08-01 13:29:49,356 WARNING vllm_client: vLLM request failed (attempt 2/3): Error code: 400 - {'error': {'message': 'Grammar error: Unimplemented keys: ["uniqueItems"]', 'type': 'BadRequestError', 'param': None, 'code': 400}}
+2026-08-01 13:29:49,356 WARNING vllm_client: vLLM request failed (attempt 2/3): Error code: 400 - {'error': {'message': 'Grammar error: Unimplemented keys: ["uniqueItems"]', 'type': 'BadRequestError', 'param': None, 'code': 400}}
+2026-08-01 13:29:53,365 INFO httpx: HTTP Request: POST http://localhost:8010/v1/chat/completions "HTTP/1.1 400 Bad Request"
+2026-08-01 13:29:53,366 INFO httpx: HTTP Request: POST http://localhost:8010/v1/chat/completions "HTTP/1.1 400 Bad Request"
+2026-08-01 13:29:53,366 INFO httpx: HTTP Request: POST http://localhost:8010/v1/chat/completions "HTTP/1.1 400 Bad Request"
+2026-08-01 13:29:53,366 INFO httpx: HTTP Request: POST http://localhost:8010/v1/chat/completions "HTTP/1.1 400 Bad Request"
+2026-08-01 13:29:53,366 INFO httpx: HTTP Request: POST http://localhost:8010/v1/chat/completions "HTTP/1.1 400 Bad Request"
+2026-08-01 13:29:53,366 INFO httpx: HTTP Request: POST http://localhost:8010/v1/chat/completions "HTTP/1.1 400 Bad Request"
+2026-08-01 13:29:53,367 INFO httpx: HTTP Request: POST http://localhost:8010/v1/chat/completions "HTTP/1.1 400 Bad Request"
+2026-08-01 13:29:53,367 INFO httpx: HTTP Request: POST http://localhost:8010/v1/chat/completions "HTTP/1.1 400 Bad Request"
+2026-08-01 13:29:53,367 INFO httpx: HTTP Request: POST http://localhost:8010/v1/chat/completions "HTTP/1.1 400 Bad Request"
+2026-08-01 13:29:53,367 WARNING vllm_client: vLLM request failed (attempt 3/3): Error code: 400 - {'error': {'message': 'Grammar error: Unimplemented keys: ["uniqueItems"]', 'type': 'BadRequestError', 'param': None, 'code': 400}}
+2026-08-01 13:29:53,367 WARNING vllm_client: vLLM request failed (attempt 3/3): Error code: 400 - {'error': {'message': 'Grammar error: Unimplemented keys: ["uniqueItems"]', 'type': 'BadRequestError', 'param': None, 'code': 400}}
+2026-08-01 13:29:53,368 WARNING vllm_client: vLLM request failed (attempt 3/3): Error code: 400 - {'error': {'message': 'Grammar error: Unimplemented keys: ["uniqueItems"]', 'type': 'BadRequestError', 'param': None, 'code': 400}}
+2026-08-01 13:29:53,368 WARNING vllm_client: vLLM request failed (attempt 3/3): Error code: 400 - {'error': {'message': 'Grammar error: Unimplemented keys: ["uniqueItems"]', 'type': 'BadRequestError', 'param': None, 'code': 400}}
+2026-08-01 13:29:53,368 WARNING vllm_client: vLLM request failed (attempt 3/3): Error code: 400 - {'error': {'message': 'Grammar error: Unimplemented keys: ["uniqueItems"]', 'type': 'BadRequestError', 'param': None, 'code': 400}}
+2026-08-01 13:29:53,369 WARNING vllm_client: vLLM request failed (attempt 3/3): Error code: 400 - {'error': {'message': 'Grammar error: Unimplemented keys: ["uniqueItems"]', 'type': 'BadRequestError', 'param': None, 'code': 400}}
+2026-08-01 13:29:53,369 WARNING vllm_client: vLLM request failed (attempt 3/3): Error code: 400 - {'error': {'message': 'Grammar error: Unimplemented keys: ["uniqueItems"]', 'type': 'BadRequestError', 'param': None, 'code': 400}}
+2026-08-01 13:29:53,369 WARNING vllm_client: vLLM request failed (attempt 3/3): Error code: 400 - {'error': {'message': 'Grammar error: Unimplemented keys: ["uniqueItems"]', 'type': 'BadRequestError', 'param': None, 'code': 400}}
+2026-08-01 13:29:53,369 WARNING vllm_client: vLLM request failed (attempt 3/3): Error code: 400 - {'error': {'message': 'Grammar error: Unimplemented keys: ["uniqueItems"]', 'type': 'BadRequestError', 'param': None, 'code': 400}}
+2026-08-01 13:29:53,414 INFO httpx: HTTP Request: POST http://localhost:8010/v1/chat/completions "HTTP/1.1 400 Bad Request"
+2026-08-01 13:29:53,414 INFO httpx: HTTP Request: POST http://localhost:8010/v1/chat/completions "HTTP/1.1 400 Bad Request"
+2026-08-01 13:29:53,414 INFO httpx: HTTP Request: POST http://localhost:8010/v1/chat/completions "HTTP/1.1 400 Bad Request"
+2026-08-01 13:29:53,414 INFO httpx: HTTP Request: POST http://localhost:8010/v1/chat/completions "HTTP/1.1 400 Bad Request"
+2026-08-01 13:29:53,415 INFO httpx: HTTP Request: POST http://localhost:8010/v1/chat/completions "HTTP/1.1 400 Bad Request"
+2026-08-01 13:29:53,415 INFO httpx: HTTP Request: POST http://localhost:8010/v1/chat/completions "HTTP/1.1 400 Bad Request"
+2026-08-01 13:29:53,415 INFO httpx: HTTP Request: POST http://localhost:8010/v1/chat/completions "HTTP/1.1 400 Bad Request"
+2026-08-01 13:29:53,415 INFO httpx: HTTP Request: POST http://localhost:8010/v1/chat/completions "HTTP/1.1 400 Bad Request"
+2026-08-01 13:29:53,415 INFO httpx: HTTP Request: POST http://localhost:8010/v1/chat/completions "HTTP/1.1 400 Bad Request"
+2026-08-01 13:29:53,415 WARNING vllm_client: vLLM request failed (attempt 3/3): Error code: 400 - {'error': {'message': 'Grammar error: Unimplemented keys: ["uniqueItems"]', 'type': 'BadRequestError', 'param': None, 'code': 400}}
+2026-08-01 13:29:53,416 WARNING vllm_client: vLLM request failed (attempt 3/3): Error code: 400 - {'error': {'message': 'Grammar error: Unimplemented keys: ["uniqueItems"]', 'type': 'BadRequestError', 'param': None, 'code': 400}}
+2026-08-01 13:29:53,416 WARNING vllm_client: vLLM request failed (attempt 3/3): Error code: 400 - {'error': {'message': 'Grammar error: Unimplemented keys: ["uniqueItems"]', 'type': 'BadRequestError', 'param': None, 'code': 400}}
+2026-08-01 13:29:53,416 WARNING vllm_client: vLLM request failed (attempt 3/3): Error code: 400 - {'error': {'message': 'Grammar error: Unimplemented keys: ["uniqueItems"]', 'type': 'BadRequestError', 'param': None, 'code': 400}}
+2026-08-01 13:29:53,417 WARNING vllm_client: vLLM request failed (attempt 3/3): Error code: 400 - {'error': {'message': 'Grammar error: Unimplemented keys: ["uniqueItems"]', 'type': 'BadRequestError', 'param': None, 'code': 400}}
+2026-08-01 13:29:53,417 WARNING vllm_client: vLLM request failed (attempt 3/3): Error code: 400 - {'error': {'message': 'Grammar error: Unimplemented keys: ["uniqueItems"]', 'type': 'BadRequestError', 'param': None, 'code': 400}}
+2026-08-01 13:29:53,417 WARNING vllm_client: vLLM request failed (attempt 3/3): Error code: 400 - {'error': {'message': 'Grammar error: Unimplemented keys: ["uniqueItems"]', 'type': 'BadRequestError', 'param': None, 'code': 400}}
+2026-08-01 13:29:53,417 WARNING vllm_client: vLLM request failed (attempt 3/3): Error code: 400 - {'error': {'message': 'Grammar error: Unimplemented keys: ["uniqueItems"]', 'type': 'BadRequestError', 'param': None, 'code': 400}}
+2026-08-01 13:29:53,418 WARNING vllm_client: vLLM request failed (attempt 3/3): Error code: 400 - {'error': {'message': 'Grammar error: Unimplemented keys: ["uniqueItems"]', 'type': 'BadRequestError', 'param': None, 'code': 400}}
+2026-08-01 13:29:53,456 INFO __main__: v3 generation complete: valid=0/18, features=0, errors=18

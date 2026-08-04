@@ -1,0 +1,901 @@
+job_id,response_id,word_original,word_normalized,prompt_variant,replicate_id,model,temperature,sampling_seed,features_json,n_features,raw_json,parse_error,prompt_hash,finish_reason,prompt_tokens,completion_tokens
+leuven_v3_qwen2_5_72b,8bc79c074479fdc499673d475e6563f16fcc115b42a516311f821cb021cd001e,(hot air) balloon,(hot air) balloon,A,4,Qwen2.5-72B-Instruct,0.8,6378389706315146637,[],0,"{
+  ""target_word"": ""hot air balloon"",
+  ""features"": [
+    ""floats in the air using heated air"",
+    ""made of lightweight fabric"",
+    ""typically spherical or teardrop-shaped"",
+    ""requires a burner to heat the air"",
+    ""used for recreational flights"",
+    ""often seen at festivals and events"",
+    ""can carry passengers in a basket"",
+    ""moves with the wind currents"",
+    ""usually brightly colored"",
+    ""has a history dating back to the 18th century""
+  ]
+}",Returned target_word 'hot air balloon' does not match expected '(hot air) balloon',aabe7e3391ab2f82997618f6e8b45a50bfd022c4926127d449430497746b2231,stop,232,112
+leuven_v3_qwen2_5_72b,81a4979159c5caf1f9755b2daea2c75db91ece7f882710df6dedd5010b31349c,(hot air) balloon,(hot air) balloon,A,0,Qwen2.5-72B-Instruct,0.8,4684589224054997449,[],0,"{
+  ""target_word"": ""hot air balloon"",
+  ""features"": [
+    ""floats in the air"",
+    ""uses heated air for lift"",
+    ""typically made of fabric"",
+    ""often colorful and decorative"",
+    ""piloted by a person"",
+    ""used for recreational flights"",
+    ""can carry passengers"",
+    ""inflated and deflated for use"",
+    ""visible from long distances"",
+    ""participates in festivals and events""
+  ]
+}",Returned target_word 'hot air balloon' does not match expected '(hot air) balloon',aabe7e3391ab2f82997618f6e8b45a50bfd022c4926127d449430497746b2231,stop,232,100
+leuven_v3_qwen2_5_72b,a675ab3b02c0c0fe024b870deeff8c6f78ad3237b51e0063476dcfe1b4e9d8a3,(hot air) balloon,(hot air) balloon,A,3,Qwen2.5-72B-Instruct,0.8,5701923087244640036,[],0,"{
+  ""target_word"": ""hot air balloon"",
+  ""features"": [
+    ""uses heated air to rise"",
+    ""made of lightweight fabric"",
+    ""requires a burner for heat"",
+    ""typically round or teardrop-shaped"",
+    ""piloted by a person"",
+    ""used for recreational flights"",
+    ""often seen at festivals"",
+    ""can travel long distances"",
+    ""inflated and deflated on the ground"",
+    ""flies at various altitudes""
+  ]
+}",Returned target_word 'hot air balloon' does not match expected '(hot air) balloon',aabe7e3391ab2f82997618f6e8b45a50bfd022c4926127d449430497746b2231,stop,232,103
+leuven_v3_qwen2_5_72b,8c39e70fd0472aa68ae61ff97d654a3558917fcba33af1281916fdc04c55900f,(hot air) balloon,(hot air) balloon,A,10,Qwen2.5-72B-Instruct,0.8,2850559297202414470,[],0,"{
+  ""target_word"": ""hot air balloon"",
+  ""features"": [
+    ""Lifted by heated air"",
+    ""Made of fabric envelope"",
+    ""Uses a basket for passengers"",
+    ""Flies using rising hot air"",
+    ""Controlled by adjusting heat"",
+    ""Often used for leisure activities"",
+    ""Can travel long distances"",
+    ""Requires a pilot to operate"",
+    ""Visible from far away"",
+    ""Used in festivals and competitions""
+  ]
+}",Returned target_word 'hot air balloon' does not match expected '(hot air) balloon',aabe7e3391ab2f82997618f6e8b45a50bfd022c4926127d449430497746b2231,stop,232,99
+leuven_v3_qwen2_5_72b,6607544e7e77f0fda1a271af78ef699aa4e2fc294b82edf3372e96f51fc9ddc5,(hot air) balloon,(hot air) balloon,A,11,Qwen2.5-72B-Instruct,0.8,8943516688247219425,[],0,"{
+  ""target_word"": ""hot air balloon"",
+  ""features"": [
+    ""Lifted by heated air"",
+    ""Made of fabric envelope"",
+    ""Uses a burner to heat air"",
+    ""Flies by controlling temperature"",
+    ""Typically round or oval shape"",
+    ""Piloted by a person"",
+    ""Used for recreation and tourism"",
+    ""Can be decorated with patterns"",
+    ""Descends by releasing hot air"",
+    ""Requires a basket for passengers""
+  ]
+}",Returned target_word 'hot air balloon' does not match expected '(hot air) balloon',aabe7e3391ab2f82997618f6e8b45a50bfd022c4926127d449430497746b2231,stop,232,104
+leuven_v3_qwen2_5_72b,22aa82b0ce9274528e65bb0015a3da54ba8d1a05a2a2509862d50c83f4ec5434,(hot air) balloon,(hot air) balloon,A,13,Qwen2.5-72B-Instruct,0.8,9112897105719598342,[],0,"{
+  ""target_word"": ""hot air balloon"",
+  ""features"": [
+    ""uses heated air to rise"",
+    ""made of lightweight fabric"",
+    ""controlled with a burner"",
+    ""floats in the sky"",
+    ""often used for leisure activities"",
+    ""can carry passengers"",
+    ""requires skilled piloting"",
+    ""typically round or teardrop-shaped"",
+    ""visible from long distances"",
+    ""used in festivals and competitions""
+  ]
+}",Returned target_word 'hot air balloon' does not match expected '(hot air) balloon',aabe7e3391ab2f82997618f6e8b45a50bfd022c4926127d449430497746b2231,stop,232,96
+leuven_v3_qwen2_5_72b,5759bd5165c850d66fda127cd576fbe1ae4aa1bcc66e60b739bbcf0d89ae810f,(hot air) balloon,(hot air) balloon,A,1,Qwen2.5-72B-Instruct,0.8,912679466867101050,[],0,"{
+  ""target_word"": ""hot air balloon"",
+  ""features"": [
+    ""Large fabric envelope filled with heated air"",
+    ""Rises and floats in the sky"",
+    ""Controlled by a burner to heat the air"",
+    ""Carries passengers in a basket or gondola"",
+    ""Used for leisure and sightseeing"",
+    ""Can travel long distances depending on wind"",
+    ""Often used in festivals and competitions"",
+    ""Requires a skilled pilot to operate"",
+    ""Can reach high altitudes"",
+    ""Decorative and colorful designs""
+  ]
+}",Returned target_word 'hot air balloon' does not match expected '(hot air) balloon',aabe7e3391ab2f82997618f6e8b45a50bfd022c4926127d449430497746b2231,stop,232,118
+leuven_v3_qwen2_5_72b,97beed71ec08fdc5032cd5f8deae5e5b9609fc09350458a6818dade8f07a2eda,(hot air) balloon,(hot air) balloon,A,7,Qwen2.5-72B-Instruct,0.8,4656349594986180332,[],0,"{
+  ""target_word"": ""hot air balloon"",
+  ""features"": [
+    ""lifted by heated air"",
+    ""made of fabric envelope"",
+    ""uses a burner to heat air"",
+    ""navigated by changing altitude"",
+    ""typically round or teardrop shape"",
+    ""used for leisure and tourism"",
+    ""can fly at various altitudes"",
+    ""requires a skilled pilot to operate"",
+    ""often used in festivals and events"",
+    ""can stay airborne for several hours""
+  ]
+}",Returned target_word 'hot air balloon' does not match expected '(hot air) balloon',aabe7e3391ab2f82997618f6e8b45a50bfd022c4926127d449430497746b2231,stop,232,107
+leuven_v3_qwen2_5_72b,f2173c0edebc8494c803e70de7ac9b171f7dfb29995f20e093528596fb2f7641,(hot air) balloon,(hot air) balloon,A,8,Qwen2.5-72B-Instruct,0.8,7627229360369209405,[],0,"{
+  ""target_word"": ""hot air balloon"",
+  ""features"": [
+    ""uses heated air to rise"",
+    ""typically made of fabric and nylon"",
+    ""controlled with a burner"",
+    ""often used for leisure activities"",
+    ""can vary in size and shape"",
+    ""requires a basket for passengers"",
+    ""flies at low to moderate altitudes"",
+    ""often seen at festivals and events"",
+    ""piloted by a trained operator"",
+    ""descends by releasing hot air or cooling""
+  ]
+}",Returned target_word 'hot air balloon' does not match expected '(hot air) balloon',aabe7e3391ab2f82997618f6e8b45a50bfd022c4926127d449430497746b2231,stop,232,109
+leuven_v3_qwen2_5_72b,65c6c82b4ff8ec52797e5b7e5732f0dddaa23f99660f4b50217c2ba5054c67d3,(hot air) balloon,(hot air) balloon,A,6,Qwen2.5-72B-Instruct,0.8,6048292171430535908,[],0,"{
+  ""target_word"": ""hot air balloon"",
+  ""features"": [
+    ""large fabric envelope filled with heated air"",
+    ""rises due to buoyancy"",
+    ""controlled by adjusting heat and altitude"",
+    ""typically round or teardrop-shaped"",
+    ""used for recreational flights and tourism"",
+    ""often decorated with vibrant colors and patterns"",
+    ""requires a pilot and crew to operate"",
+    ""inflated and deflated on the ground before and after flight"",
+    ""can travel long distances depending on wind currents"",
+    ""used in festivals and competitions""
+  ]
+}",Returned target_word 'hot air balloon' does not match expected '(hot air) balloon',aabe7e3391ab2f82997618f6e8b45a50bfd022c4926127d449430497746b2231,stop,232,122
+leuven_v3_qwen2_5_72b,5b99b66d9c1dd522912e431eb00d50ced381268d631c77fc7b94f5d97b2ba4c6,(hot air) balloon,(hot air) balloon,A,5,Qwen2.5-72B-Instruct,0.8,253780323374993512,[],0,"{
+  ""target_word"": ""hot air balloon"",
+  ""features"": [
+    ""uses heated air to rise"",
+    ""typically made of fabric"",
+    ""often used for recreational flights"",
+    ""requires a burner to heat the air"",
+    ""can be very large in size"",
+    ""usually has a basket for passengers"",
+    ""flies at low to moderate altitudes"",
+    ""is steered by changing altitude"",
+    ""often used in festivals and events"",
+    ""has a long history dating back to the 18th century""
+  ]
+}",Returned target_word 'hot air balloon' does not match expected '(hot air) balloon',aabe7e3391ab2f82997618f6e8b45a50bfd022c4926127d449430497746b2231,stop,232,115
+leuven_v3_qwen2_5_72b,7d8fe1cf97dd1ac7d0e4c93d18d7081446369e2fa009973d475e1c44b10927ff,(hot air) balloon,(hot air) balloon,A,2,Qwen2.5-72B-Instruct,0.8,8177334066986624772,[],0,"{
+  ""target_word"": ""hot air balloon"",
+  ""features"": [
+    ""Large fabric envelope filled with heated air"",
+    ""Rises and floats in the sky"",
+    ""Controlled by a pilot using burners"",
+    ""Often used for recreational flights"",
+    ""Can carry passengers in a basket"",
+    ""Typically round or teardrop-shaped"",
+    ""Visible from long distances due to bright colors"",
+    ""Dependent on weather conditions for safe operation"",
+    ""Used in festivals and competitions"",
+    ""Requires a chase crew for landing and setup""
+  ]
+}",Returned target_word 'hot air balloon' does not match expected '(hot air) balloon',aabe7e3391ab2f82997618f6e8b45a50bfd022c4926127d449430497746b2231,stop,232,120
+leuven_v3_qwen2_5_72b,cdb4954f3f4860d8531c9e2453c7db935bb59cc0bc38a5f3194be7509b9ee45b,(hot air) balloon,(hot air) balloon,A,12,Qwen2.5-72B-Instruct,0.8,6286543565084458104,[],0,"{
+  ""target_word"": ""hot air balloon"",
+  ""features"": [
+    ""lifted by heated air"",
+    ""made of fabric envelope"",
+    ""uses a burner to heat air"",
+    ""navigated by changing altitude"",
+    ""often used for leisure activities"",
+    ""can be decorated with patterns"",
+    ""requires a basket to carry passengers"",
+    ""operates in clear weather conditions"",
+    ""has a limited flight duration"",
+    ""popular in festivals and events""
+  ]
+}",Returned target_word 'hot air balloon' does not match expected '(hot air) balloon',aabe7e3391ab2f82997618f6e8b45a50bfd022c4926127d449430497746b2231,stop,232,103
+leuven_v3_qwen2_5_72b,41930e31ff019f075fcfa01994d5324dbcebd1e057e3a016e8b76e3f135c992a,(hot air) balloon,(hot air) balloon,B,1,Qwen2.5-72B-Instruct,0.8,912679466867101050,[],0,"{
+  ""target_word"": ""hot air balloon"",
+  ""features"": [
+    ""large fabric envelope"",
+    ""filled with heated air"",
+    ""uses a burner to heat air"",
+    ""typically spherical shape"",
+    ""carries passengers in a basket"",
+    ""floats in the air"",
+    ""used for leisure and tourism"",
+    ""often seen at festivals"",
+    ""requires skilled piloting"",
+    ""can travel long distances""
+  ]
+}",Returned target_word 'hot air balloon' does not match expected '(hot air) balloon',d4d3aba8b29d284e3a2222b40e9d9c9d52b0085d4f95a1dd0acfbc4fe1353f60,stop,143,94
+leuven_v3_qwen2_5_72b,9fe7f3a36d162afa99fed0d88c2d1cdbcaf6b6bb19788614f2ee9dfe960c3cd0,(hot air) balloon,(hot air) balloon,A,19,Qwen2.5-72B-Instruct,0.8,3445702838820465996,[],0,"{
+  ""target_word"": ""hot air balloon"",
+  ""features"": [
+    ""Lifted by heated air"",
+    ""Made of lightweight fabric"",
+    ""Requires a burner to heat the air"",
+    ""Used for recreational flights"",
+    ""Can carry passengers in a basket"",
+    ""Moves with the wind"",
+    ""Typically round or oval in shape"",
+    ""Often brightly colored"",
+    ""Can reach high altitudes"",
+    ""Used in festivals and competitions""
+  ]
+}",Returned target_word 'hot air balloon' does not match expected '(hot air) balloon',aabe7e3391ab2f82997618f6e8b45a50bfd022c4926127d449430497746b2231,stop,232,101
+leuven_v3_qwen2_5_72b,e116141d0fe37e0bae2fb757ffe1c541a609b5820555ebfa3af70b5aa7ca85f4,(hot air) balloon,(hot air) balloon,A,15,Qwen2.5-72B-Instruct,0.8,9104848979181679399,[],0,"{
+  ""target_word"": ""hot air balloon"",
+  ""features"": [
+    ""lifted by heated air"",
+    ""made of lightweight fabric"",
+    ""requires a burner to heat the air"",
+    ""typically spherical or teardrop-shaped"",
+    ""used for recreational flights"",
+    ""piloted by a person"",
+    ""often used in festivals and events"",
+    ""can only ascend or descend, not move horizontally on its own"",
+    ""visible from far distances due to size and color"",
+    ""can stay aloft for several hours""
+  ]
+}",Returned target_word 'hot air balloon' does not match expected '(hot air) balloon',aabe7e3391ab2f82997618f6e8b45a50bfd022c4926127d449430497746b2231,stop,232,117
+leuven_v3_qwen2_5_72b,37aab57beed7c91ea5745a8372bad1eb1c6afb9567a822b9351423f80b0b7db3,(hot air) balloon,(hot air) balloon,A,14,Qwen2.5-72B-Instruct,0.8,4313268070358771054,[],0,"{
+  ""target_word"": ""hot air balloon"",
+  ""features"": [
+    ""Lifted by heated air"",
+    ""Made of fabric envelope"",
+    ""Uses a burner to heat air"",
+    ""Carries passengers in a basket"",
+    ""Flies at low to moderate altitudes"",
+    ""Controlled primarily by altitude changes"",
+    ""Often used for recreational flights"",
+    ""Can be tethered for ground-based activities"",
+    ""Visible from long distances due to size and color"",
+    ""Dependent on weather conditions for safe operation""
+  ]
+}",Returned target_word 'hot air balloon' does not match expected '(hot air) balloon',aabe7e3391ab2f82997618f6e8b45a50bfd022c4926127d449430497746b2231,stop,232,116
+leuven_v3_qwen2_5_72b,1e33169ce2382f72052855f9af3303d5d64658da33e7884f32a3bb1a05b31802,(hot air) balloon,(hot air) balloon,A,16,Qwen2.5-72B-Instruct,0.8,5458119353470193210,[],0,"{
+  ""target_word"": ""hot air balloon"",
+  ""features"": [
+    ""uses heated air to rise"",
+    ""made of lightweight fabric"",
+    ""typically spherical or teardrop-shaped"",
+    ""requires a burner to heat the air"",
+    ""piloted by a person"",
+    ""often used for recreational flights"",
+    ""can travel long distances with wind"",
+    ""used in festivals and competitions"",
+    ""has a basket for passengers and equipment"",
+    ""visible from far away due to bright colors""
+  ]
+}",Returned target_word 'hot air balloon' does not match expected '(hot air) balloon',aabe7e3391ab2f82997618f6e8b45a50bfd022c4926127d449430497746b2231,stop,232,110
+leuven_v3_qwen2_5_72b,b84b3ddaa4f0511f4d58af05c5f2bbca455a596abfa2f5d3db4f49858c67c101,(hot air) balloon,(hot air) balloon,B,2,Qwen2.5-72B-Instruct,0.8,8177334066986624772,[],0,"{
+  ""target_word"": ""hot air balloon"",
+  ""features"": [
+    ""inflated with heated air"",
+    ""used for leisure flights"",
+    ""typically made of nylon"",
+    ""requires a burner to heat the air"",
+    ""often brightly colored"",
+    ""can be used for advertising"",
+    ""operates in clear weather conditions"",
+    ""piloted by a certified operator"",
+    ""used in festivals and competitions"",
+    ""has a basket for passengers""
+  ]
+}",Returned target_word 'hot air balloon' does not match expected '(hot air) balloon',d4d3aba8b29d284e3a2222b40e9d9c9d52b0085d4f95a1dd0acfbc4fe1353f60,stop,143,102
+leuven_v3_qwen2_5_72b,a15620b9684d3258fa823b5fee9b685e55debf1362fe45cf0e103476701b41ad,(hot air) balloon,(hot air) balloon,A,17,Qwen2.5-72B-Instruct,0.8,5742114268076171550,[],0,"{
+  ""target_word"": ""hot air balloon"",
+  ""features"": [
+    ""Rises due to heated air"",
+    ""Made of fabric and often colorful"",
+    ""Uses a burner to heat the air"",
+    ""Can carry passengers in a basket"",
+    ""Used for leisure and tourism"",
+    ""Flies at low to medium altitudes"",
+    ""Requires favorable weather conditions"",
+    ""Piloted by a trained operator"",
+    ""Can be used for advertising"",
+    ""Has a history dating back to the 18th century""
+  ]
+}",Returned target_word 'hot air balloon' does not match expected '(hot air) balloon',aabe7e3391ab2f82997618f6e8b45a50bfd022c4926127d449430497746b2231,stop,232,116
+leuven_v3_qwen2_5_72b,991cc8cd8bac08d2d27a0c713fa34a9098d81e62ac70c414b05d162eaf8a4a12,(hot air) balloon,(hot air) balloon,B,0,Qwen2.5-72B-Instruct,0.8,4684589224054997449,[],0,"{
+  ""target_word"": ""hot air balloon"",
+  ""features"": [
+    ""inflated with heated air"",
+    ""used for recreational flights"",
+    ""typically made of nylon fabric"",
+    ""requires a burner to heat the air"",
+    ""often used in festivals and events"",
+    ""can rise and descend by controlling temperature"",
+    ""usually has a wicker basket for passengers"",
+    ""not very directional in flight"",
+    ""visible from long distances due to size and color"",
+    ""has a history dating back to the 18th century""
+  ]
+}",Returned target_word 'hot air balloon' does not match expected '(hot air) balloon',d4d3aba8b29d284e3a2222b40e9d9c9d52b0085d4f95a1dd0acfbc4fe1353f60,stop,143,119
+leuven_v3_qwen2_5_72b,b180df8dc7df7d3ae9a72ae96ee532e823ef6707301d1be3f9399b8685aaa43a,(hot air) balloon,(hot air) balloon,A,18,Qwen2.5-72B-Instruct,0.8,4453572734137023230,[],0,"{
+  ""target_word"": ""hot air balloon"",
+  ""features"": [
+    ""floats in the air using heated air"",
+    ""made of fabric and a basket"",
+    ""requires a burner to heat the air"",
+    ""used for recreational flights"",
+    ""often seen at festivals and events"",
+    ""can travel long distances depending on wind"",
+    ""piloted by a trained operator"",
+    ""uses natural wind currents to navigate"",
+    ""typically round or oval in shape"",
+    ""can carry multiple passengers""
+  ]
+}",Returned target_word 'hot air balloon' does not match expected '(hot air) balloon',aabe7e3391ab2f82997618f6e8b45a50bfd022c4926127d449430497746b2231,stop,232,111
+leuven_v3_qwen2_5_72b,e3e4fb76f3a9702cb83ec2bc653fed9681c7d8b6b58f083ad423fefaaf44d0d9,(hot air) balloon,(hot air) balloon,B,5,Qwen2.5-72B-Instruct,0.8,253780323374993512,[],0,"{
+  ""target_word"": ""hot air balloon"",
+  ""features"": [
+    ""inflated with heated air"",
+    ""used for leisure flights"",
+    ""typically made of nylon"",
+    ""requires a burner to heat the air"",
+    ""often colorful and decorative"",
+    ""can rise and descend by controlling temperature"",
+    ""popular in festivals and events"",
+    ""operated by a pilot"",
+    ""limited directional control"",
+    ""used for aerial photography and tourism""
+  ]
+}",Returned target_word 'hot air balloon' does not match expected '(hot air) balloon',d4d3aba8b29d284e3a2222b40e9d9c9d52b0085d4f95a1dd0acfbc4fe1353f60,stop,143,101
+leuven_v3_qwen2_5_72b,92aa2c3e88257f62511f444a84c6e002d1f553bf16e22f8ba4b508be6bfb8dd7,(hot air) balloon,(hot air) balloon,B,9,Qwen2.5-72B-Instruct,0.8,3463648606834078059,[],0,"{
+  ""target_word"": ""hot air balloon"",
+  ""features"": [
+    ""large fabric envelope"",
+    ""filled with heated air"",
+    ""riser and burner system"",
+    ""basket for passengers"",
+    ""flies using buoyancy"",
+    ""typically used for leisure"",
+    ""often seen at festivals"",
+    ""requires skilled piloting"",
+    ""can reach high altitudes"",
+    ""used in early aviation experiments""
+  ]
+}",Returned target_word 'hot air balloon' does not match expected '(hot air) balloon',d4d3aba8b29d284e3a2222b40e9d9c9d52b0085d4f95a1dd0acfbc4fe1353f60,stop,143,91
+leuven_v3_qwen2_5_72b,a12e197650f8378c31422cc9a32826bb9e1f47f359c0d724a0abc56f9283f36c,(hot air) balloon,(hot air) balloon,B,8,Qwen2.5-72B-Instruct,0.8,7627229360369209405,[],0,"{
+  ""target_word"": ""hot air balloon"",
+  ""features"": [
+    ""inflated with heated air"",
+    ""used for recreational flights"",
+    ""typically made of nylon"",
+    ""requires a burner to heat the air"",
+    ""often has a wicker basket"",
+    ""flies by buoyancy"",
+    ""can be used for advertising"",
+    ""popular in festivals"",
+    ""controlled by adjusting altitude"",
+    ""historically significant in early aviation""
+  ]
+}",Returned target_word 'hot air balloon' does not match expected '(hot air) balloon',d4d3aba8b29d284e3a2222b40e9d9c9d52b0085d4f95a1dd0acfbc4fe1353f60,stop,143,99
+leuven_v3_qwen2_5_72b,fa7d315694f190dff644387e73054b95562d1b6ae17cb30bf3ba397748cc4b3a,(hot air) balloon,(hot air) balloon,B,3,Qwen2.5-72B-Instruct,0.8,5701923087244640036,[],0,"{
+  ""target_word"": ""hot air balloon"",
+  ""features"": [
+    ""large fabric envelope"",
+    ""filled with heated air"",
+    ""uses a burner to heat air"",
+    ""typically made of nylon"",
+    ""flies by rising in the air"",
+    ""often used for leisure activities"",
+    ""can be decorated with colorful patterns"",
+    ""requires a basket to carry passengers"",
+    ""operates best in cooler weather"",
+    ""has a history dating back to the 18th century""
+  ]
+}",Returned target_word 'hot air balloon' does not match expected '(hot air) balloon',d4d3aba8b29d284e3a2222b40e9d9c9d52b0085d4f95a1dd0acfbc4fe1353f60,stop,143,108
+leuven_v3_qwen2_5_72b,12daffd870bb797051ab421010284a21fa4e0c0703e80d0bb7bd9dcd6fc0f43f,(hot air) balloon,(hot air) balloon,A,9,Qwen2.5-72B-Instruct,0.8,3463648606834078059,[],0,"{
+  ""target_word"": ""hot air balloon"",
+  ""features"": [
+    ""large fabric envelope filled with heated air"",
+    ""uses a burner to heat the air inside the envelope"",
+    ""rises and descends by controlling the temperature of the air"",
+    ""typically made of nylon or similar lightweight material"",
+    ""has a basket or gondola to carry passengers and equipment"",
+    ""often used for recreational flights and tourism"",
+    ""can travel long distances depending on wind direction"",
+    ""requires skilled piloting to navigate and land safely"",
+    ""used in various festivals and competitions"",
+    ""historically significant in early aviation experiments""
+  ]
+}",Returned target_word 'hot air balloon' does not match expected '(hot air) balloon',aabe7e3391ab2f82997618f6e8b45a50bfd022c4926127d449430497746b2231,stop,232,136
+leuven_v3_qwen2_5_72b,47d83b4aaf8a9e06f434cf6fdaeb657956b8c13a3004723c25dda14a0f670a8b,(hot air) balloon,(hot air) balloon,C,12,Qwen2.5-72B-Instruct,0.8,6286543565084458104,[],0,"{
+  ""target_word"": ""hot air balloon"",
+  ""features"": [
+    ""large fabric envelope"",
+    ""filled with heated air"",
+    ""riser and burner system"",
+    ""wicker basket for passengers"",
+    ""flies by controlling buoyancy"",
+    ""used for recreational flights"",
+    ""typically spherical shape"",
+    ""often colorful designs"",
+    ""operated by a pilot"",
+    ""requires ground crew for launch and landing""
+  ]
+}",Returned target_word 'hot air balloon' does not match expected '(hot air) balloon',d6779951796cf129790ace596322ecc651de811d1439f4a67a703a69401108e7,stop,213,94
+leuven_v3_qwen2_5_72b,a4dbc0abc3bb5fb60d4ca5d8815082c3be8e11cc11e2b6007e7a8d8af3ceacc3,(hot air) balloon,(hot air) balloon,C,9,Qwen2.5-72B-Instruct,0.8,3463648606834078059,[],0,"{
+  ""target_word"": ""hot air balloon"",
+  ""features"": [
+    ""large fabric envelope"",
+    ""filled with heated air"",
+    ""carries a basket"",
+    ""rises in the sky"",
+    ""requires a burner"",
+    ""made of lightweight materials"",
+    ""used for leisure flights"",
+    ""often colorful and decorative"",
+    ""operated by a pilot"",
+    ""dependent on weather conditions""
+  ]
+}",Returned target_word 'hot air balloon' does not match expected '(hot air) balloon',d6779951796cf129790ace596322ecc651de811d1439f4a67a703a69401108e7,stop,213,90
+leuven_v3_qwen2_5_72b,fdde756fb7f370f90fe8318faf9821d36b53af8fed9d0b01ed34192b022fbd6d,(hot air) balloon,(hot air) balloon,C,4,Qwen2.5-72B-Instruct,0.8,6378389706315146637,[],0,"{
+  ""target_word"": ""hot air balloon"",
+  ""features"": [
+    ""large fabric envelope"",
+    ""filled with heated air"",
+    ""rises in the sky"",
+    ""basket carries passengers"",
+    ""flown for recreation"",
+    ""often colorful designs"",
+    ""requires a pilot"",
+    ""inflated and deflated on ground"",
+    ""used in festivals"",
+    ""operates in calm weather""
+  ]
+}",Returned target_word 'hot air balloon' does not match expected '(hot air) balloon',d6779951796cf129790ace596322ecc651de811d1439f4a67a703a69401108e7,stop,213,91
+leuven_v3_qwen2_5_72b,211e64d8967df150307243dd0d7176cefad4331bfbd475977ba0b924f2832b64,(hot air) balloon,(hot air) balloon,C,15,Qwen2.5-72B-Instruct,0.8,9104848979181679399,[],0,"{
+  ""target_word"": ""hot air balloon"",
+  ""features"": [
+    ""large fabric envelope"",
+    ""filled with heated air"",
+    ""carries a basket"",
+    ""rises into the sky"",
+    ""often colorful designs"",
+    ""requires a burner"",
+    ""used for leisure flights"",
+    ""operated by a pilot"",
+    ""floats with wind currents"",
+    ""lands in open areas""
+  ]
+}",Returned target_word 'hot air balloon' does not match expected '(hot air) balloon',d6779951796cf129790ace596322ecc651de811d1439f4a67a703a69401108e7,stop,213,90
+leuven_v3_qwen2_5_72b,e365a225686d21e87b24f2ff2c142b5b1c9a1122ac029edca9b6087f128e27dd,(hot air) balloon,(hot air) balloon,B,6,Qwen2.5-72B-Instruct,0.8,6048292171430535908,[],0,"{
+  ""target_word"": ""hot air balloon"",
+  ""features"": [
+    ""inflated with heated air"",
+    ""typically made of fabric"",
+    ""used for recreational flights"",
+    ""often brightly colored"",
+    ""requires a burner to heat the air"",
+    ""can be steered by changing altitude"",
+    ""used in festivals and competitions"",
+    ""has a basket for passengers"",
+    ""floats in the sky"",
+    ""popular in tourism and advertising""
+  ]
+}",Returned target_word 'hot air balloon' does not match expected '(hot air) balloon',d4d3aba8b29d284e3a2222b40e9d9c9d52b0085d4f95a1dd0acfbc4fe1353f60,stop,143,101
+leuven_v3_qwen2_5_72b,08409bc9f62295796402342d742eb3bea6cf8e65b626c5e458d46e372b3ab70e,(hot air) balloon,(hot air) balloon,C,1,Qwen2.5-72B-Instruct,0.8,912679466867101050,[],0,"{
+  ""target_word"": ""hot air balloon"",
+  ""features"": [
+    ""large fabric envelope"",
+    ""filled with heated air"",
+    ""rises in the sky"",
+    ""requires a burner to heat air"",
+    ""carries passengers in a basket"",
+    ""used for leisure and sport"",
+    ""often colorful and decorative"",
+    ""moves with wind currents"",
+    ""operated by a pilot"",
+    ""can be seen at festivals""
+  ]
+}",Returned target_word 'hot air balloon' does not match expected '(hot air) balloon',d6779951796cf129790ace596322ecc651de811d1439f4a67a703a69401108e7,stop,213,97
+leuven_v3_qwen2_5_72b,0cc304fb3ea40561ae6bc4d6d6b471593f683790020f420df3564e5b8cd27178,(hot air) balloon,(hot air) balloon,C,7,Qwen2.5-72B-Instruct,0.8,4656349594986180332,[],0,"{
+  ""target_word"": ""hot air balloon"",
+  ""features"": [
+    ""large fabric envelope"",
+    ""filled with heated air"",
+    ""rises in the sky"",
+    ""requires a burner"",
+    ""made of nylon or polyester"",
+    ""carries passengers in a basket"",
+    ""used for leisure flights"",
+    ""often colorful designs"",
+    ""operated by a pilot"",
+    ""inflates on the ground""
+  ]
+}",Returned target_word 'hot air balloon' does not match expected '(hot air) balloon',d6779951796cf129790ace596322ecc651de811d1439f4a67a703a69401108e7,stop,213,94
+leuven_v3_qwen2_5_72b,58bedf1866e490dbba9cd2c901ae0df90626b993e1dbef9e7237620f1d95cd59,(hot air) balloon,(hot air) balloon,C,6,Qwen2.5-72B-Instruct,0.8,6048292171430535908,[],0,"{
+  ""target_word"": ""hot air balloon"",
+  ""features"": [
+    ""large fabric envelope"",
+    ""filled with heated air"",
+    ""carries a basket"",
+    ""ascends and descends"",
+    ""used for leisure flights"",
+    ""requires a pilot"",
+    ""often colorful and decorative"",
+    ""flies at low to moderate altitudes"",
+    ""dependent on wind direction"",
+    ""inflated and deflated on ground""
+  ]
+}",Returned target_word 'hot air balloon' does not match expected '(hot air) balloon',d6779951796cf129790ace596322ecc651de811d1439f4a67a703a69401108e7,stop,213,96
+leuven_v3_qwen2_5_72b,177e2dc0abee9e277218d44c1ffb700ba7aca55a77ab7b30bff4544e510aa1f7,(hot air) balloon,(hot air) balloon,C,5,Qwen2.5-72B-Instruct,0.8,253780323374993512,[],0,"{
+  ""target_word"": ""hot air balloon"",
+  ""features"": [
+    ""large fabric envelope"",
+    ""filled with heated air"",
+    ""carries passengers in a basket"",
+    ""rises and floats in the sky"",
+    ""controlled by adjusting heat"",
+    ""used for recreation and tourism"",
+    ""often colorful and decorative"",
+    ""requires skilled piloting"",
+    ""typically tethered for inflation"",
+    ""can travel long distances""
+  ]
+}",Returned target_word 'hot air balloon' does not match expected '(hot air) balloon',d6779951796cf129790ace596322ecc651de811d1439f4a67a703a69401108e7,stop,213,96
+leuven_v3_qwen2_5_72b,1d458e30873a201ba9455fdf5f08af298bda670071b2ae2c17889cc87373bdb5,(hot air) balloon,(hot air) balloon,C,19,Qwen2.5-72B-Instruct,0.8,3445702838820465996,[],0,"{
+  ""target_word"": ""hot air balloon"",
+  ""features"": [
+    ""large fabric envelope"",
+    ""filled with heated air"",
+    ""carries a basket"",
+    ""ascends and descends"",
+    ""controlled by pilot"",
+    ""used for leisure flights"",
+    ""often colorful designs"",
+    ""floats in the sky"",
+    ""requires a burner"",
+    ""tethered for safety on ground""
+  ]
+}",Returned target_word 'hot air balloon' does not match expected '(hot air) balloon',d6779951796cf129790ace596322ecc651de811d1439f4a67a703a69401108e7,stop,213,91
+leuven_v3_qwen2_5_72b,326773de3b1e0ae897cc80ca4e3931696b252d529d424ae58d67ca484018b477,(hot air) balloon,(hot air) balloon,C,8,Qwen2.5-72B-Instruct,0.8,7627229360369209405,[],0,"{
+  ""target_word"": ""hot air balloon"",
+  ""features"": [
+    ""large fabric envelope"",
+    ""filled with heated air"",
+    ""rises in the sky"",
+    ""requires a burner to heat air"",
+    ""usually tethered to a basket"",
+    ""used for leisure flights"",
+    ""often seen at festivals"",
+    ""can be decorated with designs"",
+    ""operated by a pilot"",
+    ""floats gently with the wind""
+  ]
+}",Returned target_word 'hot air balloon' does not match expected '(hot air) balloon',d6779951796cf129790ace596322ecc651de811d1439f4a67a703a69401108e7,stop,213,98
+leuven_v3_qwen2_5_72b,252f0e6c8d557ed883894d67d2b61bf1640a072a08737a2919ace1b89fb74941,(hot air) balloon,(hot air) balloon,B,18,Qwen2.5-72B-Instruct,0.8,4453572734137023230,[],0,"{
+  ""target_word"": ""hot air balloon"",
+  ""features"": [
+    ""floats in the air"",
+    ""uses heated air for lift"",
+    ""often colorful and decorative"",
+    ""piloted by a person"",
+    ""common in festivals and events"",
+    ""can carry passengers"",
+    ""moves with wind currents"",
+    ""requires a burner to heat air"",
+    ""made of fabric and a basket"",
+    ""used for leisure and sightseeing""
+  ]
+}",Returned target_word 'hot air balloon' does not match expected '(hot air) balloon',d4d3aba8b29d284e3a2222b40e9d9c9d52b0085d4f95a1dd0acfbc4fe1353f60,stop,143,100
+leuven_v3_qwen2_5_72b,5765b354b3c556dbe64e8ff71e5808898a578cc36333cab750121008890cd2cc,(hot air) balloon,(hot air) balloon,C,16,Qwen2.5-72B-Instruct,0.8,5458119353470193210,[],0,"{
+  ""target_word"": ""hot air balloon"",
+  ""features"": [
+    ""large fabric envelope"",
+    ""filled with heated air"",
+    ""carries a wicker basket"",
+    ""rises in warm weather"",
+    ""used for leisure flights"",
+    ""often colorful and decorative"",
+    ""requires a burner to heat air"",
+    ""piloted by a certified operator"",
+    ""can travel long distances"",
+    ""popular at festivals""
+  ]
+}",Returned target_word 'hot air balloon' does not match expected '(hot air) balloon',d6779951796cf129790ace596322ecc651de811d1439f4a67a703a69401108e7,stop,213,96
+leuven_v3_qwen2_5_72b,1b311b57fa9e3843eaa08d251d15d0d5deacccebddc608338edbeacb0e56ec20,(hot air) balloon,(hot air) balloon,C,0,Qwen2.5-72B-Instruct,0.8,4684589224054997449,[],0,"{
+  ""target_word"": ""hot air balloon"",
+  ""features"": [
+    ""large fabric envelope"",
+    ""filled with heated air"",
+    ""rises in the sky"",
+    ""usually spherical or teardrop shape"",
+    ""made of nylon or polyester"",
+    ""carries passengers in a basket"",
+    ""propelled by a burner"",
+    ""used for leisure and sport"",
+    ""visible from far distances"",
+    ""often colorful and decorative""
+  ]
+}",Returned target_word 'hot air balloon' does not match expected '(hot air) balloon',d6779951796cf129790ace596322ecc651de811d1439f4a67a703a69401108e7,stop,213,98
+leuven_v3_qwen2_5_72b,90ce8d0d04e65dea94c92da0c393118bee63ad2c615c43126f84c844f275e93f,(hot air) balloon,(hot air) balloon,C,3,Qwen2.5-72B-Instruct,0.8,5701923087244640036,[],0,"{
+  ""target_word"": ""hot air balloon"",
+  ""features"": [
+    ""large fabric envelope"",
+    ""filled with heated air"",
+    ""carries passengers in a basket"",
+    ""rises and descends by controlling heat"",
+    ""often colorful and decorative"",
+    ""used for leisure and tourism"",
+    ""requires a pilot to operate"",
+    ""typically launches at dawn or dusk"",
+    ""can travel long distances with wind"",
+    ""popular in festivals and events""
+  ]
+}",Returned target_word 'hot air balloon' does not match expected '(hot air) balloon',d6779951796cf129790ace596322ecc651de811d1439f4a67a703a69401108e7,stop,213,102
+leuven_v3_qwen2_5_72b,760f8091264d6f2c1985e94c8571afa489b4044a7c724c7def80c007292ed11c,(hot air) balloon,(hot air) balloon,C,2,Qwen2.5-72B-Instruct,0.8,8177334066986624772,[],0,"{
+  ""target_word"": ""hot air balloon"",
+  ""features"": [
+    ""large fabric envelope"",
+    ""filled with heated air"",
+    ""carries passengers in a basket"",
+    ""rises and floats in the sky"",
+    ""controlled by adjusting heat"",
+    ""used for leisure and sport"",
+    ""often colorful and decorative"",
+    ""requires a ground crew for launch"",
+    ""moves with wind currents"",
+    ""can reach high altitudes""
+  ]
+}",Returned target_word 'hot air balloon' does not match expected '(hot air) balloon',d6779951796cf129790ace596322ecc651de811d1439f4a67a703a69401108e7,stop,213,98
+leuven_v3_qwen2_5_72b,bf9359c409e012335b98d8e1e7ab4f8992d91b62cb93a77e7a5837a66ab25f0e,(hot air) balloon,(hot air) balloon,C,18,Qwen2.5-72B-Instruct,0.8,4453572734137023230,[],0,"{
+  ""target_word"": ""hot air balloon"",
+  ""features"": [
+    ""large fabric envelope"",
+    ""filled with heated air"",
+    ""carries passengers in a basket"",
+    ""rises and floats in the sky"",
+    ""requires a burner to heat air"",
+    ""often colorful and decorative"",
+    ""used for recreational flights"",
+    ""piloted by a certified operator"",
+    ""can travel long distances"",
+    ""affected by wind direction""
+  ]
+}",Returned target_word 'hot air balloon' does not match expected '(hot air) balloon',d6779951796cf129790ace596322ecc651de811d1439f4a67a703a69401108e7,stop,213,99
+leuven_v3_qwen2_5_72b,b007c7515b02f3e37b1e526a1011d71ad88d29630fa473232fd42da5e405cd1a,(hot air) balloon,(hot air) balloon,B,14,Qwen2.5-72B-Instruct,0.8,4313268070358771054,[],0,"{
+  ""target_word"": ""hot air balloon"",
+  ""features"": [
+    ""inflated with heated air"",
+    ""used for leisure flights"",
+    ""typically made of nylon"",
+    ""requires a burner to heat the air"",
+    ""often colorful and decorative"",
+    ""can rise and descend by controlling temperature"",
+    ""used in festivals and events"",
+    ""piloted by a certified operator"",
+    ""moves with wind currents"",
+    ""has a basket for passengers and equipment""
+  ]
+}",Returned target_word 'hot air balloon' does not match expected '(hot air) balloon',d4d3aba8b29d284e3a2222b40e9d9c9d52b0085d4f95a1dd0acfbc4fe1353f60,stop,143,105
+leuven_v3_qwen2_5_72b,1baa1cc29d46e5c196d484218db97b32cec47dcaca95974cea7ddc8682385433,(hot air) balloon,(hot air) balloon,C,13,Qwen2.5-72B-Instruct,0.8,9112897105719598342,[],0,"{
+  ""target_word"": ""hot air balloon"",
+  ""features"": [
+    ""large fabric envelope"",
+    ""filled with heated air"",
+    ""carries a wicker basket"",
+    ""rises in warm weather"",
+    ""used for leisure flights"",
+    ""requires a burner to heat air"",
+    ""often colorful and decorative"",
+    ""piloted by a certified operator"",
+    ""floats with wind currents"",
+    ""landed in open fields""
+  ]
+}",Returned target_word 'hot air balloon' does not match expected '(hot air) balloon',d6779951796cf129790ace596322ecc651de811d1439f4a67a703a69401108e7,stop,213,99
+leuven_v3_qwen2_5_72b,e7dcbaaa735ce45bf9b7bd0569e4ef158189211bc5b04b8ebab9a6c536b4cfa3,(hot air) balloon,(hot air) balloon,B,7,Qwen2.5-72B-Instruct,0.8,4656349594986180332,[],0,"{
+  ""target_word"": ""hot air balloon"",
+  ""features"": [
+    ""inflated with heated air"",
+    ""used for recreational flights"",
+    ""typically made of nylon fabric"",
+    ""requires a burner to heat the air"",
+    ""often used in festivals and events"",
+    ""can rise and descend by controlling temperature"",
+    ""usually has a wicker basket for passengers"",
+    ""non-directional flight controlled by wind"",
+    ""popular for scenic views and photography"",
+    ""has a long history dating back to the 18th century""
+  ]
+}",Returned target_word 'hot air balloon' does not match expected '(hot air) balloon',d4d3aba8b29d284e3a2222b40e9d9c9d52b0085d4f95a1dd0acfbc4fe1353f60,stop,143,119
+leuven_v3_qwen2_5_72b,c8c3d427526e7647ebd1f9fa559aa24cbbb931f230966f53334ba68920cdd1d8,(hot air) balloon,(hot air) balloon,C,17,Qwen2.5-72B-Instruct,0.8,5742114268076171550,[],0,"{
+  ""target_word"": ""hot air balloon"",
+  ""features"": [
+    ""large fabric envelope"",
+    ""filled with heated air"",
+    ""carries passengers in a basket"",
+    ""rises and floats in the sky"",
+    ""controlled by adjusting heat"",
+    ""used for leisure and sport"",
+    ""often colorful and decorative"",
+    ""requires a pilot and crew"",
+    ""tethered for inflation and landing"",
+    ""visible from long distances""
+  ]
+}",Returned target_word 'hot air balloon' does not match expected '(hot air) balloon',d6779951796cf129790ace596322ecc651de811d1439f4a67a703a69401108e7,stop,213,99
+leuven_v3_qwen2_5_72b,518b3e2eeaeb1ddf4a307aa373ece3a3e3b4c3e4f4ec81d6162759fce50044d5,(hot air) balloon,(hot air) balloon,B,10,Qwen2.5-72B-Instruct,0.8,2850559297202414470,[],0,"{
+  ""target_word"": ""hot air balloon"",
+  ""features"": [
+    ""inflated with heated air"",
+    ""used for recreational flights"",
+    ""typically made of nylon fabric"",
+    ""requires a burner to heat the air"",
+    ""often used in festivals and events"",
+    ""can be decorated with various designs"",
+    ""floats due to buoyancy"",
+    ""piloted by a person"",
+    ""has a basket to carry passengers"",
+    ""operates best in calm weather conditions""
+  ]
+}",Returned target_word 'hot air balloon' does not match expected '(hot air) balloon',d4d3aba8b29d284e3a2222b40e9d9c9d52b0085d4f95a1dd0acfbc4fe1353f60,stop,143,109
+leuven_v3_qwen2_5_72b,bd9dbe68c5e921fd1efb6bde884312eda1ddef71ba9dd84d159426404f640d4b,(hot air) balloon,(hot air) balloon,B,13,Qwen2.5-72B-Instruct,0.8,9112897105719598342,[],0,"{
+  ""target_word"": ""hot air balloon"",
+  ""features"": [
+    ""floats in the air"",
+    ""uses heated air for lift"",
+    ""often brightly colored"",
+    ""common in festivals and events"",
+    ""piloted by a person"",
+    ""can carry passengers"",
+    ""made of fabric and a basket"",
+    ""requires propane burners"",
+    ""used for recreational flights"",
+    ""vulnerable to weather conditions""
+  ]
+}",Returned target_word 'hot air balloon' does not match expected '(hot air) balloon',d4d3aba8b29d284e3a2222b40e9d9c9d52b0085d4f95a1dd0acfbc4fe1353f60,stop,143,96
+leuven_v3_qwen2_5_72b,bfe33c572265bc78be63bdb9407573f096bcd683229e222f5778c34e21f65636,(hot air) balloon,(hot air) balloon,C,10,Qwen2.5-72B-Instruct,0.8,2850559297202414470,[],0,"{
+  ""target_word"": ""hot air balloon"",
+  ""features"": [
+    ""large fabric envelope"",
+    ""filled with heated air"",
+    ""rises in the sky"",
+    ""basket carries passengers"",
+    ""requires propane burners"",
+    ""flies during early morning or late evening"",
+    ""used for leisure and sightseeing"",
+    ""often colorful and decorative"",
+    ""moves with wind currents"",
+    ""landed by pilot's skill""
+  ]
+}",Returned target_word 'hot air balloon' does not match expected '(hot air) balloon',d6779951796cf129790ace596322ecc651de811d1439f4a67a703a69401108e7,stop,213,96
+leuven_v3_qwen2_5_72b,4ecdbbb19e010cf180a4a688491fcedb039e849212ec66af9df3f584a47bc766,(hot air) balloon,(hot air) balloon,C,14,Qwen2.5-72B-Instruct,0.8,4313268070358771054,[],0,"{
+  ""target_word"": ""hot air balloon"",
+  ""features"": [
+    ""large fabric envelope"",
+    ""filled with heated air"",
+    ""carries passengers in a basket"",
+    ""rises and descends by controlling heat"",
+    ""typically spherical or teardrop shape"",
+    ""often brightly colored"",
+    ""used for recreational flights"",
+    ""requires a pilot and crew"",
+    ""flies at low speeds"",
+    ""can travel long distances with wind""
+  ]
+}",Returned target_word 'hot air balloon' does not match expected '(hot air) balloon',d6779951796cf129790ace596322ecc651de811d1439f4a67a703a69401108e7,stop,213,100
+leuven_v3_qwen2_5_72b,f9a1e28963f77806ab07bcaea5a56d885181cf30903851066f8c1f64424a21ec,(hot air) balloon,(hot air) balloon,B,11,Qwen2.5-72B-Instruct,0.8,8943516688247219425,[],0,"{
+  ""target_word"": ""hot air balloon"",
+  ""features"": [
+    ""inflated with heated air"",
+    ""used for leisure flights"",
+    ""typically made of nylon"",
+    ""requires a burner to heat the air"",
+    ""often colorful and decorative"",
+    ""can rise and descend by controlling temperature"",
+    ""used in festivals and competitions"",
+    ""piloted by a person in a basket"",
+    ""floats due to buoyancy"",
+    ""limited directional control""
+  ]
+}",Returned target_word 'hot air balloon' does not match expected '(hot air) balloon',d4d3aba8b29d284e3a2222b40e9d9c9d52b0085d4f95a1dd0acfbc4fe1353f60,stop,143,105
+leuven_v3_qwen2_5_72b,18468ad76d33ac2e3db60e31a08ba0b2018f084e42235df5178cee8427ae5443,(hot air) balloon,(hot air) balloon,B,19,Qwen2.5-72B-Instruct,0.8,3445702838820465996,[],0,"{
+  ""target_word"": ""hot air balloon"",
+  ""features"": [
+    ""large fabric envelope"",
+    ""filled with heated air"",
+    ""uses a burner to heat air"",
+    ""typically made of nylon"",
+    ""carries passengers in a basket"",
+    ""floats in the sky"",
+    ""used for leisure and tourism"",
+    ""often seen at festivals"",
+    ""can be steered by changing altitude"",
+    ""requires a pilot to operate""
+  ]
+}",Returned target_word 'hot air balloon' does not match expected '(hot air) balloon',d4d3aba8b29d284e3a2222b40e9d9c9d52b0085d4f95a1dd0acfbc4fe1353f60,stop,143,99
+leuven_v3_qwen2_5_72b,ea690c84ff98353d0302733d3f43b8f62ffd4c5ff72c09f5c8d44194a105e7a1,(hot air) balloon,(hot air) balloon,B,4,Qwen2.5-72B-Instruct,0.8,6378389706315146637,[],0,"{
+  ""target_word"": ""hot air balloon"",
+  ""features"": [
+    ""inflated with heated air"",
+    ""used for recreational flights"",
+    ""typically made of nylon"",
+    ""requires a burner to heat the air"",
+    ""often used in festivals and events"",
+    ""can rise and descend by controlling temperature"",
+    ""has a basket to carry passengers"",
+    ""operates best in calm weather conditions"",
+    ""has a long history dating back to the 18th century"",
+    ""used for aerial photography and tourism""
+  ]
+}",Returned target_word 'hot air balloon' does not match expected '(hot air) balloon',d4d3aba8b29d284e3a2222b40e9d9c9d52b0085d4f95a1dd0acfbc4fe1353f60,stop,143,116
+leuven_v3_qwen2_5_72b,f977e64168a0d0f35804d8989754bd49e6a4b2e928e5f193c2dfd5f43a18b6eb,(hot air) balloon,(hot air) balloon,C,11,Qwen2.5-72B-Instruct,0.8,8943516688247219425,[],0,"{
+  ""target_word"": ""hot air balloon"",
+  ""features"": [
+    ""large fabric envelope"",
+    ""filled with heated air"",
+    ""carries passengers in a basket"",
+    ""rises and floats in the sky"",
+    ""controlled by adjusting heat"",
+    ""often used for leisure activities"",
+    ""typically spherical or teardrop shape"",
+    ""made of lightweight, durable materials"",
+    ""requires a burner to heat the air"",
+    ""can be decorated with vibrant colors""
+  ]
+}",Returned target_word 'hot air balloon' does not match expected '(hot air) balloon',d6779951796cf129790ace596322ecc651de811d1439f4a67a703a69401108e7,stop,213,105
+leuven_v3_qwen2_5_72b,7ff831304b6c007873ff1b1e3bd0b9dcf74a348ea7523e5101689010c2f28b9a,(hot air) balloon,(hot air) balloon,B,16,Qwen2.5-72B-Instruct,0.8,5458119353470193210,[],0,"{
+  ""target_word"": ""hot air balloon"",
+  ""features"": [
+    ""Inflated with heated air"",
+    ""Rises due to buoyancy"",
+    ""Typically made of fabric and a basket"",
+    ""Used for recreational flights"",
+    ""Often seen at festivals and events"",
+    ""Can be steered by changing altitude"",
+    ""Requires a burner to heat the air"",
+    ""Piloted by a trained operator"",
+    ""Has a limited flight duration"",
+    ""Can carry multiple passengers""
+  ]
+}",Returned target_word 'hot air balloon' does not match expected '(hot air) balloon',d4d3aba8b29d284e3a2222b40e9d9c9d52b0085d4f95a1dd0acfbc4fe1353f60,stop,143,110
+leuven_v3_qwen2_5_72b,3417db2bb111905290a4b5211765c3d08ec22ae36de5dd9e56117dc1c979c250,(hot air) balloon,(hot air) balloon,B,12,Qwen2.5-72B-Instruct,0.8,6286543565084458104,[],0,"{
+  ""target_word"": ""hot air balloon"",
+  ""features"": [
+    ""inflated with heated air"",
+    ""typically made of fabric"",
+    ""used for recreational flights"",
+    ""often colorful and decorative"",
+    ""requires a burner to heat the air"",
+    ""can rise and descend by controlling temperature"",
+    ""popular in festivals and events"",
+    ""operates in clear weather conditions"",
+    ""piloted by a trained operator"",
+    ""used for aerial photography and tourism""
+  ]
+}",Returned target_word 'hot air balloon' does not match expected '(hot air) balloon',d4d3aba8b29d284e3a2222b40e9d9c9d52b0085d4f95a1dd0acfbc4fe1353f60,stop,143,106
+leuven_v3_qwen2_5_72b,b46fd39aaaebba2777db2e3b12bada038e245eba84985b12ad7f815f2d4cd13f,(hot air) balloon,(hot air) balloon,B,17,Qwen2.5-72B-Instruct,0.8,5742114268076171550,[],0,"{
+  ""target_word"": ""hot air balloon"",
+  ""features"": [
+    ""inflated with heated air"",
+    ""used for recreational flights"",
+    ""typically made of nylon or polyester"",
+    ""requires a burner to heat the air"",
+    ""often used in festivals and events"",
+    ""can rise and descend by controlling temperature"",
+    ""usually tethered during inflation"",
+    ""has a wicker basket for passengers"",
+    ""visible from long distances due to size and color"",
+    ""subject to weather conditions for safe flight""
+  ]
+}",Returned target_word 'hot air balloon' does not match expected '(hot air) balloon',d4d3aba8b29d284e3a2222b40e9d9c9d52b0085d4f95a1dd0acfbc4fe1353f60,stop,143,114
+leuven_v3_qwen2_5_72b,78baf4dc636beea2261c68f50da48c1ce48ef7abf5987353200d9406ad6c50cb,(hot air) balloon,(hot air) balloon,B,15,Qwen2.5-72B-Instruct,0.8,9104848979181679399,[],0,"{
+  ""target_word"": ""hot air balloon"",
+  ""features"": [
+    ""inflated with heated air"",
+    ""used for leisure flights"",
+    ""typically made of nylon fabric"",
+    ""requires a burner to heat the air"",
+    ""often used in festivals and events"",
+    ""can rise and descend by controlling temperature"",
+    ""usually has a wicker basket for passengers"",
+    ""operates best in cooler morning or evening temperatures"",
+    ""has a long history dating back to the 18th century"",
+    ""popular for aerial photography and sightseeing""
+  ]
+}",Returned target_word 'hot air balloon' does not match expected '(hot air) balloon',d4d3aba8b29d284e3a2222b40e9d9c9d52b0085d4f95a1dd0acfbc4fe1353f60,stop,143,122

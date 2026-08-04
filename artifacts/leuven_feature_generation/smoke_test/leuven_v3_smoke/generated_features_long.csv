@@ -1,0 +1,181 @@
+job_id,response_id,word_original,word_normalized,prompt_variant,replicate_id,model,sampling_seed,feature_rank,feature_text,feature_text_normalized
+leuven_v3_smoke,584be1642a92957a3dbefa1bff4e0caddde369ac91e8cd5e9e483e9eb5f04cfa,monkey,monkey,B,1,Qwen2.5-72B-Instruct,1128741825847976059,1,mammal,mammal
+leuven_v3_smoke,584be1642a92957a3dbefa1bff4e0caddde369ac91e8cd5e9e483e9eb5f04cfa,monkey,monkey,B,1,Qwen2.5-72B-Instruct,1128741825847976059,2,arboreal,arboreal
+leuven_v3_smoke,584be1642a92957a3dbefa1bff4e0caddde369ac91e8cd5e9e483e9eb5f04cfa,monkey,monkey,B,1,Qwen2.5-72B-Instruct,1128741825847976059,3,omnivorous,omnivorous
+leuven_v3_smoke,584be1642a92957a3dbefa1bff4e0caddde369ac91e8cd5e9e483e9eb5f04cfa,monkey,monkey,B,1,Qwen2.5-72B-Instruct,1128741825847976059,4,social,social
+leuven_v3_smoke,584be1642a92957a3dbefa1bff4e0caddde369ac91e8cd5e9e483e9eb5f04cfa,monkey,monkey,B,1,Qwen2.5-72B-Instruct,1128741825847976059,5,tail,tail
+leuven_v3_smoke,584be1642a92957a3dbefa1bff4e0caddde369ac91e8cd5e9e483e9eb5f04cfa,monkey,monkey,B,1,Qwen2.5-72B-Instruct,1128741825847976059,6,brachiation,brachiation
+leuven_v3_smoke,584be1642a92957a3dbefa1bff4e0caddde369ac91e8cd5e9e483e9eb5f04cfa,monkey,monkey,B,1,Qwen2.5-72B-Instruct,1128741825847976059,7,intelligent,intelligent
+leuven_v3_smoke,584be1642a92957a3dbefa1bff4e0caddde369ac91e8cd5e9e483e9eb5f04cfa,monkey,monkey,B,1,Qwen2.5-72B-Instruct,1128741825847976059,8,playful,playful
+leuven_v3_smoke,584be1642a92957a3dbefa1bff4e0caddde369ac91e8cd5e9e483e9eb5f04cfa,monkey,monkey,B,1,Qwen2.5-72B-Instruct,1128741825847976059,9,diverse species,diverse species
+leuven_v3_smoke,584be1642a92957a3dbefa1bff4e0caddde369ac91e8cd5e9e483e9eb5f04cfa,monkey,monkey,B,1,Qwen2.5-72B-Instruct,1128741825847976059,10,used in research,used in research
+leuven_v3_smoke,f8b22f7890702971b2a199f8fa0489f5d946b1c3312fe02ee5d84027972cacc0,oven,oven,C,0,Qwen2.5-72B-Instruct,7812811414628325296,1,heats food,heats food
+leuven_v3_smoke,f8b22f7890702971b2a199f8fa0489f5d946b1c3312fe02ee5d84027972cacc0,oven,oven,C,0,Qwen2.5-72B-Instruct,7812811414628325296,2,bakes bread,bakes bread
+leuven_v3_smoke,f8b22f7890702971b2a199f8fa0489f5d946b1c3312fe02ee5d84027972cacc0,oven,oven,C,0,Qwen2.5-72B-Instruct,7812811414628325296,3,made of metal,made of metal
+leuven_v3_smoke,f8b22f7890702971b2a199f8fa0489f5d946b1c3312fe02ee5d84027972cacc0,oven,oven,C,0,Qwen2.5-72B-Instruct,7812811414628325296,4,has a door,has a door
+leuven_v3_smoke,f8b22f7890702971b2a199f8fa0489f5d946b1c3312fe02ee5d84027972cacc0,oven,oven,C,0,Qwen2.5-72B-Instruct,7812811414628325296,5,uses electricity or gas,uses electricity or gas
+leuven_v3_smoke,f8b22f7890702971b2a199f8fa0489f5d946b1c3312fe02ee5d84027972cacc0,oven,oven,C,0,Qwen2.5-72B-Instruct,7812811414628325296,6,found in kitchens,found in kitchens
+leuven_v3_smoke,f8b22f7890702971b2a199f8fa0489f5d946b1c3312fe02ee5d84027972cacc0,oven,oven,C,0,Qwen2.5-72B-Instruct,7812811414628325296,7,controls temperature,controls temperature
+leuven_v3_smoke,f8b22f7890702971b2a199f8fa0489f5d946b1c3312fe02ee5d84027972cacc0,oven,oven,C,0,Qwen2.5-72B-Instruct,7812811414628325296,8,emits heat,emits heat
+leuven_v3_smoke,f8b22f7890702971b2a199f8fa0489f5d946b1c3312fe02ee5d84027972cacc0,oven,oven,C,0,Qwen2.5-72B-Instruct,7812811414628325296,9,can broil,can broil
+leuven_v3_smoke,f8b22f7890702971b2a199f8fa0489f5d946b1c3312fe02ee5d84027972cacc0,oven,oven,C,0,Qwen2.5-72B-Instruct,7812811414628325296,10,has racks,has racks
+leuven_v3_smoke,2055eddd3abbb0f370ad60175bc8c12c636d88dc4eb7c92a11580223acd43de8,monkey,monkey,C,0,Qwen2.5-72B-Instruct,6153726420752684620,1,has fur,has fur
+leuven_v3_smoke,2055eddd3abbb0f370ad60175bc8c12c636d88dc4eb7c92a11580223acd43de8,monkey,monkey,C,0,Qwen2.5-72B-Instruct,6153726420752684620,2,long tail,long tail
+leuven_v3_smoke,2055eddd3abbb0f370ad60175bc8c12c636d88dc4eb7c92a11580223acd43de8,monkey,monkey,C,0,Qwen2.5-72B-Instruct,6153726420752684620,3,grasping hands,grasping hands
+leuven_v3_smoke,2055eddd3abbb0f370ad60175bc8c12c636d88dc4eb7c92a11580223acd43de8,monkey,monkey,C,0,Qwen2.5-72B-Instruct,6153726420752684620,4,lives in trees,lives in trees
+leuven_v3_smoke,2055eddd3abbb0f370ad60175bc8c12c636d88dc4eb7c92a11580223acd43de8,monkey,monkey,C,0,Qwen2.5-72B-Instruct,6153726420752684620,5,eats fruits,eats fruits
+leuven_v3_smoke,2055eddd3abbb0f370ad60175bc8c12c636d88dc4eb7c92a11580223acd43de8,monkey,monkey,C,0,Qwen2.5-72B-Instruct,6153726420752684620,6,can climb,can climb
+leuven_v3_smoke,2055eddd3abbb0f370ad60175bc8c12c636d88dc4eb7c92a11580223acd43de8,monkey,monkey,C,0,Qwen2.5-72B-Instruct,6153726420752684620,7,social animal,social animal
+leuven_v3_smoke,2055eddd3abbb0f370ad60175bc8c12c636d88dc4eb7c92a11580223acd43de8,monkey,monkey,C,0,Qwen2.5-72B-Instruct,6153726420752684620,8,various species,various species
+leuven_v3_smoke,2055eddd3abbb0f370ad60175bc8c12c636d88dc4eb7c92a11580223acd43de8,monkey,monkey,C,0,Qwen2.5-72B-Instruct,6153726420752684620,9,found in tropics,found in tropics
+leuven_v3_smoke,2055eddd3abbb0f370ad60175bc8c12c636d88dc4eb7c92a11580223acd43de8,monkey,monkey,C,0,Qwen2.5-72B-Instruct,6153726420752684620,10,can make facial expressions,can make facial expressions
+leuven_v3_smoke,5d4d4fcb9441136cac51917b69e146a190bd109961bbcba51d126cce7d59fef8,oven,oven,B,1,Qwen2.5-72B-Instruct,1678321551902550787,1,used for baking,used for baking
+leuven_v3_smoke,5d4d4fcb9441136cac51917b69e146a190bd109961bbcba51d126cce7d59fef8,oven,oven,B,1,Qwen2.5-72B-Instruct,1678321551902550787,2,has a door,has a door
+leuven_v3_smoke,5d4d4fcb9441136cac51917b69e146a190bd109961bbcba51d126cce7d59fef8,oven,oven,B,1,Qwen2.5-72B-Instruct,1678321551902550787,3,heats up food,heats up food
+leuven_v3_smoke,5d4d4fcb9441136cac51917b69e146a190bd109961bbcba51d126cce7d59fef8,oven,oven,B,1,Qwen2.5-72B-Instruct,1678321551902550787,4,found in kitchens,found in kitchens
+leuven_v3_smoke,5d4d4fcb9441136cac51917b69e146a190bd109961bbcba51d126cce7d59fef8,oven,oven,B,1,Qwen2.5-72B-Instruct,1678321551902550787,5,can have a timer,can have a timer
+leuven_v3_smoke,5d4d4fcb9441136cac51917b69e146a190bd109961bbcba51d126cce7d59fef8,oven,oven,B,1,Qwen2.5-72B-Instruct,1678321551902550787,6,made of metal,made of metal
+leuven_v3_smoke,5d4d4fcb9441136cac51917b69e146a190bd109961bbcba51d126cce7d59fef8,oven,oven,B,1,Qwen2.5-72B-Instruct,1678321551902550787,7,comes in various sizes,comes in various sizes
+leuven_v3_smoke,5d4d4fcb9441136cac51917b69e146a190bd109961bbcba51d126cce7d59fef8,oven,oven,B,1,Qwen2.5-72B-Instruct,1678321551902550787,8,can be gas or electric,can be gas or electric
+leuven_v3_smoke,5d4d4fcb9441136cac51917b69e146a190bd109961bbcba51d126cce7d59fef8,oven,oven,B,1,Qwen2.5-72B-Instruct,1678321551902550787,9,used for cooking meals,used for cooking meals
+leuven_v3_smoke,5d4d4fcb9441136cac51917b69e146a190bd109961bbcba51d126cce7d59fef8,oven,oven,B,1,Qwen2.5-72B-Instruct,1678321551902550787,10,has temperature controls,has temperature controls
+leuven_v3_smoke,386b67ae30f78015bf47e7d9a7b8b3f8a6ae10bfc11352c56097b79aee245f55,monkey,monkey,B,0,Qwen2.5-72B-Instruct,6153726420752684620,1,has fur,has fur
+leuven_v3_smoke,386b67ae30f78015bf47e7d9a7b8b3f8a6ae10bfc11352c56097b79aee245f55,monkey,monkey,B,0,Qwen2.5-72B-Instruct,6153726420752684620,2,lives in trees,lives in trees
+leuven_v3_smoke,386b67ae30f78015bf47e7d9a7b8b3f8a6ae10bfc11352c56097b79aee245f55,monkey,monkey,B,0,Qwen2.5-72B-Instruct,6153726420752684620,3,eats fruits,eats fruits
+leuven_v3_smoke,386b67ae30f78015bf47e7d9a7b8b3f8a6ae10bfc11352c56097b79aee245f55,monkey,monkey,B,0,Qwen2.5-72B-Instruct,6153726420752684620,4,uses tail for balance,uses tail for balance
+leuven_v3_smoke,386b67ae30f78015bf47e7d9a7b8b3f8a6ae10bfc11352c56097b79aee245f55,monkey,monkey,B,0,Qwen2.5-72B-Instruct,6153726420752684620,5,can climb,can climb
+leuven_v3_smoke,386b67ae30f78015bf47e7d9a7b8b3f8a6ae10bfc11352c56097b79aee245f55,monkey,monkey,B,0,Qwen2.5-72B-Instruct,6153726420752684620,6,often found in groups,often found in groups
+leuven_v3_smoke,386b67ae30f78015bf47e7d9a7b8b3f8a6ae10bfc11352c56097b79aee245f55,monkey,monkey,B,0,Qwen2.5-72B-Instruct,6153726420752684620,7,intelligent and curious,intelligent and curious
+leuven_v3_smoke,386b67ae30f78015bf47e7d9a7b8b3f8a6ae10bfc11352c56097b79aee245f55,monkey,monkey,B,0,Qwen2.5-72B-Instruct,6153726420752684620,8,used in scientific research,used in scientific research
+leuven_v3_smoke,386b67ae30f78015bf47e7d9a7b8b3f8a6ae10bfc11352c56097b79aee245f55,monkey,monkey,B,0,Qwen2.5-72B-Instruct,6153726420752684620,9,can be trained as service animals,can be trained as service animals
+leuven_v3_smoke,386b67ae30f78015bf47e7d9a7b8b3f8a6ae10bfc11352c56097b79aee245f55,monkey,monkey,B,0,Qwen2.5-72B-Instruct,6153726420752684620,10,featured in folklore and mythology,featured in folklore and mythology
+leuven_v3_smoke,4e20e5ea05943357fe0c7a84993232a91f5de82e378e861da7f86d2060c85f65,saw,saw,C,0,Qwen2.5-72B-Instruct,4827830605822039271,1,sharp blade,sharp blade
+leuven_v3_smoke,4e20e5ea05943357fe0c7a84993232a91f5de82e378e861da7f86d2060c85f65,saw,saw,C,0,Qwen2.5-72B-Instruct,4827830605822039271,2,handle for gripping,handle for gripping
+leuven_v3_smoke,4e20e5ea05943357fe0c7a84993232a91f5de82e378e861da7f86d2060c85f65,saw,saw,C,0,Qwen2.5-72B-Instruct,4827830605822039271,3,used for cutting wood,used for cutting wood
+leuven_v3_smoke,4e20e5ea05943357fe0c7a84993232a91f5de82e378e861da7f86d2060c85f65,saw,saw,C,0,Qwen2.5-72B-Instruct,4827830605822039271,4,can be manual or powered,can be manual or powered
+leuven_v3_smoke,4e20e5ea05943357fe0c7a84993232a91f5de82e378e861da7f86d2060c85f65,saw,saw,C,0,Qwen2.5-72B-Instruct,4827830605822039271,5,produces sawdust,produces sawdust
+leuven_v3_smoke,4e20e5ea05943357fe0c7a84993232a91f5de82e378e861da7f86d2060c85f65,saw,saw,C,0,Qwen2.5-72B-Instruct,4827830605822039271,6,various sizes and types,various sizes and types
+leuven_v3_smoke,4e20e5ea05943357fe0c7a84993232a91f5de82e378e861da7f86d2060c85f65,saw,saw,C,0,Qwen2.5-72B-Instruct,4827830605822039271,7,teeth along the edge,teeth along the edge
+leuven_v3_smoke,4e20e5ea05943357fe0c7a84993232a91f5de82e378e861da7f86d2060c85f65,saw,saw,C,0,Qwen2.5-72B-Instruct,4827830605822039271,8,requires pushing and pulling,requires pushing and pulling
+leuven_v3_smoke,4e20e5ea05943357fe0c7a84993232a91f5de82e378e861da7f86d2060c85f65,saw,saw,C,0,Qwen2.5-72B-Instruct,4827830605822039271,9,can cut through metal,can cut through metal
+leuven_v3_smoke,4e20e5ea05943357fe0c7a84993232a91f5de82e378e861da7f86d2060c85f65,saw,saw,C,0,Qwen2.5-72B-Instruct,4827830605822039271,10,portable designs available,portable designs available
+leuven_v3_smoke,91cdf4891709b551d7a542cb947552e0519475f92c8b43a12fa8ad8f79d1870b,monkey,monkey,A,1,Qwen2.5-72B-Instruct,1128741825847976059,1,lives in trees,lives in trees
+leuven_v3_smoke,91cdf4891709b551d7a542cb947552e0519475f92c8b43a12fa8ad8f79d1870b,monkey,monkey,A,1,Qwen2.5-72B-Instruct,1128741825847976059,2,has a tail,has a tail
+leuven_v3_smoke,91cdf4891709b551d7a542cb947552e0519475f92c8b43a12fa8ad8f79d1870b,monkey,monkey,A,1,Qwen2.5-72B-Instruct,1128741825847976059,3,eats fruits and insects,eats fruits and insects
+leuven_v3_smoke,91cdf4891709b551d7a542cb947552e0519475f92c8b43a12fa8ad8f79d1870b,monkey,monkey,A,1,Qwen2.5-72B-Instruct,1128741825847976059,4,can climb agilely,can climb agilely
+leuven_v3_smoke,91cdf4891709b551d7a542cb947552e0519475f92c8b43a12fa8ad8f79d1870b,monkey,monkey,A,1,Qwen2.5-72B-Instruct,1128741825847976059,5,often found in groups,often found in groups
+leuven_v3_smoke,91cdf4891709b551d7a542cb947552e0519475f92c8b43a12fa8ad8f79d1870b,monkey,monkey,A,1,Qwen2.5-72B-Instruct,1128741825847976059,6,uses hands for grasping,uses hands for grasping
+leuven_v3_smoke,91cdf4891709b551d7a542cb947552e0519475f92c8b43a12fa8ad8f79d1870b,monkey,monkey,A,1,Qwen2.5-72B-Instruct,1128741825847976059,7,has a flexible body,has a flexible body
+leuven_v3_smoke,91cdf4891709b551d7a542cb947552e0519475f92c8b43a12fa8ad8f79d1870b,monkey,monkey,A,1,Qwen2.5-72B-Instruct,1128741825847976059,8,can mimic human actions,can mimic human actions
+leuven_v3_smoke,91cdf4891709b551d7a542cb947552e0519475f92c8b43a12fa8ad8f79d1870b,monkey,monkey,A,1,Qwen2.5-72B-Instruct,1128741825847976059,9,is intelligent and curious,is intelligent and curious
+leuven_v3_smoke,91cdf4891709b551d7a542cb947552e0519475f92c8b43a12fa8ad8f79d1870b,monkey,monkey,A,1,Qwen2.5-72B-Instruct,1128741825847976059,10,communicates through vocalizations,communicates through vocalizations
+leuven_v3_smoke,1cb897929e7e25e466176de25b0bf6d21e5ddf9b9e1ef500e8b70f776ce24b72,oven,oven,B,0,Qwen2.5-72B-Instruct,7812811414628325296,1,used for baking,used for baking
+leuven_v3_smoke,1cb897929e7e25e466176de25b0bf6d21e5ddf9b9e1ef500e8b70f776ce24b72,oven,oven,B,0,Qwen2.5-72B-Instruct,7812811414628325296,2,heats up to high temperatures,heats up to high temperatures
+leuven_v3_smoke,1cb897929e7e25e466176de25b0bf6d21e5ddf9b9e1ef500e8b70f776ce24b72,oven,oven,B,0,Qwen2.5-72B-Instruct,7812811414628325296,3,has a door and shelves,has a door and shelves
+leuven_v3_smoke,1cb897929e7e25e466176de25b0bf6d21e5ddf9b9e1ef500e8b70f776ce24b72,oven,oven,B,0,Qwen2.5-72B-Instruct,7812811414628325296,4,found in kitchens,found in kitchens
+leuven_v3_smoke,1cb897929e7e25e466176de25b0bf6d21e5ddf9b9e1ef500e8b70f776ce24b72,oven,oven,B,0,Qwen2.5-72B-Instruct,7812811414628325296,5,can be gas or electric,can be gas or electric
+leuven_v3_smoke,1cb897929e7e25e466176de25b0bf6d21e5ddf9b9e1ef500e8b70f776ce24b72,oven,oven,B,0,Qwen2.5-72B-Instruct,7812811414628325296,6,used for cooking meals,used for cooking meals
+leuven_v3_smoke,1cb897929e7e25e466176de25b0bf6d21e5ddf9b9e1ef500e8b70f776ce24b72,oven,oven,B,0,Qwen2.5-72B-Instruct,7812811414628325296,7,has a thermostat,has a thermostat
+leuven_v3_smoke,1cb897929e7e25e466176de25b0bf6d21e5ddf9b9e1ef500e8b70f776ce24b72,oven,oven,B,0,Qwen2.5-72B-Instruct,7812811414628325296,8,emits heat,emits heat
+leuven_v3_smoke,1cb897929e7e25e466176de25b0bf6d21e5ddf9b9e1ef500e8b70f776ce24b72,oven,oven,B,0,Qwen2.5-72B-Instruct,7812811414628325296,9,can have a self-cleaning function,can have a self-cleaning function
+leuven_v3_smoke,1cb897929e7e25e466176de25b0bf6d21e5ddf9b9e1ef500e8b70f776ce24b72,oven,oven,B,0,Qwen2.5-72B-Instruct,7812811414628325296,10,comes in various sizes,comes in various sizes
+leuven_v3_smoke,9e1a6d9de075c52b2a8fad7662030459a4cb665ad12ab8f96c828b9b300fc551,saw,saw,C,1,Qwen2.5-72B-Instruct,5618642274060870020,1,sharp blade,sharp blade
+leuven_v3_smoke,9e1a6d9de075c52b2a8fad7662030459a4cb665ad12ab8f96c828b9b300fc551,saw,saw,C,1,Qwen2.5-72B-Instruct,5618642274060870020,2,used for cutting wood,used for cutting wood
+leuven_v3_smoke,9e1a6d9de075c52b2a8fad7662030459a4cb665ad12ab8f96c828b9b300fc551,saw,saw,C,1,Qwen2.5-72B-Instruct,5618642274060870020,3,has a handle,has a handle
+leuven_v3_smoke,9e1a6d9de075c52b2a8fad7662030459a4cb665ad12ab8f96c828b9b300fc551,saw,saw,C,1,Qwen2.5-72B-Instruct,5618642274060870020,4,can be manual or powered,can be manual or powered
+leuven_v3_smoke,9e1a6d9de075c52b2a8fad7662030459a4cb665ad12ab8f96c828b9b300fc551,saw,saw,C,1,Qwen2.5-72B-Instruct,5618642274060870020,5,produces sawdust,produces sawdust
+leuven_v3_smoke,9e1a6d9de075c52b2a8fad7662030459a4cb665ad12ab8f96c828b9b300fc551,saw,saw,C,1,Qwen2.5-72B-Instruct,5618642274060870020,6,comes in various sizes,comes in various sizes
+leuven_v3_smoke,9e1a6d9de075c52b2a8fad7662030459a4cb665ad12ab8f96c828b9b300fc551,saw,saw,C,1,Qwen2.5-72B-Instruct,5618642274060870020,7,teeth along the edge,teeth along the edge
+leuven_v3_smoke,9e1a6d9de075c52b2a8fad7662030459a4cb665ad12ab8f96c828b9b300fc551,saw,saw,C,1,Qwen2.5-72B-Instruct,5618642274060870020,8,requires force to operate,requires force to operate
+leuven_v3_smoke,9e1a6d9de075c52b2a8fad7662030459a4cb665ad12ab8f96c828b9b300fc551,saw,saw,C,1,Qwen2.5-72B-Instruct,5618642274060870020,9,can be used in construction,can be used in construction
+leuven_v3_smoke,9e1a6d9de075c52b2a8fad7662030459a4cb665ad12ab8f96c828b9b300fc551,saw,saw,C,1,Qwen2.5-72B-Instruct,5618642274060870020,10,often used by carpenters,often used by carpenters
+leuven_v3_smoke,8c8de404f23f99b55f16b4ed912d970b01294ac03ada228dfe8830bd04b0a050,monkey,monkey,C,1,Qwen2.5-72B-Instruct,1128741825847976059,1,has a tail,has a tail
+leuven_v3_smoke,8c8de404f23f99b55f16b4ed912d970b01294ac03ada228dfe8830bd04b0a050,monkey,monkey,C,1,Qwen2.5-72B-Instruct,1128741825847976059,2,lives in trees,lives in trees
+leuven_v3_smoke,8c8de404f23f99b55f16b4ed912d970b01294ac03ada228dfe8830bd04b0a050,monkey,monkey,C,1,Qwen2.5-72B-Instruct,1128741825847976059,3,eats fruits,eats fruits
+leuven_v3_smoke,8c8de404f23f99b55f16b4ed912d970b01294ac03ada228dfe8830bd04b0a050,monkey,monkey,C,1,Qwen2.5-72B-Instruct,1128741825847976059,4,jumps from branch to branch,jumps from branch to branch
+leuven_v3_smoke,8c8de404f23f99b55f16b4ed912d970b01294ac03ada228dfe8830bd04b0a050,monkey,monkey,C,1,Qwen2.5-72B-Instruct,1128741825847976059,5,has opposable thumbs,has opposable thumbs
+leuven_v3_smoke,8c8de404f23f99b55f16b4ed912d970b01294ac03ada228dfe8830bd04b0a050,monkey,monkey,C,1,Qwen2.5-72B-Instruct,1128741825847976059,6,can be found in zoos,can be found in zoos
+leuven_v3_smoke,8c8de404f23f99b55f16b4ed912d970b01294ac03ada228dfe8830bd04b0a050,monkey,monkey,C,1,Qwen2.5-72B-Instruct,1128741825847976059,7,is often depicted in cartoons,is often depicted in cartoons
+leuven_v3_smoke,8c8de404f23f99b55f16b4ed912d970b01294ac03ada228dfe8830bd04b0a050,monkey,monkey,C,1,Qwen2.5-72B-Instruct,1128741825847976059,8,has a flexible body,has a flexible body
+leuven_v3_smoke,8c8de404f23f99b55f16b4ed912d970b01294ac03ada228dfe8830bd04b0a050,monkey,monkey,C,1,Qwen2.5-72B-Instruct,1128741825847976059,9,communicates through vocalizations,communicates through vocalizations
+leuven_v3_smoke,8c8de404f23f99b55f16b4ed912d970b01294ac03ada228dfe8830bd04b0a050,monkey,monkey,C,1,Qwen2.5-72B-Instruct,1128741825847976059,10,plays and grooms others,plays and grooms others
+leuven_v3_smoke,f127667f0ddeda576c320cb84eeceea685200f76cb3a105d73c4180ad7904d9c,saw,saw,B,1,Qwen2.5-72B-Instruct,5618642274060870020,1,sharp blade,sharp blade
+leuven_v3_smoke,f127667f0ddeda576c320cb84eeceea685200f76cb3a105d73c4180ad7904d9c,saw,saw,B,1,Qwen2.5-72B-Instruct,5618642274060870020,2,used for cutting wood,used for cutting wood
+leuven_v3_smoke,f127667f0ddeda576c320cb84eeceea685200f76cb3a105d73c4180ad7904d9c,saw,saw,B,1,Qwen2.5-72B-Instruct,5618642274060870020,3,has a handle,has a handle
+leuven_v3_smoke,f127667f0ddeda576c320cb84eeceea685200f76cb3a105d73c4180ad7904d9c,saw,saw,B,1,Qwen2.5-72B-Instruct,5618642274060870020,4,can be manual or powered,can be manual or powered
+leuven_v3_smoke,f127667f0ddeda576c320cb84eeceea685200f76cb3a105d73c4180ad7904d9c,saw,saw,B,1,Qwen2.5-72B-Instruct,5618642274060870020,5,various sizes and types,various sizes and types
+leuven_v3_smoke,f127667f0ddeda576c320cb84eeceea685200f76cb3a105d73c4180ad7904d9c,saw,saw,B,1,Qwen2.5-72B-Instruct,5618642274060870020,6,produces sawdust,produces sawdust
+leuven_v3_smoke,f127667f0ddeda576c320cb84eeceea685200f76cb3a105d73c4180ad7904d9c,saw,saw,B,1,Qwen2.5-72B-Instruct,5618642274060870020,7,essential in carpentry,essential in carpentry
+leuven_v3_smoke,f127667f0ddeda576c320cb84eeceea685200f76cb3a105d73c4180ad7904d9c,saw,saw,B,1,Qwen2.5-72B-Instruct,5618642274060870020,8,can be dangerous if mishandled,can be dangerous if mishandled
+leuven_v3_smoke,f127667f0ddeda576c320cb84eeceea685200f76cb3a105d73c4180ad7904d9c,saw,saw,B,1,Qwen2.5-72B-Instruct,5618642274060870020,9,often used in construction,often used in construction
+leuven_v3_smoke,f127667f0ddeda576c320cb84eeceea685200f76cb3a105d73c4180ad7904d9c,saw,saw,B,1,Qwen2.5-72B-Instruct,5618642274060870020,10,can be made of metal,can be made of metal
+leuven_v3_smoke,8bc508707aad932b99adac7aa9e9f710d9d91e9d2876d56676fcccf39a4d736d,saw,saw,A,1,Qwen2.5-72B-Instruct,5618642274060870020,1,used for cutting wood,used for cutting wood
+leuven_v3_smoke,8bc508707aad932b99adac7aa9e9f710d9d91e9d2876d56676fcccf39a4d736d,saw,saw,A,1,Qwen2.5-72B-Instruct,5618642274060870020,2,has a blade with teeth,has a blade with teeth
+leuven_v3_smoke,8bc508707aad932b99adac7aa9e9f710d9d91e9d2876d56676fcccf39a4d736d,saw,saw,A,1,Qwen2.5-72B-Instruct,5618642274060870020,3,can be handheld or powered,can be handheld or powered
+leuven_v3_smoke,8bc508707aad932b99adac7aa9e9f710d9d91e9d2876d56676fcccf39a4d736d,saw,saw,A,1,Qwen2.5-72B-Instruct,5618642274060870020,4,often used in construction,often used in construction
+leuven_v3_smoke,8bc508707aad932b99adac7aa9e9f710d9d91e9d2876d56676fcccf39a4d736d,saw,saw,A,1,Qwen2.5-72B-Instruct,5618642274060870020,5,can be made of metal,can be made of metal
+leuven_v3_smoke,8bc508707aad932b99adac7aa9e9f710d9d91e9d2876d56676fcccf39a4d736d,saw,saw,A,1,Qwen2.5-72B-Instruct,5618642274060870020,6,requires sharpening,requires sharpening
+leuven_v3_smoke,8bc508707aad932b99adac7aa9e9f710d9d91e9d2876d56676fcccf39a4d736d,saw,saw,A,1,Qwen2.5-72B-Instruct,5618642274060870020,7,comes in various sizes,comes in various sizes
+leuven_v3_smoke,8bc508707aad932b99adac7aa9e9f710d9d91e9d2876d56676fcccf39a4d736d,saw,saw,A,1,Qwen2.5-72B-Instruct,5618642274060870020,8,can be used for pruning trees,can be used for pruning trees
+leuven_v3_smoke,8bc508707aad932b99adac7aa9e9f710d9d91e9d2876d56676fcccf39a4d736d,saw,saw,A,1,Qwen2.5-72B-Instruct,5618642274060870020,9,may have a handle,may have a handle
+leuven_v3_smoke,8bc508707aad932b99adac7aa9e9f710d9d91e9d2876d56676fcccf39a4d736d,saw,saw,A,1,Qwen2.5-72B-Instruct,5618642274060870020,10,can produce sawdust,can produce sawdust
+leuven_v3_smoke,51f8d89f9bf5c4c59aaeba261dbf2b09ef83f22194fcd9de83442977d3ce85c9,oven,oven,C,1,Qwen2.5-72B-Instruct,1678321551902550787,1,used for baking and cooking,used for baking and cooking
+leuven_v3_smoke,51f8d89f9bf5c4c59aaeba261dbf2b09ef83f22194fcd9de83442977d3ce85c9,oven,oven,C,1,Qwen2.5-72B-Instruct,1678321551902550787,2,heats up to high temperatures,heats up to high temperatures
+leuven_v3_smoke,51f8d89f9bf5c4c59aaeba261dbf2b09ef83f22194fcd9de83442977d3ce85c9,oven,oven,C,1,Qwen2.5-72B-Instruct,1678321551902550787,3,has a door and shelves,has a door and shelves
+leuven_v3_smoke,51f8d89f9bf5c4c59aaeba261dbf2b09ef83f22194fcd9de83442977d3ce85c9,oven,oven,C,1,Qwen2.5-72B-Instruct,1678321551902550787,4,made of metal and glass,made of metal and glass
+leuven_v3_smoke,51f8d89f9bf5c4c59aaeba261dbf2b09ef83f22194fcd9de83442977d3ce85c9,oven,oven,C,1,Qwen2.5-72B-Instruct,1678321551902550787,5,found in kitchens,found in kitchens
+leuven_v3_smoke,51f8d89f9bf5c4c59aaeba261dbf2b09ef83f22194fcd9de83442977d3ce85c9,oven,oven,C,1,Qwen2.5-72B-Instruct,1678321551902550787,6,can have a timer,can have a timer
+leuven_v3_smoke,51f8d89f9bf5c4c59aaeba261dbf2b09ef83f22194fcd9de83442977d3ce85c9,oven,oven,C,1,Qwen2.5-72B-Instruct,1678321551902550787,7,emits heat and light,emits heat and light
+leuven_v3_smoke,51f8d89f9bf5c4c59aaeba261dbf2b09ef83f22194fcd9de83442977d3ce85c9,oven,oven,C,1,Qwen2.5-72B-Instruct,1678321551902550787,8,controls for temperature and time,controls for temperature and time
+leuven_v3_smoke,51f8d89f9bf5c4c59aaeba261dbf2b09ef83f22194fcd9de83442977d3ce85c9,oven,oven,C,1,Qwen2.5-72B-Instruct,1678321551902550787,9,can be gas or electric,can be gas or electric
+leuven_v3_smoke,51f8d89f9bf5c4c59aaeba261dbf2b09ef83f22194fcd9de83442977d3ce85c9,oven,oven,C,1,Qwen2.5-72B-Instruct,1678321551902550787,10,used in food preparation,used in food preparation
+leuven_v3_smoke,9b44388afda065bb801d26ff8b434e8fb7f4db9dec92396f83b7c710e01694ca,saw,saw,B,0,Qwen2.5-72B-Instruct,4827830605822039271,1,blade with teeth,blade with teeth
+leuven_v3_smoke,9b44388afda065bb801d26ff8b434e8fb7f4db9dec92396f83b7c710e01694ca,saw,saw,B,0,Qwen2.5-72B-Instruct,4827830605822039271,2,used for cutting wood,used for cutting wood
+leuven_v3_smoke,9b44388afda065bb801d26ff8b434e8fb7f4db9dec92396f83b7c710e01694ca,saw,saw,B,0,Qwen2.5-72B-Instruct,4827830605822039271,3,handheld tool,handheld tool
+leuven_v3_smoke,9b44388afda065bb801d26ff8b434e8fb7f4db9dec92396f83b7c710e01694ca,saw,saw,B,0,Qwen2.5-72B-Instruct,4827830605822039271,4,can be powered by electricity,can be powered by electricity
+leuven_v3_smoke,9b44388afda065bb801d26ff8b434e8fb7f4db9dec92396f83b7c710e01694ca,saw,saw,B,0,Qwen2.5-72B-Instruct,4827830605822039271,5,varieties include hand saws and chainsaws,varieties include hand saws and chainsaws
+leuven_v3_smoke,9b44388afda065bb801d26ff8b434e8fb7f4db9dec92396f83b7c710e01694ca,saw,saw,B,0,Qwen2.5-72B-Instruct,4827830605822039271,6,often used in construction,often used in construction
+leuven_v3_smoke,9b44388afda065bb801d26ff8b434e8fb7f4db9dec92396f83b7c710e01694ca,saw,saw,B,0,Qwen2.5-72B-Instruct,4827830605822039271,7,can be made of metal,can be made of metal
+leuven_v3_smoke,9b44388afda065bb801d26ff8b434e8fb7f4db9dec92396f83b7c710e01694ca,saw,saw,B,0,Qwen2.5-72B-Instruct,4827830605822039271,8,requires sharpening,requires sharpening
+leuven_v3_smoke,9b44388afda065bb801d26ff8b434e8fb7f4db9dec92396f83b7c710e01694ca,saw,saw,B,0,Qwen2.5-72B-Instruct,4827830605822039271,9,can produce dust and noise,can produce dust and noise
+leuven_v3_smoke,9b44388afda065bb801d26ff8b434e8fb7f4db9dec92396f83b7c710e01694ca,saw,saw,B,0,Qwen2.5-72B-Instruct,4827830605822039271,10,used in carpentry and DIY projects,used in carpentry and diy projects
+leuven_v3_smoke,91848a66419d1229d2895e13d02a2c409fc0eb6d247640baaef82a78377348e9,monkey,monkey,A,0,Qwen2.5-72B-Instruct,6153726420752684620,1,has fur,has fur
+leuven_v3_smoke,91848a66419d1229d2895e13d02a2c409fc0eb6d247640baaef82a78377348e9,monkey,monkey,A,0,Qwen2.5-72B-Instruct,6153726420752684620,2,lives in trees,lives in trees
+leuven_v3_smoke,91848a66419d1229d2895e13d02a2c409fc0eb6d247640baaef82a78377348e9,monkey,monkey,A,0,Qwen2.5-72B-Instruct,6153726420752684620,3,eats fruits and insects,eats fruits and insects
+leuven_v3_smoke,91848a66419d1229d2895e13d02a2c409fc0eb6d247640baaef82a78377348e9,monkey,monkey,A,0,Qwen2.5-72B-Instruct,6153726420752684620,4,uses hands to grasp objects,uses hands to grasp objects
+leuven_v3_smoke,91848a66419d1229d2895e13d02a2c409fc0eb6d247640baaef82a78377348e9,monkey,monkey,A,0,Qwen2.5-72B-Instruct,6153726420752684620,5,has a tail for balance,has a tail for balance
+leuven_v3_smoke,91848a66419d1229d2895e13d02a2c409fc0eb6d247640baaef82a78377348e9,monkey,monkey,A,0,Qwen2.5-72B-Instruct,6153726420752684620,6,can climb quickly,can climb quickly
+leuven_v3_smoke,91848a66419d1229d2895e13d02a2c409fc0eb6d247640baaef82a78377348e9,monkey,monkey,A,0,Qwen2.5-72B-Instruct,6153726420752684620,7,often lives in groups,often lives in groups
+leuven_v3_smoke,91848a66419d1229d2895e13d02a2c409fc0eb6d247640baaef82a78377348e9,monkey,monkey,A,0,Qwen2.5-72B-Instruct,6153726420752684620,8,communicates through vocalizations and gestures,communicates through vocalizations and gestures
+leuven_v3_smoke,91848a66419d1229d2895e13d02a2c409fc0eb6d247640baaef82a78377348e9,monkey,monkey,A,0,Qwen2.5-72B-Instruct,6153726420752684620,9,is intelligent and curious,is intelligent and curious
+leuven_v3_smoke,91848a66419d1229d2895e13d02a2c409fc0eb6d247640baaef82a78377348e9,monkey,monkey,A,0,Qwen2.5-72B-Instruct,6153726420752684620,10,found in various habitats including forests and savannas,found in various habitats including forests and savannas
+leuven_v3_smoke,bdb6fbc798c000fbc1687aa4ec6d63aa3d462584c0b92e84f053a29b11df9f5b,oven,oven,A,0,Qwen2.5-72B-Instruct,7812811414628325296,1,used for baking and cooking,used for baking and cooking
+leuven_v3_smoke,bdb6fbc798c000fbc1687aa4ec6d63aa3d462584c0b92e84f053a29b11df9f5b,oven,oven,A,0,Qwen2.5-72B-Instruct,7812811414628325296,2,has a door that opens and closes,has a door that opens and closes
+leuven_v3_smoke,bdb6fbc798c000fbc1687aa4ec6d63aa3d462584c0b92e84f053a29b11df9f5b,oven,oven,A,0,Qwen2.5-72B-Instruct,7812811414628325296,3,heats up to high temperatures,heats up to high temperatures
+leuven_v3_smoke,bdb6fbc798c000fbc1687aa4ec6d63aa3d462584c0b92e84f053a29b11df9f5b,oven,oven,A,0,Qwen2.5-72B-Instruct,7812811414628325296,4,usually found in kitchens,usually found in kitchens
+leuven_v3_smoke,bdb6fbc798c000fbc1687aa4ec6d63aa3d462584c0b92e84f053a29b11df9f5b,oven,oven,A,0,Qwen2.5-72B-Instruct,7812811414628325296,5,can have a broiler function,can have a broiler function
+leuven_v3_smoke,bdb6fbc798c000fbc1687aa4ec6d63aa3d462584c0b92e84f053a29b11df9f5b,oven,oven,A,0,Qwen2.5-72B-Instruct,7812811414628325296,6,controls for setting temperature and time,controls for setting temperature and time
+leuven_v3_smoke,bdb6fbc798c000fbc1687aa4ec6d63aa3d462584c0b92e84f053a29b11df9f5b,oven,oven,A,0,Qwen2.5-72B-Instruct,7812811414628325296,7,often has a light inside,often has a light inside
+leuven_v3_smoke,bdb6fbc798c000fbc1687aa4ec6d63aa3d462584c0b92e84f053a29b11df9f5b,oven,oven,A,0,Qwen2.5-72B-Instruct,7812811414628325296,8,may have a timer or clock,may have a timer or clock
+leuven_v3_smoke,bdb6fbc798c000fbc1687aa4ec6d63aa3d462584c0b92e84f053a29b11df9f5b,oven,oven,A,0,Qwen2.5-72B-Instruct,7812811414628325296,9,comes in various sizes and styles,comes in various sizes and styles
+leuven_v3_smoke,bdb6fbc798c000fbc1687aa4ec6d63aa3d462584c0b92e84f053a29b11df9f5b,oven,oven,A,0,Qwen2.5-72B-Instruct,7812811414628325296,10,can be gas or electric powered,can be gas or electric powered
+leuven_v3_smoke,7e7c536ca1d15898f6d8b17522f2bed60ded6d7573c07814bbbbb181873f033b,saw,saw,A,0,Qwen2.5-72B-Instruct,4827830605822039271,1,used for cutting wood,used for cutting wood
+leuven_v3_smoke,7e7c536ca1d15898f6d8b17522f2bed60ded6d7573c07814bbbbb181873f033b,saw,saw,A,0,Qwen2.5-72B-Instruct,4827830605822039271,2,has a blade with teeth,has a blade with teeth
+leuven_v3_smoke,7e7c536ca1d15898f6d8b17522f2bed60ded6d7573c07814bbbbb181873f033b,saw,saw,A,0,Qwen2.5-72B-Instruct,4827830605822039271,3,can be handheld or powered,can be handheld or powered
+leuven_v3_smoke,7e7c536ca1d15898f6d8b17522f2bed60ded6d7573c07814bbbbb181873f033b,saw,saw,A,0,Qwen2.5-72B-Instruct,4827830605822039271,4,often used in construction,often used in construction
+leuven_v3_smoke,7e7c536ca1d15898f6d8b17522f2bed60ded6d7573c07814bbbbb181873f033b,saw,saw,A,0,Qwen2.5-72B-Instruct,4827830605822039271,5,requires sharpening over time,requires sharpening over time
+leuven_v3_smoke,7e7c536ca1d15898f6d8b17522f2bed60ded6d7573c07814bbbbb181873f033b,saw,saw,A,0,Qwen2.5-72B-Instruct,4827830605822039271,6,comes in various sizes,comes in various sizes
+leuven_v3_smoke,7e7c536ca1d15898f6d8b17522f2bed60ded6d7573c07814bbbbb181873f033b,saw,saw,A,0,Qwen2.5-72B-Instruct,4827830605822039271,7,can be used for pruning trees,can be used for pruning trees
+leuven_v3_smoke,7e7c536ca1d15898f6d8b17522f2bed60ded6d7573c07814bbbbb181873f033b,saw,saw,A,0,Qwen2.5-72B-Instruct,4827830605822039271,8,may have a handle made of plastic or wood,may have a handle made of plastic or wood
+leuven_v3_smoke,7e7c536ca1d15898f6d8b17522f2bed60ded6d7573c07814bbbbb181873f033b,saw,saw,A,0,Qwen2.5-72B-Instruct,4827830605822039271,9,produces sawdust when cutting,produces sawdust when cutting
+leuven_v3_smoke,7e7c536ca1d15898f6d8b17522f2bed60ded6d7573c07814bbbbb181873f033b,saw,saw,A,0,Qwen2.5-72B-Instruct,4827830605822039271,10,can be dangerous if mishandled,can be dangerous if mishandled
+leuven_v3_smoke,efb7fff54660f4fc10f165ac054e78593dedba29e32d079a026b205d50c6ddcc,oven,oven,A,1,Qwen2.5-72B-Instruct,1678321551902550787,1,used for baking and cooking,used for baking and cooking
+leuven_v3_smoke,efb7fff54660f4fc10f165ac054e78593dedba29e32d079a026b205d50c6ddcc,oven,oven,A,1,Qwen2.5-72B-Instruct,1678321551902550787,2,heats up to high temperatures,heats up to high temperatures
+leuven_v3_smoke,efb7fff54660f4fc10f165ac054e78593dedba29e32d079a026b205d50c6ddcc,oven,oven,A,1,Qwen2.5-72B-Instruct,1678321551902550787,3,has a door that opens and closes,has a door that opens and closes
+leuven_v3_smoke,efb7fff54660f4fc10f165ac054e78593dedba29e32d079a026b205d50c6ddcc,oven,oven,A,1,Qwen2.5-72B-Instruct,1678321551902550787,4,usually found in kitchens,usually found in kitchens
+leuven_v3_smoke,efb7fff54660f4fc10f165ac054e78593dedba29e32d079a026b205d50c6ddcc,oven,oven,A,1,Qwen2.5-72B-Instruct,1678321551902550787,5,can have a timer or clock,can have a timer or clock
+leuven_v3_smoke,efb7fff54660f4fc10f165ac054e78593dedba29e32d079a026b205d50c6ddcc,oven,oven,A,1,Qwen2.5-72B-Instruct,1678321551902550787,6,often has racks for placing baking trays,often has racks for placing baking trays
+leuven_v3_smoke,efb7fff54660f4fc10f165ac054e78593dedba29e32d079a026b205d50c6ddcc,oven,oven,A,1,Qwen2.5-72B-Instruct,1678321551902550787,7,may have a broiler function,may have a broiler function
+leuven_v3_smoke,efb7fff54660f4fc10f165ac054e78593dedba29e32d079a026b205d50c6ddcc,oven,oven,A,1,Qwen2.5-72B-Instruct,1678321551902550787,8,comes in gas and electric varieties,comes in gas and electric varieties
+leuven_v3_smoke,efb7fff54660f4fc10f165ac054e78593dedba29e32d079a026b205d50c6ddcc,oven,oven,A,1,Qwen2.5-72B-Instruct,1678321551902550787,9,can be built into a wall or stand-alone,can be built into a wall or stand-alone
+leuven_v3_smoke,efb7fff54660f4fc10f165ac054e78593dedba29e32d079a026b205d50c6ddcc,oven,oven,A,1,Qwen2.5-72B-Instruct,1678321551902550787,10,emits heat and can warm up the surrounding area,emits heat and can warm up the surrounding area

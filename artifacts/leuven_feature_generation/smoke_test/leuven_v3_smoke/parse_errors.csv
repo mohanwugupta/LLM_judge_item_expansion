@@ -1,0 +1,1 @@
+job_id,response_id,word_original,word_normalized,prompt_variant,replicate_id,model,temperature,sampling_seed,features_json,n_features,raw_json,parse_error,prompt_hash,finish_reason,prompt_tokens,completion_tokens

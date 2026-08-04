@@ -1,0 +1,152 @@
+prompt_variant,word_normalized,feature_text_normalized,feature_text_example,response_frequency,valid_response_count,response_proportion
+A,monkey,can climb agilely,can climb agilely,1,2,0.5
+A,monkey,can climb quickly,can climb quickly,1,2,0.5
+A,monkey,can mimic human actions,can mimic human actions,1,2,0.5
+A,monkey,communicates through vocalizations,communicates through vocalizations,1,2,0.5
+A,monkey,communicates through vocalizations and gestures,communicates through vocalizations and gestures,1,2,0.5
+A,monkey,eats fruits and insects,eats fruits and insects,2,2,1.0
+A,monkey,found in various habitats including forests and savannas,found in various habitats including forests and savannas,1,2,0.5
+A,monkey,has a flexible body,has a flexible body,1,2,0.5
+A,monkey,has a tail,has a tail,1,2,0.5
+A,monkey,has a tail for balance,has a tail for balance,1,2,0.5
+A,monkey,has fur,has fur,1,2,0.5
+A,monkey,is intelligent and curious,is intelligent and curious,2,2,1.0
+A,monkey,lives in trees,lives in trees,2,2,1.0
+A,monkey,often found in groups,often found in groups,1,2,0.5
+A,monkey,often lives in groups,often lives in groups,1,2,0.5
+A,monkey,uses hands for grasping,uses hands for grasping,1,2,0.5
+A,monkey,uses hands to grasp objects,uses hands to grasp objects,1,2,0.5
+A,oven,can be built into a wall or stand-alone,can be built into a wall or stand-alone,1,2,0.5
+A,oven,can be gas or electric powered,can be gas or electric powered,1,2,0.5
+A,oven,can have a broiler function,can have a broiler function,1,2,0.5
+A,oven,can have a timer or clock,can have a timer or clock,1,2,0.5
+A,oven,comes in gas and electric varieties,comes in gas and electric varieties,1,2,0.5
+A,oven,comes in various sizes and styles,comes in various sizes and styles,1,2,0.5
+A,oven,controls for setting temperature and time,controls for setting temperature and time,1,2,0.5
+A,oven,emits heat and can warm up the surrounding area,emits heat and can warm up the surrounding area,1,2,0.5
+A,oven,has a door that opens and closes,has a door that opens and closes,2,2,1.0
+A,oven,heats up to high temperatures,heats up to high temperatures,2,2,1.0
+A,oven,may have a broiler function,may have a broiler function,1,2,0.5
+A,oven,may have a timer or clock,may have a timer or clock,1,2,0.5
+A,oven,often has a light inside,often has a light inside,1,2,0.5
+A,oven,often has racks for placing baking trays,often has racks for placing baking trays,1,2,0.5
+A,oven,used for baking and cooking,used for baking and cooking,2,2,1.0
+A,oven,usually found in kitchens,usually found in kitchens,2,2,1.0
+A,saw,can be dangerous if mishandled,can be dangerous if mishandled,1,2,0.5
+A,saw,can be handheld or powered,can be handheld or powered,2,2,1.0
+A,saw,can be made of metal,can be made of metal,1,2,0.5
+A,saw,can be used for pruning trees,can be used for pruning trees,2,2,1.0
+A,saw,can produce sawdust,can produce sawdust,1,2,0.5
+A,saw,comes in various sizes,comes in various sizes,2,2,1.0
+A,saw,has a blade with teeth,has a blade with teeth,2,2,1.0
+A,saw,may have a handle,may have a handle,1,2,0.5
+A,saw,may have a handle made of plastic or wood,may have a handle made of plastic or wood,1,2,0.5
+A,saw,often used in construction,often used in construction,2,2,1.0
+A,saw,produces sawdust when cutting,produces sawdust when cutting,1,2,0.5
+A,saw,requires sharpening,requires sharpening,1,2,0.5
+A,saw,requires sharpening over time,requires sharpening over time,1,2,0.5
+A,saw,used for cutting wood,used for cutting wood,2,2,1.0
+B,monkey,arboreal,arboreal,1,2,0.5
+B,monkey,brachiation,brachiation,1,2,0.5
+B,monkey,can be trained as service animals,can be trained as service animals,1,2,0.5
+B,monkey,can climb,can climb,1,2,0.5
+B,monkey,diverse species,diverse species,1,2,0.5
+B,monkey,eats fruits,eats fruits,1,2,0.5
+B,monkey,featured in folklore and mythology,featured in folklore and mythology,1,2,0.5
+B,monkey,has fur,has fur,1,2,0.5
+B,monkey,intelligent,intelligent,1,2,0.5
+B,monkey,intelligent and curious,intelligent and curious,1,2,0.5
+B,monkey,lives in trees,lives in trees,1,2,0.5
+B,monkey,mammal,mammal,1,2,0.5
+B,monkey,often found in groups,often found in groups,1,2,0.5
+B,monkey,omnivorous,omnivorous,1,2,0.5
+B,monkey,playful,playful,1,2,0.5
+B,monkey,social,social,1,2,0.5
+B,monkey,tail,tail,1,2,0.5
+B,monkey,used in research,used in research,1,2,0.5
+B,monkey,used in scientific research,used in scientific research,1,2,0.5
+B,monkey,uses tail for balance,uses tail for balance,1,2,0.5
+B,oven,can be gas or electric,can be gas or electric,2,2,1.0
+B,oven,can have a self-cleaning function,can have a self-cleaning function,1,2,0.5
+B,oven,can have a timer,can have a timer,1,2,0.5
+B,oven,comes in various sizes,comes in various sizes,2,2,1.0
+B,oven,emits heat,emits heat,1,2,0.5
+B,oven,found in kitchens,found in kitchens,2,2,1.0
+B,oven,has a door,has a door,1,2,0.5
+B,oven,has a door and shelves,has a door and shelves,1,2,0.5
+B,oven,has a thermostat,has a thermostat,1,2,0.5
+B,oven,has temperature controls,has temperature controls,1,2,0.5
+B,oven,heats up food,heats up food,1,2,0.5
+B,oven,heats up to high temperatures,heats up to high temperatures,1,2,0.5
+B,oven,made of metal,made of metal,1,2,0.5
+B,oven,used for baking,used for baking,2,2,1.0
+B,oven,used for cooking meals,used for cooking meals,2,2,1.0
+B,saw,blade with teeth,blade with teeth,1,2,0.5
+B,saw,can be dangerous if mishandled,can be dangerous if mishandled,1,2,0.5
+B,saw,can be made of metal,can be made of metal,2,2,1.0
+B,saw,can be manual or powered,can be manual or powered,1,2,0.5
+B,saw,can be powered by electricity,can be powered by electricity,1,2,0.5
+B,saw,can produce dust and noise,can produce dust and noise,1,2,0.5
+B,saw,essential in carpentry,essential in carpentry,1,2,0.5
+B,saw,handheld tool,handheld tool,1,2,0.5
+B,saw,has a handle,has a handle,1,2,0.5
+B,saw,often used in construction,often used in construction,2,2,1.0
+B,saw,produces sawdust,produces sawdust,1,2,0.5
+B,saw,requires sharpening,requires sharpening,1,2,0.5
+B,saw,sharp blade,sharp blade,1,2,0.5
+B,saw,used for cutting wood,used for cutting wood,2,2,1.0
+B,saw,used in carpentry and diy projects,used in carpentry and DIY projects,1,2,0.5
+B,saw,varieties include hand saws and chainsaws,varieties include hand saws and chainsaws,1,2,0.5
+B,saw,various sizes and types,various sizes and types,1,2,0.5
+C,monkey,can be found in zoos,can be found in zoos,1,2,0.5
+C,monkey,can climb,can climb,1,2,0.5
+C,monkey,can make facial expressions,can make facial expressions,1,2,0.5
+C,monkey,communicates through vocalizations,communicates through vocalizations,1,2,0.5
+C,monkey,eats fruits,eats fruits,2,2,1.0
+C,monkey,found in tropics,found in tropics,1,2,0.5
+C,monkey,grasping hands,grasping hands,1,2,0.5
+C,monkey,has a flexible body,has a flexible body,1,2,0.5
+C,monkey,has a tail,has a tail,1,2,0.5
+C,monkey,has fur,has fur,1,2,0.5
+C,monkey,has opposable thumbs,has opposable thumbs,1,2,0.5
+C,monkey,is often depicted in cartoons,is often depicted in cartoons,1,2,0.5
+C,monkey,jumps from branch to branch,jumps from branch to branch,1,2,0.5
+C,monkey,lives in trees,lives in trees,2,2,1.0
+C,monkey,long tail,long tail,1,2,0.5
+C,monkey,plays and grooms others,plays and grooms others,1,2,0.5
+C,monkey,social animal,social animal,1,2,0.5
+C,monkey,various species,various species,1,2,0.5
+C,oven,bakes bread,bakes bread,1,2,0.5
+C,oven,can be gas or electric,can be gas or electric,1,2,0.5
+C,oven,can broil,can broil,1,2,0.5
+C,oven,can have a timer,can have a timer,1,2,0.5
+C,oven,controls for temperature and time,controls for temperature and time,1,2,0.5
+C,oven,controls temperature,controls temperature,1,2,0.5
+C,oven,emits heat,emits heat,1,2,0.5
+C,oven,emits heat and light,emits heat and light,1,2,0.5
+C,oven,found in kitchens,found in kitchens,2,2,1.0
+C,oven,has a door,has a door,1,2,0.5
+C,oven,has a door and shelves,has a door and shelves,1,2,0.5
+C,oven,has racks,has racks,1,2,0.5
+C,oven,heats food,heats food,1,2,0.5
+C,oven,heats up to high temperatures,heats up to high temperatures,1,2,0.5
+C,oven,made of metal,made of metal,1,2,0.5
+C,oven,made of metal and glass,made of metal and glass,1,2,0.5
+C,oven,used for baking and cooking,used for baking and cooking,1,2,0.5
+C,oven,used in food preparation,used in food preparation,1,2,0.5
+C,oven,uses electricity or gas,uses electricity or gas,1,2,0.5
+C,saw,can be manual or powered,can be manual or powered,2,2,1.0
+C,saw,can be used in construction,can be used in construction,1,2,0.5
+C,saw,can cut through metal,can cut through metal,1,2,0.5
+C,saw,comes in various sizes,comes in various sizes,1,2,0.5
+C,saw,handle for gripping,handle for gripping,1,2,0.5
+C,saw,has a handle,has a handle,1,2,0.5
+C,saw,often used by carpenters,often used by carpenters,1,2,0.5
+C,saw,portable designs available,portable designs available,1,2,0.5
+C,saw,produces sawdust,produces sawdust,2,2,1.0
+C,saw,requires force to operate,requires force to operate,1,2,0.5
+C,saw,requires pushing and pulling,requires pushing and pulling,1,2,0.5
+C,saw,sharp blade,sharp blade,2,2,1.0
+C,saw,teeth along the edge,teeth along the edge,2,2,1.0
+C,saw,used for cutting wood,used for cutting wood,2,2,1.0
+C,saw,various sizes and types,various sizes and types,1,2,0.5
