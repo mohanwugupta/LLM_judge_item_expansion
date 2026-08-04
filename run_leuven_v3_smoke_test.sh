@@ -52,8 +52,8 @@ GPU_MEMORY_UTILIZATION=0.92
 
 LEUVEN_FEATURES=data/leuven_combined_features_consolidated.csv
 
-JOB_ID=leuven_v3_1_smoke
-OUTPUT_DIR=artifacts/leuven_feature_generation/smoke_test/$JOB_ID
+JOB_ID=leuven_v3.1_smoke
+OUTPUT_DIR=artifacts/leuven_feature_generation/v3.1/smoke_test/$JOB_ID
 PROMPT_VERSION=v3.1
 
 MAX_WORDS=3

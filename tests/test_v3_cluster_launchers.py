@@ -27,13 +27,22 @@ def test_v3_smoke_uses_established_test_partition_and_small_plan():
     assert "RESPONSES_PER_WORD=2" in SMOKE
     assert "--max-words" in SMOKE
     assert "expected={'A':6,'B':6,'C':6}" in SMOKE
+    assert "JOB_ID=leuven_v3.1_smoke" in SMOKE
+    assert (
+        "OUTPUT_DIR=artifacts/leuven_feature_generation/v3.1/smoke_test/$JOB_ID"
+        in SMOKE
+    )
 
 
 def test_v3_production_has_fixed_comparable_protocol():
     assert "RESPONSES_PER_WORD=20" in PRODUCTION
     assert "TEMPERATURE=0.8" in PRODUCTION
     assert "BASE_SEED=20260801" in PRODUCTION
-    assert "JOB_ID=leuven_v3_1_qwen2_5_72b" in PRODUCTION
+    assert "JOB_ID=leuven_v3.1_qwen2_5_72b" in PRODUCTION
+    assert (
+        "OUTPUT_DIR=artifacts/leuven_feature_generation/v3.1/$JOB_ID"
+        in PRODUCTION
+    )
     assert "--max-words" not in PRODUCTION
 
 

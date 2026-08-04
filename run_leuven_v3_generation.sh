@@ -51,8 +51,8 @@ GPU_MEMORY_UTILIZATION=0.92
 
 LEUVEN_FEATURES=data/leuven_combined_features_consolidated.csv
 
-JOB_ID=leuven_v3_1_qwen2_5_72b
-OUTPUT_DIR=artifacts/leuven_feature_generation/$JOB_ID
+JOB_ID=leuven_v3.1_qwen2_5_72b
+OUTPUT_DIR=artifacts/leuven_feature_generation/v3.1/$JOB_ID
 PROMPT_VERSION=v3.1
 
 RESPONSES_PER_WORD=20
