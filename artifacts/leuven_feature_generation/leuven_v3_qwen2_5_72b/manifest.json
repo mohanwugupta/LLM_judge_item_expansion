@@ -332,16 +332,28 @@
   "completed_before_run": 0,
   "pending_at_start": 17580,
   "started_at": "2026-08-04T14:13:31.053507Z",
-  "finished_at": "2026-08-04T14:41:09.590910Z",
+  "finished_at": "2026-08-04T20:16:44.132858Z",
   "completed_this_run": 17520,
   "request_errors_this_run": 0,
-  "valid_responses_total": 17520,
+  "valid_responses_total": 17580,
   "valid_responses_by_prompt": {
-    "A": 5840,
-    "B": 5840,
-    "C": 5840
+    "A": 5860,
+    "B": 5860,
+    "C": 5860
   },
-  "parse_errors_total": 60,
-  "generated_feature_tokens_total": 175196,
-  "pending_after_run": 60
+  "parse_errors_total": 0,
+  "generated_feature_tokens_total": 175796,
+  "pending_after_run": 0,
+  "revalidation_history": [
+    {
+      "revalidated_at": "2026-08-04T20:16:44.132858Z",
+      "candidate_errors": 60,
+      "repaired_responses": 60,
+      "unresolved_responses": 0,
+      "method": "reparsed preserved raw_json; no model calls"
+    }
+  ],
+  "generation_finished_at": "2026-08-04T14:41:09.590910Z",
+  "revalidated_at": "2026-08-04T20:16:44.132858Z",
+  "revalidated_responses_total": 60
 }

@@ -1,4 +1,121 @@
 prompt_variant,word_normalized,feature_text_normalized,feature_text_example,response_frequency,valid_response_count,response_proportion
+A,(hot air) balloon,can be decorated with patterns,Can be decorated with patterns,2,20,0.1
+A,(hot air) balloon,can be tethered for ground-based activities,Can be tethered for ground-based activities,1,20,0.05
+A,(hot air) balloon,can be used for advertising,Can be used for advertising,1,20,0.05
+A,(hot air) balloon,can be very large in size,can be very large in size,1,20,0.05
+A,(hot air) balloon,can carry multiple passengers,can carry multiple passengers,1,20,0.05
+A,(hot air) balloon,can carry passengers,can carry passengers,2,20,0.1
+A,(hot air) balloon,can carry passengers in a basket,can carry passengers in a basket,4,20,0.2
+A,(hot air) balloon,can fly at various altitudes,can fly at various altitudes,1,20,0.05
+A,(hot air) balloon,"can only ascend or descend, not move horizontally on its own","can only ascend or descend, not move horizontally on its own",1,20,0.05
+A,(hot air) balloon,can reach high altitudes,Can reach high altitudes,2,20,0.1
+A,(hot air) balloon,can stay airborne for several hours,can stay airborne for several hours,1,20,0.05
+A,(hot air) balloon,can stay aloft for several hours,can stay aloft for several hours,1,20,0.05
+A,(hot air) balloon,can travel long distances,can travel long distances,2,20,0.1
+A,(hot air) balloon,can travel long distances depending on wind,Can travel long distances depending on wind,2,20,0.1
+A,(hot air) balloon,can travel long distances depending on wind currents,can travel long distances depending on wind currents,1,20,0.05
+A,(hot air) balloon,can travel long distances depending on wind direction,can travel long distances depending on wind direction,1,20,0.05
+A,(hot air) balloon,can travel long distances with wind,can travel long distances with wind,1,20,0.05
+A,(hot air) balloon,can vary in size and shape,can vary in size and shape,1,20,0.05
+A,(hot air) balloon,carries passengers in a basket,Carries passengers in a basket,1,20,0.05
+A,(hot air) balloon,carries passengers in a basket or gondola,Carries passengers in a basket or gondola,1,20,0.05
+A,(hot air) balloon,controlled by a burner to heat the air,Controlled by a burner to heat the air,1,20,0.05
+A,(hot air) balloon,controlled by a pilot using burners,Controlled by a pilot using burners,1,20,0.05
+A,(hot air) balloon,controlled by adjusting heat,Controlled by adjusting heat,1,20,0.05
+A,(hot air) balloon,controlled by adjusting heat and altitude,controlled by adjusting heat and altitude,1,20,0.05
+A,(hot air) balloon,controlled primarily by altitude changes,Controlled primarily by altitude changes,1,20,0.05
+A,(hot air) balloon,controlled with a burner,controlled with a burner,2,20,0.1
+A,(hot air) balloon,decorative and colorful designs,Decorative and colorful designs,1,20,0.05
+A,(hot air) balloon,dependent on weather conditions for safe operation,Dependent on weather conditions for safe operation,2,20,0.1
+A,(hot air) balloon,descends by releasing hot air,Descends by releasing hot air,1,20,0.05
+A,(hot air) balloon,descends by releasing hot air or cooling,descends by releasing hot air or cooling,1,20,0.05
+A,(hot air) balloon,flies at low to medium altitudes,Flies at low to medium altitudes,1,20,0.05
+A,(hot air) balloon,flies at low to moderate altitudes,flies at low to moderate altitudes,3,20,0.15
+A,(hot air) balloon,flies at various altitudes,flies at various altitudes,1,20,0.05
+A,(hot air) balloon,flies by controlling temperature,Flies by controlling temperature,1,20,0.05
+A,(hot air) balloon,flies using rising hot air,Flies using rising hot air,1,20,0.05
+A,(hot air) balloon,floats in the air,floats in the air,1,20,0.05
+A,(hot air) balloon,floats in the air using heated air,floats in the air using heated air,2,20,0.1
+A,(hot air) balloon,floats in the sky,floats in the sky,1,20,0.05
+A,(hot air) balloon,has a basket for passengers and equipment,has a basket for passengers and equipment,1,20,0.05
+A,(hot air) balloon,has a basket or gondola to carry passengers and equipment,has a basket or gondola to carry passengers and equipment,1,20,0.05
+A,(hot air) balloon,has a history dating back to the 18th century,has a history dating back to the 18th century,2,20,0.1
+A,(hot air) balloon,has a limited flight duration,has a limited flight duration,1,20,0.05
+A,(hot air) balloon,has a long history dating back to the 18th century,has a long history dating back to the 18th century,1,20,0.05
+A,(hot air) balloon,historically significant in early aviation experiments,historically significant in early aviation experiments,1,20,0.05
+A,(hot air) balloon,inflated and deflated for use,inflated and deflated for use,1,20,0.05
+A,(hot air) balloon,inflated and deflated on the ground,inflated and deflated on the ground,1,20,0.05
+A,(hot air) balloon,inflated and deflated on the ground before and after flight,inflated and deflated on the ground before and after flight,1,20,0.05
+A,(hot air) balloon,is steered by changing altitude,is steered by changing altitude,1,20,0.05
+A,(hot air) balloon,large fabric envelope filled with heated air,Large fabric envelope filled with heated air,4,20,0.2
+A,(hot air) balloon,lifted by heated air,Lifted by heated air,7,20,0.35
+A,(hot air) balloon,made of fabric and a basket,made of fabric and a basket,1,20,0.05
+A,(hot air) balloon,made of fabric and often colorful,Made of fabric and often colorful,1,20,0.05
+A,(hot air) balloon,made of fabric envelope,Made of fabric envelope,5,20,0.25
+A,(hot air) balloon,made of lightweight fabric,made of lightweight fabric,6,20,0.3
+A,(hot air) balloon,moves with the wind,Moves with the wind,1,20,0.05
+A,(hot air) balloon,moves with the wind currents,moves with the wind currents,1,20,0.05
+A,(hot air) balloon,navigated by changing altitude,navigated by changing altitude,2,20,0.1
+A,(hot air) balloon,often brightly colored,Often brightly colored,1,20,0.05
+A,(hot air) balloon,often colorful and decorative,often colorful and decorative,1,20,0.05
+A,(hot air) balloon,often decorated with vibrant colors and patterns,often decorated with vibrant colors and patterns,1,20,0.05
+A,(hot air) balloon,often seen at festivals,often seen at festivals,1,20,0.05
+A,(hot air) balloon,often seen at festivals and events,often seen at festivals and events,3,20,0.15
+A,(hot air) balloon,often used for leisure activities,Often used for leisure activities,4,20,0.2
+A,(hot air) balloon,often used for recreational flights,often used for recreational flights,4,20,0.2
+A,(hot air) balloon,often used for recreational flights and tourism,often used for recreational flights and tourism,1,20,0.05
+A,(hot air) balloon,often used in festivals and competitions,Often used in festivals and competitions,1,20,0.05
+A,(hot air) balloon,often used in festivals and events,often used in festivals and events,3,20,0.15
+A,(hot air) balloon,operates in clear weather conditions,operates in clear weather conditions,1,20,0.05
+A,(hot air) balloon,participates in festivals and events,participates in festivals and events,1,20,0.05
+A,(hot air) balloon,piloted by a person,piloted by a person,5,20,0.25
+A,(hot air) balloon,piloted by a trained operator,piloted by a trained operator,3,20,0.15
+A,(hot air) balloon,popular in festivals and events,popular in festivals and events,1,20,0.05
+A,(hot air) balloon,requires a basket for passengers,Requires a basket for passengers,2,20,0.1
+A,(hot air) balloon,requires a basket to carry passengers,requires a basket to carry passengers,1,20,0.05
+A,(hot air) balloon,requires a burner for heat,requires a burner for heat,1,20,0.05
+A,(hot air) balloon,requires a burner to heat the air,requires a burner to heat the air,6,20,0.3
+A,(hot air) balloon,requires a chase crew for landing and setup,Requires a chase crew for landing and setup,1,20,0.05
+A,(hot air) balloon,requires a pilot and crew to operate,requires a pilot and crew to operate,1,20,0.05
+A,(hot air) balloon,requires a pilot to operate,Requires a pilot to operate,1,20,0.05
+A,(hot air) balloon,requires a skilled pilot to operate,Requires a skilled pilot to operate,2,20,0.1
+A,(hot air) balloon,requires favorable weather conditions,Requires favorable weather conditions,1,20,0.05
+A,(hot air) balloon,requires skilled piloting,requires skilled piloting,1,20,0.05
+A,(hot air) balloon,requires skilled piloting to navigate and land safely,requires skilled piloting to navigate and land safely,1,20,0.05
+A,(hot air) balloon,rises and descends by controlling the temperature of the air,rises and descends by controlling the temperature of the air,1,20,0.05
+A,(hot air) balloon,rises and floats in the sky,Rises and floats in the sky,2,20,0.1
+A,(hot air) balloon,rises due to buoyancy,rises due to buoyancy,1,20,0.05
+A,(hot air) balloon,rises due to heated air,Rises due to heated air,1,20,0.05
+A,(hot air) balloon,typically made of fabric,typically made of fabric,2,20,0.1
+A,(hot air) balloon,typically made of fabric and nylon,typically made of fabric and nylon,1,20,0.05
+A,(hot air) balloon,typically made of nylon or similar lightweight material,typically made of nylon or similar lightweight material,1,20,0.05
+A,(hot air) balloon,typically round or oval in shape,Typically round or oval in shape,2,20,0.1
+A,(hot air) balloon,typically round or oval shape,Typically round or oval shape,1,20,0.05
+A,(hot air) balloon,typically round or teardrop shape,typically round or teardrop shape,1,20,0.05
+A,(hot air) balloon,typically round or teardrop-shaped,typically round or teardrop-shaped,4,20,0.2
+A,(hot air) balloon,typically spherical or teardrop-shaped,typically spherical or teardrop-shaped,3,20,0.15
+A,(hot air) balloon,used for leisure and sightseeing,Used for leisure and sightseeing,1,20,0.05
+A,(hot air) balloon,used for leisure and tourism,used for leisure and tourism,2,20,0.1
+A,(hot air) balloon,used for recreation and tourism,Used for recreation and tourism,1,20,0.05
+A,(hot air) balloon,used for recreational flights,used for recreational flights,6,20,0.3
+A,(hot air) balloon,used for recreational flights and tourism,used for recreational flights and tourism,1,20,0.05
+A,(hot air) balloon,used in festivals and competitions,Used in festivals and competitions,6,20,0.3
+A,(hot air) balloon,used in various festivals and competitions,used in various festivals and competitions,1,20,0.05
+A,(hot air) balloon,uses a basket for passengers,Uses a basket for passengers,1,20,0.05
+A,(hot air) balloon,uses a burner to heat air,Uses a burner to heat air,4,20,0.2
+A,(hot air) balloon,uses a burner to heat the air,Uses a burner to heat the air,1,20,0.05
+A,(hot air) balloon,uses a burner to heat the air inside the envelope,uses a burner to heat the air inside the envelope,1,20,0.05
+A,(hot air) balloon,uses heated air for lift,uses heated air for lift,1,20,0.05
+A,(hot air) balloon,uses heated air to rise,uses heated air to rise,5,20,0.25
+A,(hot air) balloon,uses natural wind currents to navigate,uses natural wind currents to navigate,1,20,0.05
+A,(hot air) balloon,usually brightly colored,usually brightly colored,1,20,0.05
+A,(hot air) balloon,usually has a basket for passengers,usually has a basket for passengers,1,20,0.05
+A,(hot air) balloon,visible from far away,Visible from far away,1,20,0.05
+A,(hot air) balloon,visible from far away due to bright colors,visible from far away due to bright colors,1,20,0.05
+A,(hot air) balloon,visible from far distances due to size and color,visible from far distances due to size and color,1,20,0.05
+A,(hot air) balloon,visible from long distances,visible from long distances,2,20,0.1
+A,(hot air) balloon,visible from long distances due to bright colors,Visible from long distances due to bright colors,1,20,0.05
+A,(hot air) balloon,visible from long distances due to size and color,Visible from long distances due to size and color,1,20,0.05
 A,accordion,associated with polka and klezmer music,associated with polka and klezmer music,1,20,0.05
 A,accordion,available in various sizes,Available in various sizes,1,20,0.05
 A,accordion,available in various sizes and types,Available in various sizes and types,1,20,0.05
@@ -18915,6 +19032,92 @@ A,zeppelin,used in world war i,used in World War I,1,20,0.05
 A,zeppelin,used in world war i for bombing raids,used in World War I for bombing raids,4,20,0.2
 A,zeppelin,uses propellers for movement,uses propellers for movement,1,20,0.05
 A,zeppelin,visible landmark in the sky,visible landmark in the sky,1,20,0.05
+B,(hot air) balloon,basket for passengers,basket for passengers,1,20,0.05
+B,(hot air) balloon,can be decorated with colorful patterns,can be decorated with colorful patterns,1,20,0.05
+B,(hot air) balloon,can be decorated with various designs,can be decorated with various designs,1,20,0.05
+B,(hot air) balloon,can be steered by changing altitude,can be steered by changing altitude,3,20,0.15
+B,(hot air) balloon,can be used for advertising,can be used for advertising,2,20,0.1
+B,(hot air) balloon,can carry multiple passengers,Can carry multiple passengers,1,20,0.05
+B,(hot air) balloon,can carry passengers,can carry passengers,2,20,0.1
+B,(hot air) balloon,can reach high altitudes,can reach high altitudes,1,20,0.05
+B,(hot air) balloon,can rise and descend by controlling temperature,can rise and descend by controlling temperature,9,20,0.45
+B,(hot air) balloon,can travel long distances,can travel long distances,1,20,0.05
+B,(hot air) balloon,carries passengers in a basket,carries passengers in a basket,2,20,0.1
+B,(hot air) balloon,common in festivals and events,common in festivals and events,2,20,0.1
+B,(hot air) balloon,controlled by adjusting altitude,controlled by adjusting altitude,1,20,0.05
+B,(hot air) balloon,filled with heated air,filled with heated air,4,20,0.2
+B,(hot air) balloon,flies by buoyancy,flies by buoyancy,1,20,0.05
+B,(hot air) balloon,flies by rising in the air,flies by rising in the air,1,20,0.05
+B,(hot air) balloon,flies using buoyancy,flies using buoyancy,1,20,0.05
+B,(hot air) balloon,floats due to buoyancy,floats due to buoyancy,2,20,0.1
+B,(hot air) balloon,floats in the air,floats in the air,3,20,0.15
+B,(hot air) balloon,floats in the sky,floats in the sky,2,20,0.1
+B,(hot air) balloon,has a basket for passengers,has a basket for passengers,2,20,0.1
+B,(hot air) balloon,has a basket for passengers and equipment,has a basket for passengers and equipment,1,20,0.05
+B,(hot air) balloon,has a basket to carry passengers,has a basket to carry passengers,2,20,0.1
+B,(hot air) balloon,has a history dating back to the 18th century,has a history dating back to the 18th century,2,20,0.1
+B,(hot air) balloon,has a limited flight duration,Has a limited flight duration,1,20,0.05
+B,(hot air) balloon,has a long history dating back to the 18th century,has a long history dating back to the 18th century,3,20,0.15
+B,(hot air) balloon,has a wicker basket for passengers,has a wicker basket for passengers,1,20,0.05
+B,(hot air) balloon,historically significant in early aviation,historically significant in early aviation,1,20,0.05
+B,(hot air) balloon,inflated with heated air,inflated with heated air,14,20,0.7
+B,(hot air) balloon,large fabric envelope,large fabric envelope,4,20,0.2
+B,(hot air) balloon,limited directional control,limited directional control,2,20,0.1
+B,(hot air) balloon,made of fabric and a basket,made of fabric and a basket,2,20,0.1
+B,(hot air) balloon,moves with wind currents,moves with wind currents,2,20,0.1
+B,(hot air) balloon,non-directional flight controlled by wind,non-directional flight controlled by wind,1,20,0.05
+B,(hot air) balloon,not very directional in flight,not very directional in flight,1,20,0.05
+B,(hot air) balloon,often brightly colored,often brightly colored,3,20,0.15
+B,(hot air) balloon,often colorful and decorative,often colorful and decorative,5,20,0.25
+B,(hot air) balloon,often has a wicker basket,often has a wicker basket,1,20,0.05
+B,(hot air) balloon,often seen at festivals,often seen at festivals,3,20,0.15
+B,(hot air) balloon,often seen at festivals and events,Often seen at festivals and events,1,20,0.05
+B,(hot air) balloon,often used for leisure activities,often used for leisure activities,1,20,0.05
+B,(hot air) balloon,often used in festivals and events,often used in festivals and events,6,20,0.3
+B,(hot air) balloon,operated by a pilot,operated by a pilot,1,20,0.05
+B,(hot air) balloon,operates best in calm weather conditions,operates best in calm weather conditions,2,20,0.1
+B,(hot air) balloon,operates best in cooler morning or evening temperatures,operates best in cooler morning or evening temperatures,1,20,0.05
+B,(hot air) balloon,operates best in cooler weather,operates best in cooler weather,1,20,0.05
+B,(hot air) balloon,operates in clear weather conditions,operates in clear weather conditions,2,20,0.1
+B,(hot air) balloon,piloted by a certified operator,piloted by a certified operator,2,20,0.1
+B,(hot air) balloon,piloted by a person,piloted by a person,3,20,0.15
+B,(hot air) balloon,piloted by a person in a basket,piloted by a person in a basket,1,20,0.05
+B,(hot air) balloon,piloted by a trained operator,Piloted by a trained operator,2,20,0.1
+B,(hot air) balloon,popular for aerial photography and sightseeing,popular for aerial photography and sightseeing,1,20,0.05
+B,(hot air) balloon,popular for scenic views and photography,popular for scenic views and photography,1,20,0.05
+B,(hot air) balloon,popular in festivals,popular in festivals,1,20,0.05
+B,(hot air) balloon,popular in festivals and events,popular in festivals and events,2,20,0.1
+B,(hot air) balloon,popular in tourism and advertising,popular in tourism and advertising,1,20,0.05
+B,(hot air) balloon,requires a basket to carry passengers,requires a basket to carry passengers,1,20,0.05
+B,(hot air) balloon,requires a burner to heat air,requires a burner to heat air,1,20,0.05
+B,(hot air) balloon,requires a burner to heat the air,requires a burner to heat the air,14,20,0.7
+B,(hot air) balloon,requires a pilot to operate,requires a pilot to operate,1,20,0.05
+B,(hot air) balloon,requires propane burners,requires propane burners,1,20,0.05
+B,(hot air) balloon,requires skilled piloting,requires skilled piloting,2,20,0.1
+B,(hot air) balloon,riser and burner system,riser and burner system,1,20,0.05
+B,(hot air) balloon,rises due to buoyancy,Rises due to buoyancy,1,20,0.05
+B,(hot air) balloon,subject to weather conditions for safe flight,subject to weather conditions for safe flight,1,20,0.05
+B,(hot air) balloon,typically made of fabric,typically made of fabric,2,20,0.1
+B,(hot air) balloon,typically made of fabric and a basket,Typically made of fabric and a basket,1,20,0.05
+B,(hot air) balloon,typically made of nylon,typically made of nylon,8,20,0.4
+B,(hot air) balloon,typically made of nylon fabric,typically made of nylon fabric,4,20,0.2
+B,(hot air) balloon,typically made of nylon or polyester,typically made of nylon or polyester,1,20,0.05
+B,(hot air) balloon,typically spherical shape,typically spherical shape,1,20,0.05
+B,(hot air) balloon,typically used for leisure,typically used for leisure,1,20,0.05
+B,(hot air) balloon,used for aerial photography and tourism,used for aerial photography and tourism,3,20,0.15
+B,(hot air) balloon,used for leisure and sightseeing,used for leisure and sightseeing,1,20,0.05
+B,(hot air) balloon,used for leisure and tourism,used for leisure and tourism,2,20,0.1
+B,(hot air) balloon,used for leisure flights,used for leisure flights,5,20,0.25
+B,(hot air) balloon,used for recreational flights,used for recreational flights,10,20,0.5
+B,(hot air) balloon,used in early aviation experiments,used in early aviation experiments,1,20,0.05
+B,(hot air) balloon,used in festivals and competitions,used in festivals and competitions,3,20,0.15
+B,(hot air) balloon,used in festivals and events,used in festivals and events,1,20,0.05
+B,(hot air) balloon,uses a burner to heat air,uses a burner to heat air,3,20,0.15
+B,(hot air) balloon,uses heated air for lift,uses heated air for lift,2,20,0.1
+B,(hot air) balloon,usually has a wicker basket for passengers,usually has a wicker basket for passengers,3,20,0.15
+B,(hot air) balloon,usually tethered during inflation,usually tethered during inflation,1,20,0.05
+B,(hot air) balloon,visible from long distances due to size and color,visible from long distances due to size and color,2,20,0.1
+B,(hot air) balloon,vulnerable to weather conditions,vulnerable to weather conditions,1,20,0.05
 B,accordion,associated with festive and lively music,associated with festive and lively music,1,20,0.05
 B,accordion,associated with polka and klezmer music,associated with polka and klezmer music,2,20,0.1
 B,accordion,available in various sizes and types,available in various sizes and types,1,20,0.05
@@ -37043,6 +37246,86 @@ B,zeppelin,uses helium or hydrogen,uses helium or hydrogen,3,20,0.15
 B,zeppelin,uses helium or hydrogen for lift,uses helium or hydrogen for lift,5,20,0.25
 B,zeppelin,uses propellers for propulsion,uses propellers for propulsion,1,20,0.05
 B,zeppelin,vulnerable to fire,vulnerable to fire,1,20,0.05
+C,(hot air) balloon,affected by wind direction,affected by wind direction,1,20,0.05
+C,(hot air) balloon,ascends and descends,ascends and descends,2,20,0.1
+C,(hot air) balloon,basket carries passengers,basket carries passengers,2,20,0.1
+C,(hot air) balloon,can be decorated with designs,can be decorated with designs,1,20,0.05
+C,(hot air) balloon,can be decorated with vibrant colors,can be decorated with vibrant colors,1,20,0.05
+C,(hot air) balloon,can be seen at festivals,can be seen at festivals,1,20,0.05
+C,(hot air) balloon,can reach high altitudes,can reach high altitudes,1,20,0.05
+C,(hot air) balloon,can travel long distances,can travel long distances,3,20,0.15
+C,(hot air) balloon,can travel long distances with wind,can travel long distances with wind,2,20,0.1
+C,(hot air) balloon,carries a basket,carries a basket,4,20,0.2
+C,(hot air) balloon,carries a wicker basket,carries a wicker basket,2,20,0.1
+C,(hot air) balloon,carries passengers in a basket,carries passengers in a basket,10,20,0.5
+C,(hot air) balloon,controlled by adjusting heat,controlled by adjusting heat,4,20,0.2
+C,(hot air) balloon,controlled by pilot,controlled by pilot,1,20,0.05
+C,(hot air) balloon,dependent on weather conditions,dependent on weather conditions,1,20,0.05
+C,(hot air) balloon,dependent on wind direction,dependent on wind direction,1,20,0.05
+C,(hot air) balloon,filled with heated air,filled with heated air,20,20,1.0
+C,(hot air) balloon,flies at low speeds,flies at low speeds,1,20,0.05
+C,(hot air) balloon,flies at low to moderate altitudes,flies at low to moderate altitudes,1,20,0.05
+C,(hot air) balloon,flies by controlling buoyancy,flies by controlling buoyancy,1,20,0.05
+C,(hot air) balloon,flies during early morning or late evening,flies during early morning or late evening,1,20,0.05
+C,(hot air) balloon,floats gently with the wind,floats gently with the wind,1,20,0.05
+C,(hot air) balloon,floats in the sky,floats in the sky,1,20,0.05
+C,(hot air) balloon,floats with wind currents,floats with wind currents,2,20,0.1
+C,(hot air) balloon,flown for recreation,flown for recreation,1,20,0.05
+C,(hot air) balloon,inflated and deflated on ground,inflated and deflated on ground,2,20,0.1
+C,(hot air) balloon,inflates on the ground,inflates on the ground,1,20,0.05
+C,(hot air) balloon,landed by pilot's skill,landed by pilot's skill,1,20,0.05
+C,(hot air) balloon,landed in open fields,landed in open fields,1,20,0.05
+C,(hot air) balloon,lands in open areas,lands in open areas,1,20,0.05
+C,(hot air) balloon,large fabric envelope,large fabric envelope,20,20,1.0
+C,(hot air) balloon,made of lightweight materials,made of lightweight materials,1,20,0.05
+C,(hot air) balloon,"made of lightweight, durable materials","made of lightweight, durable materials",1,20,0.05
+C,(hot air) balloon,made of nylon or polyester,made of nylon or polyester,2,20,0.1
+C,(hot air) balloon,moves with wind currents,moves with wind currents,3,20,0.15
+C,(hot air) balloon,often brightly colored,often brightly colored,1,20,0.05
+C,(hot air) balloon,often colorful and decorative,often colorful and decorative,12,20,0.6
+C,(hot air) balloon,often colorful designs,often colorful designs,5,20,0.25
+C,(hot air) balloon,often seen at festivals,often seen at festivals,1,20,0.05
+C,(hot air) balloon,often used for leisure activities,often used for leisure activities,1,20,0.05
+C,(hot air) balloon,operated by a pilot,operated by a pilot,6,20,0.3
+C,(hot air) balloon,operates in calm weather,operates in calm weather,1,20,0.05
+C,(hot air) balloon,piloted by a certified operator,piloted by a certified operator,3,20,0.15
+C,(hot air) balloon,popular at festivals,popular at festivals,1,20,0.05
+C,(hot air) balloon,popular in festivals and events,popular in festivals and events,1,20,0.05
+C,(hot air) balloon,propelled by a burner,propelled by a burner,1,20,0.05
+C,(hot air) balloon,requires a burner,requires a burner,4,20,0.2
+C,(hot air) balloon,requires a burner to heat air,requires a burner to heat air,5,20,0.25
+C,(hot air) balloon,requires a burner to heat the air,requires a burner to heat the air,1,20,0.05
+C,(hot air) balloon,requires a ground crew for launch,requires a ground crew for launch,1,20,0.05
+C,(hot air) balloon,requires a pilot,requires a pilot,2,20,0.1
+C,(hot air) balloon,requires a pilot and crew,requires a pilot and crew,2,20,0.1
+C,(hot air) balloon,requires a pilot to operate,requires a pilot to operate,1,20,0.05
+C,(hot air) balloon,requires ground crew for launch and landing,requires ground crew for launch and landing,1,20,0.05
+C,(hot air) balloon,requires propane burners,requires propane burners,1,20,0.05
+C,(hot air) balloon,requires skilled piloting,requires skilled piloting,1,20,0.05
+C,(hot air) balloon,riser and burner system,riser and burner system,1,20,0.05
+C,(hot air) balloon,rises and descends by controlling heat,rises and descends by controlling heat,2,20,0.1
+C,(hot air) balloon,rises and floats in the sky,rises and floats in the sky,5,20,0.25
+C,(hot air) balloon,rises in the sky,rises in the sky,7,20,0.35
+C,(hot air) balloon,rises in warm weather,rises in warm weather,2,20,0.1
+C,(hot air) balloon,rises into the sky,rises into the sky,1,20,0.05
+C,(hot air) balloon,tethered for inflation and landing,tethered for inflation and landing,1,20,0.05
+C,(hot air) balloon,tethered for safety on ground,tethered for safety on ground,1,20,0.05
+C,(hot air) balloon,typically launches at dawn or dusk,typically launches at dawn or dusk,1,20,0.05
+C,(hot air) balloon,typically spherical or teardrop shape,typically spherical or teardrop shape,2,20,0.1
+C,(hot air) balloon,typically spherical shape,typically spherical shape,1,20,0.05
+C,(hot air) balloon,typically tethered for inflation,typically tethered for inflation,1,20,0.05
+C,(hot air) balloon,used for leisure and sightseeing,used for leisure and sightseeing,1,20,0.05
+C,(hot air) balloon,used for leisure and sport,used for leisure and sport,4,20,0.2
+C,(hot air) balloon,used for leisure and tourism,used for leisure and tourism,1,20,0.05
+C,(hot air) balloon,used for leisure flights,used for leisure flights,8,20,0.4
+C,(hot air) balloon,used for recreation and tourism,used for recreation and tourism,1,20,0.05
+C,(hot air) balloon,used for recreational flights,used for recreational flights,3,20,0.15
+C,(hot air) balloon,used in festivals,used in festivals,1,20,0.05
+C,(hot air) balloon,usually spherical or teardrop shape,usually spherical or teardrop shape,1,20,0.05
+C,(hot air) balloon,usually tethered to a basket,usually tethered to a basket,1,20,0.05
+C,(hot air) balloon,visible from far distances,visible from far distances,1,20,0.05
+C,(hot air) balloon,visible from long distances,visible from long distances,1,20,0.05
+C,(hot air) balloon,wicker basket for passengers,wicker basket for passengers,1,20,0.05
 C,accordion,associated with european and latin american cultures,associated with European and Latin American cultures,1,20,0.05
 C,accordion,associated with european traditions,associated with European traditions,2,20,0.1
 C,accordion,associated with polka and klezmer,associated with polka and klezmer,1,20,0.05

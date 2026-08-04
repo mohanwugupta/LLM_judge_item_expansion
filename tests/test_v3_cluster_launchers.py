@@ -16,6 +16,8 @@ def test_v3_launchers_are_standalone_cluster_jobs():
         assert "module load anaconda3/2025.6" in script
         assert "python -m vllm.entrypoints.openai.api_server" in script
         assert "python -m leuven_expansion.generate_features" in script
+        assert "PROMPT_VERSION=v3.1" in script
+        assert "--prompt-version" in script
 
 
 def test_v3_smoke_uses_established_test_partition_and_small_plan():
@@ -31,7 +33,7 @@ def test_v3_production_has_fixed_comparable_protocol():
     assert "RESPONSES_PER_WORD=20" in PRODUCTION
     assert "TEMPERATURE=0.8" in PRODUCTION
     assert "BASE_SEED=20260801" in PRODUCTION
-    assert "JOB_ID=leuven_v3_qwen2_5_72b" in PRODUCTION
+    assert "JOB_ID=leuven_v3_1_qwen2_5_72b" in PRODUCTION
     assert "--max-words" not in PRODUCTION
 
 

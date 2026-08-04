@@ -1,5 +1,5 @@
 #!/bin/bash
-#SBATCH --job-name=leuven_v3_gen
+#SBATCH --job-name=leuven_v3_1_gen
 #SBATCH --nodes=1
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=8
@@ -9,12 +9,12 @@
 #SBATCH --mail-type=begin
 #SBATCH --mail-type=end
 #SBATCH --mail-user=mg9965@princeton.edu
-#SBATCH --time=72:00:00
-#SBATCH --output=/scratch/gpfs/JORDANAT/mg9965/FalseMemoryISC-CI/logs/leuven_v3_gen_%j.out
-#SBATCH --error=/scratch/gpfs/JORDANAT/mg9965/FalseMemoryISC-CI/logs/leuven_v3_gen_%j.err
+#SBATCH --time=02:00:00
+#SBATCH --output=/scratch/gpfs/JORDANAT/mg9965/FalseMemoryISC-CI/logs/leuven_v3_1_gen_%j.out
+#SBATCH --error=/scratch/gpfs/JORDANAT/mg9965/FalseMemoryISC-CI/logs/leuven_v3_1_gen_%j.err
 
 # =============================================================================
-# Leuven v3 free feature generation - production
+# Leuven v3.1 free feature generation - production
 #
 # Standalone production job following the established Leuven cluster template.
 # It uses one Qwen2.5-72B-Instruct model and collects 20 responses per word for
@@ -29,7 +29,7 @@ set -eo pipefail
 VLLM_PORT=8021
 
 echo "=========================================="
-echo " Leuven v3 Feature Generation"
+echo " Leuven v3.1 Feature Generation"
 echo "=========================================="
 echo "Job ID:  $SLURM_JOB_ID"
 echo "Node:    $SLURMD_NODENAME"
@@ -51,8 +51,9 @@ GPU_MEMORY_UTILIZATION=0.92
 
 LEUVEN_FEATURES=data/leuven_combined_features_consolidated.csv
 
-JOB_ID=leuven_v3_qwen2_5_72b
+JOB_ID=leuven_v3_1_qwen2_5_72b
 OUTPUT_DIR=artifacts/leuven_feature_generation/$JOB_ID
+PROMPT_VERSION=v3.1
 
 RESPONSES_PER_WORD=20
 TEMPERATURE=0.8
@@ -136,6 +137,7 @@ GENERATION_ARGS=(
     --job-id "$JOB_ID"
     --output-dir "$PROJECT_DIR/$OUTPUT_DIR"
     --model "$SERVED_MODEL_NAME"
+    --prompt-version "$PROMPT_VERSION"
     --base-url "http://localhost:${VLLM_PORT}/v1"
     --responses-per-word "$RESPONSES_PER_WORD"
     --temperature "$TEMPERATURE"
@@ -213,10 +215,10 @@ if [ $ELAPSED -ge $MAX_WAIT ]; then
 fi
 
 # ------------------------------------------------------------------
-# 8. Run v3 production generation
+# 8. Run v3.1 production generation
 # ------------------------------------------------------------------
 echo ""
-echo "Running full v3 generation: 293 words x 3 prompts x $RESPONSES_PER_WORD responses"
+echo "Running full v3.1 generation: 293 words x 3 prompts x $RESPONSES_PER_WORD responses"
 
 python -m leuven_expansion.generate_features \
     "${GENERATION_ARGS[@]}"
@@ -233,9 +235,9 @@ check_file() {
     local f="$PROJECT_DIR/$OUTPUT_DIR/$1"
     local desc="$2"
     if [ -f "$f" ]; then
-        local rows
-        rows=$(wc -l < "$f")
-        echo "  ✅ $desc: $f  ($rows lines)"
+        local bytes
+        bytes=$(wc -c < "$f")
+        echo "  ✅ $desc: $f  ($bytes bytes)"
         PASS=$((PASS + 1))
     else
         echo "  ❌ MISSING $desc: $f"
@@ -252,8 +254,9 @@ check_file "run.log"                           "run log"
 
 MANIFEST="$PROJECT_DIR/$OUTPUT_DIR/manifest.json"
 if [ -f "$MANIFEST" ]; then
-    if python3 -c "import json,sys; d=json.load(open('$MANIFEST')); expected=d['word_count'] * d['responses_per_word_per_prompt']; counts=d.get('valid_responses_by_prompt', {}); ok=d.get('finished_at') and d.get('pending_after_run') == 0 and set(counts) == {'A','B','C'} and all(v == expected for v in counts.values()); sys.exit(0 if ok else 1)"; then
-        echo "  ✅ manifest.json records a complete A/B/C run"
+    if python3 -c "import json,sys; d=json.load(open('$MANIFEST')); expected=d['word_count'] * d['responses_per_word_per_prompt']; counts=d.get('valid_responses_by_prompt', {}); ok=d.get('protocol_version') == 'leuven_free_generation_v3_1_three_prompt_comparison' and d.get('prompt_version') == 'v3.1' and d.get('finished_at') and d.get('pending_after_run') == 0 and set(counts) == {'A','B','C'} and all(v == expected for v in counts.values()); sys.exit(0 if ok else 1)"; then
+        echo "  ✅ manifest.json records a complete V3.1 A/B/C run"
+        python3 -c "import json; d=json.load(open('$MANIFEST')); print('     valid responses:', d['valid_responses_total']); print('     by prompt:', d['valid_responses_by_prompt']); print('     unresolved responses:', d['pending_after_run'])"
         PASS=$((PASS + 1))
     else
         echo "  ❌ manifest.json is incomplete or has missing prompt responses"

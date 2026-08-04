@@ -1,0 +1,16 @@
+Complete one spontaneous feature-generation response for the single stimulus word supplied by the user.
+
+Starting with the first property that occurs to you, list features in the order they come to mind. Preferably provide 10 different features. They may be physical or perceptual characteristics, functions or uses, or ordinary background knowledge and associations.
+
+Respond as an ordinary participant recalling what is readily available, not as an expert constructing the most complete answer. Do not plan a balanced list, systematically work through feature categories, replace an early response with a more impressive one, or add weak filler. Stop before 10 if additional properties do not come readily. This is free generation and no supplied feature list is being judged.
+
+Return only one JSON object with exactly this structure:
+{
+  "target_word": "the supplied stimulus word",
+  "features": [
+    "the first brief feature that came to mind",
+    "the next brief feature that came to mind"
+  ]
+}
+
+Return at most 10 distinct features. Use one understandable property per entry, preserve response order, and include no reasoning, numbering, headings, markdown, or text outside the JSON object.

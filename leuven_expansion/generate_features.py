@@ -1,4 +1,4 @@
-"""Run the v3 Leuven-style free feature-generation experiment.
+"""Run a versioned Leuven-style free feature-generation experiment.
 
 The experimental unit is one stimulus word by one simulated participant
 response. No existing Leuven feature is shown to the model.
@@ -102,6 +102,12 @@ def _normalize_json_literals(text: str) -> str:
     return re.sub(r'(?<!["\w])False(?!["\w])', "false", text)
 
 
+def _normalize_target_word_for_match(word: str) -> str:
+    """Normalize harmless parenthesis formatting without dropping its content."""
+    normalized = normalize_word(word)
+    return " ".join(re.sub(r"[()]", " ", normalized).split())
+
+
 def validate_generation_output(
     raw: str,
     expected_word: Optional[str] = None,
@@ -123,8 +129,9 @@ def validate_generation_output(
         return None, f"Schema validation error: {error.message}"
 
     if expected_word is not None:
-        returned = normalize_word(record["target_word"])
-        if returned != normalize_word(expected_word):
+        returned = _normalize_target_word_for_match(record["target_word"])
+        expected = _normalize_target_word_for_match(expected_word)
+        if returned != expected:
             return None, (
                 f"Returned target_word {record['target_word']!r} does not match "
                 f"expected {expected_word!r}"
@@ -274,6 +281,7 @@ def _manifest_config(
     *,
     job_id: str,
     model: str,
+    prompt_version: str,
     prompts: dict[str, str],
     input_csv: pathlib.Path,
     item_column: Optional[str],
@@ -286,8 +294,12 @@ def _manifest_config(
     max_words: Optional[int],
     selected_words: list[dict[str, str]],
 ) -> dict[str, Any]:
-    return {
-        "protocol_version": "leuven_free_generation_v3_three_prompt_comparison",
+    protocol_versions = {
+        "v3": "leuven_free_generation_v3_three_prompt_comparison",
+        "v3.1": "leuven_free_generation_v3_1_three_prompt_comparison",
+    }
+    manifest = {
+        "protocol_version": protocol_versions[prompt_version],
         "experimental_unit": (
             "one stimulus word x one prompt condition x one simulated participant"
         ),
@@ -328,6 +340,11 @@ def _manifest_config(
         "semantic_feature_merging_performed": False,
         "sampling_design": "paired seeds across prompt variants",
     }
+    # Preserve byte-for-byte V3 resume compatibility with manifests created before
+    # prompt versions were selectable.
+    if prompt_version != "v3":
+        manifest["prompt_version"] = prompt_version
+    return manifest
 
 
 def _validate_resume_manifest(
@@ -421,12 +438,110 @@ def _write_derived_outputs(
     return len(valid), len(long_frame)
 
 
+def revalidate_generation_outputs(
+    output_dir: str | pathlib.Path,
+) -> dict[str, Any]:
+    """Revalidate preserved raw responses and rebuild outputs without model calls."""
+    output_path = pathlib.Path(output_dir)
+    generations_csv = output_path / "feature_generations.csv"
+    manifest_path = output_path / "manifest.json"
+    long_csv = output_path / "generated_features_long.csv"
+    frequency_csv = output_path / "generated_feature_frequencies.csv"
+
+    for required in [generations_csv, manifest_path]:
+        if not required.exists():
+            raise FileNotFoundError(f"Required generation artifact not found: {required}")
+
+    generations = pd.read_csv(generations_csv, dtype=str).fillna("")
+    latest = generations.drop_duplicates("response_id", keep="last")
+    candidates = latest[latest["parse_error"] != ""]
+    repaired_rows: list[dict[str, Any]] = []
+
+    for _, row in candidates.iterrows():
+        record, parse_error = validate_generation_output(
+            row["raw_json"], expected_word=row["word_normalized"]
+        )
+        if record is None:
+            continue
+        repaired = {
+            column: row.get(column, "") for column in GENERATION_COLUMNS
+        }
+        repaired["features_json"] = json.dumps(
+            record["features"], ensure_ascii=True
+        )
+        repaired["n_features"] = len(record["features"])
+        repaired["parse_error"] = parse_error or ""
+        repaired_rows.append(repaired)
+
+    if repaired_rows:
+        with generations_csv.open("a", newline="") as handle:
+            writer = csv.DictWriter(
+                handle,
+                fieldnames=GENERATION_COLUMNS,
+                extrasaction="ignore",
+            )
+            writer.writerows(repaired_rows)
+
+    valid_total, feature_total = _write_derived_outputs(
+        generations_csv, long_csv, frequency_csv
+    )
+    all_rows = pd.read_csv(generations_csv, dtype=str).fillna("")
+    latest = all_rows.drop_duplicates("response_id", keep="last")
+    valid_latest = latest[latest["parse_error"] == ""]
+    unresolved_total = int((latest["parse_error"] != "").sum())
+    valid_by_prompt = {
+        variant: int((valid_latest["prompt_variant"] == variant).sum())
+        for variant in GENERATION_PROMPT_VARIANTS
+    }
+
+    manifest = json.loads(manifest_path.read_text())
+    revalidated_at = _utc_now()
+    backup_path = output_path / "manifest.pre_revalidation.json"
+    if repaired_rows and not backup_path.exists():
+        backup_path.write_text(manifest_path.read_text())
+    history = manifest.setdefault("revalidation_history", [])
+    history.append(
+        {
+            "revalidated_at": revalidated_at,
+            "candidate_errors": len(candidates),
+            "repaired_responses": len(repaired_rows),
+            "unresolved_responses": unresolved_total,
+            "method": "reparsed preserved raw_json; no model calls",
+        }
+    )
+    manifest.setdefault("generation_finished_at", manifest.get("finished_at"))
+    manifest |= {
+        "valid_responses_total": valid_total,
+        "valid_responses_by_prompt": valid_by_prompt,
+        "parse_errors_total": unresolved_total,
+        "generated_feature_tokens_total": feature_total,
+        "pending_after_run": int(manifest["total_planned_responses"]) - valid_total,
+        "revalidated_at": revalidated_at,
+        "revalidated_responses_total": sum(
+            int(entry.get("repaired_responses", 0)) for entry in history
+        ),
+        "finished_at": revalidated_at,
+    }
+    manifest_path.write_text(json.dumps(manifest, indent=2) + "\n")
+
+    return {
+        "candidate_errors": len(candidates),
+        "repaired_responses": len(repaired_rows),
+        "unresolved_responses": unresolved_total,
+        "valid_responses_total": valid_total,
+        "valid_responses_by_prompt": valid_by_prompt,
+        "pending_after_run": manifest["pending_after_run"],
+        "model_calls": 0,
+    }
+
+
 def preflight_feature_generation(
     *,
     job_id: str,
     input_csv: str | pathlib.Path,
     output_dir: str | pathlib.Path,
     model: str,
+    prompt_version: str = "v3",
     item_column: Optional[str] = None,
     responses_per_word: int = 20,
     temperature: float = 0.8,
@@ -435,7 +550,7 @@ def preflight_feature_generation(
     max_words: Optional[int] = None,
     resume: bool = True,
 ) -> dict[str, Any]:
-    """Validate and summarize a v3 plan without creating files or model calls."""
+    """Validate and summarize a generation plan without files or model calls."""
     if responses_per_word > 1 and temperature <= 0:
         raise ValueError(
             "Multiple simulated participants require temperature > 0 to avoid "
@@ -446,10 +561,11 @@ def preflight_feature_generation(
     resolved_item_column = item_column or columns[0]
     source_words = load_stimulus_words(input_path, resolved_item_column)
     words = select_stimulus_words(source_words, max_words)
-    system_prompts = load_generation_prompts("v3")
+    system_prompts = load_generation_prompts(prompt_version)
     config = _manifest_config(
         job_id=job_id,
         model=model,
+        prompt_version=prompt_version,
         prompts=system_prompts,
         input_csv=input_path,
         item_column=resolved_item_column,
@@ -475,7 +591,7 @@ def preflight_feature_generation(
     unique_seeds = len({job["sampling_seed"] for job in jobs})
     expected_unique_seeds = len(words) * responses_per_word
     if unique_seeds != expected_unique_seeds:
-        raise RuntimeError("Sampling-seed collision in v3 generation plan")
+        raise RuntimeError("Sampling-seed collision in feature-generation plan")
     return config | {
         "total_planned_responses": len(jobs),
         "planned_responses_by_prompt": {
@@ -494,6 +610,7 @@ def run_feature_generation(
     output_dir: str | pathlib.Path,
     client: Any,
     model: str,
+    prompt_version: str = "v3",
     item_column: Optional[str] = None,
     responses_per_word: int = 20,
     temperature: float = 0.8,
@@ -526,6 +643,7 @@ def run_feature_generation(
         input_csv=input_path,
         output_dir=output_path,
         model=model,
+        prompt_version=prompt_version,
         item_column=item_column,
         responses_per_word=responses_per_word,
         temperature=temperature,
@@ -537,7 +655,7 @@ def run_feature_generation(
     words = select_stimulus_words(
         load_stimulus_words(input_path, item_column), max_words
     )
-    system_prompts = load_generation_prompts("v3")
+    system_prompts = load_generation_prompts(prompt_version)
     config = plan.copy()
     for summary_key in [
         "total_planned_responses",
@@ -573,7 +691,8 @@ def run_feature_generation(
     )
     logging.getLogger().addHandler(file_handler)
     logger.info(
-        "v3 generation: %d words x %d prompts x %d responses = %d; pending=%d",
+        "%s generation: %d words x %d prompts x %d responses = %d; pending=%d",
+        prompt_version,
         len(words),
         len(GENERATION_PROMPT_VARIANTS),
         responses_per_word,
@@ -708,7 +827,8 @@ def run_feature_generation(
     }
     manifest_path.write_text(json.dumps(manifest, indent=2) + "\n")
     logger.info(
-        "v3 generation complete: valid=%d/%d, features=%d, errors=%d",
+        "%s generation complete: valid=%d/%d, features=%d, errors=%d",
+        prompt_version,
         valid_total,
         len(jobs),
         feature_total,
@@ -726,6 +846,12 @@ def _parse_args(argv: Optional[list[str]] = None) -> argparse.Namespace:
     parser.add_argument("--job-id", required=True)
     parser.add_argument("--output-dir", required=True)
     parser.add_argument("--model", default="Qwen2.5-72B-Instruct")
+    parser.add_argument(
+        "--prompt-version",
+        choices=("v3", "v3.1"),
+        default="v3",
+        help="free-generation prompt set; V3 remains the backward-compatible default",
+    )
     parser.add_argument("--base-url", default="http://localhost:8000/v1")
     parser.add_argument(
         "--responses-per-word",
@@ -765,6 +891,7 @@ def main(argv: Optional[list[str]] = None) -> None:
             item_column=args.item_column,
             output_dir=args.output_dir,
             model=args.model,
+            prompt_version=args.prompt_version,
             responses_per_word=args.responses_per_word,
             temperature=args.temperature,
             max_tokens=args.max_tokens,
@@ -783,6 +910,7 @@ def main(argv: Optional[list[str]] = None) -> None:
         output_dir=args.output_dir,
         client=client,
         model=args.model,
+        prompt_version=args.prompt_version,
         responses_per_word=args.responses_per_word,
         temperature=args.temperature,
         max_tokens=args.max_tokens,

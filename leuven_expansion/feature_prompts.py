@@ -27,10 +27,17 @@ _FORBIDDEN_FIELDS = frozenset([
 
 _PROMPT_DIR = pathlib.Path(__file__).parent / "prompts"
 GENERATION_PROMPT_VARIANTS = ("A", "B", "C")
-_GENERATION_PROMPT_FILES = {
-    "A": "feature_generation_prompt_A_v3_original.txt",
-    "B": "feature_generation_prompt_B_v3_concise.txt",
-    "C": "feature_generation_prompt_C_v3_structured.txt",
+_GENERATION_PROMPT_FILES_BY_VERSION = {
+    "v3": {
+        "A": "feature_generation_prompt_A_v3_original.txt",
+        "B": "feature_generation_prompt_B_v3_concise.txt",
+        "C": "feature_generation_prompt_C_v3_structured.txt",
+    },
+    "v3.1": {
+        "A": "feature_generation_prompt_A_v3_1_faithful.txt",
+        "B": "feature_generation_prompt_B_v3_1_first_to_mind.txt",
+        "C": "feature_generation_prompt_C_v3_1_individual_participant.txt",
+    },
 }
 
 # Fixed few-shot examples (same for all atomic prompts)
@@ -79,10 +86,10 @@ def load_prompts_by_version(version: str) -> Dict[str, str]:
             "C": load_prompt(_PROMPT_DIR / "feature_judge_prompt_C_v2_production.txt"),
             "adjudicator": load_prompt(_PROMPT_DIR / "feature_adjudicator_prompt_v2_production.txt"),
         }
-    if version == "v3":
+    if version in _GENERATION_PROMPT_FILES_BY_VERSION:
         raise ValueError(
-            "v3 is a free feature-generation task, not an atomic applicability "
-            "prompt set; use load_generation_prompts('v3') and "
+            f"{version} is a free feature-generation task, not an atomic applicability "
+            f"prompt set; use load_generation_prompts({version!r}) and "
             "leuven_expansion.generate_features"
         )
     raise ValueError(f"Unknown prompt version: {version!r}. Expected 'v2'.")
@@ -90,19 +97,22 @@ def load_prompts_by_version(version: str) -> Dict[str, str]:
 
 def load_generation_prompts(version: str = "v3") -> Dict[str, str]:
     """Return the three Leuven-style free-generation prompt conditions."""
-    if version != "v3":
-        raise ValueError(f"Unknown generation prompt version: {version!r}")
+    if version not in _GENERATION_PROMPT_FILES_BY_VERSION:
+        raise ValueError(
+            f"Unknown generation prompt version: {version!r}; "
+            f"expected one of {sorted(_GENERATION_PROMPT_FILES_BY_VERSION)}"
+        )
     return {
         variant: load_prompt(_PROMPT_DIR / filename)
-        for variant, filename in _GENERATION_PROMPT_FILES.items()
+        for variant, filename in _GENERATION_PROMPT_FILES_BY_VERSION[version].items()
     }
 
 
 def load_generation_prompt(version: str = "v3", variant: str = "A") -> str:
-    """Return one generation condition; variant A is the faithful default."""
+    """Return one generation condition; variant A is the fidelity control."""
     if variant not in GENERATION_PROMPT_VARIANTS:
         raise ValueError(
-            f"Unknown v3 generation prompt variant: {variant!r}; "
+            f"Unknown {version} generation prompt variant: {variant!r}; "
             f"expected one of {GENERATION_PROMPT_VARIANTS}"
         )
     return load_generation_prompts(version)[variant]

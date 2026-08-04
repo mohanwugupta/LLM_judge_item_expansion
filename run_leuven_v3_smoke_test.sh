@@ -1,5 +1,5 @@
 #!/bin/bash
-#SBATCH --job-name=leuven_v3_smoke
+#SBATCH --job-name=leuven_v3_1_smoke
 #SBATCH --nodes=1
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=8
@@ -11,11 +11,11 @@
 #SBATCH --mail-type=begin
 #SBATCH --mail-type=end
 #SBATCH --mail-user=mg9965@princeton.edu
-#SBATCH --output=/scratch/gpfs/JORDANAT/mg9965/FalseMemoryISC-CI/logs/leuven_v3_smoke_%j.out
-#SBATCH --error=/scratch/gpfs/JORDANAT/mg9965/FalseMemoryISC-CI/logs/leuven_v3_smoke_%j.err
+#SBATCH --output=/scratch/gpfs/JORDANAT/mg9965/FalseMemoryISC-CI/logs/leuven_v3_1_smoke_%j.out
+#SBATCH --error=/scratch/gpfs/JORDANAT/mg9965/FalseMemoryISC-CI/logs/leuven_v3_1_smoke_%j.err
 
 # =============================================================================
-# Leuven v3 free feature generation - smoke test
+# Leuven v3.1 free feature generation - smoke test
 #
 # This is a standalone copy of the established Leuven smoke-job structure.
 # It starts the same Qwen2.5-72B vLLM server and runs 18 generation calls:
@@ -30,7 +30,7 @@ set -eo pipefail
 VLLM_PORT=8010   # distinct port to avoid collision with production tasks
 
 echo "=========================================="
-echo " Leuven v3 Smoke Test"
+echo " Leuven v3.1 Smoke Test"
 echo "=========================================="
 echo "Job ID:  $SLURM_JOB_ID"
 echo "Node:    $SLURMD_NODENAME"
@@ -52,8 +52,9 @@ GPU_MEMORY_UTILIZATION=0.92
 
 LEUVEN_FEATURES=data/leuven_combined_features_consolidated.csv
 
-JOB_ID=leuven_v3_smoke
+JOB_ID=leuven_v3_1_smoke
 OUTPUT_DIR=artifacts/leuven_feature_generation/smoke_test/$JOB_ID
+PROMPT_VERSION=v3.1
 
 MAX_WORDS=3
 RESPONSES_PER_WORD=2
@@ -184,7 +185,7 @@ if [ $ELAPSED -ge $MAX_WAIT ]; then
 fi
 
 # ------------------------------------------------------------------
-# 8. Run v3 smoke generation
+# 8. Run v3.1 smoke generation
 # ------------------------------------------------------------------
 echo ""
 echo "Running: $MAX_WORDS words x 3 prompts x $RESPONSES_PER_WORD responses"
@@ -194,6 +195,7 @@ python -m leuven_expansion.generate_features \
     --job-id             "$JOB_ID" \
     --output-dir         "$PROJECT_DIR/$OUTPUT_DIR" \
     --model              "$SERVED_MODEL_NAME" \
+    --prompt-version     "$PROMPT_VERSION" \
     --base-url           "http://localhost:${VLLM_PORT}/v1" \
     --responses-per-word "$RESPONSES_PER_WORD" \
     --temperature        "$TEMPERATURE" \
@@ -215,9 +217,9 @@ check_file() {
     local f="$PROJECT_DIR/$OUTPUT_DIR/$1"
     local desc="$2"
     if [ -f "$f" ]; then
-        local rows
-        rows=$(wc -l < "$f")
-        echo "  ✅ $desc: $f  ($rows lines)"
+        local bytes
+        bytes=$(wc -c < "$f")
+        echo "  ✅ $desc: $f  ($bytes bytes)"
         PASS=$((PASS + 1))
     else
         echo "  ❌ MISSING $desc: $f"
@@ -235,8 +237,8 @@ check_file "run.log"                           "run.log"
 # Verify manifest has finished_at
 MANIFEST="$PROJECT_DIR/$OUTPUT_DIR/manifest.json"
 if [ -f "$MANIFEST" ]; then
-    if python3 -c "import json,sys; d=json.load(open('$MANIFEST')); expected={'A':6,'B':6,'C':6}; ok=d.get('finished_at') and d.get('pending_after_run') == 0 and d.get('valid_responses_by_prompt') == expected; sys.exit(0 if ok else 1)"; then
-        echo "  ✅ manifest.json records six valid responses per prompt"
+    if python3 -c "import json,sys; d=json.load(open('$MANIFEST')); expected={'A':6,'B':6,'C':6}; ok=d.get('protocol_version') == 'leuven_free_generation_v3_1_three_prompt_comparison' and d.get('prompt_version') == 'v3.1' and d.get('finished_at') and d.get('pending_after_run') == 0 and d.get('valid_responses_by_prompt') == expected; sys.exit(0 if ok else 1)"; then
+        echo "  ✅ manifest.json records six valid V3.1 responses per prompt"
         PASS=$((PASS + 1))
     else
         echo "  ❌ manifest.json missing finished_at or incomplete (job may have crashed)"

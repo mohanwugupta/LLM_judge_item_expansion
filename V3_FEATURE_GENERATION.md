@@ -104,7 +104,9 @@ to the SLURM error log when a setup or execution step exits.
   by prompt
 - `generated_feature_frequencies.csv`: exact normalized-string frequencies
   computed separately by word and prompt
-- `parse_errors.csv`: invalid or failed responses for resumable retry
+- `parse_errors.csv`: append-only history of invalid or failed attempts; use
+  `manifest.json` `parse_errors_total` and `pending_after_run` for unresolved
+  counts
 - `manifest.json`: locked prompt texts and hashes, schema, model, seed, selected
   words, and run configuration
 - `run.log`: collection log
@@ -118,6 +120,25 @@ Prompt quality should ultimately be ranked by recovery of the human feature
 norms after that common preprocessing/matching stage, not by raw feature count.
 Keeping all three prompt conditions in one run prevents model configuration or
 input ordering from becoming a prompt-condition confound.
+
+CSV fields such as `raw_json` can contain embedded newlines. Physical line
+counts from `wc -l` therefore do not equal CSV record counts. The manifest and
+CSV-aware readers are authoritative.
+
+## Offline revalidation
+
+Preserved raw responses can be reparsed after a validator-only correction
+without loading vLLM or making new model calls:
+
+```bash
+python -m leuven_expansion.revalidate_generations \
+  --output-dir artifacts/leuven_feature_generation/leuven_v3_qwen2_5_72b
+```
+
+The command appends corrected canonical records, keeps historical errors for
+audit, rebuilds both derived CSVs, saves the original manifest as
+`manifest.pre_revalidation.json`, and records the revalidation in the current
+manifest.
 
 ## Protocol guard
 

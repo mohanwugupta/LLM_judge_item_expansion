@@ -224,6 +224,43 @@ def test_v3_generation_prompt_hashes_are_distinct_for_comparison():
     assert len(hashes) == 3
 
 
+def test_v3_1_generation_prompts_lock_three_distinct_hypotheses():
+    prompts = load_generation_prompts("v3.1")
+    assert set(prompts) == {"A", "B", "C"}
+    assert len(set(prompts.values())) == 3
+    assert load_generation_prompt("v3.1") == prompts["A"]
+    assert "one participant" in prompts["A"].lower()
+    assert "order they come to mind" in prompts["A"].lower()
+    assert "ordinary participant" in prompts["B"].lower()
+    assert "do not plan a balanced list" in prompts["B"].lower()
+    assert "individual participant" in prompts["C"].lower()
+    assert "not produce an averaged" in prompts["C"].lower()
+    for prompt in prompts.values():
+        lower = prompt.lower()
+        assert "preferably" in lower
+        assert "physical or perceptual" in lower
+        assert "function" in lower
+        assert "background" in lower
+        assert '"target_word"' in prompt
+        assert '"features"' in prompt
+        assert "supplied feature list" in lower
+        assert "feature applicability" not in lower
+
+
+def test_v3_1_prompt_hashes_differ_from_v3():
+    message = build_generation_user_message("dog")
+    v3_hashes = {
+        prompt_hash(prompt, message)
+        for prompt in load_generation_prompts("v3").values()
+    }
+    v3_1_hashes = {
+        prompt_hash(prompt, message)
+        for prompt in load_generation_prompts("v3.1").values()
+    }
+    assert len(v3_1_hashes) == 3
+    assert v3_hashes.isdisjoint(v3_1_hashes)
+
+
 def test_v3_generation_user_message_contains_only_the_stimulus_word():
     message = build_generation_user_message("dog")
     assert message == "stimulus_word:\ndog"
