@@ -42,7 +42,7 @@ VOTE_COLUMNS = [
 RESOLUTION_COLUMNS = [
     "job_id", "word_normalized", "feature_id", "feature_text",
     "final_feature_value", "resolution_method", "needs_human_audit",
-    "adjudicated", "adjudication_trigger",
+    "adjudicated", "adjudication_trigger", "confidence", "ambiguous",
     # positive verification columns (populated only when verification is enabled)
     "pre_verification_feature_value",
     "verified_feature_value",

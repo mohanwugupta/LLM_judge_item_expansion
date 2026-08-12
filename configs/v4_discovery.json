@@ -1,0 +1,62 @@
+{
+  "protocol_version": "v4-discovery-0.1.0",
+  "prompt_version": "v4",
+  "generation_round": 1,
+  "prompt_files": {
+    "first_to_mind": "leuven_expansion/prompts/feature_generation_prompt_first_to_mind_v4.txt",
+    "perceptual_structural": "leuven_expansion/prompts/feature_generation_prompt_perceptual_structural_v4.txt",
+    "functional_affordance": "leuven_expansion/prompts/feature_generation_prompt_functional_affordance_v4.txt",
+    "taxonomic_definitional": "leuven_expansion/prompts/feature_generation_prompt_taxonomic_definitional_v4.txt",
+    "situational_relational": "leuven_expansion/prompts/feature_generation_prompt_situational_relational_v4.txt",
+    "encyclopedic_causal": "leuven_expansion/prompts/feature_generation_prompt_encyclopedic_causal_v4.txt",
+    "less_obvious_general": "leuven_expansion/prompts/feature_generation_prompt_less_obvious_general_v4.txt"
+  },
+  "prompt_family_metadata": {
+    "first_to_mind": {"role": "V3.1-B comparability anchor"},
+    "perceptual_structural": {"role": "perception, parts, and material breadth"},
+    "functional_affordance": {"role": "uses, actions, goals, and effects"},
+    "taxonomic_definitional": {"role": "category and defining properties"},
+    "situational_relational": {"role": "locations, agents, and thematic relations"},
+    "encyclopedic_causal": {"role": "origins, mechanisms, and consequences"},
+    "less_obvious_general": {"role": "valid low-salience properties"}
+  },
+  "generation": {
+    "responses_per_word_per_prompt": 20,
+    "temperature": 0.8,
+    "max_tokens": 500,
+    "base_seed": 20260801
+  },
+  "sources": [
+    {
+      "source_id": "v3_qwen2_5_72b_round0",
+      "path": "artifacts/leuven_feature_generation/leuven_v3_qwen2_5_72b",
+      "source_version": "v3",
+      "generation_round": 0,
+      "required": true
+    },
+    {
+      "source_id": "v3_1_qwen2_5_72b_round0",
+      "path": "artifacts/leuven_feature_generation/v3.1/leuven_v3.1_qwen2_5_72b",
+      "source_version": "v3.1",
+      "generation_round": 0,
+      "required": true
+    },
+    {
+      "source_id": "v4_qwen2_5_72b_round1",
+      "path": "artifacts/leuven_feature_generation/v4/round1/leuven_v4_qwen2_5_72b",
+      "source_version": "v4",
+      "generation_round": 1,
+      "required": false,
+      "required_for_primary_freeze": true
+    }
+  ],
+  "consolidation": {
+    "normalization_version": "v4-proposition-exact-1",
+    "embedding_model": "sentence-transformers/all-MiniLM-L6-v2",
+    "embedding_model_revision": "c9745ed1d9f207416be6d2e6f8de32d1f16199bf",
+    "embedding_similarity_threshold": 0.85,
+    "profile_similarity_threshold": 0.5,
+    "nearest_neighbors": 128,
+    "require_review_for_all_multi_phrase_clusters": true
+  }
+}

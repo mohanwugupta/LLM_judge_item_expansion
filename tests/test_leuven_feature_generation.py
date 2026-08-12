@@ -185,6 +185,29 @@ def test_v3_1_preflight_records_versioned_protocol_and_prompts(item_csv, tmp_pat
     assert not (tmp_path / "not_created").exists()
 
 
+def test_v4_preflight_loads_locked_configured_prompt_ensemble(item_csv, tmp_path):
+    config = Path(__file__).parents[1] / "configs" / "v4_discovery.json"
+    plan = preflight_feature_generation(
+        job_id="test_v4_smoke",
+        input_csv=item_csv,
+        output_dir=tmp_path / "not_created",
+        model="test-model",
+        prompt_version="v4",
+        prompt_config=config,
+        responses_per_word=2,
+        max_words=1,
+    )
+    assert plan["protocol_version"] == (
+        "leuven_free_generation_v4_configured_prompt_ensemble"
+    )
+    assert plan["generation_round"] == 1
+    assert len(plan["prompt_variants"]) == 7
+    assert plan["total_planned_responses"] == 14
+    assert set(plan["planned_responses_by_prompt"]) == set(plan["prompt_variants"])
+    assert plan["prompt_config_sha256"]
+    assert not (tmp_path / "not_created").exists()
+
+
 def test_mock_generation_writes_resumable_raw_and_derived_outputs(
     item_csv, tmp_path
 ):

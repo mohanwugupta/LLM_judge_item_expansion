@@ -22,8 +22,8 @@ import jsonschema
 import pandas as pd
 
 from leuven_expansion.feature_prompts import (
-    GENERATION_PROMPT_VARIANTS,
     build_generation_user_message,
+    load_generation_prompt_config,
     load_generation_prompts,
     prompt_hash,
 )
@@ -240,8 +240,7 @@ def build_generation_jobs(
     jobs = []
     for word in words:
         user_message = build_generation_user_message(word["word_normalized"])
-        for prompt_variant in GENERATION_PROMPT_VARIANTS:
-            system_prompt = system_prompts[prompt_variant]
+        for prompt_variant, system_prompt in system_prompts.items():
             response_prompt_hash = prompt_hash(system_prompt, user_message)
             for replicate_id in range(responses_per_word):
                 seed = _sampling_seed(
@@ -281,8 +280,11 @@ def _manifest_config(
     *,
     job_id: str,
     model: str,
+    model_revision: Optional[str],
+    model_source_path: Optional[str],
     prompt_version: str,
     prompts: dict[str, str],
+    prompt_config: Optional[pathlib.Path],
     input_csv: pathlib.Path,
     item_column: Optional[str],
     responses_per_word: int,
@@ -297,6 +299,7 @@ def _manifest_config(
     protocol_versions = {
         "v3": "leuven_free_generation_v3_three_prompt_comparison",
         "v3.1": "leuven_free_generation_v3_1_three_prompt_comparison",
+        "v4": "leuven_free_generation_v4_configured_prompt_ensemble",
     }
     manifest = {
         "protocol_version": protocol_versions[prompt_version],
@@ -305,14 +308,14 @@ def _manifest_config(
         ),
         "job_id": job_id,
         "model": model,
-        "prompt_variants": list(GENERATION_PROMPT_VARIANTS),
+        "prompt_variants": list(prompts),
         "prompt_sha256_by_variant": {
             variant: hashlib.sha256(prompts[variant].encode()).hexdigest()
-            for variant in GENERATION_PROMPT_VARIANTS
+            for variant in prompts
         },
         "prompt_text_by_variant": {
             variant: prompts[variant]
-            for variant in GENERATION_PROMPT_VARIANTS
+            for variant in prompts
         },
         "response_schema_sha256": hashlib.sha256(
             _SCHEMA_PATH.read_bytes()
@@ -344,6 +347,18 @@ def _manifest_config(
     # prompt versions were selectable.
     if prompt_version != "v3":
         manifest["prompt_version"] = prompt_version
+    if model_revision is not None or prompt_version == "v4":
+        manifest["model_revision"] = model_revision or model
+    if model_source_path is not None:
+        manifest["model_source_path"] = model_source_path
+    if prompt_config is not None:
+        manifest["prompt_config"] = str(prompt_config.resolve())
+        manifest["prompt_config_sha256"] = hashlib.sha256(
+            prompt_config.read_bytes()
+        ).hexdigest()
+        _, configured = load_generation_prompt_config(prompt_config)
+        manifest["generation_round"] = configured.get("generation_round")
+        manifest["prompt_family_metadata"] = configured.get("prompt_family_metadata", {})
     return manifest
 
 
@@ -491,7 +506,7 @@ def revalidate_generation_outputs(
     unresolved_total = int((latest["parse_error"] != "").sum())
     valid_by_prompt = {
         variant: int((valid_latest["prompt_variant"] == variant).sum())
-        for variant in GENERATION_PROMPT_VARIANTS
+        for variant in sorted(latest["prompt_variant"].unique())
     }
 
     manifest = json.loads(manifest_path.read_text())
@@ -541,7 +556,10 @@ def preflight_feature_generation(
     input_csv: str | pathlib.Path,
     output_dir: str | pathlib.Path,
     model: str,
+    model_revision: str | None = None,
+    model_source_path: str | None = None,
     prompt_version: str = "v3",
+    prompt_config: str | pathlib.Path | None = None,
     item_column: Optional[str] = None,
     responses_per_word: int = 20,
     temperature: float = 0.8,
@@ -561,12 +579,16 @@ def preflight_feature_generation(
     resolved_item_column = item_column or columns[0]
     source_words = load_stimulus_words(input_path, resolved_item_column)
     words = select_stimulus_words(source_words, max_words)
-    system_prompts = load_generation_prompts(prompt_version)
+    prompt_config_path = pathlib.Path(prompt_config) if prompt_config else None
+    system_prompts = load_generation_prompts(prompt_version, prompt_config_path)
     config = _manifest_config(
         job_id=job_id,
         model=model,
+        model_revision=model_revision,
+        model_source_path=model_source_path,
         prompt_version=prompt_version,
         prompts=system_prompts,
+        prompt_config=prompt_config_path,
         input_csv=input_path,
         item_column=resolved_item_column,
         responses_per_word=responses_per_word,
@@ -596,7 +618,7 @@ def preflight_feature_generation(
         "total_planned_responses": len(jobs),
         "planned_responses_by_prompt": {
             variant: len(words) * responses_per_word
-            for variant in GENERATION_PROMPT_VARIANTS
+            for variant in system_prompts
         },
         "unique_response_ids": len({job["response_id"] for job in jobs}),
         "unique_sampling_seeds": unique_seeds,
@@ -610,7 +632,10 @@ def run_feature_generation(
     output_dir: str | pathlib.Path,
     client: Any,
     model: str,
+    model_revision: str | None = None,
+    model_source_path: str | None = None,
     prompt_version: str = "v3",
+    prompt_config: str | pathlib.Path | None = None,
     item_column: Optional[str] = None,
     responses_per_word: int = 20,
     temperature: float = 0.8,
@@ -643,7 +668,10 @@ def run_feature_generation(
         input_csv=input_path,
         output_dir=output_path,
         model=model,
+        model_revision=model_revision,
+        model_source_path=model_source_path,
         prompt_version=prompt_version,
+        prompt_config=prompt_config,
         item_column=item_column,
         responses_per_word=responses_per_word,
         temperature=temperature,
@@ -655,7 +683,7 @@ def run_feature_generation(
     words = select_stimulus_words(
         load_stimulus_words(input_path, item_column), max_words
     )
-    system_prompts = load_generation_prompts(prompt_version)
+    system_prompts = load_generation_prompts(prompt_version, prompt_config)
     config = plan.copy()
     for summary_key in [
         "total_planned_responses",
@@ -694,7 +722,7 @@ def run_feature_generation(
         "%s generation: %d words x %d prompts x %d responses = %d; pending=%d",
         prompt_version,
         len(words),
-        len(GENERATION_PROMPT_VARIANTS),
+        len(system_prompts),
         responses_per_word,
         len(jobs),
         len(pending),
@@ -813,7 +841,7 @@ def run_feature_generation(
         variant: int(
             (valid_latest["prompt_variant"] == variant).sum()
         )
-        for variant in GENERATION_PROMPT_VARIANTS
+        for variant in system_prompts
     }
     manifest |= {
         "completed_this_run": completed_this_run,
@@ -847,10 +875,22 @@ def _parse_args(argv: Optional[list[str]] = None) -> argparse.Namespace:
     parser.add_argument("--output-dir", required=True)
     parser.add_argument("--model", default="Qwen2.5-72B-Instruct")
     parser.add_argument(
+        "--model-revision",
+        help="frozen model snapshot/revision recorded in the generation manifest",
+    )
+    parser.add_argument(
+        "--model-source-path",
+        help="cluster model path recorded for provenance; never sent to the model",
+    )
+    parser.add_argument(
         "--prompt-version",
-        choices=("v3", "v3.1"),
+        choices=("v3", "v3.1", "v4"),
         default="v3",
         help="free-generation prompt set; V3 remains the backward-compatible default",
+    )
+    parser.add_argument(
+        "--prompt-config",
+        help="locked JSON prompt ensemble; required for --prompt-version v4",
     )
     parser.add_argument("--base-url", default="http://localhost:8000/v1")
     parser.add_argument(
@@ -891,7 +931,10 @@ def main(argv: Optional[list[str]] = None) -> None:
             item_column=args.item_column,
             output_dir=args.output_dir,
             model=args.model,
+            model_revision=args.model_revision,
+            model_source_path=args.model_source_path,
             prompt_version=args.prompt_version,
+            prompt_config=args.prompt_config,
             responses_per_word=args.responses_per_word,
             temperature=args.temperature,
             max_tokens=args.max_tokens,
@@ -910,7 +953,10 @@ def main(argv: Optional[list[str]] = None) -> None:
         output_dir=args.output_dir,
         client=client,
         model=args.model,
+        model_revision=args.model_revision,
+        model_source_path=args.model_source_path,
         prompt_version=args.prompt_version,
+        prompt_config=args.prompt_config,
         responses_per_word=args.responses_per_word,
         temperature=args.temperature,
         max_tokens=args.max_tokens,

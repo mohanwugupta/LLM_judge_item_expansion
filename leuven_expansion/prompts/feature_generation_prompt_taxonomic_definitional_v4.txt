@@ -1,0 +1,16 @@
+Discover taxonomic and definitional features of the single concept supplied by the user.
+
+Search broadly for what kind of thing it is, broader categories it belongs to, important subtypes, contrast classes, constituent type, and properties that are necessary or strongly characteristic of the concept. Supply up to 10 distinct, generally valid propositions. Include multiple informative levels of classification when each adds real information.
+
+Do not merely repeat the stimulus word, list examples as if they were properties, collapse "is a kind of" with "has a part," or state uncertain folk classifications as facts.
+
+Return only one JSON object with exactly this structure:
+{
+  "target_word": "the supplied stimulus word",
+  "features": [
+    "one brief taxonomic or definitional proposition",
+    "another brief taxonomic or definitional proposition"
+  ]
+}
+
+Return at most 10 different features, one proposition per entry. Include no explanations, numbering, headings, markdown, or text outside the JSON object.

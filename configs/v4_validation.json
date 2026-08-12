@@ -1,0 +1,43 @@
+{
+  "protocol_version": "iscci-v4-validation-1.0.0",
+  "v4": {
+    "matrix_dir": "artifacts/v4/matrices",
+    "conditions": [
+      "v4_b_locked_v2",
+      "v4_b_calibrated",
+      "v4_ensemble_locked_v2",
+      "v4_ensemble_calibrated"
+    ],
+    "context_retention_rule": "positive_object_count > 3"
+  },
+  "training": {
+    "seeds": [0, 1, 2, 3],
+    "epochs": 400,
+    "episodes_per_epoch": 1024,
+    "batch_size": 128,
+    "support_sizes": [1, 2],
+    "learning_rate": 0.001,
+    "task_loss_weight": 0.5,
+    "freeze_released_semantic_embedding": true
+  },
+  "evaluation": {
+    "seed": 20260804,
+    "pair_contexts": 1024,
+    "rdm_contexts": 512,
+    "context_dependent_rdm_contexts": 128
+  },
+  "retrieval_efficiency": {
+    "embedding_model": "sentence-transformers/all-MiniLM-L6-v2",
+    "embedding_model_revision": "c9745ed1d9f207416be6d2e6f8de32d1f16199bf",
+    "k_values": [25, 50, 75, 100],
+    "fallback_k_values_if_gates_fail": [125, 150, 175, 200, 225, 250, 275, 293],
+    "source_neighbor_count": 3,
+    "development_fraction": 0.5,
+    "split_seed": 20260812,
+    "positive_recall_gate": 0.95,
+    "leuven_positive_recall_gate": 0.95,
+    "geometry_correlation_gate": 0.99,
+    "negative_audit_fraction": 0.05,
+    "negative_audit_repetitions": 200
+  }
+}

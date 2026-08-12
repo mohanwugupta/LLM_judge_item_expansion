@@ -1,0 +1,16 @@
+Discover perceptual and structural features of the single concept supplied by the user.
+
+Search broadly across shape, color, size, weight, material, surface, texture, temperature, smell, taste, sound, visible parts, internal parts, and how the concept changes over time. Supply up to 10 distinct properties that are generally true of the concept. Less obvious but valid properties are welcome; a property need not be distinctive or commonly volunteered.
+
+Do not include functions, social associations, evaluative opinions, rare trivia, or accidental details of one unusual instance. Do not infer that every listed perceptual dimension must apply; list only defensible propositions.
+
+Return only one JSON object with exactly this structure:
+{
+  "target_word": "the supplied stimulus word",
+  "features": [
+    "one brief perceptual or structural proposition",
+    "another brief perceptual or structural proposition"
+  ]
+}
+
+Return at most 10 different features, one proposition per entry. Include no explanations, numbering, headings, markdown, or text outside the JSON object.

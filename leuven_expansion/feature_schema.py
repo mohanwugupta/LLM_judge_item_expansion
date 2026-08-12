@@ -78,6 +78,61 @@ def load_leuven_feature_schema(
     }
 
 
+def load_candidate_feature_schema(
+    candidate_bank_csv: str | pathlib.Path,
+) -> Dict[str, Any]:
+    """Adapt a frozen V4 candidate bank to the existing integer feature interface."""
+    path = pathlib.Path(candidate_bank_csv)
+    bank = pd.read_csv(path, dtype=str).fillna("")
+    required = {
+        "candidate_id",
+        "canonical_feature_text",
+        "candidate_inventory_hash",
+    }
+    missing = required - set(bank.columns)
+    if missing:
+        raise ValueError(f"Candidate bank is missing columns: {sorted(missing)}")
+    if bank.empty:
+        raise ValueError("Candidate bank is empty")
+    if bank["candidate_id"].duplicated().any():
+        raise ValueError("Candidate IDs must be unique")
+    if (bank["candidate_id"].str.strip() == "").any() or (
+        bank["canonical_feature_text"].str.strip() == ""
+    ).any():
+        raise ValueError("Candidate IDs and feature texts must be non-empty")
+    inventory_hashes = set(bank["candidate_inventory_hash"])
+    if len(inventory_hashes) != 1:
+        raise ValueError("Candidate bank must contain exactly one inventory hash")
+    if "candidate_index" in bank:
+        index = pd.to_numeric(bank["candidate_index"], errors="raise").astype(int)
+        if sorted(index.tolist()) != list(range(len(bank))):
+            raise ValueError("candidate_index must be a complete zero-based sequence")
+        bank = bank.assign(_index=index).sort_values("_index")
+    else:
+        bank = bank.sort_values("candidate_id")
+    feature_columns = bank["canonical_feature_text"].tolist()
+    candidate_ids = bank["candidate_id"].tolist()
+    return {
+        "schema_version": "v4_candidate_feature_schema_v1",
+        "n_features": len(bank),
+        "feature_columns": feature_columns,
+        "feature_id_map": {
+            text: index for index, text in enumerate(feature_columns)
+        },
+        "candidate_ids": candidate_ids,
+        "candidate_id_by_feature_id": dict(enumerate(candidate_ids)),
+        "feature_id_by_candidate_id": {
+            candidate_id: index for index, candidate_id in enumerate(candidate_ids)
+        },
+        "candidate_inventory_hash": next(iter(inventory_hashes)),
+        "value_scale": {
+            "min": 0,
+            "max": 4,
+            "interpretation": "Leuven-style feature applicability",
+        },
+    }
+
+
 def get_feature_text(schema: Dict[str, Any], feature_id: int) -> str:
     """Return the feature text for a given feature_id integer index."""
     cols = schema["feature_columns"]

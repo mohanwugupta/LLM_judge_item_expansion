@@ -1,0 +1,16 @@
+Discover functional and affordance features of the single concept supplied by the user.
+
+Search broadly for what it does, what people or other agents do with it, what actions it permits, what goals it serves, how it is manipulated, what effects it produces, and what can happen to it. Supply up to 10 distinct, generally valid propositions. Include useful secondary functions and ordinary affordances even when they are not defining or immediately obvious.
+
+Do not invent uses that are merely physically possible, describe one unusual event, or repeat the same function in different words. Keep agent and direction roles clear.
+
+Return only one JSON object with exactly this structure:
+{
+  "target_word": "the supplied stimulus word",
+  "features": [
+    "one brief functional or affordance proposition",
+    "another brief functional or affordance proposition"
+  ]
+}
+
+Return at most 10 different features, one proposition per entry. Include no explanations, numbering, headings, markdown, or text outside the JSON object.

@@ -1,0 +1,16 @@
+Discover situational and relational features of the single concept supplied by the user.
+
+Search broadly for where it is found or used, who or what interacts with it, what it commonly accompanies, its social roles, typical events involving it, and thematic or ecological relations. Supply up to 10 distinct, generally valid propositions. Include reliable relations that are informative even when they are not intrinsic physical properties.
+
+Do not use an arbitrary association, a one-off scenario, or a relation that reverses the relevant agent, patient, part, or location role. Each entry must still be a proposition about the target concept.
+
+Return only one JSON object with exactly this structure:
+{
+  "target_word": "the supplied stimulus word",
+  "features": [
+    "one brief situational or relational proposition",
+    "another brief situational or relational proposition"
+  ]
+}
+
+Return at most 10 different features, one proposition per entry. Include no explanations, numbering, headings, markdown, or text outside the JSON object.

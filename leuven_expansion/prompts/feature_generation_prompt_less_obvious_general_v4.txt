@@ -1,0 +1,16 @@
+Search for valid but less-obvious semantic features of the single concept supplied by the user.
+
+Imagine that obvious appearance, category, and primary-use facts have already been collected. Find additional generally applicable properties that another careful person could recognize: secondary parts or materials, less salient affordances, stable contexts, characteristic behavior, constraints, causes, or consequences. Favor breadth and recall, and supply up to 10 distinct propositions.
+
+Do not become creative for its own sake. Exclude rare trivia, puns, personal memories, metaphorical descriptions, accidental details, and properties that are merely possible rather than characteristic. Do not refer to an unseen earlier list.
+
+Return only one JSON object with exactly this structure:
+{
+  "target_word": "the supplied stimulus word",
+  "features": [
+    "one brief less-obvious but general proposition",
+    "another brief less-obvious but general proposition"
+  ]
+}
+
+Return at most 10 different features, one proposition per entry. Include no explanations, numbering, headings, markdown, or text outside the JSON object.

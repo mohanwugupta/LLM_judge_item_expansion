@@ -95,8 +95,41 @@ def load_prompts_by_version(version: str) -> Dict[str, str]:
     raise ValueError(f"Unknown prompt version: {version!r}. Expected 'v2'.")
 
 
-def load_generation_prompts(version: str = "v3") -> Dict[str, str]:
+def load_generation_prompt_config(
+    prompt_config: str | pathlib.Path,
+) -> tuple[Dict[str, str], Dict[str, object]]:
+    """Load a locked named prompt ensemble without changing the generation client."""
+    config_path = pathlib.Path(prompt_config).resolve()
+    config = json.loads(config_path.read_text(encoding="utf-8"))
+    if config.get("prompt_version") != "v4":
+        raise ValueError("A configurable generation ensemble must declare prompt_version='v4'")
+    prompt_files = config.get("prompt_files")
+    if not isinstance(prompt_files, dict) or not prompt_files:
+        raise ValueError("V4 prompt configuration requires a non-empty prompt_files mapping")
+    prompts: Dict[str, str] = {}
+    for family, configured_path in prompt_files.items():
+        if not isinstance(family, str) or not family.strip():
+            raise ValueError("V4 prompt-family names must be non-empty strings")
+        path = pathlib.Path(str(configured_path))
+        if not path.is_absolute():
+            path = (config_path.parent.parent / path).resolve()
+        prompts[family] = load_prompt(path)
+    if len(set(prompts.values())) != len(prompts):
+        raise ValueError("V4 prompt families must contain distinct prompt texts")
+    return prompts, config
+
+
+def load_generation_prompts(
+    version: str = "v3",
+    prompt_config: str | pathlib.Path | None = None,
+) -> Dict[str, str]:
     """Return the three Leuven-style free-generation prompt conditions."""
+    if version == "v4":
+        if prompt_config is None:
+            raise ValueError("V4 generation requires --prompt-config")
+        return load_generation_prompt_config(prompt_config)[0]
+    if prompt_config is not None:
+        raise ValueError("--prompt-config is only valid with prompt version v4")
     if version not in _GENERATION_PROMPT_FILES_BY_VERSION:
         raise ValueError(
             f"Unknown generation prompt version: {version!r}; "
@@ -108,14 +141,19 @@ def load_generation_prompts(version: str = "v3") -> Dict[str, str]:
     }
 
 
-def load_generation_prompt(version: str = "v3", variant: str = "A") -> str:
+def load_generation_prompt(
+    version: str = "v3",
+    variant: str = "A",
+    prompt_config: str | pathlib.Path | None = None,
+) -> str:
     """Return one generation condition; variant A is the fidelity control."""
-    if variant not in GENERATION_PROMPT_VARIANTS:
+    prompts = load_generation_prompts(version, prompt_config)
+    if variant not in prompts:
         raise ValueError(
             f"Unknown {version} generation prompt variant: {variant!r}; "
-            f"expected one of {GENERATION_PROMPT_VARIANTS}"
+            f"expected one of {tuple(prompts)}"
         )
-    return load_generation_prompts(version)[variant]
+    return prompts[variant]
 
 
 def build_generation_user_message(word_normalized: str) -> str:

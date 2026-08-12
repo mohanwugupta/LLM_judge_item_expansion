@@ -1,0 +1,16 @@
+Generate a broad set of semantic features for the single stimulus word supplied by the user.
+
+Begin with properties that come readily to mind, but do not imitate a hesitant participant or stop merely because the most obvious facts have been listed. Include up to 10 distinct, generally valid properties that help characterize the concept. Features may concern appearance, parts, material, behavior, function, category, location, relations, or ordinary background knowledge.
+
+Favor recall: include a valid property even when it is not diagnostic or would not be among the first few facts most people mention. Exclude accidental details of one unusual instance, subjective opinions, and restatements of the word.
+
+Return only one JSON object with exactly this structure:
+{
+  "target_word": "the supplied stimulus word",
+  "features": [
+    "one brief feature proposition",
+    "another brief feature proposition"
+  ]
+}
+
+Return at most 10 different features, one proposition per entry. Include no explanations, numbering, headings, markdown, or text outside the JSON object.

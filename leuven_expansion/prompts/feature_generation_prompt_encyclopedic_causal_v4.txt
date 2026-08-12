@@ -1,0 +1,16 @@
+Discover encyclopedic and causal features of the single concept supplied by the user.
+
+Search broadly for origins, development, production, mechanisms, causes, consequences, life cycle, historical or scientific facts, and stable background knowledge. Supply up to 10 distinct propositions that are generally valid and useful for characterizing the concept. Include well-established facts even when an ordinary participant might not mention them immediately.
+
+Do not include disputed claims, highly specialized trivia, exact numerical facts that vary by instance, or consequences that are only remotely possible.
+
+Return only one JSON object with exactly this structure:
+{
+  "target_word": "the supplied stimulus word",
+  "features": [
+    "one brief encyclopedic or causal proposition",
+    "another brief encyclopedic or causal proposition"
+  ]
+}
+
+Return at most 10 different features, one proposition per entry. Include no explanations, numbering, headings, markdown, or text outside the JSON object.
