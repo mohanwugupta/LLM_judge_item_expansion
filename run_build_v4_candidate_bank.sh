@@ -5,7 +5,7 @@
 #SBATCH --cpus-per-task=32
 #SBATCH --mem=32G
 #SBATCH --partition=cpu
-#SBATCH --time=1:00:00
+#SBATCH --time=12:00:00
 #SBATCH --mail-type=begin
 #SBATCH --mail-type=end
 #SBATCH --mail-user=mg9965@princeton.edu
@@ -16,6 +16,15 @@
 # embeddings). The embedding call in iscci_validation/consolidation.py is
 # hardcoded to device="cpu", so this does not need a GPU allocation --
 # it just needs dedicated CPU threads instead of a contended login node.
+#
+# 2026-08-19: a prior attempt with --time=1:00:00 hit TIMEOUT with only
+# ~5% CPU utilization and no stage-level log output, so we could not tell
+# which step (embedding encode, phrase-profile counting, or the
+# nearest-neighbor merge in consolidate_phrase_types) was the bottleneck.
+# build_v4_candidate_bank.py now prints a [timing] line after each major
+# stage; --time is set generously here for this diagnostic run so the
+# job can finish and the logs can tell us where the real cost is before
+# tightening this value again.
 
 set -eo pipefail
 

@@ -5,6 +5,7 @@ from __future__ import annotations
 import argparse
 import json
 import sys
+import time
 from datetime import datetime, timezone
 from pathlib import Path
 
@@ -200,6 +201,14 @@ def proposed_clusters(
     output_dir: Path,
     force_embeddings: bool,
 ) -> tuple[list[list[str]], pd.DataFrame]:
+    step_start = time.monotonic()
+
+    def step(label: str) -> None:
+        nonlocal step_start
+        now = time.monotonic()
+        print(f"[timing] proposed_clusters/{label}: {now - step_start:.1f}s", file=sys.stderr, flush=True)
+        step_start = now
+
     consolidation = dict(config["consolidation"])
     phrases = sorted(
         set(long_data["feature_text_normalized"].unique()) - excluded_phrases
@@ -207,6 +216,11 @@ def proposed_clusters(
     if not phrases:
         return [], pd.DataFrame(columns=REVIEW_COLUMNS)
     words = sorted(long_data["word_normalized"].unique())
+    print(
+        f"[timing] proposed_clusters: {len(phrases)} unique phrases, {len(words)} words",
+        file=sys.stderr,
+        flush=True,
+    )
     embedding_path = output_dir / "candidate_phrase_embeddings.npz"
     if embedding_path.exists() and not force_embeddings:
         cached = np.load(embedding_path, allow_pickle=False)
@@ -234,8 +248,10 @@ def proposed_clusters(
             phrases=np.asarray(phrases),
             embeddings=embeddings,
         )
+    step("embeddings (load cache or encode)")
     subset = long_data.loc[long_data["feature_text_normalized"].isin(phrases)]
     profiles = build_phrase_profiles(subset, phrases, words)
+    step("build_phrase_profiles")
     clusters = consolidate_phrase_types(
         phrases,
         embeddings,
@@ -244,10 +260,12 @@ def proposed_clusters(
         profile_threshold=float(consolidation["profile_similarity_threshold"]),
         nearest_neighbors=int(consolidation["nearest_neighbors"]),
     )
+    step("consolidate_phrase_types (nearest-neighbor + union-find)")
     frequencies = subset.groupby("feature_text_normalized").size()
     assignments = make_assignments(
         "v4", phrases, clusters, embeddings, profiles, frequencies
     )
+    step("make_assignments")
     proposed: list[list[str]] = []
     review_rows: list[dict[str, object]] = []
     for cluster_id, group in assignments.groupby("cluster_id", sort=True):
@@ -267,6 +285,7 @@ def proposed_clusters(
                     "reviewed_at": "",
                 }
             )
+    step("build proposed/review rows")
     return proposed, pd.DataFrame(review_rows, columns=REVIEW_COLUMNS)
 
 
@@ -460,13 +479,20 @@ def main() -> None:
     )
     args = parser.parse_args()
 
+    def checkpoint(label: str, _last: list[float] = [time.monotonic()]) -> None:
+        now = time.monotonic()
+        print(f"[timing] {label}: {now - _last[0]:.1f}s", file=sys.stderr, flush=True)
+        _last[0] = now
+
     config = json.loads(args.config.read_text(encoding="utf-8"))
     output = args.output_dir.resolve()
     output.mkdir(parents=True, exist_ok=True)
     long_data, source_inventory = load_generation_sources(config)
+    checkpoint("load_generation_sources")
     source_inventory.to_csv(output / "source_inventory.csv", index=False)
     normalization_version = str(config["consolidation"]["normalization_version"])
     fixed, fixed_phrase_ids, fixed_hash = load_fixed_v3_1_b(normalization_version)
+    checkpoint("load_fixed_v3_1_b")
     fixed_source = long_data.loc[
         long_data["feature_text_normalized"].isin(fixed_phrase_ids)
     ].copy()
@@ -477,6 +503,7 @@ def main() -> None:
         fixed_phrase_ids,
         normalization_version,
     )
+    checkpoint("build_bank (fixed 175 subset)")
     fixed_bank = fixed_bank.sort_values("fixed_v3_1_b_order")
     fixed_bank["candidate_index"] = range(len(fixed_bank))
     fixed_bank["candidate_inventory_hash"] = fixed_hash
@@ -488,10 +515,12 @@ def main() -> None:
         output,
         args.force_embeddings,
     )
+    checkpoint("proposed_clusters (embeddings + nearest-neighbor merge)")
     review_candidates.to_csv(output / "candidate_merge_candidates.csv", index=False)
     final_clusters, merged_review = apply_review(
         proposed, review_candidates, args.manual_review.resolve()
     )
+    checkpoint("apply_review")
     if args.auto_approve_merges:
         merged_review = auto_approve_pending_verdicts(
             merged_review, config["consolidation"]
@@ -501,6 +530,7 @@ def main() -> None:
         # file so they remain a documented, auditable record rather than a
         # silent runtime override.
         merged_review.to_csv(args.manual_review.resolve(), index=False)
+        checkpoint("auto_approve_pending_verdicts")
     merged_review.to_csv(output / "candidate_merge_review.csv", index=False)
     pending_review = merged_review.loc[~merged_review["verdict"].isin(["pass", "reject"])]
     if not pending_review.empty:
