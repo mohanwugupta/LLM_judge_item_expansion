@@ -378,13 +378,18 @@ def build_bank(
 ) -> tuple[pd.DataFrame, pd.DataFrame]:
     phrase_to_candidate = dict(fixed_phrase_ids)
     candidate_rows = fixed.to_dict(orient="records")
+    # Precompute phrase frequencies once (O(n_long_data)) instead of
+    # re-scanning long_data with .isin(members) inside the loop below
+    # (previously O(n_clusters * n_long_data), the dominant cost for the
+    # full pooled-ensemble bank -- see build_v4_bank_12645686 TIMEOUT).
+    frequency_by_phrase = long_data.groupby("feature_text_normalized").size()
     for members in clusters:
         candidate_id = stable_candidate_id(members, normalization_version)
         phrase_to_candidate.update({member: candidate_id for member in members})
-        frequencies = long_data.loc[
-            long_data["feature_text_normalized"].isin(members)
-        ].groupby("feature_text_normalized").size()
-        canonical = sorted(members, key=lambda value: (-int(frequencies.get(value, 0)), len(value), value))[0]
+        canonical = sorted(
+            members,
+            key=lambda value: (-int(frequency_by_phrase.get(value, 0)), len(value), value),
+        )[0]
         candidate_rows.append(
             {
                 "candidate_id": candidate_id,
@@ -562,6 +567,7 @@ def main() -> None:
         fixed_phrase_ids,
         normalization_version,
     )
+    checkpoint(f"build_bank (full, {len(final_clusters)} clusters)")
     fixed_ids = set(fixed["candidate_id"])
     fixed_bank = bank.loc[bank["candidate_id"].isin(fixed_ids)].copy()
     fixed_bank = fixed_bank.sort_values("fixed_v3_1_b_order")
