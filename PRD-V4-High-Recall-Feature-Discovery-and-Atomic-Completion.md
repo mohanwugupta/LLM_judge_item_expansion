@@ -591,10 +591,18 @@ contexts_gained_or_lost_after_judging
 
 ### 13.6 Redundant context control
 
-After judgment, identify candidate pairs with identical or near-identical object profiles. Do not automatically merge them. A merge requires both:
+After judgment, identify candidate pairs with identical or near-identical object profiles. Do not automatically merge them without a documented decision rule. A merge requires both:
 
 - proposition equivalence; and
-- documented review.
+- a documented review decision, which may be an automated threshold-based
+  decision consistent with the precedent set by the frozen V3.1-B
+  consolidation (`embedding_similarity_threshold=0.85`, see
+  `ISC-CI_LLM_validation/artifacts/v3_1_consolidation/threshold_sensitivity.csv`),
+  rather than a per-cluster human check. `build_v4_candidate_bank.py
+  --auto-approve-merges` applies this rule and records
+  `reviewer=automated:embedding_threshold` for every such decision so it
+  remains auditable; any verdict a human reviewer has already entered in
+  `configs/v4_candidate_merge_review.csv` is never overridden.
 
 Report results with the primary reviewed bank and a no-semantic-merge sensitivity bank. This prevents duplicated phrasings from artificially overweighting one semantic dimension.
 

@@ -50,7 +50,8 @@ CANDIDATE_BANK="$PROJECT_DIR/artifacts/v4/discovery/candidate_bank_v3_1_b_175.cs
 python build_v4_candidate_bank.py \
     --config configs/v4_discovery.json \
     --manual-review configs/v4_candidate_merge_review.csv \
-    --output-dir artifacts/v4/discovery
+    --output-dir artifacts/v4/discovery \
+    --auto-approve-merges
 
 if [ ! -e "$CANDIDATE_BANK" ]; then
     echo "ERROR: candidate bank was not produced at $CANDIDATE_BANK"

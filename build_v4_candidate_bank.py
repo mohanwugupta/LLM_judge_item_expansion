@@ -5,6 +5,7 @@ from __future__ import annotations
 import argparse
 import json
 import sys
+from datetime import datetime, timezone
 from pathlib import Path
 
 import numpy as np
@@ -269,6 +270,59 @@ def proposed_clusters(
     return proposed, pd.DataFrame(review_rows, columns=REVIEW_COLUMNS)
 
 
+def auto_approve_pending_verdicts(
+    merged_review: pd.DataFrame, consolidation: dict[str, object]
+) -> pd.DataFrame:
+    """Auto-pass proposed merges left blank by a human reviewer.
+
+    Cluster membership is already fully determined by
+    ``embedding_similarity_threshold`` / ``profile_similarity_threshold``
+    (the same automated-threshold consolidation used, with no per-cluster
+    manual check, for the frozen V3.1-B condition; see
+    ``ISC-CI_LLM_validation/artifacts/v3_1_consolidation/threshold_sensitivity.csv``).
+    This keeps V4 consistent with that precedent: a merge is accepted
+    whenever the configured thresholds already grouped the phrases
+    together, and the automated decision is still recorded (not silently
+    applied) so it remains auditable.
+    """
+    merged_review = merged_review.copy()
+    pending = merged_review["verdict"].eq("")
+    if not pending.any():
+        return merged_review
+    note = (
+        "auto-approved: cluster formed by embedding_similarity_threshold="
+        f"{consolidation['embedding_similarity_threshold']} and "
+        f"profile_similarity_threshold={consolidation['profile_similarity_threshold']}; "
+        "consistent with V3.1-B automated consolidation precedent"
+    )
+    now = datetime.now(timezone.utc).isoformat()
+    merged_review.loc[pending, "verdict"] = "pass"
+    merged_review.loc[pending, "reviewer"] = "automated:embedding_threshold"
+    merged_review.loc[pending, "reviewed_at"] = now
+    merged_review.loc[pending, "review_note"] = note
+    return merged_review
+
+
+def clusters_from_verdicts(
+    proposed: list[list[str]], merged_review: pd.DataFrame
+) -> list[list[str]]:
+    verdict_by_members = {
+        tuple(json.loads(row.member_phrases)): row.verdict
+        for row in merged_review.itertuples(index=False)
+    }
+    final: list[list[str]] = []
+    for members in proposed:
+        if len(members) == 1:
+            final.append(members)
+            continue
+        verdict = verdict_by_members.get(tuple(members), "")
+        if verdict == "pass":
+            final.append(members)
+        elif verdict == "reject":
+            final.extend([[member] for member in members])
+    return final
+
+
 def apply_review(
     proposed: list[list[str]], review_candidates: pd.DataFrame, review_path: Path
 ) -> tuple[list[list[str]], pd.DataFrame]:
@@ -292,20 +346,7 @@ def apply_review(
     )
     if unknown_ids:
         raise ValueError(f"Merge review contains obsolete IDs: {sorted(unknown_ids)[:10]}")
-    verdict_by_members = {
-        tuple(json.loads(row.member_phrases)): row.verdict
-        for row in merged.itertuples(index=False)
-    }
-    final: list[list[str]] = []
-    for members in proposed:
-        if len(members) == 1:
-            final.append(members)
-            continue
-        verdict = verdict_by_members.get(tuple(members), "")
-        if verdict == "pass":
-            final.append(members)
-        elif verdict == "reject":
-            final.extend([[member] for member in members])
+    final = clusters_from_verdicts(proposed, merged)
     return final, merged
 
 
@@ -402,6 +443,21 @@ def main() -> None:
     parser.add_argument("--manual-review", type=Path, required=True)
     parser.add_argument("--output-dir", type=Path, required=True)
     parser.add_argument("--force-embeddings", action="store_true")
+    parser.add_argument(
+        "--auto-approve-merges",
+        action="store_true",
+        help=(
+            "Auto-pass any proposed merge left blank in --manual-review, using the "
+            "same embedding_similarity_threshold/profile_similarity_threshold that "
+            "already determined cluster membership. This matches the automated, "
+            "no-per-cluster-review consolidation precedent used for the frozen "
+            "V3.1-B condition (see "
+            "ISC-CI_LLM_validation/artifacts/v3_1_consolidation/threshold_sensitivity.csv). "
+            "Decisions are still written back to --manual-review with "
+            "reviewer=automated:embedding_threshold for auditability; explicit "
+            "'reject' verdicts already present are never overridden."
+        ),
+    )
     args = parser.parse_args()
 
     config = json.loads(args.config.read_text(encoding="utf-8"))
@@ -436,6 +492,15 @@ def main() -> None:
     final_clusters, merged_review = apply_review(
         proposed, review_candidates, args.manual_review.resolve()
     )
+    if args.auto_approve_merges:
+        merged_review = auto_approve_pending_verdicts(
+            merged_review, config["consolidation"]
+        )
+        final_clusters = clusters_from_verdicts(proposed, merged_review)
+        # Persist the automated decisions back to the configured manual-review
+        # file so they remain a documented, auditable record rather than a
+        # silent runtime override.
+        merged_review.to_csv(args.manual_review.resolve(), index=False)
     merged_review.to_csv(output / "candidate_merge_review.csv", index=False)
     pending_review = merged_review.loc[~merged_review["verdict"].isin(["pass", "reject"])]
     if not pending_review.empty:

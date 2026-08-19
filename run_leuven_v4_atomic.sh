@@ -6,8 +6,8 @@
 #SBATCH --mem=96G
 #SBATCH --gres=gpu:4
 #SBATCH --constraint=gpu80
-#SBATCH --array=0-31%4
-#SBATCH --time=72:00:00
+#SBATCH --array=0-31%8
+#SBATCH --time=8:00:00
 #SBATCH --mail-type=begin
 #SBATCH --mail-type=end
 #SBATCH --mail-user=mg9965@princeton.edu
@@ -15,6 +15,16 @@
 #SBATCH --error=/scratch/gpfs/JORDANAT/mg9965/FalseMemoryISC-CI/logs/leuven_v4_atomic_%A_%a.err
 
 # Exhaustive V4 candidate x Leuven judgment using the executed V2 panel.
+#
+# Runtime estimate (2026-08-19): the leuven_full_v2 baseline (same 4-GPU
+# tensor-parallel-size=4, max-workers=64 vLLM config) completed 363,415
+# judgment calls in 58.25 wall-clock hours (~6,240 calls/hour); even using
+# the slower ~100-hour real-world estimate for that run (~3,634 calls/hour),
+# this job's ~170,600-179,000 total planned calls split across 32 shards
+# should finish in well under 2 hours per shard. --time is set with a
+# generous ~4x safety margin over that conservative estimate rather than
+# the previous 72-hour ceiling, which was far larger than the workload
+# requires and can hurt scheduling/backfill priority on a shared cluster.
 
 set -eo pipefail
 

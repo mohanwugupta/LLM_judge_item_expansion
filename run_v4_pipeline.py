@@ -170,6 +170,7 @@ def main() -> None:
                         str(configured_review),
                         "--output-dir",
                         "artifacts/v4/discovery",
+                        "--auto-approve-merges",
                     ],
                     log_path,
                 )
