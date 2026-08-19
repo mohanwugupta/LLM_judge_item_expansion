@@ -24,6 +24,7 @@ artifacts/
 
 # ISC-CI_LLM_validation: keep source code tracked, ignore generated outputs
 ISC-CI_LLM_validation/artifacts/
+!ISC-CI_LLM_validation/artifacts/v3_1_consolidation/
 ISC-CI_LLM_validation/reports/
 ISC-CI_LLM_validation/upstream/
 ISC-CI_LLM_validation/__pycache__/

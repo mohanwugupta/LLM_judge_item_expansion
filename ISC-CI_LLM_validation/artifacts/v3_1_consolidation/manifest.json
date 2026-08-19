@@ -1,0 +1,92 @@
+{
+  "artifact_prefix": "v3_1",
+  "created_at": "2026-08-08T16:09:58.500970+00:00",
+  "embedding_model_file": "/Users/mg9965/.cache/huggingface/hub/models--sentence-transformers--all-MiniLM-L6-v2/snapshots/c9745ed1d9f207416be6d2e6f8de32d1f16199bf/model.safetensors",
+  "embedding_model_file_sha256": "53aa51172d142c89d9012cce15ae4d6cc0ca6895895114379cacb4fab128d9db",
+  "environment": {
+    "packages": {
+      "numpy": "2.2.6",
+      "pandas": "2.3.2",
+      "scikit-learn": "1.7.1",
+      "scipy": "1.16.1",
+      "sentence-transformers": "5.1.2",
+      "torch": "2.8.0",
+      "transformers": "4.56.1"
+    },
+    "platform": "macOS-26.5.2-arm64-arm-64bit",
+    "python": "3.11.8 (main, Aug 21 2025, 14:08:53) [Clang 17.0.0 (clang-1700.0.13.3)]"
+  },
+  "inputs": {
+    "config": "/Users/mg9965/Library/CloudStorage/Box-Box/ResearchProjects/FalseMemoryISC-CI/LLM_judge_item_expansion/ISC-CI_LLM_validation/configs/v3_1_validation.json",
+    "config_sha256": "ff2333853578154338ca1d7cac0ad80e9d36d38ea2de1c07d977355c6748812a",
+    "human_csv": "/Users/mg9965/Library/CloudStorage/Box-Box/ResearchProjects/FalseMemoryISC-CI/LLM_judge_item_expansion/ISC-CI_LLM_validation/upstream/IntegratedSemanticsControlContextInference/data/leuven_dataset/leuven_combined_features_consolidated.csv",
+    "human_csv_sha256": "0c99ceb4e28f58150d0886c99c5b012f0e12b658fa6f965e6cc32ca85dc3102a",
+    "long_csv": "/Users/mg9965/Library/CloudStorage/Box-Box/ResearchProjects/FalseMemoryISC-CI/LLM_judge_item_expansion/artifacts/leuven_feature_generation/v3.1/leuven_v3.1_qwen2_5_72b/generated_features_long.csv",
+    "long_csv_sha256": "ad26922d039eb692596d9c9a2109bc6227bf854621277898af8a0880dcf7f639",
+    "manual_review_csv": "/Users/mg9965/Library/CloudStorage/Box-Box/ResearchProjects/FalseMemoryISC-CI/LLM_judge_item_expansion/ISC-CI_LLM_validation/configs/v3_1_consolidation_manual_review.csv",
+    "manual_review_csv_sha256": "7354a97a1c1e0527122c7b8b826a8766293a5baf84a801dd5d755ecd1d27e088"
+  },
+  "parameters": {
+    "embedding_model": "sentence-transformers/all-MiniLM-L6-v2",
+    "embedding_model_revision": "c9745ed1d9f207416be6d2e6f8de32d1f16199bf",
+    "embedding_similarity_threshold": 0.85,
+    "nearest_neighbors": 128,
+    "object_cutoff": 3,
+    "profile_similarity_threshold": 0.5,
+    "rater_cutoff": 3
+  },
+  "primary_summary": [
+    {
+      "clusters_total": 13212,
+      "embedding_threshold": 0.85,
+      "largest_cluster_size": 11,
+      "merged_phrase_types": 4238,
+      "multi_phrase_clusters": 3250,
+      "phrase_types": 17450,
+      "positive_word_cluster_pairs": 4750,
+      "prompt_variant": "A",
+      "retained_training_tasks": 88,
+      "training_density": 0.021214706794911574,
+      "training_positive_cells": 547
+    },
+    {
+      "clusters_total": 8552,
+      "embedding_threshold": 0.85,
+      "largest_cluster_size": 9,
+      "merged_phrase_types": 2269,
+      "multi_phrase_clusters": 1754,
+      "phrase_types": 10821,
+      "positive_word_cluster_pairs": 4728,
+      "prompt_variant": "B",
+      "retained_training_tasks": 175,
+      "training_density": 0.02363725012189176,
+      "training_positive_cells": 1212
+    },
+    {
+      "clusters_total": 11354,
+      "embedding_threshold": 0.85,
+      "largest_cluster_size": 11,
+      "merged_phrase_types": 3231,
+      "multi_phrase_clusters": 2532,
+      "phrase_types": 14585,
+      "positive_word_cluster_pairs": 4724,
+      "prompt_variant": "C",
+      "retained_training_tasks": 128,
+      "training_density": 0.02295755119453925,
+      "training_positive_cells": 861
+    }
+  ],
+  "prompt_handling": "separate conditions; no pooling across A/B/C",
+  "proposed_retained_semantic_clusters_reviewed": 5,
+  "protocol_version": "iscci-v3.1-validation-0.4.0",
+  "response_counting": "deduplicate cluster within response, then count unique response IDs",
+  "retained_semantic_clusters_manually_reviewed": 4,
+  "retained_semantic_clusters_rejected_and_split": 1,
+  "source_cjk_responses": 1,
+  "source_cjk_rows": 1,
+  "source_phrase_types": 31198,
+  "source_responses": 17580,
+  "source_rows": 175766,
+  "source_words": 293,
+  "threshold_semantics": "strict response_frequency > rater_cutoff, then strict positive_objects > object_cutoff"
+}

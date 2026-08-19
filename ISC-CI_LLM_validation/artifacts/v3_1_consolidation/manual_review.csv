@@ -1,0 +1,6 @@
+cluster_id,prompt_variant,cluster_members,verdict,review_note,reviewed_at,reviewer
+A_a3ccc8f335fe,A,can grow up to several meters in length | can grow up to several meters long,pass,Equivalent surface forms of the same maximum-length property.,2026-08-08,Codex-assisted review
+B_96975afbf780,B,laid eggs in water | lay eggs in water | lays eggs in water,pass,Inflection and tense variants of the same egg-laying property.,2026-08-08,Codex-assisted review
+B_f4b6c3fac41b,B,is endangered in some species | some species are endangered,pass,Equivalent word order for the same species-qualified endangered status.,2026-08-08,Codex-assisted review
+C_3a8096bbc2ea,C,driven on highways | driven on roads,reject,Highways are a narrower road type; preserve these as separate propositions.,2026-08-08,Codex-assisted review
+C_cd1c9a4be33e,C,common in cities | common in urban areas,pass,Equivalent ordinary descriptions of urban prevalence.,2026-08-08,Codex-assisted review
