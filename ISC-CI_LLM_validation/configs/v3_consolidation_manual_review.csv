@@ -1,0 +1,8 @@
+cluster_id,prompt_variant,cluster_members,verdict,review_note,reviewed_at,reviewer
+A_b65898859f15,A,"nocturnal activity | nocturnal behavior | nocturnal habits",pass,"Equivalent descriptions of nocturnal behavior.",2026-08-04,Codex-assisted review
+B_96975afbf780,B,"laid eggs in water | lay eggs in water | lays eggs in water",pass,"Inflection and tense variants of the same property.",2026-08-04,Codex-assisted review
+B_ce94a8a4970f,B,"nocturnal activity | nocturnal behavior",pass,"Equivalent descriptions of nocturnal behavior.",2026-08-04,Codex-assisted review
+B_eb52822ae0ae,B,"popular in urban areas | popular in urban environments",pass,"Equivalent location descriptions in this feature-norm context.",2026-08-04,Codex-assisted review
+B_2e053a1504f7,B,"high in omega-3 fatty acids | rich in omega-3 fatty acids",pass,"Equivalent nutrient-content descriptions.",2026-08-04,Codex-assisted review
+C_64aa143c3e90,C,"durable build | durable construction",pass,"Equivalent construction/durability descriptions.",2026-08-04,Codex-assisted review
+C_6bef719e328d,C,"powerful jaws | strong jaws",pass,"Equivalent jaw-strength descriptions.",2026-08-04,Codex-assisted review

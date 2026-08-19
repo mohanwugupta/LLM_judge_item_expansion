@@ -1,0 +1,30 @@
+{
+  "protocol_version": "iscci-v3-validation-0.3.0",
+  "prompts": ["A", "B", "C"],
+  "consolidation": {
+    "embedding_model": "sentence-transformers/all-MiniLM-L6-v2",
+    "embedding_model_revision": "c9745ed1d9f207416be6d2e6f8de32d1f16199bf",
+    "embedding_similarity_threshold": 0.85,
+    "profile_similarity_threshold": 0.5,
+    "nearest_neighbors": 128,
+    "sensitivity_embedding_thresholds": [0.8, 0.825, 0.85, 0.875, 0.9],
+    "rater_cutoff_strictly_greater_than": 3,
+    "object_cutoff_strictly_greater_than": 3
+  },
+  "training": {
+    "seeds": [0, 1, 2, 3],
+    "epochs": 400,
+    "episodes_per_epoch": 1024,
+    "batch_size": 128,
+    "support_sizes": [1, 2],
+    "learning_rate": 0.001,
+    "task_loss_weight": 0.5,
+    "freeze_released_semantic_embedding": true
+  },
+  "evaluation": {
+    "seed": 20260804,
+    "pair_contexts": 1024,
+    "rdm_contexts": 512,
+    "context_dependent_rdm_contexts": 128
+  }
+}

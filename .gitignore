@@ -21,7 +21,13 @@ htmlcov/
 
 # Large artifacts (outputs from pipeline runs)
 artifacts/
-ISC-CI_LLM_validation/
+
+# ISC-CI_LLM_validation: keep source code tracked, ignore generated outputs
+ISC-CI_LLM_validation/artifacts/
+ISC-CI_LLM_validation/reports/
+ISC-CI_LLM_validation/upstream/
+ISC-CI_LLM_validation/__pycache__/
+ISC-CI_LLM_validation/**/__pycache__/
 
 # Jupyter
 .ipynb_checkpoints/
