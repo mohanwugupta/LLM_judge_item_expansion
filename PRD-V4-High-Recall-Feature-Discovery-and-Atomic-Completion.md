@@ -1,5 +1,43 @@
 # PRD: V4 High-Recall Feature Discovery and Atomic Completion for ISC-CI
 
+## Approved execution amendment (2026-08-24)
+
+The completed discovery run produced a frozen bank of 133,081 candidates
+(`candidate_inventory_hash = cf0af7b1c8126e2a06ad162e916685b75a298c3cf8da9a89b8ecd9e9652da3fd`).
+At the investigator's direction, the proposed consolidation decisions were applied
+automatically rather than waiting for manual review. All 56,294 proposed merges were
+accepted. This is a deliberate deviation from the conservative manual-review language
+below and must remain visible in sensitivity analyses.
+
+The first exhaustive atomic attempt completed 2,508,408 valid candidate-by-word cells
+before its 32 eight-hour shards timed out. Resumption uses an approved prompt-C cascade:
+
+1. Preserve every valid completed A/B/C resolution from the interrupted run.
+2. Screen every unresolved candidate-by-word cell independently with V2 prompt C. This
+   remains exhaustive over the full cross-product; no embedding retrieval or target
+   pruning is used.
+3. Route a cell to prompts A and B when prompt C is positive, ambiguous, below 0.80
+   confidence, or has a parse/schema failure. Resolve routed A/B/C votes with the frozen
+   V2 resolver and adjudicator.
+4. Set an unrouted high-confidence prompt-C negative to zero with resolution method
+   `prompt_c_high_confidence_negative`.
+5. Recover interrupted cells from existing votes, quarantine invalid resolutions, and
+   require each final cell to have either a complete A/B/C panel or a valid C-only
+   high-confidence-negative record.
+
+This change was selected from a posthoc benchmark conducted before resuming production.
+On complete V2 data it retained 99.63% of positive cells and object geometry `r = .9996`;
+on 8,445 complete V4 pilot features it retained 99.68% of positives and object geometry
+`r = .9987`. Matched ISC-CI runs were closer than ordinary V2 seed-to-seed variation on
+all five representation metrics. All 13 paper-simulation condition-mean directions were
+preserved, although context-dependent nonmonotonicity choice agreement shifted from
+.659 to .591 and remains a required sensitivity result. The V4 pilot is 98% V4-only and
+alphabetically early, so the completed matrix still requires a stratified negative audit.
+
+Implementation and evidence are in `leuven_expansion/cascade_jobs.py`,
+`run_v4_judgments.py`, and
+`artifacts/v4/retrieval_efficiency/prompt_c_cascade/RESULTS.md`.
+
 ## 1. Executive summary
 
 V4 combines the strongest parts of the existing pipelines:

@@ -35,5 +35,6 @@ python run_v4_judgments.py \
     --output-dir artifacts/v4/judgments \
     --model Qwen2.5-72B-Instruct \
     --shard-count "$SHARD_COUNT" \
+    --execution-mode prompt-c-cascade \
+    --cascade-confidence-threshold 0.80 \
     --finalize
-

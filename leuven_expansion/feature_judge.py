@@ -9,7 +9,7 @@ from __future__ import annotations
 
 import hashlib
 import logging
-from typing import Dict, List, Optional, Tuple
+from typing import Dict, List, Optional, Sequence, Tuple
 
 from leuven_expansion.feature_schema import validate_judge_output, load_json_schema
 from leuven_expansion.feature_prompts import (
@@ -79,11 +79,12 @@ def judge_pair(
     model: str,
     temperature: float = 0.0,
     max_tokens: int = 400,
+    judge_ids: Sequence[str] = JUDGE_IDS,
 ) -> List[Dict]:
     """
-    Run three independent first-pass judgments for one word × feature pair.
+    Run the requested independent first-pass judgments for one word × feature pair.
 
-    Returns a list of vote dicts (one per judge variant A, B, C).
+    Returns a list of vote dicts, one per requested judge variant.
     Each vote dict contains all schema fields plus bookkeeping columns.
 
     IMPORTANT: each call is fully independent and stateless.
@@ -93,7 +94,13 @@ def judge_pair(
     user_message = build_judge_user_message(word_normalized, feature_id, feature_text)
 
     votes: List[Dict] = []
-    for judge_id in JUDGE_IDS:
+    requested = tuple(judge_ids)
+    if not requested or len(set(requested)) != len(requested):
+        raise ValueError("judge_ids must contain unique prompt variants")
+    unknown = set(requested) - set(JUDGE_IDS)
+    if unknown:
+        raise ValueError(f"Unknown judge prompt variants: {sorted(unknown)}")
+    for judge_id in requested:
         system_prompt = prompts[judge_id]
         phash = prompt_hash(system_prompt, user_message)
 

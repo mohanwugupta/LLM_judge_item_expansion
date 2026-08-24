@@ -78,6 +78,8 @@ python run_v4_judgments.py \
     --output-dir "$OUTPUT_DIR" \
     --model "$SERVED_MODEL_NAME" \
     --shard-count "$SHARD_COUNT" \
+    --execution-mode prompt-c-cascade \
+    --cascade-confidence-threshold 0.80 \
     --dry-run
 
 python -m vllm.entrypoints.openai.api_server \
@@ -130,6 +132,8 @@ python run_v4_judgments.py \
     --max-workers 32 \
     --shard-count "$SHARD_COUNT" \
     --shard-index "$SHARD_INDEX" \
+    --execution-mode prompt-c-cascade \
+    --cascade-confidence-threshold 0.80 \
     --resume
 
 MANIFEST="$OUTPUT_DIR/shards/0000/v4_shard_manifest.json"
@@ -144,6 +148,7 @@ if manifest["resolved_cells"] != manifest["expected_cells"]:
     raise SystemExit("V4 smoke shard cell count is wrong")
 if manifest["resolved_cells"] < 1:
     raise SystemExit("V4 smoke shard selected no cells")
+if manifest["full_panel_vote_cells"] + manifest["prompt_c_only_cells"] != manifest["resolved_cells"]:
+    raise SystemExit("V4 smoke shard has invalid cascade vote coverage")
 print(f"V4 atomic smoke passed: {manifest['resolved_cells']} cells")
 PY
-

@@ -4,6 +4,7 @@ import pandas as pd
 
 from leuven_expansion.v4 import candidate_inventory_hash
 from run_v4_judgments import (
+    CASCADE_RESOLUTION_METHOD,
     build_pairs,
     finalize,
     protocol_record,
@@ -100,3 +101,60 @@ def test_mock_shards_require_three_votes_and_finalize_exact_cross_product(tmp_pa
     assert set(resolved["resolved_binary_locked_v2"]) == {1}
     assert json.loads((output / "judgment_manifest.json").read_text())["complete"]
 
+
+def test_finalize_accepts_valid_prompt_c_only_negatives(tmp_path):
+    bank = tmp_path / "bank.csv"
+    words = tmp_path / "words.csv"
+    output = tmp_path / "judgments"
+    _bank(bank)
+    _words(words)
+    protocol = protocol_record(bank, words, "test-model", 1, None)
+    pairs = build_pairs(bank, words, 1, 0)
+    shard = output / "shards" / "0000"
+    shard.mkdir(parents=True)
+    votes = []
+    resolutions = []
+    for index, pair in enumerate(pairs):
+        c_only = index % 2 == 0
+        for judge in ("C" if c_only else "ABC"):
+            votes.append(
+                {
+                    "word_normalized": pair["word_normalized"],
+                    "feature_id": pair["feature_id"],
+                    "judge_id": judge,
+                    "prompt_hash": f"hash-{judge}",
+                    "feature_value": 0 if c_only else 1,
+                    "confidence": 0.95,
+                    "ambiguous": False,
+                    "parse_error": "",
+                }
+            )
+        resolutions.append(
+            {
+                "word_normalized": pair["word_normalized"],
+                "feature_id": pair["feature_id"],
+                "feature_text": pair["feature_text"],
+                "final_feature_value": 0 if c_only else 1,
+                "confidence": 0.95,
+                "ambiguous": False,
+                "resolution_method": (
+                    CASCADE_RESOLUTION_METHOD if c_only else "unanimous"
+                ),
+                "needs_human_audit": False,
+                "adjudicated": False,
+                "adjudication_trigger": "",
+            }
+        )
+    pd.DataFrame(votes).to_csv(shard / "feature_votes.csv", index=False)
+    pd.DataFrame(resolutions).to_csv(shard / "feature_resolutions.csv", index=False)
+    pd.DataFrame(columns=["empty"]).to_csv(
+        shard / "feature_adjudication_votes.csv", index=False
+    )
+    pd.DataFrame(columns=["empty"]).to_csv(shard / "parse_errors.csv", index=False)
+    shard_manifest = validate_shard_complete(shard, pairs, protocol, 0)
+    assert shard_manifest["prompt_c_only_cells"] == 3
+    assert shard_manifest["full_panel_vote_cells"] == 3
+    finalize(bank, words, output, protocol)
+    manifest = json.loads((output / "judgment_manifest.json").read_text())
+    assert manifest["prompt_c_only_cells"] == 3
+    assert manifest["full_panel_vote_cells"] == 3

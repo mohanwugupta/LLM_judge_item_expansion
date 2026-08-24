@@ -38,6 +38,7 @@ def main() -> None:
 
     discovery_manifest = read_json(run_dir / "discovery" / "candidate_bank_manifest.json")
     judgment_manifest = read_json(run_dir / "judgments" / "judgment_manifest.json")
+    judgment_dry_run = read_json(run_dir / "judgments" / "dry_run_cost_report.json")
     threshold = read_json(run_dir / "judgments" / "judgment_threshold.json")
     matrix_manifest = read_json(run_dir / "matrices" / "matrix_manifest.json")
     validation_manifest = read_json(run_dir / "validation" / "manifest.json")
@@ -63,6 +64,16 @@ def main() -> None:
             else cascade.sort_values("positive_recall", ascending=False).iloc[0]
         )
         best_cascade = selected_cascade.to_dict()
+    prompt_c_cascade_path = (
+        run_dir / "retrieval_efficiency" / "prompt_c_cascade" / "benchmark_summary.csv"
+    )
+    prompt_c_benchmarks: dict[str, dict[str, Any]] = {}
+    if prompt_c_cascade_path.exists():
+        prompt_c_frame = pd.read_csv(prompt_c_cascade_path)
+        prompt_c_benchmarks = {
+            str(row["benchmark"]): row
+            for row in prompt_c_frame.to_dict(orient="records")
+        }
     merge_review_path = run_dir / "discovery" / "candidate_merge_review_required.csv"
     pending_merges = 0
     if merge_review_path.exists():
@@ -134,6 +145,15 @@ def main() -> None:
 
     selected = threshold["selected_cross_validated_metrics"] if threshold else {}
     heldout = retrieval.get("heldout_test_metrics", {}) if retrieval else {}
+    if judgment_manifest and judgment_manifest.get("complete"):
+        atomic_status = "complete"
+    elif judgment_dry_run and judgment_dry_run.get("existing_reusable_cells", 0):
+        atomic_status = (
+            f"partial: {int(judgment_dry_run['existing_reusable_cells']):,} valid cells "
+            "reusable; cascade resume ready"
+        )
+    else:
+        atomic_status = "pending cluster run"
     stage_status = {
         "candidate_bank": (
             "complete"
@@ -142,20 +162,42 @@ def main() -> None:
             if pending_discovery_sources
             else f"blocked: {pending_merges} merge decisions pending"
         ),
-        "atomic_judgments": "complete" if judgment_manifest and judgment_manifest.get("complete") else "pending cluster run",
+        "atomic_judgments": atomic_status,
         "matrices": "complete" if matrix_manifest else "pending atomic judgments",
         "ISC-CI_training": "complete" if validation_manifest else "pending matrices",
         "paper_simulations": "complete" if (simulation_dir / "manifest.json").exists() else "pending trained models",
     }
+    if discovery_manifest:
+        discovery_summary = (
+            f"Discovery is complete with {int(discovery_manifest['candidate_count']):,} "
+            "frozen candidates."
+        )
+    elif pending_discovery_sources:
+        discovery_summary = "The new seven-family discovery run is pending."
+    else:
+        discovery_summary = (
+            f"The pooled candidate bank requires {pending_merges:,} merge decisions."
+        )
+    if judgment_dry_run and not judgment_manifest:
+        judgment_summary = (
+            f" The interrupted atomic run has "
+            f"{int(judgment_dry_run.get('existing_reusable_cells', 0)):,} valid reusable "
+            f"resolutions and {int(judgment_dry_run.get('remaining_cells', 0)):,} cells "
+            "remaining."
+        )
+    else:
+        judgment_summary = ""
+    v2_prompt_c = prompt_c_benchmarks.get("v2_complete", {})
+    v4_prompt_c = prompt_c_benchmarks.get("all_complete_v4_pilot", {})
     report = f"""# V4 Results and Reproduction Status
 
 ## 1. Executive interpretation
 
-The primary V4 semantic and ISC-CI comparison is not yet estimable because {('the new seven-family discovery run is pending' if pending_discovery_sources else f'the pooled candidate bank requires {pending_merges:,} documented proposition-equivalence decisions')} and the exhaustive atomic cluster run has not been executed. No downstream V4 result has been used to choose the candidate vocabulary, merge rules, or atomic threshold.
+The primary V4 semantic and ISC-CI comparison is not yet estimable because atomic completion is still pending. {discovery_summary}{judgment_summary}
 
 Calibration is frozen independently of V4 outcomes at `resolved_value >= {threshold['selected_rule']['value'] if threshold else 'pending'}`. On five held-out-word folds, this rule has positive recall {fmt(selected.get('positive_recall_mean'))}, precision {fmt(selected.get('positive_precision_mean'))}, MCC {fmt(selected.get('MCC_mean'))}, density {fmt(selected.get('matrix_density_mean'))}, and human input-object RDM correlation {fmt(selected.get('input_object_RDM_correlation_mean'))}. The executed V2 `resolved_value > 0` rule remains a mandatory control.
 
-The V2 posthoc retrieval benchmark does not support an aggressive `K <= 100` shortlist. The development split selected `K={retrieval.get('selected_K') if retrieval else 'pending'}`; on untouched held-out features it retained {fmt(heldout.get('positive_cell_recall'))} of V2-positive cells, preserved object geometry at {fmt(heldout.get('object_geometry_correlation'))}, and reduced initial retrieval cells by only {fmt(heldout.get('initial_call_reduction'))}. The cascade can still save calls, but its result must be treated as secondary and validated again on the completed V4 matrix.
+The V2 posthoc retrieval benchmark does not support an aggressive `K <= 100` shortlist. The development split selected `K={retrieval.get('selected_K') if retrieval else 'pending'}`; on untouched held-out features it retained {fmt(heldout.get('positive_cell_recall'))} of V2-positive cells, preserved object geometry at {fmt(heldout.get('object_geometry_correlation'))}, and reduced initial retrieval cells by only {fmt(heldout.get('initial_call_reduction'))}. Prompt-C cascading has been approved for the production resume, while embedding retrieval remains a posthoc analysis.
 
 ## 2. Stage status
 
@@ -166,24 +208,25 @@ The V2 posthoc retrieval benchmark does not support an aggressive `K <= 100` sho
 ## 3. Candidate discovery and consolidation
 
 - Existing V3 and V3.1 generations are imported with source manifests.
-- Seven configured V4 prompt families request up to ten liberal candidate propositions per response.
+- Seven configured V4 prompt families requested up to ten liberal candidate propositions per response.
 - Valid singleton and rare phrases are retained; no V3 response-frequency cutoff is applied before judging.
 - The exact ordered V3.1-B 175-context inventory is frozen as the fixed-vocabulary control.
-- Semantic/profile similarity only nominates merges. Every nontrivial merge requires `pass` or `reject` review.
-- Pending primary discovery sources: {', '.join(pending_discovery_sources) if pending_discovery_sources else 'none'}.
-- Preliminary pending merge decisions from currently imported sources: {pending_merges:,}. This list must be regenerated after all primary discovery sources finish.
+- At the investigator's direction, consolidation was automated; {int(discovery_manifest.get('merge_passed', 0)) if discovery_manifest else 0:,} proposed merges were accepted. This deviation from manual review remains a sensitivity limitation.
+- Frozen candidate inventory hash: `{discovery_manifest.get('candidate_inventory_hash', 'pending') if discovery_manifest else 'pending'}`.
+- Pending primary discovery sources: {'none; the bank is frozen' if discovery_manifest else ', '.join(pending_discovery_sources) if pending_discovery_sources else 'none'}.
+- Pending merge decisions: {0 if discovery_manifest else pending_merges:,}{'; all proposals were applied automatically' if discovery_manifest else ''}.
 
 ## 4. Atomic judgment and calibration
 
-The primary atomic condition remains exhaustive candidate-by-293-word judging with the existing V2 A/B/C prompts, resolution rules, Qwen2.5-72B model identity, and no source provenance in calls. Shards use stable candidate-word hashes and cannot be marked complete unless every expected cell has exactly three first-pass votes and one resolution.
+The primary condition remains exhaustive candidate-by-293-word screening with the existing V2 prompts, Qwen2.5-72B model identity, and no source provenance in calls. Every unresolved cell receives prompt C. Positive, ambiguous, confidence-below-.80, and parse-failed responses receive A/B and the frozen V2 resolver; other C negatives resolve to zero. Every final cell must have either the exact A/B/C panel or a valid unrouted C-only negative plus one resolution. Valid completed full-panel cells are reused unchanged.
 
 Threshold selection used only 112,805 completed V2 cells for the 293 words and 385 retained human features. Five-fold splitting occurred by word. The selected threshold maximized mean held-out MCC subject to recall at least .80, with precision and conservatism as tie breakers.
 
 ## 5. Retrieval and cascade efficiency
 
-The full atomic matrix is the gold standard; retrieval is simulated only after the full run. On the retrospective V2 benchmark, source words force human-positive recall to 1.0 by construction, so V2-positive recall and geometry are the discriminating criteria. `K=100` retained about 74% of V2 positives. The frozen escalation schedule required `K=275` to pass the 95% recall and .99 geometry gates on development features.
+Embedding retrieval is simulated only after the primary run. On the retrospective V2 benchmark, source words force human-positive recall to 1.0 by construction, so V2-positive recall and geometry are the discriminating criteria. `K=100` retained about 74% of V2 positives. The frozen escalation schedule required `K=275` to pass the 95% recall and .99 geometry gates on development features.
 
-The held-out `K=275` result retained {fmt(heldout.get('positive_cell_recall'))} of V2 positives and used {fmt(heldout.get('shortlist_fraction'))} of cells. This means embedding retrieval alone offers little safe reduction. The best gate-passing cascade used judge {best_cascade.get('cheap_judge', 'pending')}, retained {fmt(best_cascade.get('positive_recall'))} of positives, preserved object geometry at {fmt(best_cascade.get('object_geometry_correlation'))}, and reduced the call proxy by {fmt(best_cascade.get('call_reduction'))}. It must be compared against the completed V4 matrix before any recommendation.
+The held-out `K=275` result retained {fmt(heldout.get('positive_cell_recall'))} of V2 positives and used {fmt(heldout.get('shortlist_fraction'))} of cells. The expanded prompt-C analysis retained {fmt(v2_prompt_c.get('positive_cell_recall'), 4)} of V2 positives and {fmt(v4_prompt_c.get('positive_cell_recall'), 4)} in the V4 pilot; object geometry correlations were {fmt(v2_prompt_c.get('object_geometry_correlation'), 4)} and {fmt(v4_prompt_c.get('object_geometry_correlation'), 4)}. Matched ISC-CI runs and paper simulations are documented in `artifacts/v4/retrieval_efficiency/prompt_c_cascade/RESULTS.md`. The complete V4 matrix still requires a stratified negative audit.
 
 ## 6. Required V4 comparisons
 
@@ -197,12 +240,10 @@ Pending exhaustive judgments, matrices, four-seed training, fixed-probe evaluati
 ## 7. Reproduction commands
 
 ```bash
-sbatch run_leuven_v4_generation.sh
-python build_v4_candidate_bank.py --config configs/v4_discovery.json --manual-review configs/v4_candidate_merge_review.csv --output-dir artifacts/v4/discovery
-python run_v4_judgments.py --candidate-bank artifacts/v4/discovery/candidate_bank.csv --leuven-words data/leuven_combined_features_consolidated.csv --output-dir artifacts/v4/judgments --dry-run
+python run_v4_judgments.py --candidate-bank artifacts/v4/discovery/candidate_bank.csv --leuven-words data/leuven_combined_features_consolidated.csv --v2-manifest artifacts/leuven_full_labels/leuven_full_v2/manifest.json --output-dir artifacts/v4/judgments --model Qwen2.5-72B-Instruct --shard-count 32 --execution-mode prompt-c-cascade --cascade-confidence-threshold 0.80 --dry-run
 sbatch run_leuven_v4_atomic_smoke_test.sh
 sbatch run_leuven_v4_atomic.sh
-sbatch run_leuven_v4_atomic_finalize.sh
+sbatch --dependency=afterok:<array_job_id> run_leuven_v4_atomic_finalize.sh
 python calibrate_v4_judgments.py --v2-resolved artifacts/leuven_full_labels/leuven_full_v2/feature_resolutions.csv --human-features data/leuven_combined_features_consolidated.csv --output-dir artifacts/v4/judgments
 python build_v4_matrices.py --candidate-bank artifacts/v4/discovery/candidate_bank.csv --resolved-values artifacts/v4/judgments/resolved_feature_values.csv --threshold artifacts/v4/judgments/judgment_threshold.json --output-dir artifacts/v4/matrices
 python ISC-CI_LLM_validation/run_validation.py --config configs/v4_validation.json --output-dir artifacts/v4/validation --base-validation-dir ISC-CI_LLM_validation/artifacts/validation_v3_1 --include-v4
@@ -228,9 +269,11 @@ DRM expansion is blocked until V4 completes the Leuven validation gates. The V2 
         "source_manifest_hashes": {
             "discovery": sha256_file(run_dir / "discovery" / "candidate_bank_manifest.json") if discovery_manifest else None,
             "judgment": sha256_file(run_dir / "judgments" / "judgment_manifest.json") if judgment_manifest else None,
+            "judgment_dry_run": sha256_file(run_dir / "judgments" / "dry_run_cost_report.json") if judgment_dry_run else None,
             "threshold": sha256_file(run_dir / "judgments" / "judgment_threshold.json") if threshold else None,
             "matrices": sha256_file(run_dir / "matrices" / "matrix_manifest.json") if matrix_manifest else None,
             "validation": sha256_file(run_dir / "validation" / "manifest.json") if validation_manifest else None,
+            "prompt_c_cascade": sha256_file(run_dir / "retrieval_efficiency" / "prompt_c_cascade" / "manifest.json") if (run_dir / "retrieval_efficiency" / "prompt_c_cascade" / "manifest.json").exists() else None,
         },
         "outputs": {path.name: sha256_file(path) for path in output_files},
         "calibration_candidate_count": len(calibration_rows),

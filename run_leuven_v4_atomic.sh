@@ -7,7 +7,7 @@
 #SBATCH --gres=gpu:4
 #SBATCH --constraint=gpu80
 #SBATCH --array=0-31%8
-#SBATCH --time=8:00:00
+#SBATCH --time=72:00:00
 #SBATCH --mail-type=begin
 #SBATCH --mail-type=end
 #SBATCH --mail-user=mg9965@princeton.edu
@@ -16,15 +16,15 @@
 
 # Exhaustive V4 candidate x Leuven judgment using the executed V2 panel.
 #
-# Runtime estimate (2026-08-19): the leuven_full_v2 baseline (same 4-GPU
-# tensor-parallel-size=4, max-workers=64 vLLM config) completed 363,415
-# judgment calls in 58.25 wall-clock hours (~6,240 calls/hour); even using
-# the slower ~100-hour real-world estimate for that run (~3,634 calls/hour),
-# this job's ~170,600-179,000 total planned calls split across 32 shards
-# should finish in well under 2 hours per shard. --time is set with a
-# generous ~4x safety margin over that conservative estimate rather than
-# the previous 72-hour ceiling, which was far larger than the workload
-# requires and can hurt scheduling/backfill priority on a shared cluster.
+# Resume estimate (2026-08-24): the 133,081-candidate bank creates
+# 38,992,733 cells, not ~179,000 calls. The interrupted full-panel run
+# wrote 2,508,409 resolution rows (2,508,408 valid). Remaining cells receive
+# prompt C once; only
+# positives, ambiguous/low-confidence responses, and parse failures receive
+# A/B plus the frozen V2 resolver. The posthoc V4 pilot routed 1.95% of cells
+# and reduced calls by 64.7%. At the observed shard throughput, a resumed
+# shard is expected to need roughly 40-50 hours; 72 hours leaves room for
+# denser later V3/V3.1-derived candidates and cluster variability.
 
 set -eo pipefail
 
@@ -36,6 +36,7 @@ VLLM_PORT=${VLLM_PORT:-8024}
 SHARD_COUNT=${SHARD_COUNT:-32}
 SHARD_INDEX=${SLURM_ARRAY_TASK_ID}
 MAX_WORKERS=${MAX_WORKERS:-64}
+CASCADE_CONFIDENCE_THRESHOLD=${CASCADE_CONFIDENCE_THRESHOLD:-0.80}
 
 CANDIDATE_BANK="$PROJECT_DIR/artifacts/v4/discovery/candidate_bank.csv"
 LEUVEN_WORDS="$PROJECT_DIR/data/leuven_combined_features_consolidated.csv"
@@ -134,6 +135,8 @@ python run_v4_judgments.py \
     --max-workers "$MAX_WORKERS" \
     --shard-count "$SHARD_COUNT" \
     --shard-index "$SHARD_INDEX" \
+    --execution-mode prompt-c-cascade \
+    --cascade-confidence-threshold "$CASCADE_CONFIDENCE_THRESHOLD" \
     --resume
 
 python3 - "$OUTPUT_DIR/shards/$(printf '%04d' "$SHARD_INDEX")/v4_shard_manifest.json" <<'PY'
@@ -145,4 +148,3 @@ if not manifest.get("complete") or manifest["resolved_cells"] != manifest["expec
     raise SystemExit("V4 atomic shard failed completeness checks")
 print(f"V4 atomic shard complete: {manifest['resolved_cells']} cells")
 PY
-
