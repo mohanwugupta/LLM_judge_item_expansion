@@ -1,0 +1,13 @@
+{
+  "candidate_inventory_hash": "316113ab46aea52cf5dc03d32c1d7d50d30658a7a42d56b6d5ba6043616cc55f",
+  "complete": true,
+  "duplicate_cells": 0,
+  "expected_cells": 9,
+  "extra_cells": 0,
+  "invalid_first_pass_vote_counts": 0,
+  "missing_cells": 0,
+  "missing_first_pass_vote_cells": 0,
+  "protocol_hash": "aafa0fe53ea0d9dc0ce81cc2e6240f6d24e044176874299332a52cfefce77715",
+  "resolved_cells": 9,
+  "shard_index": 0
+}

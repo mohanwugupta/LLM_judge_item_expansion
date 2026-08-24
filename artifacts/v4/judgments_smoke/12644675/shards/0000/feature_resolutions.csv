@@ -1,0 +1,10 @@
+job_id,word_normalized,feature_id,feature_text,final_feature_value,resolution_method,needs_human_audit,adjudicated,adjudication_trigger,confidence,ambiguous,pre_verification_feature_value,verified_feature_value,positive_verification_status,positive_verification_confidence,positive_verification_reason
+v4_atomic_shard_0000,pants,60,used in construction,0.0,unanimous,False,False,,,,,,not_candidate,,
+v4_atomic_shard_0000,frog,74,can fly short distances,0.0,unanimous,False,False,,,,,,not_candidate,,
+v4_atomic_shard_0000,turtle,51,brakes,0.0,unanimous,False,False,,,,,,not_candidate,,
+v4_atomic_shard_0000,airplane,88,has a beak,0.0,unanimous,False,False,,,,,,not_candidate,,
+v4_atomic_shard_0000,sparrow,146,moves quickly,3.0,adjudicator_agree,False,True,high_confidence_dissent,,,,,not_candidate,,
+v4_atomic_shard_0000,toaster,21,has keys,0.0,unanimous,False,False,,,,,,not_candidate,,
+v4_atomic_shard_0000,horsefly,1,long tail,0.0,adjudicator_agree,False,True,high_confidence_dissent,,,,,not_candidate,,
+v4_atomic_shard_0000,crowbar,171,slithers,0.0,unanimous,False,False,,,,,,not_candidate,,
+v4_atomic_shard_0000,bazooka,84,lives near water,0.0,unanimous,False,False,,,,,,not_candidate,,

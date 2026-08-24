@@ -1,0 +1,15 @@
+{
+  "candidate_count": 175,
+  "estimated_adjudicated_cells_high": 8394,
+  "estimated_adjudicated_cells_low": 5596,
+  "estimated_adjudication_calls_high": 25184,
+  "estimated_adjudication_calls_low": 16789,
+  "existing_reusable_cells": 0,
+  "expected_cell_count": 51275,
+  "planned_first_pass_calls": 153825,
+  "primary_execution": "exhaustive candidate-by-word judging; no retrieval pruning",
+  "remaining_cells": 51275,
+  "shard_count": 4096,
+  "v2_observed_adjudication_rate": 0.13643393347156357,
+  "word_count": 293
+}

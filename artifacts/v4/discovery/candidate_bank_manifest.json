@@ -1,0 +1,19 @@
+{
+  "candidate_bank_sha256": "0e13f5c955143422a82c66d081f06b7704abf8fb5f01ad42a712f0a30dd90a2c",
+  "candidate_count": 133081,
+  "candidate_inventory_hash": "cf0af7b1c8126e2a06ad162e916685b75a298c3cf8da9a89b8ecd9e9652da3fd",
+  "config": "/scratch/gpfs/JORDANAT/mg9965/FalseMemoryISC-CI/LLM_judge_item_expansion/configs/v4_discovery.json",
+  "config_sha256": "1fe6fd991e9c9403a784a1b3973aa4786af53a7b62018c31ba94bc712dc06460",
+  "fixed_v3_1_b_count": 175,
+  "fixed_v3_1_b_inventory_hash": "316113ab46aea52cf5dc03d32c1d7d50d30658a7a42d56b6d5ba6043616cc55f",
+  "human_mapping_used_for_bank": false,
+  "manual_review": "/scratch/gpfs/JORDANAT/mg9965/FalseMemoryISC-CI/LLM_judge_item_expansion/configs/v4_candidate_merge_review.csv",
+  "manual_review_sha256": "1b166f319d1acfb456fbe909a804aa0acb7cee5bdea01b27df76259ea2564d90",
+  "merge_candidates": 56294,
+  "merge_passed": 56294,
+  "merge_rejected": 0,
+  "pre_atomic_filter": "none; valid singleton and rare candidates retained",
+  "protocol_version": "v4-discovery-0.1.0",
+  "source_count": 3,
+  "source_inventory_sha256": "33f83d0fe98c0720f1c2e25ec1748f363c7d84ffc3202b8f20b1f96c02721b56"
+}

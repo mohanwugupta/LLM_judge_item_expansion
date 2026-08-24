@@ -1,0 +1,12 @@
+{
+  "job_id": "v4_atomic_shard_0000",
+  "model": "Qwen2.5-72B-Instruct",
+  "n_total_pairs": 9,
+  "n_skipped_resume": 0,
+  "n_pending": 9,
+  "n_completed_this_run": 9,
+  "n_parse_errors": 0,
+  "started_at": "2026-08-19T19:54:09.059261Z",
+  "finished_at": "2026-08-19T19:54:26.778092Z",
+  "schema_version": "leuven_feature_schema_v1"
+}
