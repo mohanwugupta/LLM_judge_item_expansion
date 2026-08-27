@@ -2,11 +2,11 @@
 #SBATCH --job-name=leuven_v4_atomic
 #SBATCH --nodes=1
 #SBATCH --ntasks=1
-#SBATCH --cpus-per-task=32
-#SBATCH --mem=96G
+#SBATCH --cpus-per-task=8
+#SBATCH --mem=32G
 #SBATCH --gres=gpu:4
 #SBATCH --constraint=gpu80
-#SBATCH --array=0-31%8
+#SBATCH --array=0-31%4
 #SBATCH --time=72:00:00
 #SBATCH --mail-type=begin
 #SBATCH --mail-type=end
@@ -19,8 +19,8 @@
 # Resume estimate (2026-08-24): the 133,081-candidate bank creates
 # 38,992,733 cells, not ~179,000 calls. The interrupted full-panel run
 # wrote 2,508,409 resolution rows (2,508,408 valid). Remaining cells receive
-# prompt C once; only
-# positives, ambiguous/low-confidence responses, and parse failures receive
+# prompt C once; only positives, ambiguous/low-confidence responses, and parse
+# failures receive
 # A/B plus the frozen V2 resolver. The posthoc V4 pilot routed 1.95% of cells
 # and reduced calls by 64.7%. At the observed shard throughput, a resumed
 # shard is expected to need roughly 40-50 hours; 72 hours leaves room for
@@ -37,6 +37,7 @@ SHARD_COUNT=${SHARD_COUNT:-32}
 SHARD_INDEX=${SLURM_ARRAY_TASK_ID}
 MAX_WORKERS=${MAX_WORKERS:-64}
 CASCADE_CONFIDENCE_THRESHOLD=${CASCADE_CONFIDENCE_THRESHOLD:-0.80}
+TENSOR_PARALLEL_SIZE=${TENSOR_PARALLEL_SIZE:-4}
 
 CANDIDATE_BANK="$PROJECT_DIR/artifacts/v4/discovery/candidate_bank.csv"
 LEUVEN_WORDS="$PROJECT_DIR/data/leuven_combined_features_consolidated.csv"
@@ -71,8 +72,17 @@ mkdir -p "$HF_HOME" "$HF_DATASETS_CACHE" "$VLLM_CACHE_DIR" \
     "$PROJECT_DIR/logs" "$OUTPUT_DIR"
 export HF_HUB_OFFLINE=1
 export TRANSFORMERS_OFFLINE=1
-export CUDA_VISIBLE_DEVICES=0,1,2,3
-export OMP_NUM_THREADS=32
+if [ -z "${CUDA_VISIBLE_DEVICES:-}" ]; then
+    echo "ERROR: Slurm did not expose any GPUs"
+    exit 1
+fi
+VISIBLE_GPU_COUNT=$(awk -F, '{print NF}' <<<"$CUDA_VISIBLE_DEVICES")
+if [ "$VISIBLE_GPU_COUNT" -ne "$TENSOR_PARALLEL_SIZE" ]; then
+    echo "ERROR: $VISIBLE_GPU_COUNT GPUs are visible but tensor parallel size is $TENSOR_PARALLEL_SIZE"
+    echo "A one-GPU run requires a quantized checkpoint and TENSOR_PARALLEL_SIZE=1."
+    exit 1
+fi
+export OMP_NUM_THREADS="${SLURM_CPUS_PER_TASK:-8}"
 export TOKENIZERS_PARALLELISM=true
 export PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True
 export NCCL_P2P_LEVEL=NVL
@@ -89,7 +99,7 @@ python -m vllm.entrypoints.openai.api_server \
     --model "$MODEL_PATH" \
     --served-model-name "$SERVED_MODEL_NAME" \
     --port "$VLLM_PORT" \
-    --tensor-parallel-size 4 \
+    --tensor-parallel-size "$TENSOR_PARALLEL_SIZE" \
     --dtype auto \
     --trust-remote-code \
     --max-model-len 4096 \
