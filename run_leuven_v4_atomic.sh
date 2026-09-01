@@ -6,8 +6,8 @@
 #SBATCH --mem=32G
 #SBATCH --gres=gpu:4
 #SBATCH --constraint=gpu80
-#SBATCH --array=0-31%4
-#SBATCH --time=72:00:00
+#SBATCH --array=0-93
+#SBATCH --time=24:00:00
 #SBATCH --mail-type=begin
 #SBATCH --mail-type=end
 #SBATCH --mail-user=mg9965@princeton.edu
