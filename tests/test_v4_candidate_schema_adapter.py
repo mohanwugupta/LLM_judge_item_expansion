@@ -34,3 +34,14 @@ def test_candidate_schema_fails_closed_on_duplicate_ids(tmp_path):
     bank.to_csv(path, index=False)
     with pytest.raises(ValueError, match="unique"):
         load_candidate_feature_schema(path)
+
+
+def test_candidate_schema_reports_unmaterialized_lfs_pointer(tmp_path):
+    path = tmp_path / "bank.csv"
+    path.write_text(
+        "version https://git-lfs.github.com/spec/v1\n"
+        "oid sha256:abc123\n"
+        "size 54709400\n"
+    )
+    with pytest.raises(ValueError, match="Git LFS pointer"):
+        load_candidate_feature_schema(path)

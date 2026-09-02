@@ -83,6 +83,13 @@ def load_candidate_feature_schema(
 ) -> Dict[str, Any]:
     """Adapt a frozen V4 candidate bank to the existing integer feature interface."""
     path = pathlib.Path(candidate_bank_csv)
+    with path.open("rb") as handle:
+        prefix = handle.read(128)
+    if prefix.startswith(b"version https://git-lfs.github.com/spec/v1"):
+        raise ValueError(
+            f"Candidate bank is a Git LFS pointer, not materialized data: {path}. "
+            "Run git lfs pull for this file before submitting the job."
+        )
     bank = pd.read_csv(path, dtype=str).fillna("")
     required = {
         "candidate_id",

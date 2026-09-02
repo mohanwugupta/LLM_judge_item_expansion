@@ -43,6 +43,7 @@ CANDIDATE_BANK="$PROJECT_DIR/artifacts/v4/discovery/candidate_bank.csv"
 LEUVEN_WORDS="$PROJECT_DIR/data/leuven_combined_features_consolidated.csv"
 V2_MANIFEST="$PROJECT_DIR/artifacts/leuven_full_labels/leuven_full_v2/manifest.json"
 OUTPUT_DIR="$PROJECT_DIR/artifacts/v4/judgments"
+EXPECTED_CANDIDATE_BANK_SHA256=0e13f5c955143422a82c66d081f06b7704abf8fb5f01ad42a712f0a30dd90a2c
 
 echo "V4 atomic shard $SHARD_INDEX/$SHARD_COUNT"
 echo "Job: $SLURM_JOB_ID node: $SLURMD_NODENAME time: $(date)"
@@ -94,6 +95,33 @@ for required in "$MODEL_PATH" "$CANDIDATE_BANK" "$LEUVEN_WORDS" "$V2_MANIFEST"; 
         exit 1
     fi
 done
+if head -n 3 "$CANDIDATE_BANK" | grep -q '^version https://git-lfs.github.com/spec/v1$'; then
+    echo "ERROR: candidate bank is a Git LFS pointer: $CANDIDATE_BANK"
+    echo "Run: git lfs pull --include=artifacts/v4/discovery/candidate_bank.csv"
+    exit 1
+fi
+ACTUAL_CANDIDATE_BANK_SHA256=$(sha256sum "$CANDIDATE_BANK" | awk '{print $1}')
+if [ "$ACTUAL_CANDIDATE_BANK_SHA256" != "$EXPECTED_CANDIDATE_BANK_SHA256" ]; then
+    echo "ERROR: candidate bank hash does not match the frozen V4 inventory"
+    echo "Expected: $EXPECTED_CANDIDATE_BANK_SHA256"
+    echo "Actual:   $ACTUAL_CANDIDATE_BANK_SHA256"
+    exit 1
+fi
+
+JUDGMENT_ARGS=(
+    --candidate-bank "$CANDIDATE_BANK"
+    --leuven-words "$LEUVEN_WORDS"
+    --v2-manifest "$V2_MANIFEST"
+    --output-dir "$OUTPUT_DIR"
+    --model "$SERVED_MODEL_NAME"
+    --max-workers "$MAX_WORKERS"
+    --shard-count "$SHARD_COUNT"
+    --execution-mode prompt-c-cascade
+    --cascade-confidence-threshold "$CASCADE_CONFIDENCE_THRESHOLD"
+)
+
+echo "Running no-model V4 resume preflight before loading Qwen..."
+python run_v4_judgments.py "${JUDGMENT_ARGS[@]}" --dry-run
 
 python -m vllm.entrypoints.openai.api_server \
     --model "$MODEL_PATH" \
@@ -136,17 +164,9 @@ if [ "$elapsed" -ge 600 ]; then
 fi
 
 python run_v4_judgments.py \
-    --candidate-bank "$CANDIDATE_BANK" \
-    --leuven-words "$LEUVEN_WORDS" \
-    --v2-manifest "$V2_MANIFEST" \
-    --output-dir "$OUTPUT_DIR" \
-    --model "$SERVED_MODEL_NAME" \
+    "${JUDGMENT_ARGS[@]}" \
     --base-url "http://localhost:${VLLM_PORT}/v1" \
-    --max-workers "$MAX_WORKERS" \
-    --shard-count "$SHARD_COUNT" \
     --shard-index "$SHARD_INDEX" \
-    --execution-mode prompt-c-cascade \
-    --cascade-confidence-threshold "$CASCADE_CONFIDENCE_THRESHOLD" \
     --resume
 
 python3 - "$OUTPUT_DIR/shards/$(printf '%04d' "$SHARD_INDEX")/v4_shard_manifest.json" <<'PY'
