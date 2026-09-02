@@ -6,7 +6,7 @@
 #SBATCH --mem=32G
 #SBATCH --gres=gpu:4
 #SBATCH --constraint=gpu80
-#SBATCH --array=0-93
+#SBATCH --array=0-31%4
 #SBATCH --time=24:00:00
 #SBATCH --mail-type=begin
 #SBATCH --mail-type=end
@@ -20,11 +20,12 @@
 # 38,992,733 cells, not ~179,000 calls. The interrupted full-panel run
 # wrote 2,508,409 resolution rows (2,508,408 valid). Remaining cells receive
 # prompt C once; only positives, ambiguous/low-confidence responses, and parse
-# failures receive
-# A/B plus the frozen V2 resolver. The posthoc V4 pilot routed 1.95% of cells
-# and reduced calls by 64.7%. At the observed shard throughput, a resumed
-# shard is expected to need roughly 40-50 hours; 72 hours leaves room for
-# denser later V3/V3.1-derived candidates and cluster variability.
+# failures receive A/B plus the frozen V2 resolver. The posthoc V4 pilot routed
+# 1.95% of cells
+# and reduced calls by 64.7%. At the observed shard throughput, a shard may
+# need more than one 24-hour allocation. Submit another 0-31 wave after this
+# one ends; --resume continues each shard from its durable CSV checkpoint.
+# Never represent repeated waves by extending the array beyond index 31.
 
 set -eo pipefail
 
@@ -33,11 +34,18 @@ MODEL_PATH=${MODEL_PATH:-/scratch/gpfs/JORDANAT/mg9965/models/Qwen--Qwen2.5-72B-
 SERVED_MODEL_NAME=${SERVED_MODEL_NAME:-Qwen2.5-72B-Instruct}
 CONDA_ENV=${CONDA_ENV:-PromptControlText}
 VLLM_PORT=${VLLM_PORT:-8024}
-SHARD_COUNT=${SHARD_COUNT:-32}
-SHARD_INDEX=${SLURM_ARRAY_TASK_ID}
+SHARD_COUNT=32
+SHARD_INDEX=${SLURM_ARRAY_TASK_ID:-}
 MAX_WORKERS=${MAX_WORKERS:-64}
 CASCADE_CONFIDENCE_THRESHOLD=${CASCADE_CONFIDENCE_THRESHOLD:-0.80}
 TENSOR_PARALLEL_SIZE=${TENSOR_PARALLEL_SIZE:-4}
+
+if ! [[ "$SHARD_INDEX" =~ ^[0-9]+$ ]] || (( SHARD_INDEX >= SHARD_COUNT )); then
+    echo "ERROR: invalid V4 shard index '$SHARD_INDEX'; expected a Slurm array index from 0 to 31"
+    echo "Submit only --array=0-31 (optionally with a concurrency limit such as %4)."
+    echo "For another resume wave, submit the same 0-31 array again; do not extend the range."
+    exit 1
+fi
 
 CANDIDATE_BANK="$PROJECT_DIR/artifacts/v4/discovery/candidate_bank.csv"
 LEUVEN_WORDS="$PROJECT_DIR/data/leuven_combined_features_consolidated.csv"
@@ -122,6 +130,10 @@ JUDGMENT_ARGS=(
 
 echo "Running no-model V4 resume preflight before loading Qwen..."
 python run_v4_judgments.py "${JUDGMENT_ARGS[@]}" --dry-run
+python run_v4_judgments.py \
+    "${JUDGMENT_ARGS[@]}" \
+    --shard-index "$SHARD_INDEX" \
+    --preflight-shard
 
 python -m vllm.entrypoints.openai.api_server \
     --model "$MODEL_PATH" \

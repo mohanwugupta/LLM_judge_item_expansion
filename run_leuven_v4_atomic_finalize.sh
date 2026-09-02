@@ -14,7 +14,7 @@ set -eo pipefail
 
 PROJECT_DIR=${PROJECT_DIR:-/scratch/gpfs/JORDANAT/mg9965/FalseMemoryISC-CI/LLM_judge_item_expansion}
 CONDA_ENV=${CONDA_ENV:-PromptControlText}
-SHARD_COUNT=${SHARD_COUNT:-32}
+SHARD_COUNT=32
 
 cd "$PROJECT_DIR"
 module load anaconda3/2025.6

@@ -4,6 +4,7 @@ import re
 from unittest.mock import MagicMock
 
 import pandas as pd
+import pytest
 
 from leuven_expansion.cascade_jobs import (
     CASCADE_RESOLUTION_METHOD,
@@ -238,3 +239,14 @@ def test_legacy_shard_manifest_migrates_to_cascade_protocol(tmp_path):
     migrated = json.loads(sidecar.read_text())
     assert migrated["protocol_hash"] != legacy_hash
     assert migrated["migrated_from_protocol_hash"] == legacy_hash
+
+
+def test_resume_reports_lfs_pointer_checkpoint_before_schema_access(tmp_path):
+    (tmp_path / "feature_votes.csv").write_text(
+        "version https://git-lfs.github.com/spec/v1\n"
+        "oid sha256:abc123\n"
+        "size 82303580\n"
+    )
+    protocol = {"candidate_inventory_hash": "inventory"}
+    with pytest.raises(ValueError, match="Checkpoint CSV is a Git LFS pointer"):
+        validate_shard_resume(tmp_path, protocol, 0)

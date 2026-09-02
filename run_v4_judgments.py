@@ -146,8 +146,34 @@ def build_pairs(
     return pairs
 
 
-def read_csv_or_empty(path: Path) -> pd.DataFrame:
-    return pd.read_csv(path) if path.exists() and path.stat().st_size else pd.DataFrame()
+def read_csv_or_empty(
+    path: Path, required_columns: set[str] | None = None
+) -> pd.DataFrame:
+    required_columns = required_columns or set()
+    if not path.exists() or path.stat().st_size == 0:
+        return pd.DataFrame(columns=sorted(required_columns))
+    with path.open("rb") as handle:
+        prefix = handle.read(128)
+    if prefix.startswith(b"version https://git-lfs.github.com/spec/v1"):
+        try:
+            display_path = path.resolve().relative_to(ROOT)
+        except ValueError:
+            display_path = path
+        raise ValueError(
+            f"Checkpoint CSV is a Git LFS pointer, not materialized data: {path}. "
+            f"Run git lfs pull --include='{display_path}'."
+        )
+    try:
+        frame = pd.read_csv(path, low_memory=False)
+    except pd.errors.EmptyDataError:
+        frame = pd.DataFrame()
+    missing = required_columns - set(frame.columns)
+    if missing:
+        raise ValueError(
+            f"Checkpoint CSV has the wrong schema: {path}; missing columns "
+            f"{sorted(missing)}; available columns {list(frame.columns)}"
+        )
+    return frame
 
 
 def validate_shard_resume(
@@ -173,8 +199,14 @@ def validate_shard_resume(
             != protocol["candidate_inventory_hash"]
         ):
             raise ValueError("Cannot resume V4 shard under a changed protocol")
-    votes = read_csv_or_empty(shard_dir / "feature_votes.csv")
-    resolutions = read_csv_or_empty(shard_dir / "feature_resolutions.csv")
+    votes = read_csv_or_empty(
+        shard_dir / "feature_votes.csv",
+        {"word_normalized", "feature_id", "judge_id"},
+    )
+    resolutions = read_csv_or_empty(
+        shard_dir / "feature_resolutions.csv",
+        {"word_normalized", "feature_id", "final_feature_value"},
+    )
     if not votes.empty and votes.duplicated(
         ["word_normalized", "feature_id", "judge_id"]
     ).any():
@@ -625,6 +657,7 @@ def main() -> None:
     parser.add_argument("--shard-count", type=int, default=256)
     parser.add_argument("--shard-index", type=int)
     parser.add_argument("--dry-run", action="store_true")
+    parser.add_argument("--preflight-shard", action="store_true")
     parser.add_argument("--finalize", action="store_true")
     parser.add_argument("--resume", action="store_true")
     parser.add_argument(
@@ -660,6 +693,9 @@ def main() -> None:
     shard_dir = output / "shards" / f"{args.shard_index:04d}"
     shard_dir.mkdir(parents=True, exist_ok=True)
     validate_shard_resume(shard_dir, protocol, args.shard_index)
+    if args.preflight_shard:
+        print(f"V4 shard {args.shard_index} checkpoint preflight passed: {shard_dir}")
+        return
     pairs = build_pairs(
         args.candidate_bank,
         args.leuven_words,
