@@ -1,1 +1,3 @@
-job_id,word_original,word_normalized,row_hash,feature_id,feature_text,judge_id,judge_prompt_variant,judge_model,raw_json,parse_error,prompt_hash
+version https://git-lfs.github.com/spec/v1
+oid sha256:e0e2393d35a671c11d99a651219e1c693bb0b0a727cc1272bacacc8e7bd99cde
+size 7342

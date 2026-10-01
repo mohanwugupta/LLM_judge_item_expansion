@@ -1,1 +1,3 @@
-job_id,response_id,word_original,word_normalized,prompt_variant,replicate_id,model,sampling_seed,feature_rank,feature_text,feature_text_normalized
+version https://git-lfs.github.com/spec/v1
+oid sha256:e38f0b1abee3148647f70665a70d3c77a07dde9192be56f9ba332f78b90611b9
+size 147

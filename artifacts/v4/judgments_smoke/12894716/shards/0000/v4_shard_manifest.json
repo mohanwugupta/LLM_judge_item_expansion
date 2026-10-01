@@ -1,0 +1,19 @@
+{
+  "candidate_inventory_hash": "316113ab46aea52cf5dc03d32c1d7d50d30658a7a42d56b6d5ba6043616cc55f",
+  "cascade_route_violations": 0,
+  "complete": true,
+  "duplicate_cells": 0,
+  "duplicate_first_pass_votes": 0,
+  "expected_cells": 9,
+  "extra_cells": 0,
+  "extra_first_pass_vote_cells": 0,
+  "full_panel_vote_cells": 2,
+  "invalid_first_pass_vote_counts": 0,
+  "invalid_resolved_values": 0,
+  "missing_cells": 0,
+  "missing_first_pass_vote_cells": 0,
+  "prompt_c_only_cells": 7,
+  "protocol_hash": "92944c0394e5d02bb654083017539137c11ce044c09b75969e7bbf95f28a99cc",
+  "resolved_cells": 9,
+  "shard_index": 0
+}

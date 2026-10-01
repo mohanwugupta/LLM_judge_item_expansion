@@ -1,20 +1,3 @@
-2026-08-01 14:00:52,280 INFO __main__: v3 generation: 3 words x 3 prompts x 2 responses = 18; pending=18
-2026-08-01 14:01:07,758 INFO httpx: HTTP Request: POST http://localhost:8010/v1/chat/completions "HTTP/1.1 200 OK"
-2026-08-01 14:01:07,961 INFO httpx: HTTP Request: POST http://localhost:8010/v1/chat/completions "HTTP/1.1 200 OK"
-2026-08-01 14:01:08,042 INFO httpx: HTTP Request: POST http://localhost:8010/v1/chat/completions "HTTP/1.1 200 OK"
-2026-08-01 14:01:08,327 INFO httpx: HTTP Request: POST http://localhost:8010/v1/chat/completions "HTTP/1.1 200 OK"
-2026-08-01 14:01:08,392 INFO httpx: HTTP Request: POST http://localhost:8010/v1/chat/completions "HTTP/1.1 200 OK"
-2026-08-01 14:01:08,521 INFO httpx: HTTP Request: POST http://localhost:8010/v1/chat/completions "HTTP/1.1 200 OK"
-2026-08-01 14:01:08,521 INFO httpx: HTTP Request: POST http://localhost:8010/v1/chat/completions "HTTP/1.1 200 OK"
-2026-08-01 14:01:08,552 INFO httpx: HTTP Request: POST http://localhost:8010/v1/chat/completions "HTTP/1.1 200 OK"
-2026-08-01 14:01:08,584 INFO httpx: HTTP Request: POST http://localhost:8010/v1/chat/completions "HTTP/1.1 200 OK"
-2026-08-01 14:01:08,616 INFO httpx: HTTP Request: POST http://localhost:8010/v1/chat/completions "HTTP/1.1 200 OK"
-2026-08-01 14:01:08,616 INFO httpx: HTTP Request: POST http://localhost:8010/v1/chat/completions "HTTP/1.1 200 OK"
-2026-08-01 14:01:08,649 INFO httpx: HTTP Request: POST http://localhost:8010/v1/chat/completions "HTTP/1.1 200 OK"
-2026-08-01 14:01:09,042 INFO httpx: HTTP Request: POST http://localhost:8010/v1/chat/completions "HTTP/1.1 200 OK"
-2026-08-01 14:01:09,105 INFO httpx: HTTP Request: POST http://localhost:8010/v1/chat/completions "HTTP/1.1 200 OK"
-2026-08-01 14:01:09,105 INFO httpx: HTTP Request: POST http://localhost:8010/v1/chat/completions "HTTP/1.1 200 OK"
-2026-08-01 14:01:09,353 INFO httpx: HTTP Request: POST http://localhost:8010/v1/chat/completions "HTTP/1.1 200 OK"
-2026-08-01 14:01:09,354 INFO httpx: HTTP Request: POST http://localhost:8010/v1/chat/completions "HTTP/1.1 200 OK"
-2026-08-01 14:01:09,914 INFO httpx: HTTP Request: POST http://localhost:8010/v1/chat/completions "HTTP/1.1 200 OK"
-2026-08-01 14:01:10,200 INFO __main__: v3 generation complete: valid=18/18, features=180, errors=0
+version https://git-lfs.github.com/spec/v1
+oid sha256:4ee8e38161d96eb2972ff219590f03962c67e915c6aac7ecf1724575ef0c53ac
+size 2274

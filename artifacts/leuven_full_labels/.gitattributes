@@ -1,0 +1,4 @@
+artifacts/leuven_full_labels/leuven_full_v2/*.csv filter=lfs diff=lfs merge=lfs -text
+artifacts/leuven_full_labels/leuven_full_v2/*.log filter=lfs diff=lfs merge=lfs -text
+artifacts/leuven_full_labels/leuven_full_v2/feature_votes.csv filter=lfs diff=lfs merge=lfs -text
+artifacts/leuven_full_labels/leuven_full_v2/feature_adjudication_votes.csv filter=lfs diff=lfs merge=lfs -text

@@ -1,12 +1,21 @@
 {
+  "cascade_confidence_threshold": 0.8,
+  "completed_pairs": 264585,
+  "execution_mode": "prompt_c_cascade",
+  "finished_at": "2026-09-27T10:51:22.659345+00:00",
   "job_id": "v4_atomic_shard_0022",
   "model": "Qwen2.5-72B-Instruct",
+  "n_completed_this_run": 264585,
+  "n_parse_errors": 17,
+  "n_pending": 264585,
+  "n_skipped_resume": 952553,
   "n_total_pairs": 1217138,
-  "n_skipped_resume": 0,
-  "n_pending": 1217138,
-  "n_completed_this_run": 0,
-  "n_parse_errors": 0,
-  "started_at": "2026-08-21T18:36:01.112741Z",
-  "finished_at": null,
-  "schema_version": "leuven_feature_schema_v1"
+  "new_adjudication_calls": 53949,
+  "new_first_pass_calls": 353712,
+  "new_parse_errors": 17,
+  "prompt_c_only_resolutions": 219975,
+  "recovered_existing_vote_cells": 31,
+  "routed_full_panel_resolutions": 44610,
+  "schema_version": "leuven_feature_schema_v1",
+  "started_at": "2026-09-26T20:42:06.459898+00:00"
 }

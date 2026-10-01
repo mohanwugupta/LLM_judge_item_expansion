@@ -1,5 +1,19 @@
 {
   "candidate_inventory_hash": "cf0af7b1c8126e2a06ad162e916685b75a298c3cf8da9a89b8ecd9e9652da3fd",
-  "protocol_hash": "723516354f8df921164d122fbaee0226dd02dc36728d4cc2835034a5e165b86c",
+  "cascade_route_violations": 0,
+  "complete": false,
+  "duplicate_cells": 0,
+  "duplicate_first_pass_votes": 0,
+  "expected_cells": 1218806,
+  "extra_cells": 0,
+  "extra_first_pass_vote_cells": 0,
+  "full_panel_vote_cells": 288356,
+  "invalid_first_pass_vote_counts": 0,
+  "invalid_resolved_values": 72,
+  "missing_cells": 0,
+  "missing_first_pass_vote_cells": 0,
+  "prompt_c_only_cells": 930450,
+  "protocol_hash": "8d70b3db7fc70fc07d589d97d0297ee851e40c0d637048e9ec0cb710bc66d73f",
+  "resolved_cells": 1218806,
   "shard_index": 21
 }
