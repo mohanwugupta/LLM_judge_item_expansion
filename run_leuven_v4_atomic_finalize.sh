@@ -15,6 +15,9 @@ set -eo pipefail
 PROJECT_DIR=${PROJECT_DIR:-/scratch/gpfs/JORDANAT/mg9965/FalseMemoryISC-CI/LLM_judge_item_expansion}
 CONDA_ENV=${CONDA_ENV:-PromptControlText}
 SHARD_COUNT=32
+MAX_UNRESOLVED_CELLS=${MAX_UNRESOLVED_CELLS:-127}
+RECOVERY_DIR=${RECOVERY_DIR:-ISC-CI_LLM_validation/reports/v4_exact_id_recovery_20261001}
+RECOVERY_INPUTS_BUNDLE=${RECOVERY_INPUTS_BUNDLE:-configs/v4_exact_id_recovery_inputs.tar.gz}
 
 cd "$PROJECT_DIR"
 module load anaconda3/2025.6
@@ -28,6 +31,17 @@ else
 fi
 export PYTHONPATH="$PROJECT_DIR${PYTHONPATH:+:$PYTHONPATH}"
 
+# Apply saved-response formatting repairs in this CPU job; no GPU retry is needed.
+if [ ! -f "$RECOVERY_DIR/recovery_plan.json" ] && [ -f "$RECOVERY_INPUTS_BUNDLE" ]; then
+    mkdir -p "$RECOVERY_DIR"
+    tar -xzf "$RECOVERY_INPUTS_BUNDLE" -C "$RECOVERY_DIR"
+fi
+if [ -f "$RECOVERY_DIR/recovery_plan.json" ]; then
+    python -u ISC-CI_LLM_validation/recover_v4_exact_ids.py \
+        --judgments-dir artifacts/v4/judgments \
+        --output-dir "$RECOVERY_DIR" --apply
+fi
+
 python run_v4_judgments.py \
     --candidate-bank artifacts/v4/discovery/candidate_bank.csv \
     --leuven-words data/leuven_combined_features_consolidated.csv \
@@ -37,4 +51,5 @@ python run_v4_judgments.py \
     --shard-count "$SHARD_COUNT" \
     --execution-mode prompt-c-cascade \
     --cascade-confidence-threshold 0.80 \
+    --max-unresolved-cells "$MAX_UNRESOLVED_CELLS" \
     --finalize

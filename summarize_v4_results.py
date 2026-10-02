@@ -36,14 +36,19 @@ def main() -> None:
     reports = run_dir / "reports"
     reports.mkdir(parents=True, exist_ok=True)
 
-    discovery_manifest = read_json(run_dir / "discovery" / "candidate_bank_manifest.json")
+    discovery_manifest = read_json(
+        run_dir / "discovery" / "candidate_bank_manifest.json"
+    )
     judgment_manifest = read_json(run_dir / "judgments" / "judgment_manifest.json")
     judgment_dry_run = read_json(run_dir / "judgments" / "dry_run_cost_report.json")
     threshold = read_json(run_dir / "judgments" / "judgment_threshold.json")
     matrix_manifest = read_json(run_dir / "matrices" / "matrix_manifest.json")
     validation_manifest = read_json(run_dir / "validation" / "manifest.json")
     retrieval = read_json(
-        run_dir / "retrieval_efficiency" / "v2_retrospective" / "retrieval_selection.json"
+        run_dir
+        / "retrieval_efficiency"
+        / "v2_retrospective"
+        / "retrieval_selection.json"
     )
     cascade_path = (
         run_dir
@@ -110,9 +115,9 @@ def main() -> None:
             reports / "v4_pruning_completion.csv", index=False
         )
     else:
-        pd.DataFrame(
-            columns=["matrix", "candidate_count_after_strict_gt_3"]
-        ).to_csv(reports / "v4_pruning_completion.csv", index=False)
+        pd.DataFrame(columns=["matrix", "candidate_count_after_strict_gt_3"]).to_csv(
+            reports / "v4_pruning_completion.csv", index=False
+        )
 
     validation_eval = run_dir / "validation" / "evaluation"
     representational_path = validation_eval / "input_matrix_rdm_comparisons.csv"
@@ -146,7 +151,7 @@ def main() -> None:
     selected = threshold["selected_cross_validated_metrics"] if threshold else {}
     heldout = retrieval.get("heldout_test_metrics", {}) if retrieval else {}
     if judgment_manifest and judgment_manifest.get("complete"):
-        atomic_status = "complete"
+        atomic_status = judgment_manifest.get("status", "complete")
     elif judgment_dry_run and judgment_dry_run.get("existing_reusable_cells", 0):
         atomic_status = (
             f"partial: {int(judgment_dry_run['existing_reusable_cells']):,} valid cells "
@@ -158,14 +163,20 @@ def main() -> None:
         "candidate_bank": (
             "complete"
             if discovery_manifest
-            else "blocked: primary generation pending"
-            if pending_discovery_sources
-            else f"blocked: {pending_merges} merge decisions pending"
+            else (
+                "blocked: primary generation pending"
+                if pending_discovery_sources
+                else f"blocked: {pending_merges} merge decisions pending"
+            )
         ),
         "atomic_judgments": atomic_status,
         "matrices": "complete" if matrix_manifest else "pending atomic judgments",
         "ISC-CI_training": "complete" if validation_manifest else "pending matrices",
-        "paper_simulations": "complete" if (simulation_dir / "manifest.json").exists() else "pending trained models",
+        "paper_simulations": (
+            "complete"
+            if (simulation_dir / "manifest.json").exists()
+            else "pending trained models"
+        ),
     }
     if discovery_manifest:
         discovery_summary = (
@@ -189,7 +200,8 @@ def main() -> None:
         judgment_summary = ""
     v2_prompt_c = prompt_c_benchmarks.get("v2_complete", {})
     v4_prompt_c = prompt_c_benchmarks.get("all_complete_v4_pilot", {})
-    report = f"""# V4 Results and Reproduction Status
+    report = (
+        f"""# V4 Results and Reproduction Status
 
 ## 1. Executive interpretation
 
@@ -203,7 +215,9 @@ The V2 posthoc retrieval benchmark does not support an aggressive `K <= 100` sho
 
 | Stage | Status |
 | --- | --- |
-""" + "\n".join(f"| {stage} | {status} |" for stage, status in stage_status.items()) + f"""
+"""
+        + "\n".join(f"| {stage} | {status} |" for stage, status in stage_status.items())
+        + f"""
 
 ## 3. Candidate discovery and consolidation
 
@@ -219,6 +233,8 @@ The V2 posthoc retrieval benchmark does not support an aggressive `K <= 100` sho
 ## 4. Atomic judgment and calibration
 
 The primary condition remains exhaustive candidate-by-293-word screening with the existing V2 prompts, Qwen2.5-72B model identity, and no source provenance in calls. Every unresolved cell receives prompt C. Positive, ambiguous, confidence-below-.80, and parse-failed responses receive A/B and the frozen V2 resolver; other C negatives resolve to zero. Every final cell must have either the exact A/B/C panel or a valid unrouted C-only negative plus one resolution. Valid completed full-panel cells are reused unchanged.
+
+Finalized exclusions, when authorized: {int(judgment_manifest.get('unresolved_cells', 0)) if judgment_manifest else 0:,} failed adjudications; {int(judgment_manifest.get('excluded_candidate_count', 0)) if judgment_manifest else 0:,} entire candidate contexts excluded from training. Missing judgments are not converted to negative cells. `complete` denotes finalized/accounted-for outputs; `judgments_complete` and the unresolved audit distinguish genuinely complete judgments from declared exclusions.
 
 Threshold selection used only 112,805 completed V2 cells for the 293 words and 385 retained human features. Five-fold splitting occurred by word. The selected threshold maximized mean held-out MCC subject to recall at least .80, with precision and conservatism as tie breakers.
 
@@ -257,23 +273,64 @@ python summarize_v4_results.py --run-dir artifacts/v4
 
 DRM expansion is blocked until V4 completes the Leuven validation gates. The V2 efficiency benchmark may not generalize to a broader generated vocabulary, and its human-positive recall is inflated by forced original source words. Per-request tokens and wall time were not retained in V2, so call fractions are explicitly labeled as token, cost, and runtime proxies.
 """
+    )
     report_path = reports / "V4_RESULTS.md"
     report_path.write_text(report, encoding="utf-8")
 
-    output_files = sorted(path for path in reports.iterdir() if path.name != "report_manifest.json")
+    output_files = sorted(
+        path for path in reports.iterdir() if path.name != "report_manifest.json"
+    )
     manifest = {
         "protocol_version": "v4-report-1.0.0",
         "created_at": datetime.now(timezone.utc).isoformat(),
         "run_dir": str(run_dir),
         "stage_status": stage_status,
         "source_manifest_hashes": {
-            "discovery": sha256_file(run_dir / "discovery" / "candidate_bank_manifest.json") if discovery_manifest else None,
-            "judgment": sha256_file(run_dir / "judgments" / "judgment_manifest.json") if judgment_manifest else None,
-            "judgment_dry_run": sha256_file(run_dir / "judgments" / "dry_run_cost_report.json") if judgment_dry_run else None,
-            "threshold": sha256_file(run_dir / "judgments" / "judgment_threshold.json") if threshold else None,
-            "matrices": sha256_file(run_dir / "matrices" / "matrix_manifest.json") if matrix_manifest else None,
-            "validation": sha256_file(run_dir / "validation" / "manifest.json") if validation_manifest else None,
-            "prompt_c_cascade": sha256_file(run_dir / "retrieval_efficiency" / "prompt_c_cascade" / "manifest.json") if (run_dir / "retrieval_efficiency" / "prompt_c_cascade" / "manifest.json").exists() else None,
+            "discovery": (
+                sha256_file(run_dir / "discovery" / "candidate_bank_manifest.json")
+                if discovery_manifest
+                else None
+            ),
+            "judgment": (
+                sha256_file(run_dir / "judgments" / "judgment_manifest.json")
+                if judgment_manifest
+                else None
+            ),
+            "judgment_dry_run": (
+                sha256_file(run_dir / "judgments" / "dry_run_cost_report.json")
+                if judgment_dry_run
+                else None
+            ),
+            "threshold": (
+                sha256_file(run_dir / "judgments" / "judgment_threshold.json")
+                if threshold
+                else None
+            ),
+            "matrices": (
+                sha256_file(run_dir / "matrices" / "matrix_manifest.json")
+                if matrix_manifest
+                else None
+            ),
+            "validation": (
+                sha256_file(run_dir / "validation" / "manifest.json")
+                if validation_manifest
+                else None
+            ),
+            "prompt_c_cascade": (
+                sha256_file(
+                    run_dir
+                    / "retrieval_efficiency"
+                    / "prompt_c_cascade"
+                    / "manifest.json"
+                )
+                if (
+                    run_dir
+                    / "retrieval_efficiency"
+                    / "prompt_c_cascade"
+                    / "manifest.json"
+                ).exists()
+                else None
+            ),
         },
         "outputs": {path.name: sha256_file(path) for path in output_files},
         "calibration_candidate_count": len(calibration_rows),

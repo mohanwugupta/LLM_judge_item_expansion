@@ -9,7 +9,10 @@ from build_v4_matrices import main as build_matrices_main
 from leuven_expansion.v4 import candidate_inventory_hash, sha256_file
 
 
-def test_matrix_build_preserves_order_rules_completion_and_provenance(tmp_path, monkeypatch):
+@pytest.mark.parametrize("with_unresolved", [False, True])
+def test_matrix_build_preserves_order_rules_completion_and_provenance(
+    tmp_path, monkeypatch, with_unresolved
+):
     pytest.importorskip("pyarrow")
     words = ["dog", "cat", "bird", "plane", "rock"]
     candidate_ids = [f"v4_{index:03d}" for index in range(175)]
@@ -50,6 +53,18 @@ def test_matrix_build_preserves_order_rules_completion_and_provenance(tmp_path, 
                 }
             )
     resolved_path = tmp_path / "resolved_feature_values.csv"
+    if with_unresolved:
+        failed = rows.pop(0)
+        audit_path = tmp_path / "unresolved_cells.csv"
+        pd.DataFrame(
+            [
+                {
+                    "candidate_id": failed["candidate_id"],
+                    "target_word": failed["target_word"],
+                    "reason": "adjudicator_failed_missing_final_value",
+                }
+            ]
+        ).to_csv(audit_path, index=False)
     pd.DataFrame(rows).to_csv(resolved_path, index=False)
     manifest = {
         "complete": True,
@@ -57,6 +72,18 @@ def test_matrix_build_preserves_order_rules_completion_and_provenance(tmp_path, 
         "candidate_bank_sha256": sha256_file(bank_path),
         "protocol_hash": "protocol",
     }
+    if with_unresolved:
+        manifest.update(
+            {
+                "unresolved_cells": 1,
+                "max_unresolved_cells": 1,
+                "unresolved_policy": "exclude_incomplete_candidates",
+                "unresolved_cells_sha256": sha256_file(audit_path),
+                "excluded_candidate_ids": [candidate_ids[0]],
+                "excluded_candidate_count": 1,
+                "resolved_values_sha256": sha256_file(resolved_path),
+            }
+        )
     (tmp_path / "judgment_manifest.json").write_text(json.dumps(manifest))
     threshold_path = tmp_path / "judgment_threshold.json"
     threshold_path.write_text(
@@ -91,17 +118,29 @@ def test_matrix_build_preserves_order_rules_completion_and_provenance(tmp_path, 
     calibrated = pd.read_csv(output / "v4_ensemble_calibrated.csv", index_col=0)
     source_only = pd.read_csv(output / "v4_ensemble_source_only.csv", index_col=0)
     assert raw.index.tolist() == words
-    assert raw.columns.tolist() == locked.columns.tolist() == calibrated.columns.tolist()
+    assert (
+        raw.columns.tolist() == locked.columns.tolist() == calibrated.columns.tolist()
+    )
+    assert (
+        raw.columns.tolist() == candidate_ids[1:]
+        if with_unresolved
+        else raw.columns.tolist() == candidate_ids
+    )
     assert np.array_equal(locked.to_numpy(), raw.to_numpy() > 0)
     assert (source_only.to_numpy() <= calibrated.to_numpy()).all()
     inventory = pd.read_csv(output / "context_inventory_comparison.csv")
     row = inventory.loc[inventory["matrix"].eq("v4_ensemble_calibrated")].iloc[0]
-    assert row["candidate_count_after_strict_gt_3"] == 1
+    assert row["candidate_count_after_strict_gt_3"] == (0 if with_unresolved else 1)
     provenance = pd.read_parquet(output / "cell_provenance.parquet")
-    assert len(provenance) == 875
-    assert provenance.loc[
-        provenance["candidate_id"].eq("v4_001")
-        & provenance["target_word"].eq("cat"),
-        "source_generated",
-    ].item() is False
-
+    assert len(provenance) == (870 if with_unresolved else 875)
+    metadata = json.loads((output / "matrix_manifest.json").read_text())
+    assert metadata["fixed_candidate_count"] == (174 if with_unresolved else 175)
+    assert metadata["excluded_candidate_count"] == (1 if with_unresolved else 0)
+    assert (
+        provenance.loc[
+            provenance["candidate_id"].eq("v4_001")
+            & provenance["target_word"].eq("cat"),
+            "source_generated",
+        ].item()
+        is False
+    )
