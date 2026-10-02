@@ -6,3 +6,4 @@ artifacts/v4/discovery/candidate_phrase_assignments.csv filter=lfs diff=lfs merg
 artifacts/v4/discovery/candidate_bank.csv filter=lfs diff=lfs merge=lfs -text
 artifacts/v4/judgments/shards/**/feature_votes.csv filter=lfs diff=lfs merge=lfs -text
 artifacts/v4/judgments/shards/**/feature_resolutions.csv filter=lfs diff=lfs merge=lfs -text
+artifacts/v4/judgments/resolved_feature_values.csv.gz.part-* filter=lfs diff=lfs merge=lfs -text
