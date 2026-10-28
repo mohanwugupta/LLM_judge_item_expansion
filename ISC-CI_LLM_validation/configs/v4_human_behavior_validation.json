@@ -1,0 +1,40 @@
+{
+  "protocol_version": "iscci-external-human-behavior-1.1.0",
+  "validation_directories": [
+    "ISC-CI_LLM_validation/artifacts/validation_v3_1",
+    "ISC-CI_LLM_validation/artifacts/validation_v4_20261002"
+  ],
+  "output_directory": "ISC-CI_LLM_validation/artifacts/human_behavior_validation_v4_20261002",
+  "required_conditions": [
+    "human", "v2", "v3_A", "v3_B", "v3_C", "v3_1_B",
+    "v4_b_locked_v2", "v4_b_calibrated",
+    "v4_ensemble_locked_v2", "v4_ensemble_calibrated",
+    "v4_ensemble_source_only"
+  ],
+  "optional_conditions": ["v3_1_A", "v3_1_C"],
+  "training": {
+    "seeds": [0, 1, 2, 3], "epochs": 400, "episodes_per_epoch": 1024,
+    "batch_size": 128, "support_sizes": [1, 2], "learning_rate": 0.001,
+    "task_loss_weight": 0.5, "freeze_released_semantic_embedding": true
+  },
+  "evaluation": {
+    "seed": 20260804, "pair_contexts": 1024, "rdm_contexts": 512,
+    "context_dependent_rdm_contexts": 128
+  },
+  "fidelity": {
+    "item_absolute_tolerance": 0.00001,
+    "statistic_absolute_tolerance": 0.00001,
+    "reconstructed_human_statistic_absolute_tolerance": 0.00001,
+    "require_reconstructed_human_reproduction": true,
+    "require_pdf_notebook_context_consistency": false,
+    "reconstructed_criterion": "released_seed_prediction_interval",
+    "reference_prediction_interval_level": 0.95,
+    "require_exact_stochastic_notebook_reproduction": false
+  },
+  "analysis": {
+    "seed": 20261001, "bootstrap_repetitions": 2000,
+    "reliability_repetitions": 100, "cross_validation_folds": 5,
+    "geometry_permutations": 2000
+  },
+  "external_test_policy": "Behavioral outcomes may not change feature decisions, feature retention, thresholds, architecture, training parameters, or condition selection. CV fits are supplemental measurement mappings only."
+}

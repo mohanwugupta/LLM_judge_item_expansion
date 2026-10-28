@@ -5,6 +5,8 @@ import argparse
 import json
 import logging
 import shutil
+import multiprocessing
+from concurrent.futures import ProcessPoolExecutor, as_completed
 from datetime import datetime, timezone
 from pathlib import Path
 
@@ -46,7 +48,9 @@ RELEASED_MODEL = UPSTREAM / "models" / "1and2shot_isc-seed3.pt"
 
 
 def parse_args() -> argparse.Namespace:
-    parser = argparse.ArgumentParser(description="Train the ISC-CI validation conditions.")
+    parser = argparse.ArgumentParser(
+        description="Train the ISC-CI validation conditions."
+    )
     parser.add_argument(
         "--config", type=Path, default=ROOT / "configs" / "v3_validation.json"
     )
@@ -58,6 +62,8 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--conditions", nargs="+")
     parser.add_argument("--include-v3-1", action="store_true")
     parser.add_argument("--include-v4", action="store_true")
+    parser.add_argument("--include-v4-source-only", action="store_true")
+    parser.add_argument("--workers", type=int, default=1)
     parser.add_argument(
         "--v4-matrix-dir",
         type=Path,
@@ -76,6 +82,7 @@ def load_conditions(
     include_v3_1: bool = False,
     include_v4: bool = False,
     v4_matrix_dir: Path | None = None,
+    include_v4_source_only: bool = False,
 ) -> tuple[dict[str, pd.DataFrame], dict[str, object]]:
     human_counts, human = load_human_matrix(HUMAN_CSV)
     v2, v2_missing_pairs = load_v2_matrix(V2_CSV, human_counts)
@@ -91,13 +98,17 @@ def load_conditions(
             )
     if include_v4:
         if v4_matrix_dir is None:
-            raise ValueError("--include-v4 requires --v4-matrix-dir or config v4.matrix_dir")
+            raise ValueError(
+                "--include-v4 requires --v4-matrix-dir or config v4.matrix_dir"
+            )
         v4_files = {
             "v4_b_locked_v2": "v4_b_locked_v2.csv",
             "v4_b_calibrated": "v4_b_calibrated.csv",
             "v4_ensemble_locked_v2": "v4_ensemble_locked_v2.csv",
             "v4_ensemble_calibrated": "v4_ensemble_calibrated.csv",
         }
+        if include_v4_source_only:
+            v4_files["v4_ensemble_source_only"] = "v4_ensemble_source_only.csv"
         for condition, filename in v4_files.items():
             conditions[condition] = load_v4_matrix(
                 v4_matrix_dir / filename, human.index
@@ -108,13 +119,55 @@ def load_conditions(
             condition: int(matrix.shape[1]) for condition, matrix in conditions.items()
         },
         "condition_positive_cells": {
-            condition: int(matrix.values.sum()) for condition, matrix in conditions.items()
+            condition: int(matrix.values.sum())
+            for condition, matrix in conditions.items()
         },
+    }
+
+
+def train_run(matrix, embedding, condition, seed, parameters, run_dir, provenance):
+    if not isinstance(embedding, torch.Tensor):
+        embedding = torch.from_numpy(embedding)
+    model, metrics, elapsed = train_model(
+        matrix=matrix,
+        released_embedding=embedding,
+        seed=seed,
+        epochs=parameters["epochs"],
+        episodes_per_epoch=parameters["episodes_per_epoch"],
+        batch_size=parameters["batch_size"],
+        learning_rate=parameters["learning_rate"],
+        task_loss_weight=parameters["task_loss_weight"],
+    )
+    if not torch.equal(model.input_to_independent.weight.detach(), embedding):
+        raise ValueError("Frozen semantic embedding changed during training")
+    run_dir.mkdir(parents=True, exist_ok=True)
+    metrics.to_csv(run_dir / "training_metrics.csv", index=False)
+    save_checkpoint(
+        run_dir / "checkpoint.pt",
+        model,
+        matrix,
+        condition,
+        seed,
+        parameters["epochs"],
+        parameters,
+        provenance,
+    )
+    return {
+        "condition": condition,
+        "seed": seed,
+        "epochs": parameters["epochs"],
+        "task_count": matrix.shape[1],
+        "elapsed_seconds": elapsed,
+        "reused": False,
     }
 
 
 def main() -> None:
     args = parse_args()
+    if args.workers < 1:
+        raise ValueError("workers must be positive")
+    if args.include_v4_source_only and not args.include_v4:
+        raise ValueError("--include-v4-source-only requires --include-v4")
     config = json.loads(args.config.read_text(encoding="utf-8"))
     training_config = dict(config["training"])
     epochs = args.epochs if args.epochs is not None else int(training_config["epochs"])
@@ -132,6 +185,7 @@ def main() -> None:
         args.include_v3_1,
         args.include_v4,
         v4_matrix_dir.resolve() if v4_matrix_dir else None,
+        args.include_v4_source_only,
     )
     selected_conditions = args.conditions or list(conditions)
     unknown = set(selected_conditions) - set(conditions)
@@ -196,12 +250,12 @@ def main() -> None:
             "training_config_hash": sha256_file(args.config.resolve()),
             "source_commit": git_revision(PROJECT_ROOT),
         }
+    pending_runs = []
     for condition in selected_conditions:
         matrix = conditions[condition]
         for seed in seeds:
             run_dir = output_dir / "models" / condition / f"seed_{seed}"
             checkpoint_path = run_dir / "checkpoint.pt"
-            metrics_path = run_dir / "training_metrics.csv"
             if checkpoint_path.exists() and not args.force:
                 checkpoint = torch.load(
                     checkpoint_path, map_location="cpu", weights_only=False
@@ -228,51 +282,48 @@ def main() -> None:
                     )
                     continue
             logging.info(
-                "Training condition=%s seed=%s tasks=%s epochs=%s",
+                "Scheduling condition=%s seed=%s tasks=%s epochs=%s",
                 condition,
                 seed,
                 matrix.shape[1],
                 epochs,
             )
-            model, metrics, elapsed = train_model(
-                matrix=matrix,
-                released_embedding=released_embedding,
-                seed=seed,
-                epochs=epochs,
-                episodes_per_epoch=parameters["episodes_per_epoch"],
-                batch_size=parameters["batch_size"],
-                learning_rate=parameters["learning_rate"],
-                task_loss_weight=parameters["task_loss_weight"],
+            pending_runs.append(
+                (
+                    matrix,
+                    released_embedding.numpy(),
+                    condition,
+                    seed,
+                    parameters,
+                    run_dir,
+                    v4_provenance if condition.startswith("v4_") else None,
+                )
             )
-            run_dir.mkdir(parents=True, exist_ok=True)
-            metrics.to_csv(metrics_path, index=False)
-            save_checkpoint(
-                checkpoint_path,
-                model,
-                matrix,
-                condition,
-                seed,
-                epochs,
-                parameters,
-                v4_provenance if condition.startswith("v4_") else None,
-            )
-            if not torch.equal(
-                model.input_to_independent.weight.detach(), released_embedding
-            ):
-                raise ValueError("Frozen semantic embedding changed during training")
+    if args.workers == 1:
+        for job in pending_runs:
+            row = train_run(*job)
+            run_rows.append(row)
             logging.info(
-                "Completed condition=%s seed=%s elapsed=%.1fs", condition, seed, elapsed
+                "Completed %s seed=%s elapsed=%.1fs",
+                row["condition"],
+                row["seed"],
+                row["elapsed_seconds"],
             )
-            run_rows.append(
-                {
-                    "condition": condition,
-                    "seed": seed,
-                    "epochs": epochs,
-                    "task_count": matrix.shape[1],
-                    "elapsed_seconds": elapsed,
-                    "reused": False,
-                }
-            )
+    elif pending_runs:
+        # Separate processes isolate the global Python/NumPy/Torch RNGs per seed.
+        with ProcessPoolExecutor(
+            max_workers=args.workers, mp_context=multiprocessing.get_context("spawn")
+        ) as pool:
+            futures = [pool.submit(train_run, *job) for job in pending_runs]
+            for future in as_completed(futures):
+                row = future.result()
+                run_rows.append(row)
+                logging.info(
+                    "Completed %s seed=%s elapsed=%.1fs",
+                    row["condition"],
+                    row["seed"],
+                    row["elapsed_seconds"],
+                )
     run_table = pd.DataFrame(run_rows)
     run_table.to_csv(output_dir / "training_runs.csv", index=False)
     manifest = {
@@ -316,6 +367,7 @@ def main() -> None:
         "selected_conditions": selected_conditions,
         "selected_seeds": seeds,
         "environment": environment_record(),
+        "execution_workers": args.workers,
     }
     write_json(output_dir / "manifest.json", manifest)
     logging.info("Training stage complete: %s", output_dir)

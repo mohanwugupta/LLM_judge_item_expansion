@@ -39,8 +39,27 @@ def load_and_validate_cells(
     ] != sha256_file(resolved_values):
         raise ValueError("Resolved-value file differs from the finalized manifest")
 
+    # The finalized cross-product has ~39M rows. Repeated identifiers should not
+    # allocate a Python string per cell; unused prompt payloads remain in the source.
+    used_columns = {
+        "candidate_id",
+        "target_word",
+        "resolved_value",
+        "confidence",
+        "ambiguous",
+        "resolution_method",
+        "adjudicated",
+        "needs_human_audit",
+    }
     cells = pd.read_csv(
-        resolved_values, dtype={"candidate_id": str, "target_word": str}
+        resolved_values,
+        usecols=lambda column: column in used_columns,
+        dtype={
+            "candidate_id": pd.CategoricalDtype(schema["candidate_ids"]),
+            "target_word": pd.CategoricalDtype(words),
+            "resolution_method": "category",
+            "ambiguous": "boolean",
+        },
     )
     required = {"candidate_id", "target_word", "resolved_value"}
     if missing := required - set(cells.columns):
@@ -107,7 +126,7 @@ def load_and_validate_cells(
         ):
             raise ValueError("A cell cannot be both resolved and unresolved")
         combined_counts = (
-            cells.groupby("candidate_id")
+            cells.groupby("candidate_id", observed=False)
             .size()
             .add(failed.groupby("candidate_id").size(), fill_value=0)
         )

@@ -45,7 +45,9 @@ def load_v2_matrix(
         raise ValueError("V2 contains duplicate word-feature decisions")
 
     matrix = (
-        resolutions.assign(value=resolutions["final_feature_value"].gt(0).astype(np.int8))
+        resolutions.assign(
+            value=resolutions["final_feature_value"].gt(0).astype(np.int8)
+        )
         .pivot(index="word_normalized", columns="feature_id", values="value")
         .reindex(index=human_counts.index, columns=range(human_counts.shape[1]))
     )
@@ -56,9 +58,7 @@ def load_v2_matrix(
     ]
     matrix = matrix.fillna(0).astype(np.int8)
     matrix.columns = human_counts.columns
-    human_task_names = human_counts.columns[
-        human_counts.gt(3).sum(axis=0).gt(3)
-    ]
+    human_task_names = human_counts.columns[human_counts.gt(3).sum(axis=0).gt(3)]
     human_schema_matrix = matrix.loc[:, human_task_names]
     # V2 is an applicability judgment over the already selected human schema.
     # Per the study decision, every nonzero finalized value is positive and no
@@ -115,14 +115,11 @@ class CICODataset(Dataset):
         return self.n_sequences
 
     def __getitem__(self, _: int) -> dict[str, np.ndarray]:
-        task_idx = int(np.random.choice(range(self.df.shape[1])))
+        # Same uniform draw/RNG consumption, without materializing every task ID.
+        task_idx = int(np.random.choice(self.df.shape[1]))
         n = int(np.random.choice(self.n))
-        negative_idxs = np.random.permutation(
-            self.task_to_idxs[task_idx]["negative"]
-        )
-        positive_idxs = np.random.permutation(
-            self.task_to_idxs[task_idx]["positive"]
-        )
+        negative_idxs = np.random.permutation(self.task_to_idxs[task_idx]["negative"])
+        positive_idxs = np.random.permutation(self.task_to_idxs[task_idx]["positive"])
         support_idxs = positive_idxs[:n]
         query_idxs = np.concatenate([negative_idxs, positive_idxs[n:]])
         if n < self.max_n:

@@ -35,12 +35,16 @@ def score_arguments(
             if pd.notna(row.get(column)) and str(row.get(column)).strip()
         ]
         if not premise_names or len(premise_names) > 3:
-            raise ValueError(f"Unsupported premises at row {row_index}: {premise_names}")
+            raise ValueError(
+                f"Unsupported premises at row {row_index}: {premise_names}"
+            )
         try:
             premise_indices = [lookup[str(name)] for name in premise_names]
             conclusion_index = lookup[str(row["Conclusion"])]
         except KeyError as error:
-            raise ValueError(f"Unknown Leuven object at row {row_index}: {error}") from error
+            raise ValueError(
+                f"Unknown Leuven object at row {row_index}: {error}"
+            ) from error
         if len(premise_indices) == 1:
             premise_indices.append(padding)
         supports.append(premise_indices)
@@ -59,14 +63,14 @@ def score_arguments(
                     [[conclusions[index]] for index in selected], dtype=torch.long
                 )
                 context = model.get_context_rep(support)
-                output = model.get_ft_output(conclusion, context).squeeze(-1).squeeze(-1)
+                output = (
+                    model.get_ft_output(conclusion, context).squeeze(-1).squeeze(-1)
+                )
                 scores[selected] = output.cpu().numpy()
     return scores
 
 
-def induction_correlations(
-    data: pd.DataFrame, scores: np.ndarray
-) -> pd.DataFrame:
+def induction_correlations(data: pd.DataFrame, scores: np.ndarray) -> pd.DataFrame:
     working = data.copy()
     working["ISC-CI"] = scores
     rows = []
@@ -140,9 +144,7 @@ def similarity_domain_correlations(
     averaged["ISC-CI"] = scores
     rows = []
     for domain, group in averaged.groupby("Domain", observed=True):
-        correlation, p_value = pearsonr(
-            group["Normalized Similarity"], group["ISC-CI"]
-        )
+        correlation, p_value = pearsonr(group["Normalized Similarity"], group["ISC-CI"])
         rows.append(
             {
                 "domain": domain,
@@ -329,17 +331,12 @@ def _lca_choice_probabilities(
             0.0,
             lambda_ * activations[:, 1]
             + (1 - lambda_)
-            * (
-                inputs[:, 1]
-                - beta * (first + activations[:, 2])
-                + noise[:, 1]
-            ),
+            * (inputs[:, 1] - beta * (first + activations[:, 2]) + noise[:, 1]),
         )
         third = np.maximum(
             0.0,
             lambda_ * activations[:, 2]
-            + (1 - lambda_)
-            * (inputs[:, 2] - beta * (first + second) + noise[:, 2]),
+            + (1 - lambda_) * (inputs[:, 2] - beta * (first + second) + noise[:, 2]),
         )
         activations = np.column_stack([first, second, third])
         if step >= burn_in:
@@ -352,12 +349,12 @@ def _stable_seed(base_seed: int, *values: str) -> int:
     return int.from_bytes(hashlib.sha256(payload).digest()[:8], "little")
 
 
-def model_similarity_context_effect(
+def model_similarity_context_predictions(
     row: pd.Series,
     model: CICOModel,
     object_names: Sequence[str],
     seed: int,
-) -> float:
+) -> dict[str, float]:
     lookup = _name_to_index(object_names)
     premise = lookup[str(row["Premise 1"])]
     options_base = [
@@ -382,12 +379,24 @@ def model_similarity_context_effect(
             choices = _lca_choice_probabilities(np.stack(drift_rows), rng)
             output_values[f"c1-{distractor_name}"] = float(choices[0])
             output_values[f"c2-{distractor_name}"] = float(choices[1])
-    return (
+    output_values["model_effect"] = (
         output_values["c1-Distractor 1"]
         - output_values["c1-Distractor 2"]
         + output_values["c2-Distractor 2"]
         - output_values["c2-Distractor 1"]
     )
+    return output_values
+
+
+def model_similarity_context_effect(
+    row: pd.Series,
+    model: CICOModel,
+    object_names: Sequence[str],
+    seed: int,
+) -> float:
+    return model_similarity_context_predictions(row, model, object_names, seed)[
+        "model_effect"
+    ]
 
 
 def similarity_context_metrics(

@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import time
+import logging
 from pathlib import Path
 from typing import Any
 
@@ -26,9 +27,7 @@ def train_model(
     set_random_seed(seed)
     model = initialize_model(matrix.shape[1], released_embedding, seed)
     optimizer = torch.optim.Adam(model.parameters(), lr=learning_rate)
-    dataset = CICODataset(
-        matrix, n_sequences=episodes_per_epoch, n_shot=(1, 2)
-    )
+    dataset = CICODataset(matrix, n_sequences=episodes_per_epoch, n_shot=(1, 2))
     loader = DataLoader(dataset, batch_size=batch_size, shuffle=False, num_workers=0)
     metrics: list[dict[str, Any]] = []
     started = time.perf_counter()
@@ -74,6 +73,16 @@ def train_model(
                         "loss": float(loss),
                     }
                 )
+        if (epoch + 1) % 25 == 0 or epoch + 1 == epochs:
+            logging.getLogger(__name__).warning(
+                "Training seed=%s tasks=%s epoch=%s/%s elapsed=%.1fs loss=%.4f",
+                seed,
+                matrix.shape[1],
+                epoch + 1,
+                epochs,
+                time.perf_counter() - started,
+                metrics[-1]["loss"],
+            )
     elapsed = time.perf_counter() - started
     return model, pd.DataFrame(metrics), elapsed
 

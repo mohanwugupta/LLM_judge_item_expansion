@@ -21,3 +21,19 @@ def test_v3_1_manual_review_records_every_verdict() -> None:
     assert set(review["verdict"]) == {"pass", "reject"}
     assert review["cluster_id"].is_unique
     assert review["review_note"].notna().all()
+
+
+def test_v4_behavior_extension_keeps_external_test_settings_frozen() -> None:
+    original = json.loads((ROOT / "configs/human_behavior_validation.json").read_text())
+    extended = json.loads(
+        (ROOT / "configs/v4_human_behavior_validation.json").read_text()
+    )
+    for key in (
+        "training",
+        "evaluation",
+        "fidelity",
+        "analysis",
+        "external_test_policy",
+    ):
+        assert extended[key] == original[key]
+    assert "v4_ensemble_source_only" in extended["required_conditions"]

@@ -216,3 +216,195 @@ Therefore, keep the current embedding/profile/complete-link safeguards, but do n
 primary lexical consolidation as final. A follow-up should use safe inflectional normalization
 plus manual adjudication for modality, frequency, and derivational changes, then retrain those
 matrices as a reported sensitivity condition without replacing the original primary results.
+## 2026-10-01: External Human-Behavior Stage
+
+Added the separate downstream protocol in `HUMAN_BEHAVIOR_VALIDATION.md` and the
+runner `run_human_behavior_validation.py`. Reuse original human observations,
+stimuli, mappings, probes, and paper measures. Save every trial prediction before
+aggregation. Keep raw-feature, frozen-semantic, and fully trained evaluations
+separate. Four seeds and the existing frozen 400-epoch protocol remain unchanged.
+Human behavior is an external test, never a feature/threshold/training selection tool.
+
+Default fidelity tolerances were fixed at 1e-5 before running. Original item-probe
+parity passes, and the released seed-3 checkpoint reproduces the 16 deterministic
+notebook statistics. Reconstructed human models do not numerically match that one
+released seed. A distinct source check finds PDF page 73 reports 36/38 context
+directions while the saved notebook reports 37/38. The common-seed stochastic probe
+matches the PDF. The strict requested gate remains failed, with no silent tolerance
+relaxation, seed selection, candidate behavioral evaluation, or new training.
+
+V4 also remains blocked by unfinalized judgments/matrices from the October 1 audit.
+No invalid cells were converted to negatives. Optional source-only models are
+evaluated when already trained; this stage does not invent a source-only benchmark.
+The original synthetic phenomena CSV lacks human responses, and originally
+model-selected stimuli limit independence claims; both caveats are explicit.
+
+### User Clarification and Protocol 1.1
+
+The user explicitly selected: "Exact released replication; statistical reconstructed
+replication." Preserve the initial strict audit in `artifacts/human_behavior_validation/`.
+The current protocol uses exact deterministic released-seed-3 reproduction plus
+reconstructed four-seed means inside the 95% released-human-seed prediction envelope
+(t, df=3, reference SD * sqrt(1+1/4)). All four released models receive identical probes.
+This is statistical replication consistency, not formal equivalence; four reference
+seeds limit precision. The rule was specified after initial human-only inspection,
+before LLM-condition behavioral evaluation, and must not be called preregistered.
+
+The saved stochastic notebook value and PDF/notebook source discrepancy remain
+reported diagnostics, not deterministic numerical gates. No LCA seed or parameters
+were changed to achieve a target. Protocol 1.1 passes all 33 required statistical and
+deterministic checks. Current outputs use `artifacts/human_behavior_validation_statistical/`.
+This authorizes downstream evaluation of available models, but not training from
+unfinalized V4 data or changing any upstream feature or training decision.
+
+### Completed Available-Condition Behavior and Derived QA
+
+Protocol 1.1 evaluated human, V2, V3-A/B/C, and V3.1-A/B/C: 32 existing
+four-seed models, plus four released reference checkpoints. No new training or
+upstream changes were required. All V4 conditions remain missing, not estimated.
+The original model graph and scoring agree at every induction/phenomenon query
+for the eight human/reference models (16 checks; maximum error 1.91e-6).
+
+Derived QA corrected induction trial errors after heterogeneous task concatenation
+and separated historical input-RDM ranks from defined-pair sensitivity. Parent
+manifests, original trial-statistic files, raw-probe hashes, and implementation
+lineage were retained. No model predictions or CV fits were changed. The main
+runner now emits the corrected reports, consolidated trial metrics, and human
+reliability in the condition table. Zero-vector raw similarity remains undefined,
+with explicit coverage rather than invented scores. These are evaluation/reporting
+corrections, not behavior-driven feature, threshold, or training selection.
+
+Exploratory geometry-behavior associations use seven nonhuman CONDITIONS, not 28
+pseudo-independent seeds. Permutation p-values are unadjusted, with related
+conditions and many outcomes; they do not establish a general geometry-validity
+relationship or justify selecting a feature configuration. See the statistical
+run's `RESULTS.md`, complete per-task tables, uncertainty, and manifest.
+
+### V4 Finalizer Failure and Authorized Exact-ID Recovery
+
+The finalizer failed because original shard 0 had 47 invalid resolved values despite
+complete cell coverage; all 32 original sidecars were incomplete (2,005 failures).
+After explanation, the investigator selected recovery of exact-ID formatting cases
+from saved responses first, then retrying remaining cells on the cluster.
+The recorded conservative policy recovered exactly 1,878 cells locally, leaving
+127. Original CSV bytes/failed rows and raw adjudicator responses are preserved;
+no semantic scores were guessed, and no LLM calls or training ran locally.
+Sidecars remain unchanged pending full revalidation. Details, hashes, and cluster
+steps: `reports/v4_exact_id_recovery_20261001/RECOVERY.md`.
+
+The previously unexplained protocol relocation mismatch is now resolved. Replaying
+the cluster paths and recomputing their dependent legacy hashes exactly reproduces
+the production hash `8d70b3db7fc70fc07d589d97d0297ee851e40c0d637048e9ec0cb710bc66d73f`.
+No recorded hash was overwritten. Finalization gains comprehensive manifest
+diagnostics and validation-only path replay, without weakened content checks.
+Resolution CSVs now use the existing Git LFS convention. A CPU-only recovery
+launcher and small portable evidence bundle allow the same repairs on the cluster;
+the original four-80-GB-GPU production job resources are unchanged.
+
+### Investigator Amendment: Finalize Without Retrying 127 Cells
+
+The investigator explicitly authorized accepting the remaining 127 failed
+adjudications and proceeding without a GPU retry. The finalization launcher now
+applies the saved exact-ID recovery inside its CPU job and opts into a cap of
+127 recorded missing `adjudicator_failed` scores. Protocol, partition, row
+coverage, duplicate, range, and vote checks remain enforced on actual CSVs.
+Failures remain in a hashed unresolved-cell audit; no unknown score becomes zero.
+
+Training matrices exclude all 64 candidate columns containing those failures,
+leaving 133,017 of the 133,081 frozen candidates before the existing retention
+rule. No excluded candidate overlaps the fixed-B 175-feature inventory. The bank,
+valid judgments, thresholds, training settings, and human control are unchanged.
+Judgment finalization and complete semantic judgments are distinguished explicitly
+in manifests (`complete: true`, `judgments_complete: false`, declared exclusions).
+The matrix builder validates the failure audit and carries exclusions into its
+provenance. This is missing-data handling chosen independently of behavioral
+outcomes, not a behavior-driven selection of features. It supersedes the remaining
+retry requirement; see `reports/v4_finalize_exclusions_20261001/FINALIZE.md`.
+
+## 2026-10-02: Finalized V4 Training and External Behavior Completed
+
+The downloaded finalization passes the frozen-bank and resolved-file hashes,
+exhaustive accounted-for coverage, duplicate/range checks, and explicit failure
+audit. Exclude 64 whole incomplete feature columns, none in fixed-B. Keep `>0`,
+frozen `>=1`, and strict `>3` context retention unchanged. No behavior feedback.
+
+The investigator approved four ensemble source-only seeds before that condition's
+behavioral results. Train 20 new models with the frozen 400-epoch/409,600-episode
+procedure and reuse all 32 prior trained checkpoints. Isolated spawned workers,
+equivalent integer task sampling, categorical input storage, and duplicate-seed
+bootstrap caching change execution only; regression tests establish equivalence.
+The original 504 baseline prediction CSVs and baseline statistics/intervals remain
+unchanged. Original graph/scorer parity passes for all 20 new models.
+
+The released exact / reconstructed statistical gate passes all 33 required checks.
+Common-probe comparisons and original-paper simulations cover 56 models including
+released references. External behavior covers 13 four-seed conditions, every
+original human dataset, saved individual predictions, CV-only rating mappings,
+2,000 crossed item/seed bootstrap draws, human reliability, and all three levels.
+No required seeds are missing. See `V4_20261002_RUN.md` and
+`reports/v4_20261002/RESULTS.md` for source hashes, commands, and full results.
+
+Completion improves raw Leuven geometry but has mixed behavioral consequences:
+fixed-B improves some induction/context measures over V3.1-B; completed ensembles
+lose thematic/nonmonotonicity preference fidelity versus source-only and human.
+Global RDM recovery does not uniformly predict human behavior across conditions.
+This is not behavioral equivalence or an entirely human-data-free semantic model.
+Do not tune thresholds, feature decisions, or training from these external results.
+The production cascade's fast negatives lack counterfactual full-panel ground
+truth, and equal episode budgets give large ensembles only ~5 episodes/context.
+
+## 2026-10-05: Frozen Final-Results Figure Package
+
+Implement `PRD-ISC-CI-Final-Results-Figures.md` as reporting only. No judgments,
+training, checkpoint inference, model simulations, new bootstrap intervals, or
+giant-cell evaluation. Use authoritative common-LCA-seed human-validation protocol
+1.1.0, not historical paper-simulation seed schedules. Preserve all 13 conditions
+and seeds 0-3; released references are never added to reconstructed-human replicates.
+
+Main comparisons are the prespecified seven conditions, with V3-B chosen by prompt
+matching rather than performance. Raw features, shared pretrained activations,
+fully trained predictions, and observed human reliability remain separate.
+Common-finite-pair sensitivity intersects stable similarity item IDs across those
+seven conditions within each domain and reports point estimates only. Original
+coverage statistics and saved intervals remain unchanged. RDM heatmaps use original
+Leuven category/file order and preserve undefined zero-vector cosines as missing;
+historical imputation and defined-pair sensitivity are displayed separately.
+
+Context direction uses 38 sets; magnitude uses all 41 with the original
+three-alternative probability denominator. Asymmetry keeps its distinct 34/50
+subsets and logit-versus-human-choice scales. Recomputed CSV logit subtraction is
+checked within 1e-6 because float32/export rounding reaches 5e-7, below the frozen
+fidelity tolerance; no saved score is changed. The supplied local paper labels
+nonmonotonicity Figure 5 and context-specific categorization Figure 6.
+
+All four main figures, mandatory supplements, per-panel source tables, captions,
+interpretation, source hashes, and missing-input records are generated under
+`reports/v4_20261002/figures_final/`. See `FINAL_FIGURES.md` for the one-command
+renderer and independent PDF/SVG/PNG QA. Input hashes are verified unchanged.
+Figures do not establish model equivalence, arbitrary-word generalization, or
+false-memory/DRM validity. No external human outcome revises scientific settings.
+
+## 2026-10-28: Human-Sized Random-Feature Negative Control
+
+The investigator explicitly approved a human-sized random control rather than a
+fixed-B- or ensemble-sized control. Shuffle each of the 385 human feature columns
+independently over the same 293 objects with fixed RNG seed 20261028 (PCG64).
+Preserve every feature's prevalence and all 8,056 positive cells; do not preserve
+object degrees or select a realization using human behavior. Use one fixed random
+matrix for four training seeds, not four different matrices mislabeled as pure
+training-seed uncertainty.
+
+Reuse the exact frozen encoder, architecture, 400-epoch training procedure, original
+human tasks, common stochastic evaluation seed, CV scoring, representation probes,
+and 2,000-draw crossed item/seed bootstrap. New original-graph checks must pass.
+Add a paired human-minus-random contrast, without changing the earlier contrasts.
+Never retrain or overwrite the 13 completed conditions. Combined CSVs preserve
+their original byte prefixes. Redraw the same figure families into the versioned
+October 28 report; keep the original common-finite-pair mask and separate raw,
+shared-pretrained, and fully trained levels.
+
+Interpret this as a test of meaningful contexts conditional on the human-pretrained
+encoder, not an encoder-removal ablation or a numerical decomposition of its causal
+contribution. Four-seed intervals do not include randomization-realization variability.
+Details and replay are in `RANDOM_FEATURE_CONTROL.md`; all new scientific outputs
+are under `artifacts/random_feature_control_20261028/`.
