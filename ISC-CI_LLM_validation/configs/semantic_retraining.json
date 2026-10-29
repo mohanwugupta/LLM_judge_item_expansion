@@ -1,0 +1,38 @@
+{
+  "protocol": "isc-independent-32-corrected-targets-v1",
+  "taxonomy": "configs/task_taxonomy_32_reconstructed.json",
+  "output_directory": "artifacts/semantic_retraining_20261028_32_corrected",
+  "report_directory": "reports/semantic_retraining_20261028_32_corrected",
+  "pilot_llm_condition": "v3_1_B",
+  "seeds": [0, 1, 2, 3],
+  "auxiliary_tasks": [],
+  "classifier": {
+    "model": "Qwen2.5-72B-Instruct", "revision": null,
+    "temperature": 0, "seed": 0, "max_tokens": 2048,
+    "batch_size": 8, "timeout_seconds": 300,
+    "endpoint": "http://localhost:8024/v1"
+  },
+  "semantic": {
+    "pilot": {
+      "max_epochs": 1000, "batch_size": 64, "learning_rate": 0.01,
+      "max_seconds": 3600, "max_absolute_error": 0.1,
+      "stopping": "convergence", "device": "cpu", "chunk_size": 4096
+    },
+    "schedule_locked": false,
+    "schedule_selection_basis": "training-only; no human behavioral results",
+    "schedule_rationale": null,
+    "full": null
+  },
+  "downstream_settings": {
+    "epochs": 400, "episodes_per_epoch": 1024, "batch_size": 128,
+    "learning_rate": 0.001, "task_loss_weight": 0.5,
+    "support_sizes": [1, 2], "freeze_semantic_embedding": true
+  },
+  "behavior_config": "configs/v4_human_behavior_validation.json",
+  "frozen_behavior_manifest": "artifacts/human_behavior_validation_v4_20261002/manifest.json",
+  "baseline_figure_manifests": [
+    "reports/v4_20261002/figures_final/figure_manifest.json",
+    "reports/v4_20261028_random_control/figures_final/figure_manifest.json"
+  ],
+  "external_test_policy": "Human behavior cannot revise task classes, assignments, thresholds, feature retention, architecture, stopping rules, or condition selection. One fixed randomized matrix; four seeds are not four randomizations."
+}

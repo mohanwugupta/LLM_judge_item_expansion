@@ -1,5 +1,17 @@
 # ISC-CI LLM Validation
 
+The independent semantic-retraining extension is under `semantic_retraining/`.
+See `../docs/iscci_semantic_retraining/AUDIT.md` and `SCRATCHPAD.md` in that
+documentation directory for staged implementation status and investigator decisions.
+It uses an explicitly approved 32-class taxonomy reconstruction and corrected
+complete targets; it does not modify or replace any completed experiment. Real
+classification review and the semantic training pilot are still required.
+Run instructions, cluster smoke jobs, review/freeze steps, and the phased
+56-encoder / 784-ISC-CI design are in
+`../docs/iscci_semantic_retraining/WORKFLOW.md`. The entry point is
+`python ISC-CI_LLM_validation/run_semantic_retraining.py --stage plan --phase 3 --dry-run`
+from the project root. No expensive stages run automatically.
+
 The latest figures add the investigator-approved four-seed human-sized random-feature
 control: `reports/v4_20261028_random_control/figures_final/INDEX.md`.
 See `RANDOM_FEATURE_CONTROL.md` for the fixed shuffle, original-code reuse, results
