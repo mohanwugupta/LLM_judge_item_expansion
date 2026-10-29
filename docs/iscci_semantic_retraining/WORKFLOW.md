@@ -34,14 +34,66 @@ Preserve/materialize these existing inputs on the execution machine:
 - The frozen behavior manifest, existing model checkpoints, and files referenced
   by the original and random-control figure manifests, for fidelity/preservation.
 
-Many inputs are Git-ignored. **Pushing code does not upload them.** Preflight
-reports missing files before loading Qwen or training. The 10-GB raw V4 judgment
+The 14 frozen input matrices are explicitly tracked with Git LFS, despite the
+general artifacts ignore rule. Other historical inputs remain Git-ignored;
+**pushing code does not upload those inputs.** Preflight reports missing files
+before loading Qwen or training. The 10-GB raw V4 judgment
 payload is not needed for this extension. Old checkpoints are historical fidelity
 inputs only; no old semantic weights enter new semantic learning.
 
 Python dependencies are the existing NumPy, pandas, PyTorch, SciPy, scikit-learn,
 matplotlib, Pillow, and pytest stack. Cluster classification additionally uses the
 already established vLLM/Transformers environment. No new API account is needed.
+
+## Transfer Missing Matrices
+
+An error for `validation_v4_20261002/data_matrices/human.csv` means the cluster
+checkout lacks saved validation inputs. This is not a Qwen failure. Even the
+classification smoke prepares all 14 conditions. These exact frozen matrices
+are now tracked with Git LFS. On the cluster login node, retrieve them with:
+
+```bash
+git pull --ff-only
+git lfs pull --include='ISC-CI_LLM_validation/artifacts/validation_v4_20261002/data_matrices/*.csv,ISC-CI_LLM_validation/artifacts/random_feature_control_20261028/validation/data_matrices/random_human.csv' --exclude=''
+```
+
+Git LFS must be installed in the cluster checkout. The explicit include avoids
+downloading unrelated large raw judgment payloads. Do not regenerate matrices,
+recreate the randomized control, or rerun old training to fix missing inputs.
+
+If direct transfer is preferable, use the existing saved files as follows.
+
+From a terminal **on the Mac**, change to this repository. Set `CLUSTER` to your
+actual SSH login destination (replace the placeholder), then run:
+
+```bash
+CLUSTER='mg9965@YOUR_CLUSTER_LOGIN_HOST'
+DEST='/scratch/gpfs/JORDANAT/mg9965/FalseMemoryISC-CI/LLM_judge_item_expansion/'
+rsync -avR --ignore-existing \
+  ISC-CI_LLM_validation/artifacts/validation_v4_20261002/data_matrices/ \
+  ISC-CI_LLM_validation/artifacts/random_feature_control_20261028/validation/data_matrices/random_human.csv \
+  "$CLUSTER:$DEST"
+```
+
+The source matrices currently occupy about 100 MiB. `-R` retains the relative
+directory hierarchy; `--ignore-existing` avoids replacing cluster files. No
+delete option is used. Existing-but-different files still need comparison, not
+blind overwriting: the usual source/hash gates remain in effect.
+
+Then, on the cluster login node, activate `PromptControlText`, change to the
+repository, and check inputs **before reserving GPUs**:
+
+```bash
+python ISC-CI_LLM_validation/run_semantic_retraining.py --stage prepare
+python ISC-CI_LLM_validation/run_semantic_retraining.py --stage preflight
+```
+
+Preparation now lists every missing matrix at once and writes no inventory if
+any are absent. Other ignored inputs listed above (description metadata,
+upstream code/data/checkpoints, frozen behavior and figure sources) must also be
+present. A successful matrix transfer alone does not certify those later gates.
+Once both checks pass, submit the Qwen smoke job below. No thresholds, feature
+memberships, or existing model results need to change to fix this error.
 
 ## Initial Checks
 

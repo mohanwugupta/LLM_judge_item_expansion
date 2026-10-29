@@ -73,6 +73,21 @@ def load_matrix(path: Path, object_order=None) -> pd.DataFrame:
 
 
 def inventory(root: Path) -> dict:
+    missing = [
+        matrix_path(root, c) for c in CONDITIONS if not matrix_path(root, c).is_file()
+    ]
+    if missing:
+        raise FileNotFoundError(
+            f"Missing {len(missing)} frozen semantic input matrices:\n"
+            + "\n".join(str(path) for path in missing)
+            + "\nThese frozen matrices are tracked with Git LFS. Run git pull and "
+            "git lfs pull to retrieve them. Alternatively, transfer the saved "
+            "matrices from the machine containing the completed "
+            "validation, preserving their paths. Do not regenerate them or rerun old "
+            "training to repair this error. See docs/iscci_semantic_retraining/WORKFLOW.md "
+            "(Transfer Missing Matrices) and run --stage prepare on the login node "
+            "before submitting another GPU job."
+        )
     records, objects, human = {}, None, None
     for condition, expected in CONDITIONS.items():
         path = matrix_path(root, condition)

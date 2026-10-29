@@ -407,3 +407,55 @@ readonly preservation command initially used the nonexistent config key
 output_root; corrected to output_directory (no pipeline code change).
 Corrected post-smoke check passed: all 316 historical files still match the
 preflight snapshot.
+
+## 2026-10-29: Missing Cluster Matrices / Input Transfer
+
+Investigator's isc_task_classes_1640624 job stopped at prepare because the cluster
+lacked validation_v4_20261002/data_matrices/human.csv. Confirmed all saved matrices
+exist locally; the 13-condition matrix directory is about 100 MiB. They are
+Git-ignored generated inputs and are not delivered by git pull. No model or
+judgment changes are appropriate, and old training must not be rerun to fix this.
+
+RED command: M0 interpreter `-m pytest -q
+ISC-CI_LLM_validation/tests/test_semantic_inventory.py -k missing_inventory`.
+Two failures: empty checkout reported only the first missing file; partial
+checkout attempted to parse the existing file before reporting other absences.
+Added initial all-condition existence validation with explicit transfer guidance.
+Regression fixtures preserve every existing byte and assert no files are created.
+WORKFLOW.md now gives Mac-to-cluster rsync for the frozen matrices and the saved
+random control, preserving paths without replacing existing files. It also
+requires login-node prepare/preflight before another GPU allocation and notes
+that additional ignored historical inputs may need transfer as well.
+
+No network transfers, cluster submissions, regenerated matrices, or model calls
+were performed during this repair. GREEN/full regression results follow below.
+
+GREEN: inventory tests 5 passed (4.04 s). Full CLI preflight: **117 passed
+(17.72 s)**, no stderr, 316 historical files unchanged. Signature:
+`63398b16c4997892b9a22fcbce01482e233caa97009bd231a3f6fc74986e8db7`.
+`git diff --check` passed. Local benchmark and versioned synthetic smoke were
+refreshed against this code revision; these never authorize real training.
+
+## 2026-10-29: Investigator-Requested Git LFS Publication
+
+Investigator asked to push the missing matrices to the repository instead of
+requiring a separate transfer. Publish exactly the 14 saved matrices with scoped
+Git LFS attributes, force-adding these ignored files only. No force push or
+history rewrite is needed; GitHub main was confirmed at local parent 96416d5.
+Other generated artifacts remain ignored. No matrices were regenerated.
+
+RED regression: M0 interpreter `-m pytest -q
+ISC-CI_LLM_validation/tests/test_semantic_inventory.py -k configured_for_git_lfs`
+first exposed a test transport error (Git's -z stdin also requires NUL-delimited
+input); corrected the fixture, then confirmed the intended failure: filter
+unspecified rather than lfs for the frozen matrices. Added the two narrow
+.gitattributes patterns. Updated missing-input instructions to git pull plus
+filtered git lfs pull, retaining rsync as an optional fallback.
+
+GREEN full CLI preflight: **118 passed (19.76 s)**, no stderr, **316 historical
+files unchanged**. Signature:
+`17fdc1965517dd97ed66d370d8ffe9e6101bb038d06473d11ddec5964b7294fb`.
+Inspected staged human and largest ensemble files: both are three-line LFS
+pointers, not CSV payloads in ordinary Git objects. Largest payload is 52,915,127
+bytes. Staged diff whitespace check passed. Commit/push contains this publication
+and the immediately preceding missing-input diagnostic/tests/documentation fix.
