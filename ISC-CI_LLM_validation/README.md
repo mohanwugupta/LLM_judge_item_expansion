@@ -87,6 +87,11 @@ relevant source, configuration, or implementation intentionally changed.
 - `reports/report_manifest.json`: hashes linking the report to every analysis stage.
 
 Source code, configurations, tests, and documentation are tracked. Generated artifacts,
-reports, and the upstream checkout are excluded by the parent `.gitignore` (apart from
-the existing V3.1 consolidation exception). Preserve or archive generated outputs before
-cleanup; pushing the implementation does not upload checkpoints, datasets, or figures.
+reports, and upstream checkouts are generally ignored. Exceptions include V3.1
+consolidation, the 14 frozen semantic input matrices (Git LFS), and the complete
+frozen-input bundle `inputs/semantic_frozen_inputs.tar.gz` (Git LFS). On a fresh
+cluster checkout, fetch that bundle and run
+`python ISC-CI_LLM_validation/run_semantic_inputs.py --install` from the repository
+root before prepare/preflight. See the semantic-retraining WORKFLOW for the exact
+commands and conflict safeguards. Other generated outputs are not uploaded merely
+by pushing code; preserve them before cleanup.

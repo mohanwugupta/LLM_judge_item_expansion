@@ -2,7 +2,7 @@ import json
 
 import pytest
 
-from semantic_retraining.gates import verify_sources, verify_gate
+from semantic_retraining.gates import verify_sources, verify_gate, saved_path
 from semantic_retraining.inventory import sha256
 from semantic_retraining.provenance import validate_output_directory
 
@@ -15,6 +15,29 @@ def test_preservation_gate_rejects_any_changed_input(tmp_path):
     source.write_text("changed\n")
     with pytest.raises(ValueError, match="changed"):
         verify_sources(records)
+
+
+def test_portable_frozen_paths_prefer_current_checkout(tmp_path):
+    original = tmp_path / "old/ISC-CI_LLM_validation/reports/input.csv"
+    current = tmp_path / "clone/ISC-CI_LLM_validation"
+    original.parent.mkdir(parents=True)
+    original.write_text("stale original checkout")
+    portable = current / "reports/input.csv"
+    portable.parent.mkdir(parents=True)
+    portable.write_text("current checkout")
+    assert saved_path(str(original), current) == portable
+
+
+def test_external_reference_prefers_byte_exact_packaged_copy(tmp_path):
+    root = tmp_path / "ISC-CI_LLM_validation"
+    relative = "IntegratedSemanticsControlContextInference/data/categories.csv"
+    reference = root / "inputs/reference_sources" / relative
+    reference.parent.mkdir(parents=True)
+    reference.write_bytes(b"category\r\n")
+    upstream = root / "upstream" / relative
+    upstream.parent.mkdir(parents=True)
+    upstream.write_bytes(b"category\n")
+    assert saved_path("/old/" + relative, root) == reference
 
 
 def test_stale_or_failed_preflight_cannot_release_training(tmp_path):

@@ -12,20 +12,30 @@ from .taxonomy import taxonomy_hash
 
 def saved_path(path, root):
     candidate = Path(path)
-    if candidate.exists():
-        return candidate
     for marker, parent in [
         ("/ISC-CI_LLM_validation/", root),
         ("/LLM_judge_item_expansion/", root.parent),
         (
             "/IntegratedSemanticsControlContextInference/",
-            root / "upstream/IntegratedSemanticsControlContextInference",
+            root
+            / "inputs/reference_sources/IntegratedSemanticsControlContextInference",
         ),
     ]:
         if marker in str(path):
             translated = parent / str(path).split(marker, 1)[1]
             if translated.exists():
                 return translated
+    if candidate.exists():
+        return candidate
+    marker = "/IntegratedSemanticsControlContextInference/"
+    if marker in str(path):
+        translated = (
+            root
+            / "upstream/IntegratedSemanticsControlContextInference"
+            / str(path).split(marker, 1)[1]
+        )
+        if translated.exists():
+            return translated
     raise FileNotFoundError(f"Materialize frozen input before training: {path}")
 
 

@@ -459,3 +459,72 @@ Inspected staged human and largest ensemble files: both are three-line LFS
 pointers, not CSV payloads in ordinary Git objects. Largest payload is 52,915,127
 bytes. Staged diff whitespace check passed. Commit/push contains this publication
 and the immediately preceding missing-input diagnostic/tests/documentation fix.
+
+## 2026-10-30: Complete Cluster Input Closure
+
+Investigator retrieved all 14 matrices successfully. Prepare then failed on
+v3_A_cluster_labels.csv; preflight independently failed on the original figure
+manifest. The preceding matrix-only publication was insufficient for a fresh
+checkout. Audited the complete dependency closure: frozen history and its source
+files/checkpoints, all retained feature-description joins, original human tasks
+and references, semantic graph/target fixtures, and downstream reliability tables.
+
+Added a deterministic Git LFS input bundle and relative-path/checksum manifest.
+run_semantic_inputs.py --install uses only the standard library, validates all
+payloads before writing, skips matching files, accepts only exact LFS pointers,
+and stops on conflicting scientific files. It does not regenerate data or weaken
+fidelity gates. The classification launcher calls it before prepare/preflight.
+All scientific outputs remain separate from these existing reference inputs.
+
+TDD RED: `python -m pytest -q ISC-CI_LLM_validation/tests/test_semantic_inputs.py`
+failed collection on missing semantic_inputs. Implemented payload/hash validation,
+idempotence, conflict protection, traversal/link/duplicate-member rejection and
+CLI installation. Initial GREEN: 13 passed (0.17 s).
+
+First real bundle build correctly stopped on a byte-level category-file mismatch:
+the historical adjacent-repository file uses CRLF; the upstream checkout copy
+uses LF. They must not be substituted under an exact SHA gate. Package the exact
+historical bytes in inputs/reference_sources without changing either original.
+Additional fixture tests cover reference aliases and deterministic output.
+
+Portable path regression first failed because an original-machine absolute path
+was preferred even when the current checkout had its own file. Another RED
+showed no support for the byte-exact packaged external reference. Prefer current
+checkout paths and packaged references before legacy fallbacks. Combined initial
+GREEN: 20 passed (1.60 s). Validation and isolated-checkout results follow below.
+
+Final frozen package: **345 files**, 378,994,665 compressed bytes (about 361 MiB),
+SHA-256 `a29d404e23f48fe5922946719a02c702ebd7db374f790f667ef7f6476d1e6948`.
+Manifest includes all 14 matrices, six prompt-specific label tables, candidate
+descriptions, frozen figure/history sources and prior checkpoints, original
+upstream task data/code/notebooks, and the exact external category reference.
+It excludes raw shard judgments, Qwen weights, and new experiment results.
+
+Verified bootstrap with `python -S` (no scientific site packages). The existing
+workspace needed only the new byte-exact reference copy; no pre-existing file was
+replaced. Repeated install is idempotent. Original-workspace preflight:
+**137 passed (35.81 s)**; 316 historical files unchanged, no stderr.
+
+Fresh-checkout reproduction under `/private/tmp/iscci-clean-inputs-fvfHk5`:
+created local clone metadata without checkout, exported staged tracked files with
+GIT_LFS_SKIP_SMUDGE=1, and materialized only the published bundle. No ignored
+original-workspace artifacts were copied separately. Standard-library installer
+restored 331 files and verified all 345. Second invocation installed 0.
+Prepare resolved all 14 conditions / 87,679 descriptions. **Preflight passed all
+137 tests (33.14 s)** with 316 preserved files, no stderr. Both environments have
+the same gate signature:
+`66faef6b785e65d7aeb18d8337e787681fea052cd90382783b3821c97567050b`.
+Historical fidelity manifest SHA remains
+`bd1a3d078106cc73944b7bbba42771b31721cbe88352e92fe9648f38e1b810be`.
+
+Additional tests cover all missing/changed paths, stdlib-only CLI, deterministic
+reference-alias packaging, complete real input closure, unsafe paths (including
+root), symlink destinations, corrupt archive/hash/payload, duplicate members and
+non-overwrite on conflicts. `bash -n` and whitespace checks passed. The staged
+archive is a three-line LFS pointer. No Qwen calls, new judgments, scientific
+model training, altered evaluation settings, or Slurm submissions occurred.
+
+Next cluster action: pull the fix and only the frozen-input LFS bundle, run
+run_semantic_inputs.py --install, then prepare/preflight on the login node before
+submitting the Qwen smoke job. Do not delete differing cluster results: the
+installer intentionally stops for a comparison instead of overwriting them.

@@ -35,15 +35,58 @@ Preserve/materialize these existing inputs on the execution machine:
   by the original and random-control figure manifests, for fidelity/preservation.
 
 The 14 frozen input matrices are explicitly tracked with Git LFS, despite the
-general artifacts ignore rule. Other historical inputs remain Git-ignored;
-**pushing code does not upload those inputs.** Preflight reports missing files
-before loading Qwen or training. The 10-GB raw V4 judgment
+general artifacts ignore rule. The complete frozen dependency set is also
+distributed as the LFS bundle `inputs/semantic_frozen_inputs.tar.gz` under the
+validation directory, with `configs/semantic_frozen_inputs.json` recording every
+relative path, byte size and SHA-256. Historical directories remain ignored;
+the installer materializes their required inputs without regenerating results.
+Preflight reports missing files before loading Qwen or training. The 10-GB raw V4 judgment
 payload is not needed for this extension. Old checkpoints are historical fidelity
 inputs only; no old semantic weights enter new semantic learning.
 
 Python dependencies are the existing NumPy, pandas, PyTorch, SciPy, scikit-learn,
 matplotlib, Pillow, and pytest stack. Cluster classification additionally uses the
 already established vLLM/Transformers environment. No new API account is needed.
+
+## Install the Complete Frozen Inputs
+
+Run this on the cluster login node, from the repository root, before submitting
+another GPU job. This addresses missing cluster-label files, figure manifests,
+human-task data, upstream reference code, and saved fidelity inputs together:
+
+```bash
+git pull --ff-only
+git lfs pull --include='ISC-CI_LLM_validation/inputs/semantic_frozen_inputs.tar.gz' --exclude=''
+python ISC-CI_LLM_validation/run_semantic_inputs.py --install
+python ISC-CI_LLM_validation/run_semantic_retraining.py --stage prepare
+python ISC-CI_LLM_validation/run_semantic_retraining.py --stage preflight
+```
+
+The installer needs only the Python standard library. It validates the bundle
+hash and every archive payload before writing inputs. It skips matching files,
+materializes exactly matching LFS pointers, and **refuses to replace existing
+files with different contents**. On a conflict, stop and compare the cluster
+file with the saved reference; do not delete experimental results to make the
+check pass. Interrupted installation can be rerun. It never trains a model,
+recreates a random matrix, changes a judgment, or recomputes a behavioral result.
+
+Use `python ISC-CI_LLM_validation/run_semantic_inputs.py --check` to list all
+missing/changed inputs. The Qwen Slurm launcher runs the same installer before
+prepare/preflight and before loading the model. Running the commands above on
+the login node avoids occupying four GPUs to discover a missing input.
+
+Historical manifests contain absolute original-machine paths. Preservation checks
+prefer the corresponding current-checkout path. A byte-exact external reference
+is retained under `inputs/reference_sources/` where needed: the original category
+CSV used CRLF, whereas the upstream checkout copy uses LF. Both are preserved
+unchanged; no checksum tolerance or line-ending normalization is substituted.
+
+The bundle includes only existing inputs for preparation, regression/fidelity,
+and downstream evaluation. It excludes Qwen weights, new classifications/reviews,
+new semantic experiment outputs, raw 32-shard judgment logs, and unrelated files.
+Its deterministic build command is
+`python ISC-CI_LLM_validation/run_semantic_inputs.py --build` on the machine with
+all frozen source data. Build is not a repair command for an incomplete cluster.
 
 ## Transfer Missing Matrices
 
@@ -89,9 +132,8 @@ python ISC-CI_LLM_validation/run_semantic_retraining.py --stage preflight
 ```
 
 Preparation now lists every missing matrix at once and writes no inventory if
-any are absent. Other ignored inputs listed above (description metadata,
-upstream code/data/checkpoints, frozen behavior and figure sources) must also be
-present. A successful matrix transfer alone does not certify those later gates.
+any are absent. Matrix-only transfer does not include label metadata or frozen
+history: install the complete bundle above to supply those dependencies.
 Once both checks pass, submit the Qwen smoke job below. No thresholds, feature
 memberships, or existing model results need to change to fix this error.
 
@@ -130,7 +172,7 @@ First run an isolated eight-description API smoke:
 sbatch --export=ALL,SMOKE_TEST=1 ISC-CI_LLM_validation/run_semantic_classification.sh
 ```
 
-The script performs prepare/preflight and hashes the actual local model shards
+The script installs/verifies the frozen inputs, performs prepare/preflight, and hashes the actual local model shards
 before vLLM startup. Fingerprinting 72B weights requires reading those files and
 can take several minutes. This identifies the actual checkpoint rather than
 guessing a revision from its name. The smoke cache is separate from production.

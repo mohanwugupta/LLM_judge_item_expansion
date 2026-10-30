@@ -1,0 +1,1731 @@
+{
+  "bundle_sha256": "a29d404e23f48fe5922946719a02c702ebd7db374f790f667ef7f6476d1e6948",
+  "files": [
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/human_behavior_validation_v4_20261002/behavior_per_seed.csv",
+      "sha256": "724e1a2fd0f75bad34c11e6adb37e1cb81395ce920ce70e4f4aebb230d3274b6",
+      "size": 146027
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/human_behavior_validation_v4_20261002/behavior_summary.csv",
+      "sha256": "c8361a46e010203eacbb539d9e71ea2a3e04f8a2d5fcd4f882d2c3246647ca02",
+      "size": 335396
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/human_behavior_validation_v4_20261002/condition_summary.csv",
+      "sha256": "18ee8ee0b52bb8e972586c2a8a8cdf140c30a5e1d7035a6025d0b627b0f1223e",
+      "size": 125468
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/human_behavior_validation_v4_20261002/human_participant_reliability.csv",
+      "sha256": "65831a9a8a7e168b5865dd6ba1e26b4024b7d65feb3cb96cca19e91bbc985f86",
+      "size": 22278
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/human_behavior_validation_v4_20261002/human_reliability.csv",
+      "sha256": "397091571cbfaa4de6a51b4214ee0fdbcb8309eea7944e65ee909f35c2c06c00",
+      "size": 2846
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/human_behavior_validation_v4_20261002/manifest.json",
+      "sha256": "bd1a3d078106cc73944b7bbba42771b31721cbe88352e92fe9648f38e1b810be",
+      "size": 19806
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/human_behavior_validation_v4_20261002/paired_condition_contrasts.csv",
+      "sha256": "f50001d9665350830e7e8707838a89c6f984814b88734eda33b19d7ec586eb34",
+      "size": 146182
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/human_behavior_validation_v4_20261002/paper_human_choice_statistics.csv",
+      "sha256": "6ab93c28eebdbfb3922bd139f19825ce485c5fc87f65f442f8b3a584b72c97eb",
+      "size": 464
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/human_behavior_validation_v4_20261002/paper_human_participant_choices.csv",
+      "sha256": "9e2844978527588d97d74f09d6930cc2802facdf8c031880c91dd7b0cdeabd38",
+      "size": 8602
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/human_behavior_validation_v4_20261002/per_model/human_seed_0/asymmetry_items.csv",
+      "sha256": "4607ad7471c080bdcb78bed2275c0f965fc0b4d3036942a96fdcd7b900f4eb1a",
+      "size": 13214
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/human_behavior_validation_v4_20261002/per_model/human_seed_0/context_items.csv",
+      "sha256": "9bfbdb6ac32d2be32ae1fc8fb19bdfc1dc726fe40c974f1dd46cbb5610ffe09c",
+      "size": 15591
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/human_behavior_validation_v4_20261002/per_model/human_seed_0/paper_participant_predictions.csv",
+      "sha256": "f450dc34ed2d7e3499f5a73f6cf700047f4cd36732179aa37fc29cb1617ab894",
+      "size": 6555
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/human_behavior_validation_v4_20261002/per_model/human_seed_0/similarity_items.csv",
+      "sha256": "938ca9057a908f05930424bc3e753610792a47aea906b42a460e6a4b65f201bb",
+      "size": 657221
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/human_behavior_validation_v4_20261002/per_model/human_seed_1/asymmetry_items.csv",
+      "sha256": "c8434400e140f8e027f88a8fa46fb7b3da1bad272db6a5a1a981ee2b353d36eb",
+      "size": 13236
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/human_behavior_validation_v4_20261002/per_model/human_seed_1/context_items.csv",
+      "sha256": "da81a4ad0c742a317a62c9de85febda693bf56a03e946bd31546385f291bd5a3",
+      "size": 15662
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/human_behavior_validation_v4_20261002/per_model/human_seed_1/paper_participant_predictions.csv",
+      "sha256": "24ab43ecb477b01bee99093f2d8b1e3d5b8ac56d75a51af7a896069d11cb8e55",
+      "size": 6512
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/human_behavior_validation_v4_20261002/per_model/human_seed_1/similarity_items.csv",
+      "sha256": "9fdc19fba965b492b17c260dae960c2196f59a4d58dd52ab14c7af59aa159c32",
+      "size": 657116
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/human_behavior_validation_v4_20261002/per_model/human_seed_2/asymmetry_items.csv",
+      "sha256": "1c3ee979c9f50596bb776ae8e31c58fd4aa3b33dec8815088e22485d5a1cf5ea",
+      "size": 13243
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/human_behavior_validation_v4_20261002/per_model/human_seed_2/context_items.csv",
+      "sha256": "12b16a71a9c2d3666229e1c08b88a96a4676c6521d5a9d204b1722e001e32d6c",
+      "size": 15514
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/human_behavior_validation_v4_20261002/per_model/human_seed_2/paper_participant_predictions.csv",
+      "sha256": "0af9d36fb13b10d7dcbda68726ea81f3427c8c18d5778796729b545f0f087daf",
+      "size": 6434
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/human_behavior_validation_v4_20261002/per_model/human_seed_2/similarity_items.csv",
+      "sha256": "c03be177b93e0ce5b11746f111e10279b0713cbcf634b2b86a954ca11228023a",
+      "size": 656916
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/human_behavior_validation_v4_20261002/per_model/human_seed_3/asymmetry_items.csv",
+      "sha256": "0809657300a2e2e509127285f15c963675911d126c815169fe8bc677e1cd0434",
+      "size": 13227
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/human_behavior_validation_v4_20261002/per_model/human_seed_3/context_items.csv",
+      "sha256": "76e30a7256801c543309d8451e415cff06ac6cd19fd7b55c6864b482c8e886b8",
+      "size": 15688
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/human_behavior_validation_v4_20261002/per_model/human_seed_3/paper_participant_predictions.csv",
+      "sha256": "441480fec94762e270622d8d27672ddbd96fbc8c77b9e8f2afd8f407265507a6",
+      "size": 6600
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/human_behavior_validation_v4_20261002/per_model/human_seed_3/similarity_items.csv",
+      "sha256": "bbbfdb9ce587d6b78112d64c3c639e312e0adcf3822fb3d10bffc96e6751b734",
+      "size": 656955
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/human_behavior_validation_v4_20261002/per_model/v2_seed_0/asymmetry_items.csv",
+      "sha256": "61f9b2248813bd10a077ae9a73c0e001f00e92637b1e282649b48a3479c10438",
+      "size": 12897
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/human_behavior_validation_v4_20261002/per_model/v2_seed_0/context_items.csv",
+      "sha256": "34496409b02fd637072b06df91289b175bfedbd29243cb6e087c638c2fec5bfb",
+      "size": 15374
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/human_behavior_validation_v4_20261002/per_model/v2_seed_0/paper_participant_predictions.csv",
+      "sha256": "cb55612ea78683742956a04078b595872a12194bad13307922a25be0146a5225",
+      "size": 6255
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/human_behavior_validation_v4_20261002/per_model/v2_seed_0/similarity_items.csv",
+      "sha256": "982f6e70bb928def3b7ca9c521b703f4a817e7569e001cd6ca57d6efee97438a",
+      "size": 633609
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/human_behavior_validation_v4_20261002/per_model/v2_seed_1/asymmetry_items.csv",
+      "sha256": "79c5646d13deb00c5e6b26fd2222c5fb68bd634fcc6691a33a70292a98a00d03",
+      "size": 12904
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/human_behavior_validation_v4_20261002/per_model/v2_seed_1/context_items.csv",
+      "sha256": "67f6ca120514f689583099c264cb860b1d79e49ec63a11afaed4b4dc591d40c3",
+      "size": 15277
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/human_behavior_validation_v4_20261002/per_model/v2_seed_1/paper_participant_predictions.csv",
+      "sha256": "97588f4d1173b59c45a4401e7ef90bb475737fc6546868c866eca992340d651c",
+      "size": 6223
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/human_behavior_validation_v4_20261002/per_model/v2_seed_1/similarity_items.csv",
+      "sha256": "567dff2f88c24d4ae7d70ba45399135dcb00f5863a55e55a7dea8b34e35828b0",
+      "size": 635826
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/human_behavior_validation_v4_20261002/per_model/v2_seed_2/asymmetry_items.csv",
+      "sha256": "42b4fd9618e999274318f74266e04aeb11ad9f30e3b3d030ab3ce2bb1aa4614a",
+      "size": 12919
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/human_behavior_validation_v4_20261002/per_model/v2_seed_2/context_items.csv",
+      "sha256": "147f2b1cd411aea2fd84e16c79efff32b6a3a6e5a8066fa2da77a6ada7abfc05",
+      "size": 15302
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/human_behavior_validation_v4_20261002/per_model/v2_seed_2/paper_participant_predictions.csv",
+      "sha256": "1930ae3ee632d555651e906b260a9734b60b169ab25929653fc8d7322df67721",
+      "size": 6242
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/human_behavior_validation_v4_20261002/per_model/v2_seed_2/similarity_items.csv",
+      "sha256": "425d904eb472290b768dcd3b4f10b3b7ca439cd83f91f94ab1dfe957cf3d2952",
+      "size": 634390
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/human_behavior_validation_v4_20261002/per_model/v2_seed_3/asymmetry_items.csv",
+      "sha256": "d477ae916dcb6100a931d17ff63dd52816b581cda002744697280074ff0e3834",
+      "size": 12895
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/human_behavior_validation_v4_20261002/per_model/v2_seed_3/context_items.csv",
+      "sha256": "7c8c16b52cd4996ba24154b3eb9f49160f49ec36a2a8d78d0be0919882a5a9ec",
+      "size": 15358
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/human_behavior_validation_v4_20261002/per_model/v2_seed_3/paper_participant_predictions.csv",
+      "sha256": "a6bceadd7dcbb7f02f0b701188ea28696ede1718e40cd15a908ba87d345e4783",
+      "size": 6223
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/human_behavior_validation_v4_20261002/per_model/v2_seed_3/similarity_items.csv",
+      "sha256": "f9f426a1a8f89d93a1f1db64d9a2d3003f6a40801beb86f71a3690bd54f0fbaf",
+      "size": 633681
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/human_behavior_validation_v4_20261002/per_model/v3_1_A_seed_0/asymmetry_items.csv",
+      "sha256": "99f7493409e843f7cb0cd42a1987cfaeda5b73ddbdde0add1e713b8802505dec",
+      "size": 13389
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/human_behavior_validation_v4_20261002/per_model/v3_1_A_seed_0/context_items.csv",
+      "sha256": "8e51dc9c20f2a61d6c13795bd0eb1461794eeea82d50a152954018e6829e78ac",
+      "size": 15731
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/human_behavior_validation_v4_20261002/per_model/v3_1_A_seed_0/paper_participant_predictions.csv",
+      "sha256": "7c1720d4b91623e385be9d0f13660097a3ed00e4b3f91ba685c4f960b8349bed",
+      "size": 6634
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/human_behavior_validation_v4_20261002/per_model/v3_1_A_seed_1/asymmetry_items.csv",
+      "sha256": "2b9b59a891ca5d4a9ce93ab47da62eb05c2d5b46dfc3638b61707646cbaea9ea",
+      "size": 13400
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/human_behavior_validation_v4_20261002/per_model/v3_1_A_seed_1/context_items.csv",
+      "sha256": "f5c02eac0df69b7558393f81b36b1c29a3dffb64754a54d129f38c9437f0fb23",
+      "size": 15644
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/human_behavior_validation_v4_20261002/per_model/v3_1_A_seed_1/paper_participant_predictions.csv",
+      "sha256": "521f66ee1606a83b9e9efc3972253bab80b721c34133e5199de118c20c730108",
+      "size": 6637
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/human_behavior_validation_v4_20261002/per_model/v3_1_A_seed_2/asymmetry_items.csv",
+      "sha256": "8b34b19b43d033e369d785a3b36b42932212ab315cbe6ffdff110fa11d58386c",
+      "size": 13438
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/human_behavior_validation_v4_20261002/per_model/v3_1_A_seed_2/context_items.csv",
+      "sha256": "339bc60b371f4766abb207ae6a742655806fe3dd4a9157e9c7470bad4b60e3e9",
+      "size": 15787
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/human_behavior_validation_v4_20261002/per_model/v3_1_A_seed_2/paper_participant_predictions.csv",
+      "sha256": "f0522da201d6824599cc641619a3d9ff4d24ab370512f3136bd05b1bdb378d83",
+      "size": 6482
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/human_behavior_validation_v4_20261002/per_model/v3_1_A_seed_3/asymmetry_items.csv",
+      "sha256": "a91ed0d693e8f58ac5ebf2c418eecd5e70f896fe19b6320eea4c19caffc203d7",
+      "size": 13350
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/human_behavior_validation_v4_20261002/per_model/v3_1_A_seed_3/context_items.csv",
+      "sha256": "238dc87e78bdc1c58cab83c199da94347cb9ff25ca44af3ab767967ae540a901",
+      "size": 15666
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/human_behavior_validation_v4_20261002/per_model/v3_1_A_seed_3/paper_participant_predictions.csv",
+      "sha256": "e40122f82a93a65ab8c180c1ed1281ceb23ec0a95c8d5100eab7cd562db6ce6e",
+      "size": 6470
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/human_behavior_validation_v4_20261002/per_model/v3_1_B_seed_0/asymmetry_items.csv",
+      "sha256": "1b1a1164309cf9142625203f9c6447d79173d684bf2dca2be3f065ef298491ad",
+      "size": 13368
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/human_behavior_validation_v4_20261002/per_model/v3_1_B_seed_0/context_items.csv",
+      "sha256": "565d3729015e7ecc482eec07ee3edae3f6d56684265ea81856dca0773878a414",
+      "size": 15700
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/human_behavior_validation_v4_20261002/per_model/v3_1_B_seed_0/paper_participant_predictions.csv",
+      "sha256": "fb8bd97794b42f2d580211ec2d73c68ceaf737cf3faf22b321bf811444a4eba3",
+      "size": 6531
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/human_behavior_validation_v4_20261002/per_model/v3_1_B_seed_0/similarity_items.csv",
+      "sha256": "98aa7152198c918fb8a44bae615d8d91e9af187eef9028cbefb5a69851cd647b",
+      "size": 666811
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/human_behavior_validation_v4_20261002/per_model/v3_1_B_seed_1/asymmetry_items.csv",
+      "sha256": "894e526c98d4e76d68e1f0de82823287fb56a492212d42674ede27272e87d240",
+      "size": 13374
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/human_behavior_validation_v4_20261002/per_model/v3_1_B_seed_1/context_items.csv",
+      "sha256": "2405c42654061438cc1b246b334f5514fab6ba08318e9fe8662b5f6018308a03",
+      "size": 15687
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/human_behavior_validation_v4_20261002/per_model/v3_1_B_seed_1/paper_participant_predictions.csv",
+      "sha256": "2f1689b7f108638df76aabfc07d840fdd991c0a485d310406787b4ab026ff12e",
+      "size": 6636
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/human_behavior_validation_v4_20261002/per_model/v3_1_B_seed_1/similarity_items.csv",
+      "sha256": "276139a55457357ef4fe58fc5f89e4b30fa8702a565ff5b20dba69506a256f84",
+      "size": 666948
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/human_behavior_validation_v4_20261002/per_model/v3_1_B_seed_2/asymmetry_items.csv",
+      "sha256": "daf80d6734043b4dd11fdc339aa986602c4477835afb970be3c8c9ac2fd35fe2",
+      "size": 13399
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/human_behavior_validation_v4_20261002/per_model/v3_1_B_seed_2/context_items.csv",
+      "sha256": "14cbccbe0cdf04bb5b46b892c50e68a38585254d54bea40ac84ee07a7465b28e",
+      "size": 15804
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/human_behavior_validation_v4_20261002/per_model/v3_1_B_seed_2/paper_participant_predictions.csv",
+      "sha256": "f090c5ef71c35ad5a4169249e597e5ae6cf850b75e5f4f8536a86b2344aa97e0",
+      "size": 6588
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/human_behavior_validation_v4_20261002/per_model/v3_1_B_seed_2/similarity_items.csv",
+      "sha256": "07a4eab938802515f581e074e41f36dc1cdf1eecf8b6ab04ac19b1443b3611f5",
+      "size": 665856
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/human_behavior_validation_v4_20261002/per_model/v3_1_B_seed_3/asymmetry_items.csv",
+      "sha256": "ecd2810aa3621f02cce42f99cf08fcaf13ba57e94a189d3c71adba29c4fa07f1",
+      "size": 13401
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/human_behavior_validation_v4_20261002/per_model/v3_1_B_seed_3/context_items.csv",
+      "sha256": "12049eaca88e4f8a9932d482e834107bd26cbeb3fa3c75d8b5911aa56d1d5f29",
+      "size": 15680
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/human_behavior_validation_v4_20261002/per_model/v3_1_B_seed_3/paper_participant_predictions.csv",
+      "sha256": "7d6394f9ac70d893edfbf15b132ee9c1a7f7a5a4c9a75cab3679bf0b76a5860e",
+      "size": 6557
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/human_behavior_validation_v4_20261002/per_model/v3_1_B_seed_3/similarity_items.csv",
+      "sha256": "739ea696b39f471a4043e599134a57022dad1b64b976c1c40cf05c91a025377c",
+      "size": 666214
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/human_behavior_validation_v4_20261002/per_model/v3_1_C_seed_0/asymmetry_items.csv",
+      "sha256": "80faf99c89702c041bb5f49dbc5bb6cda1aa55b6e1e688807d1140cbb7563d74",
+      "size": 13355
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/human_behavior_validation_v4_20261002/per_model/v3_1_C_seed_0/context_items.csv",
+      "sha256": "9a491289a5195db5d3ad26007708bcb28b72a590637f2d558e5fe974183ae4c4",
+      "size": 15758
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/human_behavior_validation_v4_20261002/per_model/v3_1_C_seed_0/paper_participant_predictions.csv",
+      "sha256": "456e2c9fd9b0c788b25e69858dbe4738453837a5bda46ef6ad6bd3363abb2c7a",
+      "size": 6611
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/human_behavior_validation_v4_20261002/per_model/v3_1_C_seed_1/asymmetry_items.csv",
+      "sha256": "68a638163bcb4f865cbd2c2d2f8bc038b550588dbffbf5c27596bbcbde28608d",
+      "size": 13414
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/human_behavior_validation_v4_20261002/per_model/v3_1_C_seed_1/context_items.csv",
+      "sha256": "538077c89e630cdfaf99904722d2382ac0868a2bc06c56d06831fd00790eca41",
+      "size": 15858
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/human_behavior_validation_v4_20261002/per_model/v3_1_C_seed_1/paper_participant_predictions.csv",
+      "sha256": "0dacd171d922952bfdc3e6ce8a70b57d884568976443b40b4cad076b165d2cca",
+      "size": 6526
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/human_behavior_validation_v4_20261002/per_model/v3_1_C_seed_2/asymmetry_items.csv",
+      "sha256": "863511d1be9a785492e649ca19c0a56dc2ff7ee759d3e10953ff8f82e76a4265",
+      "size": 13373
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/human_behavior_validation_v4_20261002/per_model/v3_1_C_seed_2/context_items.csv",
+      "sha256": "b0ca6984541ee9e32e4ea82951273c67313b0d24340a4f41ee41ca2dcc16bb36",
+      "size": 15626
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/human_behavior_validation_v4_20261002/per_model/v3_1_C_seed_2/paper_participant_predictions.csv",
+      "sha256": "b4c3529b2a57cecbed36af25ae7e72e09f39355dad1600776eefc68f67779c9b",
+      "size": 6663
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/human_behavior_validation_v4_20261002/per_model/v3_1_C_seed_3/asymmetry_items.csv",
+      "sha256": "85fb64713a372276a62172625c750eae9b3b6cc198c706add9c307a05d8b9901",
+      "size": 13390
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/human_behavior_validation_v4_20261002/per_model/v3_1_C_seed_3/context_items.csv",
+      "sha256": "4f1309880e610276ef7bd551bd9c31274b20b63ea296fe9bbfb2c969c798033b",
+      "size": 15770
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/human_behavior_validation_v4_20261002/per_model/v3_1_C_seed_3/paper_participant_predictions.csv",
+      "sha256": "c299344d51f6462b883ec6c4e451ae96d72d29102a6ee619c0743dce2ea689bc",
+      "size": 6648
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/human_behavior_validation_v4_20261002/per_model/v3_A_seed_0/asymmetry_items.csv",
+      "sha256": "1cdff6d5c834f89ff31a1ce943199c7f367050c84a660e86245169a715a626e2",
+      "size": 13184
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/human_behavior_validation_v4_20261002/per_model/v3_A_seed_0/context_items.csv",
+      "sha256": "55b38ad55bd230975b42e64e55a8b7dc52c834c2f3f97441be54ef58f54d9e0b",
+      "size": 15500
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/human_behavior_validation_v4_20261002/per_model/v3_A_seed_0/paper_participant_predictions.csv",
+      "sha256": "e030bc4633fcb214681612b1d54641c49371a7bb1681fd16c4645729a4926ef9",
+      "size": 6488
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/human_behavior_validation_v4_20261002/per_model/v3_A_seed_1/asymmetry_items.csv",
+      "sha256": "a939303b88d6694fcea94060c742ba5556817b3ac6c5ea55632c8e4e69a55d4b",
+      "size": 13196
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/human_behavior_validation_v4_20261002/per_model/v3_A_seed_1/context_items.csv",
+      "sha256": "cf43a5e4987452a59c9e3e7ab0a8918010f7badf9f42f4da8df75b1a90db82ed",
+      "size": 15517
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/human_behavior_validation_v4_20261002/per_model/v3_A_seed_1/paper_participant_predictions.csv",
+      "sha256": "877c08f8a42d16f7bcedac9b1f77ed904ea152b956cb5e94e0117b63ffe9a395",
+      "size": 6448
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/human_behavior_validation_v4_20261002/per_model/v3_A_seed_2/asymmetry_items.csv",
+      "sha256": "bb154b0b20241738722475f981bdc98eb99dbd3bef864fa58d25e3cd63c268cd",
+      "size": 13234
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/human_behavior_validation_v4_20261002/per_model/v3_A_seed_2/context_items.csv",
+      "sha256": "1350453f6f8ef8b10aeabec4b1799dbdd2158d7eb8b97759b55f0eb69eaa7479",
+      "size": 15711
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/human_behavior_validation_v4_20261002/per_model/v3_A_seed_2/paper_participant_predictions.csv",
+      "sha256": "568380caf93e08dbf6aa1d9a6fc8b7bc73bd6f40c73b5a3a631620503e901f24",
+      "size": 6488
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/human_behavior_validation_v4_20261002/per_model/v3_A_seed_3/asymmetry_items.csv",
+      "sha256": "45ee120cbdc0971c34f272643fd42b9f18cb5f8ca89bb04b25459ff50d3eb78e",
+      "size": 13203
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/human_behavior_validation_v4_20261002/per_model/v3_A_seed_3/context_items.csv",
+      "sha256": "a7609c75a7dfb73299d31d315e175da61976975564c58dc0d38012be4bdcc2ea",
+      "size": 15513
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/human_behavior_validation_v4_20261002/per_model/v3_A_seed_3/paper_participant_predictions.csv",
+      "sha256": "77467d76574f1c6574ab278df5f6bde11f81628fe8fcea0a84c424856ca3f9b6",
+      "size": 6373
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/human_behavior_validation_v4_20261002/per_model/v3_B_seed_0/asymmetry_items.csv",
+      "sha256": "e5b5b7ff8435b585467ea997c5b8b326efff0eb6973692485ba5f8cef0426ed8",
+      "size": 13237
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/human_behavior_validation_v4_20261002/per_model/v3_B_seed_0/context_items.csv",
+      "sha256": "cf48338a28b39ce7c8168228aac6479bfbe9a2e67e0489359de285615a375123",
+      "size": 15434
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/human_behavior_validation_v4_20261002/per_model/v3_B_seed_0/paper_participant_predictions.csv",
+      "sha256": "33dabb3d7dccecfa7caca49da78b8b335fcd2ef3fe6372b3ecaf65ad105c95b5",
+      "size": 6343
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/human_behavior_validation_v4_20261002/per_model/v3_B_seed_0/similarity_items.csv",
+      "sha256": "0d37b7b4ec70bc6c415ceb3dad9015265d79ab252dfe677d3bc42ba2de6bc61c",
+      "size": 654865
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/human_behavior_validation_v4_20261002/per_model/v3_B_seed_1/asymmetry_items.csv",
+      "sha256": "f121454bb455d79a9f1b6bd7f1d25740377910d9d3c4f45ce0d0ed61735de139",
+      "size": 13172
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/human_behavior_validation_v4_20261002/per_model/v3_B_seed_1/context_items.csv",
+      "sha256": "279ca2e999eb56c6658b762d9020bf03e89eb57844067c383e7bc7c532d29dd9",
+      "size": 15649
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/human_behavior_validation_v4_20261002/per_model/v3_B_seed_1/paper_participant_predictions.csv",
+      "sha256": "e1846f621ff0f3794250501b644cd4a751c34fcb7d61e5eb64a8fc27e57eb595",
+      "size": 6446
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/human_behavior_validation_v4_20261002/per_model/v3_B_seed_1/similarity_items.csv",
+      "sha256": "4444436c0d2b9a8989aa73962daa0e3f848fe478099f4fac520186c6b070d7bd",
+      "size": 655159
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/human_behavior_validation_v4_20261002/per_model/v3_B_seed_2/asymmetry_items.csv",
+      "sha256": "cff83453584d2a2e260965faf158e849b03937b556f9111c7db5e91c240dbe0d",
+      "size": 13191
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/human_behavior_validation_v4_20261002/per_model/v3_B_seed_2/context_items.csv",
+      "sha256": "25e4666afa5b87d2f24aac4eeecf8208c13793cdcc142910fa2b0aef4c844cd9",
+      "size": 15408
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/human_behavior_validation_v4_20261002/per_model/v3_B_seed_2/paper_participant_predictions.csv",
+      "sha256": "4574eb1ddd0c0798cb618679da91d00a67440b9fc2369cbd46ded6fed7824b2a",
+      "size": 6497
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/human_behavior_validation_v4_20261002/per_model/v3_B_seed_2/similarity_items.csv",
+      "sha256": "62baef5a265c6f4bee5eb2c061125e63ed2c761123ff00d1a6a9a82eb1d5cb71",
+      "size": 655513
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/human_behavior_validation_v4_20261002/per_model/v3_B_seed_3/asymmetry_items.csv",
+      "sha256": "864c7b7f6df0d632140237379a1c70964175c00e3a4964525b92a33c2f3cd373",
+      "size": 13182
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/human_behavior_validation_v4_20261002/per_model/v3_B_seed_3/context_items.csv",
+      "sha256": "caad53ff20529fb1784649c2ff6155f17509963a0ab5f01eed05a145e78b5321",
+      "size": 15453
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/human_behavior_validation_v4_20261002/per_model/v3_B_seed_3/paper_participant_predictions.csv",
+      "sha256": "495a980eb2afe829c35c1c621aab36a6921dc65e469767844b3069a0903a5a1b",
+      "size": 6405
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/human_behavior_validation_v4_20261002/per_model/v3_B_seed_3/similarity_items.csv",
+      "sha256": "f9fe99fbaafce55b25dbf2c50125ee2e390b3d4f3b486ffe2d80abd28b2cfa00",
+      "size": 654928
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/human_behavior_validation_v4_20261002/per_model/v3_C_seed_0/asymmetry_items.csv",
+      "sha256": "00977f0b52bd9af58aa4fa5cdcf5007b381b172f61f816239d4b2464bc162e83",
+      "size": 13193
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/human_behavior_validation_v4_20261002/per_model/v3_C_seed_0/context_items.csv",
+      "sha256": "6c0299f31da88a29b00876afe8dd8ea7531b3895b1e3752503e9da89992edf27",
+      "size": 15515
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/human_behavior_validation_v4_20261002/per_model/v3_C_seed_0/paper_participant_predictions.csv",
+      "sha256": "606cf0b12baf864f1b46076ba3ec93ba1414f10f4777b827c523b2f4d5a02660",
+      "size": 6387
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/human_behavior_validation_v4_20261002/per_model/v3_C_seed_1/asymmetry_items.csv",
+      "sha256": "0b00a812f5df993b242dae7e420a80dbccce1e1b32d0b7e836fd233c95eec725",
+      "size": 13205
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/human_behavior_validation_v4_20261002/per_model/v3_C_seed_1/context_items.csv",
+      "sha256": "6866e68ac7b47e6dce736c05c0c1390770f3b844c1c51e9628dcd3ce6c1cf61e",
+      "size": 15558
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/human_behavior_validation_v4_20261002/per_model/v3_C_seed_1/paper_participant_predictions.csv",
+      "sha256": "817a873a09bc58912dabfd54abd93fa9c71105c3ac52b2350aa5e0ffa0e5a59b",
+      "size": 6284
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/human_behavior_validation_v4_20261002/per_model/v3_C_seed_2/asymmetry_items.csv",
+      "sha256": "c8858999a58a2159465b185749555b7852afc09fcfbeb66a9d56f006e894f697",
+      "size": 13169
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/human_behavior_validation_v4_20261002/per_model/v3_C_seed_2/context_items.csv",
+      "sha256": "621745df4d366bf484c9b28c35e382d8a3e8fa34f2164872a782d4c3ca84ce0b",
+      "size": 15547
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/human_behavior_validation_v4_20261002/per_model/v3_C_seed_2/paper_participant_predictions.csv",
+      "sha256": "97009374d62fa0212fd2c24ca51087ef60750a048f81628188154dd2327ffcbf",
+      "size": 6469
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/human_behavior_validation_v4_20261002/per_model/v3_C_seed_3/asymmetry_items.csv",
+      "sha256": "621c43a2ac7a81081f84a334a6a7703c94973cf4c2cb0a52f84ef36d6665a956",
+      "size": 13211
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/human_behavior_validation_v4_20261002/per_model/v3_C_seed_3/context_items.csv",
+      "sha256": "911a4b7098e0069f65aea5b4670e10d3a4922d30ae95b5cc89b62787a7dbe6c4",
+      "size": 15637
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/human_behavior_validation_v4_20261002/per_model/v3_C_seed_3/paper_participant_predictions.csv",
+      "sha256": "b8788fad30e73a087e4e784ccf40c24cda6c5e80892991f488afeaf9fe3270a1",
+      "size": 6342
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/human_behavior_validation_v4_20261002/per_model/v4_b_calibrated_seed_0/asymmetry_items.csv",
+      "sha256": "e591cd7b58bf8d9477ee10eb9a88a22c5cc44b2313636851b55e69347845ef76",
+      "size": 14191
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/human_behavior_validation_v4_20261002/per_model/v4_b_calibrated_seed_0/context_items.csv",
+      "sha256": "eea86d67eed42cf72eb21636e04a027380b625da2dcdc39daec72ba3ac344726",
+      "size": 16415
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/human_behavior_validation_v4_20261002/per_model/v4_b_calibrated_seed_0/paper_participant_predictions.csv",
+      "sha256": "40b30e971f210b788b8a6ab1f45b056a333d6fb4ccb68398cdb2025c45fc315c",
+      "size": 7221
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/human_behavior_validation_v4_20261002/per_model/v4_b_calibrated_seed_0/similarity_items.csv",
+      "sha256": "44013722db1c00ea63acfacdce7badd0f34b5ba60838269a01dab4f4103d23d0",
+      "size": 709522
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/human_behavior_validation_v4_20261002/per_model/v4_b_calibrated_seed_1/asymmetry_items.csv",
+      "sha256": "b5a016e5f14e3fc202c5a3b7fe523f566ae9f4abf934b3a21f055dba648cd80e",
+      "size": 14181
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/human_behavior_validation_v4_20261002/per_model/v4_b_calibrated_seed_1/context_items.csv",
+      "sha256": "e4cfa04bcfe7ccf7a7ca9aaf16a74dd73b11112d09bfe301d97a1459a167ab09",
+      "size": 16382
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/human_behavior_validation_v4_20261002/per_model/v4_b_calibrated_seed_1/paper_participant_predictions.csv",
+      "sha256": "d3bf7ab89632206729f64c0805a6da3fcf3578d80cc703514077dda907c6ac5b",
+      "size": 7275
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/human_behavior_validation_v4_20261002/per_model/v4_b_calibrated_seed_1/similarity_items.csv",
+      "sha256": "2ee5d2a1919c8f241087a8b7f140436bd8b13b1c9c779eff036a5691b9d64401",
+      "size": 709852
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/human_behavior_validation_v4_20261002/per_model/v4_b_calibrated_seed_2/asymmetry_items.csv",
+      "sha256": "9131491fe57cb101ea607de5c5af536489cb2e74de246ee4cd3e106e55dc2fb7",
+      "size": 14201
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/human_behavior_validation_v4_20261002/per_model/v4_b_calibrated_seed_2/context_items.csv",
+      "sha256": "0e01ca88f111fc747af474d34c876460bdb7ccfb385234535a779e1a70a0aa08",
+      "size": 16570
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/human_behavior_validation_v4_20261002/per_model/v4_b_calibrated_seed_2/paper_participant_predictions.csv",
+      "sha256": "71f79d9042b318c17a72042caae21f5572fc4eada441c212fd7ede168e9c1f16",
+      "size": 7299
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/human_behavior_validation_v4_20261002/per_model/v4_b_calibrated_seed_2/similarity_items.csv",
+      "sha256": "0891fbac2d534a8b0d15f23d91233c521808147f5135956a836150b571bb074a",
+      "size": 711110
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/human_behavior_validation_v4_20261002/per_model/v4_b_calibrated_seed_3/asymmetry_items.csv",
+      "sha256": "fcebc9739091e3e483df3566df11d29adafd4930df8b7987ca43afd075542bc7",
+      "size": 14196
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/human_behavior_validation_v4_20261002/per_model/v4_b_calibrated_seed_3/context_items.csv",
+      "sha256": "c4167ce5133a69983278a9ed2a5328e46f18f1d2f6b29fd6308cc21b781bd9d6",
+      "size": 16572
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/human_behavior_validation_v4_20261002/per_model/v4_b_calibrated_seed_3/paper_participant_predictions.csv",
+      "sha256": "0a3890c050697e3998c1c40c6b379bee96924c6500556d2f151733d28c44b74f",
+      "size": 7185
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/human_behavior_validation_v4_20261002/per_model/v4_b_calibrated_seed_3/similarity_items.csv",
+      "sha256": "41a484fc39b1b48dcc4bee7013f20179a26bea86d6f89bb905bfcfda5b845cbf",
+      "size": 709965
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/human_behavior_validation_v4_20261002/per_model/v4_b_locked_v2_seed_0/asymmetry_items.csv",
+      "sha256": "2bc5a1b3c7bd1657876c4353fae6735bceb9774a9d665430be06d5243ceb533e",
+      "size": 14090
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/human_behavior_validation_v4_20261002/per_model/v4_b_locked_v2_seed_0/context_items.csv",
+      "sha256": "a0fb10f2561407d01c19c55c6ff571724b85e94713c047fcb9f43efafb8ce448",
+      "size": 16344
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/human_behavior_validation_v4_20261002/per_model/v4_b_locked_v2_seed_0/paper_participant_predictions.csv",
+      "sha256": "a0f1c465bd603c116480166effee38d0d69b9eecad1a2cb90943b3e982dc32bb",
+      "size": 7175
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/human_behavior_validation_v4_20261002/per_model/v4_b_locked_v2_seed_1/asymmetry_items.csv",
+      "sha256": "280d35e6b215b72655ebe27bc41b36788bdf6c234165896b7a5f2b7c3d97e743",
+      "size": 14159
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/human_behavior_validation_v4_20261002/per_model/v4_b_locked_v2_seed_1/context_items.csv",
+      "sha256": "94f19e64cd7ef0d241386d45edd2e0aec12d6ad62a9fd48009bfc1ffa11d3d9c",
+      "size": 16326
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/human_behavior_validation_v4_20261002/per_model/v4_b_locked_v2_seed_1/paper_participant_predictions.csv",
+      "sha256": "557d16d39af16c4c00b5684d82fce8ae907409c3310f97ca27af47396c087263",
+      "size": 7215
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/human_behavior_validation_v4_20261002/per_model/v4_b_locked_v2_seed_2/asymmetry_items.csv",
+      "sha256": "736e3a6fda4169374662e556a776bd4441df9c19c8c46a28931fff804ff178a6",
+      "size": 14094
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/human_behavior_validation_v4_20261002/per_model/v4_b_locked_v2_seed_2/context_items.csv",
+      "sha256": "3efad00e4a9bfa0560a1907634cb9f9394e7f47172d92b8a6ab4d72a0957b97c",
+      "size": 16440
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/human_behavior_validation_v4_20261002/per_model/v4_b_locked_v2_seed_2/paper_participant_predictions.csv",
+      "sha256": "fdbcfe034b5a0d2f643432adc93fd790b9489aeec71185b84d010b7ae759b28e",
+      "size": 7304
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/human_behavior_validation_v4_20261002/per_model/v4_b_locked_v2_seed_3/asymmetry_items.csv",
+      "sha256": "594da4b1aae96ebfd6597afeec4870685782d20a2bb5a47683777e30b9c3801d",
+      "size": 14118
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/human_behavior_validation_v4_20261002/per_model/v4_b_locked_v2_seed_3/context_items.csv",
+      "sha256": "042626cab36cd9dd4ade64bcfd5a0efb236205409f5fbd7d02a4d49d15ef5599",
+      "size": 16502
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/human_behavior_validation_v4_20261002/per_model/v4_b_locked_v2_seed_3/paper_participant_predictions.csv",
+      "sha256": "90b95a539ae042173996d2aa062c5a0ed58ea7f4bc1fcfbcd7e0fb17ab534c4d",
+      "size": 7237
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/human_behavior_validation_v4_20261002/per_model/v4_ensemble_calibrated_seed_0/asymmetry_items.csv",
+      "sha256": "85be41e3ab19d4351769a5e6112b82ce112111048dceede16d88f6ffbf7f891c",
+      "size": 14909
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/human_behavior_validation_v4_20261002/per_model/v4_ensemble_calibrated_seed_0/context_items.csv",
+      "sha256": "040ba4b2a787639ef6651096f78576c452dc0256f3cfe245ce5cca0eca15ab3a",
+      "size": 16928
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/human_behavior_validation_v4_20261002/per_model/v4_ensemble_calibrated_seed_0/paper_participant_predictions.csv",
+      "sha256": "ba20d7f2cd915239e8c33ae17a7482df0b75083b0e9e76b4ad59244c05434673",
+      "size": 7711
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/human_behavior_validation_v4_20261002/per_model/v4_ensemble_calibrated_seed_0/similarity_items.csv",
+      "sha256": "d6d9ae9f0f79518d4a1fa1f594ba441396a78e3be67d142fd4ebe310733fc216",
+      "size": 750643
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/human_behavior_validation_v4_20261002/per_model/v4_ensemble_calibrated_seed_1/asymmetry_items.csv",
+      "sha256": "c4522fd247ae46519e0dc5d7576d46425ff215977d2dbc432b746083cdde81de",
+      "size": 14922
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/human_behavior_validation_v4_20261002/per_model/v4_ensemble_calibrated_seed_1/context_items.csv",
+      "sha256": "ec9f9f2e82140a8673aefd79ed009686c6c62c80a4931717e256916dfd270b63",
+      "size": 16886
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/human_behavior_validation_v4_20261002/per_model/v4_ensemble_calibrated_seed_1/paper_participant_predictions.csv",
+      "sha256": "92f10f698b12033b7309eaf85f37ecce0810edf2d56ed1934155e5b92134b957",
+      "size": 7806
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/human_behavior_validation_v4_20261002/per_model/v4_ensemble_calibrated_seed_1/similarity_items.csv",
+      "sha256": "554df32526c301fd6dd98aa7ed190b140696b5161660bb03d579a792160d164f",
+      "size": 749616
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/human_behavior_validation_v4_20261002/per_model/v4_ensemble_calibrated_seed_2/asymmetry_items.csv",
+      "sha256": "cd69a730a7dce9780f9b22289e09eb5d87e887a44a043eee7843c340e39c76dd",
+      "size": 14918
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/human_behavior_validation_v4_20261002/per_model/v4_ensemble_calibrated_seed_2/context_items.csv",
+      "sha256": "647898cd40bd8197a210dc2d5f7dd3279519753188e39d7b941e605543c7ee52",
+      "size": 17104
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/human_behavior_validation_v4_20261002/per_model/v4_ensemble_calibrated_seed_2/paper_participant_predictions.csv",
+      "sha256": "71791b78642a156647acf195d7f32bf9a8eaf1106170daf9259a72e829f80a59",
+      "size": 7951
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/human_behavior_validation_v4_20261002/per_model/v4_ensemble_calibrated_seed_2/similarity_items.csv",
+      "sha256": "3eeee4caa6ee2b665f7797208da9e8f55a1a47e66cbda19b43004ab24edc154c",
+      "size": 750791
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/human_behavior_validation_v4_20261002/per_model/v4_ensemble_calibrated_seed_3/asymmetry_items.csv",
+      "sha256": "9afb7147ec3a838213ebeedfb4f557efe8ef2a80af2ac77ceeefb903360fcc3e",
+      "size": 14859
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/human_behavior_validation_v4_20261002/per_model/v4_ensemble_calibrated_seed_3/context_items.csv",
+      "sha256": "1e9d1682bb400803fab000082d8050852da1699d23e2ece2bb0471abdcb79038",
+      "size": 16907
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/human_behavior_validation_v4_20261002/per_model/v4_ensemble_calibrated_seed_3/paper_participant_predictions.csv",
+      "sha256": "d1132c6c03cace40842f0777be0731f9acad2c84003648ec0661b92839e58785",
+      "size": 7938
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/human_behavior_validation_v4_20261002/per_model/v4_ensemble_calibrated_seed_3/similarity_items.csv",
+      "sha256": "6ad295acbfc70ebc41ad8a6f705866bb0755b0e7ad92d5894f8df61a1fee5266",
+      "size": 750532
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/human_behavior_validation_v4_20261002/per_model/v4_ensemble_locked_v2_seed_0/asymmetry_items.csv",
+      "sha256": "560a0d1d9d1c26aaa760e5e40694a979f06d170c4d4d4771cb16cefb66b69572",
+      "size": 14821
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/human_behavior_validation_v4_20261002/per_model/v4_ensemble_locked_v2_seed_0/context_items.csv",
+      "sha256": "3b4d236fcd6ea24211d669c1cbe2291aad38c641002505e2c7b156ecad356549",
+      "size": 16796
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/human_behavior_validation_v4_20261002/per_model/v4_ensemble_locked_v2_seed_0/paper_participant_predictions.csv",
+      "sha256": "be4f42af08bc447552188b0e48d417b0e95d248659bcc9cb146c437f01e93a23",
+      "size": 7700
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/human_behavior_validation_v4_20261002/per_model/v4_ensemble_locked_v2_seed_1/asymmetry_items.csv",
+      "sha256": "d5ed9ca83dde56b4ad1b25ac8acf476ceb7aa7211e4ea5dc9a227f424083419e",
+      "size": 14798
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/human_behavior_validation_v4_20261002/per_model/v4_ensemble_locked_v2_seed_1/context_items.csv",
+      "sha256": "2caf7a4181a4fc2cc4bd423029b1498444ebb9e308649b6775469de8bbf8b07c",
+      "size": 17048
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/human_behavior_validation_v4_20261002/per_model/v4_ensemble_locked_v2_seed_1/paper_participant_predictions.csv",
+      "sha256": "1d482cb279fd4598067f064cf3b81f66b82a925529224d1e543df719df0e2129",
+      "size": 7859
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/human_behavior_validation_v4_20261002/per_model/v4_ensemble_locked_v2_seed_2/asymmetry_items.csv",
+      "sha256": "bcb75eceb7b9c186c382a6074d91418643a61a203fbc4c66474d2c9e81ca6284",
+      "size": 14830
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/human_behavior_validation_v4_20261002/per_model/v4_ensemble_locked_v2_seed_2/context_items.csv",
+      "sha256": "86dd9faf19ae8ffc450e7bb860083287d8dddd6d727ac7c257ad53671a236cfd",
+      "size": 16914
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/human_behavior_validation_v4_20261002/per_model/v4_ensemble_locked_v2_seed_2/paper_participant_predictions.csv",
+      "sha256": "0a61c8a9c6c30d874e710323e9127909da961ab4c810b8c87a5b50c52f82e461",
+      "size": 7820
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/human_behavior_validation_v4_20261002/per_model/v4_ensemble_locked_v2_seed_3/asymmetry_items.csv",
+      "sha256": "f68f6bbbaa462d64012ab897715c38085d2c4e7698250d7930607b932d180385",
+      "size": 14832
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/human_behavior_validation_v4_20261002/per_model/v4_ensemble_locked_v2_seed_3/context_items.csv",
+      "sha256": "da01677ede7b3bd78e02cd683d6be0627047b82aac1b6cf90eaf0a8a7c81d06a",
+      "size": 16770
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/human_behavior_validation_v4_20261002/per_model/v4_ensemble_locked_v2_seed_3/paper_participant_predictions.csv",
+      "sha256": "b79c0602f4ebd6b4512fb32598ca009ced9c036369bfec828ac34eae73bb4c0b",
+      "size": 7792
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/human_behavior_validation_v4_20261002/per_model/v4_ensemble_source_only_seed_0/asymmetry_items.csv",
+      "sha256": "145e0af5c4e1037e278febeb9a8f50098e623440fb5e77851a98206c940efd7a",
+      "size": 15069
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/human_behavior_validation_v4_20261002/per_model/v4_ensemble_source_only_seed_0/context_items.csv",
+      "sha256": "f2736ffa1f3291b6a2a25fc3419fd360edc63cb95ee71818036ececd8e439e18",
+      "size": 17128
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/human_behavior_validation_v4_20261002/per_model/v4_ensemble_source_only_seed_0/paper_participant_predictions.csv",
+      "sha256": "46bbb023023cb22cc2289847cadfd8b3b41f21dbed43385d37ddb7214859c1ba",
+      "size": 7916
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/human_behavior_validation_v4_20261002/per_model/v4_ensemble_source_only_seed_0/similarity_items.csv",
+      "sha256": "38e4b2b13d0268ea4f3256922d3ecd0fa4ae09aafadf5f26550a494b795e5ce3",
+      "size": 765196
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/human_behavior_validation_v4_20261002/per_model/v4_ensemble_source_only_seed_1/asymmetry_items.csv",
+      "sha256": "c3261b8f61bc0b62141504a773ebea1fabe9cd6a5da2d229f80d240a85f9f262",
+      "size": 15070
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/human_behavior_validation_v4_20261002/per_model/v4_ensemble_source_only_seed_1/context_items.csv",
+      "sha256": "6658c8bb1be7a0872627b261cf0af43168ee4320ec0cd5aeb8de8c7dfe543152",
+      "size": 17188
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/human_behavior_validation_v4_20261002/per_model/v4_ensemble_source_only_seed_1/paper_participant_predictions.csv",
+      "sha256": "55d42d2af40da92ae6de66cb851e6bff230ecb86a8b98b50ed1d9666c72738c8",
+      "size": 7974
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/human_behavior_validation_v4_20261002/per_model/v4_ensemble_source_only_seed_1/similarity_items.csv",
+      "sha256": "649912d8ad23ca7bb25f9b8f310464f5e9d5f0c74916263772df26150d4cf04a",
+      "size": 764301
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/human_behavior_validation_v4_20261002/per_model/v4_ensemble_source_only_seed_2/asymmetry_items.csv",
+      "sha256": "45b673fa4adc725114f2550ae2d35a1a78955dfdf58da29f8b9dc3fbe9199555",
+      "size": 15103
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/human_behavior_validation_v4_20261002/per_model/v4_ensemble_source_only_seed_2/context_items.csv",
+      "sha256": "36e0703f5a0be061a0629cf76a169432b422687ae05d7e3cc2202e92b0259d97",
+      "size": 17021
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/human_behavior_validation_v4_20261002/per_model/v4_ensemble_source_only_seed_2/paper_participant_predictions.csv",
+      "sha256": "3fbae03fb8a6fcbe94d44c2d4e94d6ab305cf7ecac7a1ba80f5432a4a63ea8f4",
+      "size": 8008
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/human_behavior_validation_v4_20261002/per_model/v4_ensemble_source_only_seed_2/similarity_items.csv",
+      "sha256": "cd38eaecbc5943651d0a72f4a1ba638da5708ad24cbc5935cb5d1abeef39e80e",
+      "size": 765380
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/human_behavior_validation_v4_20261002/per_model/v4_ensemble_source_only_seed_3/asymmetry_items.csv",
+      "sha256": "9d0d723136c38edc0f6b669f43859da5be590fa9585c0558cc9bb0737c6dec13",
+      "size": 15097
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/human_behavior_validation_v4_20261002/per_model/v4_ensemble_source_only_seed_3/context_items.csv",
+      "sha256": "176732c6d03e84506b62a4ed19e9760aec457f6a90af59a44e5a873f3653c412",
+      "size": 17212
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/human_behavior_validation_v4_20261002/per_model/v4_ensemble_source_only_seed_3/paper_participant_predictions.csv",
+      "sha256": "309f10826cfd9656fd830b39f6e019470d21aa5f2d6f27d675f27b24724844f1",
+      "size": 7872
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/human_behavior_validation_v4_20261002/per_model/v4_ensemble_source_only_seed_3/similarity_items.csv",
+      "sha256": "206bef5a104a42a7c48973ac5400e860063e39b924dfb71a109aecbfb2d09abd",
+      "size": 765331
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/human_behavior_validation_v4_20261002/representation_per_seed.csv",
+      "sha256": "1e1f32b2e8780d38ade8d9ed468cb50d544aad9d05e7003b85bd5b351670ce4b",
+      "size": 19241
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/human_behavior_validation_v4_20261002/similarity_levels_1_2_items.csv",
+      "sha256": "69a0df0762f13380bf15cd26e3e64c52cb609e7cec813ced46ae05ecb2a2fa2b",
+      "size": 17470873
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/human_behavior_validation_v4_20261002/similarity_levels_1_2_summary.csv",
+      "sha256": "152cf59112848d818fa0bad3a9d492246532f54d46df10f6b597f391c25fd471",
+      "size": 372783
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/random_feature_control_20261028/behavior/per_model/random_human_seed_0/asymmetry_items.csv",
+      "sha256": "cdbbe5908512df5cac24c33299cf1bc5696bdd2d459ceb22840853313ba407e0",
+      "size": 14026
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/random_feature_control_20261028/behavior/per_model/random_human_seed_0/context_items.csv",
+      "sha256": "e593c042cbbdf53219730c963211d167dd6a8dfecb53e3a90b62291f68d195f2",
+      "size": 16293
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/random_feature_control_20261028/behavior/per_model/random_human_seed_0/paper_participant_predictions.csv",
+      "sha256": "cac25c2285347d511267e49a492204e5145bc70ee48a68a4d45c1e6eef95e44d",
+      "size": 7056
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/random_feature_control_20261028/behavior/per_model/random_human_seed_0/similarity_items.csv",
+      "sha256": "915fb4fdeb5611bdc211485fde91fe5c2712bc604ef220fc52f57c14240569af",
+      "size": 700645
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/random_feature_control_20261028/behavior/per_model/random_human_seed_1/asymmetry_items.csv",
+      "sha256": "592bfe6c81561b60492e3db3214a39d8fe07ead57afe87897263260b8a2c5720",
+      "size": 14070
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/random_feature_control_20261028/behavior/per_model/random_human_seed_1/context_items.csv",
+      "sha256": "49fe51e9cc317de0665debb32be5f92cd1c901211c2825606938627cc66c74a0",
+      "size": 16394
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/random_feature_control_20261028/behavior/per_model/random_human_seed_1/paper_participant_predictions.csv",
+      "sha256": "d9ad2a409f1e938d7ae8bd8f15695ddf56d8d11e98dfafaf3b42ccfd9449cad3",
+      "size": 7037
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/random_feature_control_20261028/behavior/per_model/random_human_seed_1/similarity_items.csv",
+      "sha256": "79e96e48dfabd2e8ae75130be09757f529301c89b9faa05c0bd569a32c65dc93",
+      "size": 700861
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/random_feature_control_20261028/behavior/per_model/random_human_seed_2/asymmetry_items.csv",
+      "sha256": "0356bb9f494812f2c4daf5d72d7c5b677dabe805a8611b795195c99cca08f018",
+      "size": 14100
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/random_feature_control_20261028/behavior/per_model/random_human_seed_2/context_items.csv",
+      "sha256": "e0270eb7552fc37fd5221bec86770e3365767141757c94b598419509ae5cea34",
+      "size": 16259
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/random_feature_control_20261028/behavior/per_model/random_human_seed_2/paper_participant_predictions.csv",
+      "sha256": "2efa16c2481b135e9ebf3c0b3f0c51d91484e061a19e6ba63dc9ce68d0d8e4a0",
+      "size": 7050
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/random_feature_control_20261028/behavior/per_model/random_human_seed_2/similarity_items.csv",
+      "sha256": "9b25cb08dc1fa6b80ebfd6c4a611ac633694bb43a95ac4278f7e3109bf54ce14",
+      "size": 700296
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/random_feature_control_20261028/behavior/per_model/random_human_seed_3/asymmetry_items.csv",
+      "sha256": "cd36fc47daf91cde932b64539a8eff94a3ba4eb09d0c12b20c1c0c238bb88113",
+      "size": 14063
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/random_feature_control_20261028/behavior/per_model/random_human_seed_3/context_items.csv",
+      "sha256": "e00165169a2bdfdf3252647c33bf24a03d9f64fa86c3777c9fa7ce4eabdd4426",
+      "size": 16102
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/random_feature_control_20261028/behavior/per_model/random_human_seed_3/paper_participant_predictions.csv",
+      "sha256": "79627b1f82969be25782e99e57c16e90bacc83a8a97883d6dfbf8a02ce6a879c",
+      "size": 7142
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/random_feature_control_20261028/behavior/per_model/random_human_seed_3/similarity_items.csv",
+      "sha256": "11d8d051bf3913a5302f5dcafbcbf1b29476ef5bd228b35540fbb9302007a93a",
+      "size": 700531
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/random_feature_control_20261028/combined_behavior/behavior_per_seed.csv",
+      "sha256": "26a0da21fc4a9d996f4c01f3bafda0c9c168a67a613e2f09477bb81fbef2df1b",
+      "size": 157336
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/random_feature_control_20261028/combined_behavior/behavior_summary.csv",
+      "sha256": "24213d290d28fd606d238c21d502e3378c8bc39ff3d7c2a67c664427bceda75f",
+      "size": 361334
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/random_feature_control_20261028/combined_behavior/condition_summary.csv",
+      "sha256": "14f38e3cdcbe6386c6892490a88d54de56fda7c22b59803be482d99a21674a67",
+      "size": 133736
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/random_feature_control_20261028/combined_behavior/manifest.json",
+      "sha256": "036e83d90dee2d4076a295c39dae7b7dceb237981ab9f98a74ef79fa626d9941",
+      "size": 26598
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/random_feature_control_20261028/combined_behavior/paired_condition_contrasts.csv",
+      "sha256": "c96f1ea779a5ccbfd34e4427093381276ee89ea1899452565fc65c5fdde188fc",
+      "size": 152816
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/random_feature_control_20261028/combined_behavior/representation_per_seed.csv",
+      "sha256": "5675dab999e59fe20db9c85980379aa496227a4a7fd4c1d1d036b3466565e425",
+      "size": 20710
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/random_feature_control_20261028/combined_behavior/similarity_levels_1_2_items.csv",
+      "sha256": "3c5718fe3d0dc281d8aba3e4bc1b163c4fb4568a98756da3cb3558729f9ed81f",
+      "size": 18860908
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/random_feature_control_20261028/combined_behavior/similarity_levels_1_2_summary.csv",
+      "sha256": "426392d53f77d36a148a763afdc9f4f559389ce980e833d775c9cce172292cea",
+      "size": 401784
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/random_feature_control_20261028/validation/data_matrices/random_human.csv",
+      "sha256": "a35390ef21c4637602ead722a1ff9c39333d61603eef75b645b7c0a6fc01715c",
+      "size": 234717
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/random_feature_control_20261028/validation/models/random_human/seed_0/checkpoint.pt",
+      "sha256": "fcd6fe780e6f6d824f70604ee4fa0bb00f4e099a008288441b3e644eb273aef1",
+      "size": 428661
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/random_feature_control_20261028/validation/models/random_human/seed_1/checkpoint.pt",
+      "sha256": "6a3825712f820d824360dc54e2dbf1fdd61e472f68a3fb998e07e16a9e291daa",
+      "size": 428661
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/random_feature_control_20261028/validation/models/random_human/seed_2/checkpoint.pt",
+      "sha256": "eecedb01db92817e75dc3f90ed46a97cb945ebcb12d5a981d37063c5ce380b14",
+      "size": 428661
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/random_feature_control_20261028/validation/models/random_human/seed_3/checkpoint.pt",
+      "sha256": "f8e9e50f41b981473684bd6b6e9bc489ac6b4628dd9e6c16b32e6de511dcc7e1",
+      "size": 428661
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/v3_1_consolidation/v3_1_A_cluster_labels.csv",
+      "sha256": "b44a0bf580682d06ce4710fb141c130a26fd0f2c576446eddf8844eaf13e8768",
+      "size": 1240581
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/v3_1_consolidation/v3_1_B_cluster_labels.csv",
+      "sha256": "da1d5833e88bf45b115b7bbc59826e1f7a70bd7513596b67657f4834fe036793",
+      "size": 708632
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/v3_1_consolidation/v3_1_C_cluster_labels.csv",
+      "sha256": "ae26744f82cc2554cd6cd83e635e2fc6ceab97980883e44ed077fc516fd960b4",
+      "size": 993129
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/v3_consolidation/v3_A_cluster_labels.csv",
+      "sha256": "98fd6f7751a8c2fb2a0149417c7b31df9736e5b34ea43c236d4ce5bfe8d1a1da",
+      "size": 1129226
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/v3_consolidation/v3_B_cluster_labels.csv",
+      "sha256": "a295756ed5f89c01f41bfa177fe96e48d0d20d51942fd95998593e9be9c3cdbf",
+      "size": 1020035
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/v3_consolidation/v3_C_cluster_labels.csv",
+      "sha256": "a4a87abf14e6aa413d1ecc01e3eb496a78bd1e8637c9d2f73f2e5027eab73bd9",
+      "size": 1049826
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/validation_v4_20261002/data_matrices/human.csv",
+      "sha256": "5383e1ceb63c882027b4f0ab8df9b680dd354914d11c39b6c344854845b59d07",
+      "size": 234717
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/validation_v4_20261002/data_matrices/v2.csv",
+      "sha256": "d4f6f6b9039965fc157a0cd93dc3c0a82044f4ef6e7745c0b7fd3b7d82c31e51",
+      "size": 232908
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/validation_v4_20261002/data_matrices/v3_1_A.csv",
+      "sha256": "783e2c80ff7243ceb296aa54ac995941e0c620173da17d62c1ec6cd52dc1d2fc",
+      "size": 55136
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/validation_v4_20261002/data_matrices/v3_1_B.csv",
+      "sha256": "d40146aa0a5aa54e09cb2aafc91df41238126e668b96f62eca28ef09b88b7bb9",
+      "size": 107423
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/validation_v4_20261002/data_matrices/v3_1_C.csv",
+      "sha256": "8cd286f3ac6159d896251eea822a626c10a2da9d495a4609f15a9f8dadc8b8e3",
+      "size": 79176
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/validation_v4_20261002/data_matrices/v3_A.csv",
+      "sha256": "e7b7d3f1decc695674f398211e1dd05c54ddbbfab433de4732bafbae0fdd925f",
+      "size": 58742
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/validation_v4_20261002/data_matrices/v3_B.csv",
+      "sha256": "fdaa64505b035383cf6734c4d1a0260755576e1e0a521dda3a6480630fcb0fd3",
+      "size": 71363
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/validation_v4_20261002/data_matrices/v3_C.csv",
+      "sha256": "0c4239070286b0daf0dbd31b770aa7dfe446e0a22777ca52c92f06b273bb9803",
+      "size": 74969
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/validation_v4_20261002/data_matrices/v4_b_calibrated.csv",
+      "sha256": "467d5258f8028c828b1e382b86669f6a8ade29917afad1c9f67f9e71ef898afe",
+      "size": 108287
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/validation_v4_20261002/data_matrices/v4_b_locked_v2.csv",
+      "sha256": "d36c768dadb69fed8748f606498d094eac1f492671ad7937bbfa21b77a3fad2e",
+      "size": 108287
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/validation_v4_20261002/data_matrices/v4_ensemble_calibrated.csv",
+      "sha256": "690c815cb50d198679e6e3ad4c46abe5ea6dc6d0231678c4dd1b1719198946b6",
+      "size": 48905831
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/validation_v4_20261002/data_matrices/v4_ensemble_locked_v2.csv",
+      "sha256": "60a3dcd3f14ee32f66ac0220f78933357137d77e447044938402563883a658e2",
+      "size": 52915127
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/validation_v4_20261002/data_matrices/v4_ensemble_source_only.csv",
+      "sha256": "3f4468ad739db35410f760ed1428adb1e60aca4141e2510c0384cae206003b5d",
+      "size": 1429973
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/validation_v4_20261002/models/human/seed_0/checkpoint.pt",
+      "sha256": "4d5d6f14674faa2861ea637bfa648865380da8b7e81df89ee4ea8ecb664e3972",
+      "size": 426933
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/validation_v4_20261002/models/human/seed_1/checkpoint.pt",
+      "sha256": "3b9eb9a736dabeef4a250ff2c50349bfea27d4c5f975e152710a8984743207da",
+      "size": 426933
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/validation_v4_20261002/models/human/seed_2/checkpoint.pt",
+      "sha256": "664247fc3cf3cf97f4293197a09d2f1bbd4477dd2a562d1236d8155dd23b552d",
+      "size": 426933
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/validation_v4_20261002/models/human/seed_3/checkpoint.pt",
+      "sha256": "d4498212bce5aa65b3b30bd102245780cbfdfab6936752a1ddb3005922dba90e",
+      "size": 426933
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/validation_v4_20261002/models/v2/seed_0/checkpoint.pt",
+      "sha256": "598c51eed5a2350ab48e380cb4857124e7ee2c429a235c54f8cb37c144b40838",
+      "size": 425205
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/validation_v4_20261002/models/v2/seed_1/checkpoint.pt",
+      "sha256": "b123607f68ad329a4b6e9893781d871f58de9d68ea9c3b4e4885b374b44ed942",
+      "size": 425205
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/validation_v4_20261002/models/v2/seed_2/checkpoint.pt",
+      "sha256": "0f3915a65261ed31c69f862f63c5108a23a17a89cfa5dfe64281168154e734dc",
+      "size": 425205
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/validation_v4_20261002/models/v2/seed_3/checkpoint.pt",
+      "sha256": "33c278c1e2c69274ddba74684f3af853ef8a358fc50c5a1f8b004a8a5376a927",
+      "size": 425205
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/validation_v4_20261002/models/v3_1_A/seed_0/checkpoint.pt",
+      "sha256": "3187356bb915b078c3a777f362c0a5a8c50120addd6be13d314d095530ffefa3",
+      "size": 265397
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/validation_v4_20261002/models/v3_1_A/seed_1/checkpoint.pt",
+      "sha256": "29ea6da2ca5aef9a27c9e27ac666b3a069a9c799774887157c426483de8ce9d4",
+      "size": 265397
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/validation_v4_20261002/models/v3_1_A/seed_2/checkpoint.pt",
+      "sha256": "65b7665b46125d9849ae2dd6993cdd28d5e3dd4f10aab5c4506b9a9f8459c0f0",
+      "size": 265397
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/validation_v4_20261002/models/v3_1_A/seed_3/checkpoint.pt",
+      "sha256": "2e3d724d76ba38950b3db79c568960c114a284ea96f4b985ae6b7ef812937cb6",
+      "size": 265397
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/validation_v4_20261002/models/v3_1_B/seed_0/checkpoint.pt",
+      "sha256": "d73e52b0838c7f761e80e5c540cec29e3abbc12bee8634e0295060e3f97ead15",
+      "size": 312373
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/validation_v4_20261002/models/v3_1_B/seed_1/checkpoint.pt",
+      "sha256": "c67ccc0e4ae95630c19136c84b6b741f8de8213c1683b0fb72c46869f6e8ee57",
+      "size": 312373
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/validation_v4_20261002/models/v3_1_B/seed_2/checkpoint.pt",
+      "sha256": "b9919616a90eb93d231f5cfbb5a2ce92b75a003720eaa307b61ca3695a6ca19f",
+      "size": 312373
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/validation_v4_20261002/models/v3_1_B/seed_3/checkpoint.pt",
+      "sha256": "931b02c7cfb99c0d31b666dc6ce434442e6066262d301d53e0f26755f3a50625",
+      "size": 312373
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/validation_v4_20261002/models/v3_1_C/seed_0/checkpoint.pt",
+      "sha256": "55abddbd7077b716ce3e106c783a5a6ed45097e53ca3419d6f7dead5f2b643bf",
+      "size": 287029
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/validation_v4_20261002/models/v3_1_C/seed_1/checkpoint.pt",
+      "sha256": "2b111621cff6a779c0e64ca33700472235a178c5ffc18bae6df1b287431712ec",
+      "size": 287029
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/validation_v4_20261002/models/v3_1_C/seed_2/checkpoint.pt",
+      "sha256": "e7d7d1808bffa44d15bf6da055f80108aeab5b4b8b3a309dd362474926f030fd",
+      "size": 287029
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/validation_v4_20261002/models/v3_1_C/seed_3/checkpoint.pt",
+      "sha256": "0e4df4a41408ac8b51e6547fd5c2f75c5ad92ec9738332c47eb3b28d0cdffcb4",
+      "size": 287029
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/validation_v4_20261002/models/v3_A/seed_0/checkpoint.pt",
+      "sha256": "ccf7689390dce84132d01aa81a3b66b30e531237dfaef0b7e6d721df5cbbe5c9",
+      "size": 268597
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/validation_v4_20261002/models/v3_A/seed_1/checkpoint.pt",
+      "sha256": "c458896a21d1c8e42a561b96281483c4f5bdc6540e63182e5099dd8022c35961",
+      "size": 268597
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/validation_v4_20261002/models/v3_A/seed_2/checkpoint.pt",
+      "sha256": "45566180f3d6f5a8fe30c74fdb299b3db9843a9615b55f4a310ea6628216bbd8",
+      "size": 268597
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/validation_v4_20261002/models/v3_A/seed_3/checkpoint.pt",
+      "sha256": "d184f59ca09fc24bcc81f157c5a5d7b4ebeb28f1ea9f23339d5cd97c0bc9b43c",
+      "size": 268597
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/validation_v4_20261002/models/v3_B/seed_0/checkpoint.pt",
+      "sha256": "5da9917c3d33c0d9081de5cede711f8b7f612782f60ec1f3f3fbb84c6422b325",
+      "size": 279989
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/validation_v4_20261002/models/v3_B/seed_1/checkpoint.pt",
+      "sha256": "4775a49934a593d80c1b5550cca94bdfa559581f2d963d3c022653e680f839dc",
+      "size": 279989
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/validation_v4_20261002/models/v3_B/seed_2/checkpoint.pt",
+      "sha256": "535eaf8fd1a1315e873e6d654fdeaf5aa90720042cfcb95e40e11b86a8d9a28d",
+      "size": 279989
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/validation_v4_20261002/models/v3_B/seed_3/checkpoint.pt",
+      "sha256": "ff873da8078534ff46dae83d9b5a4a1bc11db8c1921b91d059b4edcd8024abc8",
+      "size": 279989
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/validation_v4_20261002/models/v3_C/seed_0/checkpoint.pt",
+      "sha256": "ef2cc9a2c82d3e89ac7e85c6e3b8528e91e954164df9aacc79fe158084ae8137",
+      "size": 283189
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/validation_v4_20261002/models/v3_C/seed_1/checkpoint.pt",
+      "sha256": "d3d67c64fe801d5dd500109fe9d954fac253bff3eae2907d451301e1c057b26d",
+      "size": 283189
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/validation_v4_20261002/models/v3_C/seed_2/checkpoint.pt",
+      "sha256": "ae55b3d86a50e1b7c88f5ec902e94ecf94316ccb916489b27a6e6f27e2ad633a",
+      "size": 283189
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/validation_v4_20261002/models/v3_C/seed_3/checkpoint.pt",
+      "sha256": "5e541cf6b6a8983210d954f3fdff5731681723fede0c5528fa80f6770905b521",
+      "size": 283189
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/validation_v4_20261002/models/v4_b_calibrated/seed_0/checkpoint.pt",
+      "sha256": "1afb33bec2d6af7b2596a9465d8785f66ee7baf07231fb8c5d3f6c3bb2f61562",
+      "size": 314037
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/validation_v4_20261002/models/v4_b_calibrated/seed_1/checkpoint.pt",
+      "sha256": "4ef58a639b18cc69d369080cf80f18ba3b518e635b0f7301bfe27685a25f9b25",
+      "size": 314037
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/validation_v4_20261002/models/v4_b_calibrated/seed_2/checkpoint.pt",
+      "sha256": "32b43d8933b279bd239380fdd0f7466bae394edbb971e26ff23a244c72614a6c",
+      "size": 314037
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/validation_v4_20261002/models/v4_b_calibrated/seed_3/checkpoint.pt",
+      "sha256": "d5502a08a840c0d8ceb346b3ff99aa279fdf1c4a6d66bd13da826c71c3fa2d76",
+      "size": 314037
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/validation_v4_20261002/models/v4_b_locked_v2/seed_0/checkpoint.pt",
+      "sha256": "a8f5a249829958e2f8f7a7bd4e6a25c34fcc99a1073fe49a262c8d76f10faa73",
+      "size": 314037
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/validation_v4_20261002/models/v4_b_locked_v2/seed_1/checkpoint.pt",
+      "sha256": "5de84a745325496ffa1eea1c02473592d4f6c721f3f1a05b254b8d68aae97711",
+      "size": 314037
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/validation_v4_20261002/models/v4_b_locked_v2/seed_2/checkpoint.pt",
+      "sha256": "842d5b507364120b833e8fe97924b005c599198898b89a31a64f31cecfb318d1",
+      "size": 314037
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/validation_v4_20261002/models/v4_b_locked_v2/seed_3/checkpoint.pt",
+      "sha256": "9a95c3c62584e856ee3e2286c5fc1d4c18267c7784678cc0c0f2c37eadf1971d",
+      "size": 314037
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/validation_v4_20261002/models/v4_ensemble_calibrated/seed_0/checkpoint.pt",
+      "sha256": "433a34503d80495125ea00937aa6c06260f70a9c3e72c76cb8ff678901984b01",
+      "size": 44199861
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/validation_v4_20261002/models/v4_ensemble_calibrated/seed_1/checkpoint.pt",
+      "sha256": "55be4b06fef50dec29ad3ecbb44f57fcbb0a763aea4a26dfc0bbd3f91b415b0f",
+      "size": 44199861
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/validation_v4_20261002/models/v4_ensemble_calibrated/seed_2/checkpoint.pt",
+      "sha256": "5c9378397b623d445dd50b76ed74c523c95cf0fe1a3f750d217e9021f3032fb9",
+      "size": 44199861
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/validation_v4_20261002/models/v4_ensemble_calibrated/seed_3/checkpoint.pt",
+      "sha256": "8b947091c4da630bf1f56209d6b911d4cb3148856644aeafdee941c3af789040",
+      "size": 44199861
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/validation_v4_20261002/models/v4_ensemble_locked_v2/seed_0/checkpoint.pt",
+      "sha256": "87c16f93d5cbfd40b6e9d7ebbe769485e79c7ec519f95617d9979dd85ed68427",
+      "size": 47805621
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/validation_v4_20261002/models/v4_ensemble_locked_v2/seed_1/checkpoint.pt",
+      "sha256": "86be32da446353e758c758d83bac7622076607327cc4c5268d4d1f5218e0a3e2",
+      "size": 47805621
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/validation_v4_20261002/models/v4_ensemble_locked_v2/seed_2/checkpoint.pt",
+      "sha256": "f3d21aab49df9f5a8ccc4b5131e734d04e85a0cfce4f2bba3d5c4f000365a31d",
+      "size": 47805621
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/validation_v4_20261002/models/v4_ensemble_locked_v2/seed_3/checkpoint.pt",
+      "sha256": "6e8f53e54341b2c42094275da7446fced46996250c6788b3e2eabc085ed947d8",
+      "size": 47805621
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/validation_v4_20261002/models/v4_ensemble_source_only/seed_0/checkpoint.pt",
+      "sha256": "2d05faf52a1c0d6363391cd4bd24e8d10baaa4686e13efa5a4affa1889f4614e",
+      "size": 1502773
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/validation_v4_20261002/models/v4_ensemble_source_only/seed_1/checkpoint.pt",
+      "sha256": "eec190a5f31e77de485104af0b6006f5c4f35ee8f7df5f86a2354cf1153ddc64",
+      "size": 1502773
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/validation_v4_20261002/models/v4_ensemble_source_only/seed_2/checkpoint.pt",
+      "sha256": "8307e57bb871384838df0bf7887a716fc637eca03b86231f0f16b7bc4c83b6d8",
+      "size": 1502773
+    },
+    {
+      "path": "ISC-CI_LLM_validation/artifacts/validation_v4_20261002/models/v4_ensemble_source_only/seed_3/checkpoint.pt",
+      "sha256": "a339ea3d67bcd7c75b271b64ea14289c273236f34f9b893c789b266fcdf08a00",
+      "size": 1502773
+    },
+    {
+      "path": "ISC-CI_LLM_validation/inputs/reference_sources/IntegratedSemanticsControlContextInference/data/leuven_dataset/leuven_categories.csv",
+      "sha256": "9deb096488ce1ee576019d23d04cd60d6f1c42f1e0e5c2922fd70ea1087c9733",
+      "size": 9128
+    },
+    {
+      "path": "ISC-CI_LLM_validation/iscci_validation/__init__.py",
+      "sha256": "f041dd37a7a7cd88ffff56f351a0a79aa34d19c359e81d6a07b52d9e6bb5dcbd",
+      "size": 71
+    },
+    {
+      "path": "ISC-CI_LLM_validation/iscci_validation/behavior.py",
+      "sha256": "8d9d5bcf4e518d31d7eab47d566db21ddd13331f04a913aca5da2bce1b77613d",
+      "size": 31489
+    },
+    {
+      "path": "ISC-CI_LLM_validation/iscci_validation/behavior_fidelity.py",
+      "sha256": "64aaf728110d294a91befe610307c95078487ed2112a2fb572c00e935bb4ad10",
+      "size": 8300
+    },
+    {
+      "path": "ISC-CI_LLM_validation/iscci_validation/consolidation.py",
+      "sha256": "eda43971130e36f023b81db60dcde099af465a301171ec4a5c58621d067e345e",
+      "size": 15514
+    },
+    {
+      "path": "ISC-CI_LLM_validation/iscci_validation/dataio.py",
+      "sha256": "ae7d59252394fc0de17823630c9af87ca1a916b78675c09e662fb3251ee8501d",
+      "size": 5494
+    },
+    {
+      "path": "ISC-CI_LLM_validation/iscci_validation/evaluation.py",
+      "sha256": "2a85b4383688012d6ad329551f3a751bdec51bbb74338f986567360053f32b7b",
+      "size": 11120
+    },
+    {
+      "path": "ISC-CI_LLM_validation/iscci_validation/modeling.py",
+      "sha256": "2b1d1774da6fd553253caa9d3c4abeb02ed5a5855d818747b0a8db7774ee218c",
+      "size": 3444
+    },
+    {
+      "path": "ISC-CI_LLM_validation/iscci_validation/provenance.py",
+      "sha256": "b4af714d9736f9de0310d374fdc9c7623e8ce8647b52d96dd97abbf0bd801b28",
+      "size": 1827
+    },
+    {
+      "path": "ISC-CI_LLM_validation/iscci_validation/simulations.py",
+      "sha256": "35e76e204da7649b89049047009c2679ac3616d6fd0c1261ee9d269ad42c79b9",
+      "size": 14763
+    },
+    {
+      "path": "ISC-CI_LLM_validation/iscci_validation/training.py",
+      "sha256": "af1b88328ab75bb58896b7c92772d7e4dc85d57cd72a7ca957946502c9017bf3",
+      "size": 4715
+    },
+    {
+      "path": "ISC-CI_LLM_validation/reports/v4_20261002/RESULTS.md",
+      "sha256": "5df834b4fadc966f4a77b3fbf67cb5cc8e9f0b12f77e0e14748ed6b8577ff3de",
+      "size": 11755
+    },
+    {
+      "path": "ISC-CI_LLM_validation/reports/v4_20261002/figures_final/figure_manifest.json",
+      "sha256": "55d1be343f21241c6b7eadbdaa5c884d58cbb96fe362f9fb62a30f8f975af0d3",
+      "size": 99016
+    },
+    {
+      "path": "ISC-CI_LLM_validation/reports/v4_20261002/report_manifest.json",
+      "sha256": "0d1e9a3f719eb5aeee06a2243aaa29154550b6c6422277efd3fc0abac95b913a",
+      "size": 5866
+    },
+    {
+      "path": "ISC-CI_LLM_validation/reports/v4_20261028_random_control/figures_final/figure_manifest.json",
+      "sha256": "062e8051ad3ee0cb91386414f58473fda45051558d04a579120fa747f80adfc9",
+      "size": 107661
+    },
+    {
+      "path": "ISC-CI_LLM_validation/run_human_behavior_validation.py",
+      "sha256": "4f4aec3f515feb7499b30bb64222a8d717aa583f60cd3dbb36747c4dbf66c6be",
+      "size": 38171
+    },
+    {
+      "path": "ISC-CI_LLM_validation/upstream/IntegratedSemanticsControl/data.py",
+      "sha256": "0ff1f8a168c69d8c527f200b138f6e5d944417a7b9b4555e8d02c1dc5801f893",
+      "size": 23032
+    },
+    {
+      "path": "ISC-CI_LLM_validation/upstream/IntegratedSemanticsControl/data/leuven_rum_nozeroes.ex",
+      "sha256": "f91a3e3a5af19b35e51f5fb5a77a9e8a34756ad8f63c67408eddc609a11e9aeb",
+      "size": 359494
+    },
+    {
+      "path": "ISC-CI_LLM_validation/upstream/IntegratedSemanticsControl/models.py",
+      "sha256": "dfe42e77d70e32e6fac266bb97077adddfa1d1895ade77959d78c421c69d3c6c",
+      "size": 18721
+    },
+    {
+      "path": "ISC-CI_LLM_validation/upstream/IntegratedSemanticsControl/utils.py",
+      "sha256": "2a5b888c3526958b1529008ca8351d9cef5472a6f763cc9841be78e2816a6cd9",
+      "size": 624
+    },
+    {
+      "path": "ISC-CI_LLM_validation/upstream/IntegratedSemanticsControlContextInference/1. Part 1 Inductive Inference.ipynb",
+      "sha256": "ac80de5115cec0250a738cfd041ed4fd16fec54a96b22008c40847a04592484f",
+      "size": 246804
+    },
+    {
+      "path": "ISC-CI_LLM_validation/upstream/IntegratedSemanticsControlContextInference/2. Part 2 Similarity.ipynb",
+      "sha256": "6ea6280184fc0d3d8e81210b67f6a954dcece79b67c6b3f9ca2d77de7675fe15",
+      "size": 119539
+    },
+    {
+      "path": "ISC-CI_LLM_validation/upstream/IntegratedSemanticsControlContextInference/analysis.py",
+      "sha256": "8d6e2e164aef926657dec6117fb5c94917996345f6bd42ac8405416b0d8635de",
+      "size": 26979
+    },
+    {
+      "path": "ISC-CI_LLM_validation/upstream/IntegratedSemanticsControlContextInference/data.py",
+      "sha256": "ea724374b10f4f2eea9c133790830ba59633e805534216f6427b72839bb7a0b8",
+      "size": 8427
+    },
+    {
+      "path": "ISC-CI_LLM_validation/upstream/IntegratedSemanticsControlContextInference/data/generalization_experiments/context_dependent_nonmonotonicity.csv",
+      "sha256": "fa0dba8607ced96bff2b7893ef88ca9031282828b29aeaf1877a51d965a8292e",
+      "size": 76645
+    },
+    {
+      "path": "ISC-CI_LLM_validation/upstream/IntegratedSemanticsControlContextInference/data/generalization_experiments/context_dependent_nonmonotonicity_llm.csv",
+      "sha256": "d72ddf36a0fa9bc066477a659e2ca2b6a24ff515aea1d07ac4f9fd7c887e5220",
+      "size": 5026
+    },
+    {
+      "path": "ISC-CI_LLM_validation/upstream/IntegratedSemanticsControlContextInference/data/generalization_experiments/context_dependent_nonmonotonicity_llm_unpaired.csv",
+      "sha256": "2ecd17b8729c20ee6afef4ceae1e1e6ab81b2a2b84e9abb9b18045cd8502b34e",
+      "size": 4959
+    },
+    {
+      "path": "ISC-CI_LLM_validation/upstream/IntegratedSemanticsControlContextInference/data/generalization_experiments/induction_arguments.csv",
+      "sha256": "997524a11008b6d15319e2fdf0a4906ce9cd15c7b73a9c16897db91c5932bd7b",
+      "size": 78335
+    },
+    {
+      "path": "ISC-CI_LLM_validation/upstream/IntegratedSemanticsControlContextInference/data/generalization_experiments/inductive_phenomena.csv",
+      "sha256": "26beb9b39532ab503a5b46804ca01aad6817fdcd8030b3ce3911cbce8e9c4aca",
+      "size": 589555
+    },
+    {
+      "path": "ISC-CI_LLM_validation/upstream/IntegratedSemanticsControlContextInference/data/generalization_experiments/thematic_arguments.csv",
+      "sha256": "712fb587f6d4b367a8b112a1eb6739d4945770e29795b6784cad25e1309a7854",
+      "size": 122627
+    },
+    {
+      "path": "ISC-CI_LLM_validation/upstream/IntegratedSemanticsControlContextInference/data/generalization_experiments/thematic_arguments_llm.csv",
+      "sha256": "3fa152dba3aa3531adc59c220561b33b4cf0b7626820b5322661994e74fc890d",
+      "size": 2724
+    },
+    {
+      "path": "ISC-CI_LLM_validation/upstream/IntegratedSemanticsControlContextInference/data/leuven_dataset/leuven_categories.csv",
+      "sha256": "8ab0c21698e92d6d89a2a3ddec41be20939498a583c76b9c892a5b91f6aaaf31",
+      "size": 8834
+    },
+    {
+      "path": "ISC-CI_LLM_validation/upstream/IntegratedSemanticsControlContextInference/data/leuven_dataset/leuven_combined_exemplar_data.csv",
+      "sha256": "6988d4c0cf6db25c654f405a3ca22eb59d56266f5adfa58caabf9933bdfab20a",
+      "size": 14197
+    },
+    {
+      "path": "ISC-CI_LLM_validation/upstream/IntegratedSemanticsControlContextInference/data/leuven_dataset/leuven_combined_features_consolidated.csv",
+      "sha256": "0c99ceb4e28f58150d0886c99c5b012f0e12b658fa6f965e6cc32ca85dc3102a",
+      "size": 1210888
+    },
+    {
+      "path": "ISC-CI_LLM_validation/upstream/IntegratedSemanticsControlContextInference/data/leuven_dataset/leuven_singular_to_plural.csv",
+      "sha256": "758f17ca324a4a2e832039798e24ba8580372a8c358bf7d84a088a309b111c89",
+      "size": 5873
+    },
+    {
+      "path": "ISC-CI_LLM_validation/upstream/IntegratedSemanticsControlContextInference/data/similarity_experiments/similarity_asymmetry.csv",
+      "sha256": "e5419e0094beb35fd2dadd635d5976354dc1b0158534fe5ab76ed7cb6656d3dc",
+      "size": 109908
+    },
+    {
+      "path": "ISC-CI_LLM_validation/upstream/IntegratedSemanticsControlContextInference/data/similarity_experiments/similarity_asymmetry_llm.csv",
+      "sha256": "97f02a102efbe67ddd87a11ab3e10c33e6d07549fd9d0626326d5704bc6e7fb9",
+      "size": 2257
+    },
+    {
+      "path": "ISC-CI_LLM_validation/upstream/IntegratedSemanticsControlContextInference/data/similarity_experiments/similarity_in_context.csv",
+      "sha256": "3a71370eb7ccb67d8fb3d05feb609783108a43051ab56a951d7cc595b8783f9e",
+      "size": 154675
+    },
+    {
+      "path": "ISC-CI_LLM_validation/upstream/IntegratedSemanticsControlContextInference/data/similarity_experiments/similarity_in_context_llm.csv",
+      "sha256": "5b4d8f76d557cbce8bfa9fc5ffce19450e8546e169d1ac6f64ba4d59e583433d",
+      "size": 4899
+    },
+    {
+      "path": "ISC-CI_LLM_validation/upstream/IntegratedSemanticsControlContextInference/data/similarity_experiments/similarity_in_domain.csv",
+      "sha256": "8def208df15e88437ced0dce3a73be286f54a2f1d1ff74cb640e2de14723a9a9",
+      "size": 3122457
+    },
+    {
+      "path": "ISC-CI_LLM_validation/upstream/IntegratedSemanticsControlContextInference/data/similarity_experiments/similarity_in_domain_llm.csv",
+      "sha256": "87bdca4ee5e0a240c1b6a310d43bb5fb69f76c7a97f3402dc35d61b4113cf4d6",
+      "size": 241064
+    },
+    {
+      "path": "ISC-CI_LLM_validation/upstream/IntegratedSemanticsControlContextInference/models.py",
+      "sha256": "efc2652d06a64100dba7bc5e7df4fc58a27e7159e25400d52b49ebdff6737c15",
+      "size": 7032
+    },
+    {
+      "path": "ISC-CI_LLM_validation/upstream/IntegratedSemanticsControlContextInference/models/1and2shot_isc-seed0.pt",
+      "sha256": "8976c9d00c01cc684de6f95a6cc2a505e6a996060374e66d45a36387e5afbda4",
+      "size": 709975
+    },
+    {
+      "path": "ISC-CI_LLM_validation/upstream/IntegratedSemanticsControlContextInference/models/1and2shot_isc-seed1.pt",
+      "sha256": "937b8a1041aa57969b04adcd8437bba1edd789d7e586ee79e92f4a1ab6f98167",
+      "size": 709975
+    },
+    {
+      "path": "ISC-CI_LLM_validation/upstream/IntegratedSemanticsControlContextInference/models/1and2shot_isc-seed2.pt",
+      "sha256": "749a1ad324388dabe94bcf9aa7d34d9cc2c6a6e1ec0a74c4b9ea5374c9b91a3f",
+      "size": 709975
+    },
+    {
+      "path": "ISC-CI_LLM_validation/upstream/IntegratedSemanticsControlContextInference/models/1and2shot_isc-seed3.pt",
+      "sha256": "45db56a9c96e668b6fb85ee6515deb461493fcd5d25f66965fff44043ca2661d",
+      "size": 709975
+    },
+    {
+      "path": "ISC-CI_LLM_validation/upstream/IntegratedSemanticsControlContextInference/models/matrix-seed3.pt",
+      "sha256": "5d85e10bdf570e61cecb6f8cefbc74ee252eacb3bc6d4c95161a69d302475e27",
+      "size": 419487
+    },
+    {
+      "path": "ISC-CI_LLM_validation/upstream/IntegratedSemanticsControlContextInference/utils.py",
+      "sha256": "dfec608dad9659fe05e622069860af5751e7e31dfff85d0d94fde03979fcb9f9",
+      "size": 5248
+    },
+    {
+      "path": "artifacts/v4/discovery/candidate_bank.csv",
+      "sha256": "0e13f5c955143422a82c66d081f06b7704abf8fb5f01ad42a712f0a30dd90a2c",
+      "size": 54709400
+    }
+  ],
+  "version": 1
+}

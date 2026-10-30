@@ -63,6 +63,8 @@ if [ "$VISIBLE_GPU_COUNT" -ne "$TENSOR_PARALLEL_SIZE" ]; then
 fi
 
 RUNNER=ISC-CI_LLM_validation/run_semantic_retraining.py
+# Restore missing frozen inputs only; matching files are verified and conflicts stop the job.
+python ISC-CI_LLM_validation/run_semantic_inputs.py --install
 # Fail on missing matrices, upstream data, package/tests, or stale originals before loading Qwen.
 python "$RUNNER" --stage prepare --output-dir "$OUTPUT_DIR"
 python "$RUNNER" --stage preflight --output-dir "$OUTPUT_DIR"

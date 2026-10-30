@@ -9,3 +9,4 @@ artifacts/v4/judgments/shards/**/feature_resolutions.csv filter=lfs diff=lfs mer
 artifacts/v4/judgments/resolved_feature_values.csv.gz.part-* filter=lfs diff=lfs merge=lfs -text
 ISC-CI_LLM_validation/artifacts/validation_v4_20261002/data_matrices/*.csv filter=lfs diff=lfs merge=lfs -text
 ISC-CI_LLM_validation/artifacts/random_feature_control_20261028/validation/data_matrices/random_human.csv filter=lfs diff=lfs merge=lfs -text
+ISC-CI_LLM_validation/inputs/semantic_frozen_inputs.tar.gz filter=lfs diff=lfs merge=lfs -text
