@@ -26,6 +26,7 @@ def load_config(path=None):
         )
     if config["pilot_llm_condition"] not in set(CONDITIONS) - {"human", "random_human"}:
         raise ValueError("Unknown prespecified pilot source")
+    source_cohort(config)
     from .transfer_embeddings import SETTINGS
 
     if config["downstream_settings"] != SETTINGS:
@@ -38,29 +39,48 @@ def load_config(path=None):
     return config
 
 
+def source_cohort(config, include_deferred=False):
+    deferred = config.get("deferred_conditions", [])
+    if (
+        not isinstance(deferred, list)
+        or any(not isinstance(c, str) or c not in CONDITIONS for c in deferred)
+        or len(set(deferred)) != len(deferred)
+        or {"human", "random_human", config["pilot_llm_condition"]}.intersection(
+            deferred
+        )
+    ):
+        raise ValueError(
+            "Invalid deferred conditions: preserve human/random/pilot references and use unique known sources"
+        )
+    return [c for c in CONDITIONS if include_deferred or c not in deferred]
+
+
 def all_pairs():
     return list(product(CONDITIONS, repeat=2))
 
 
-def phase_pairs(phase, pilot_llm="v3_1_B"):
+def phase_pairs(phase, pilot_llm="v3_1_B", sources=None):
+    sources = list(CONDITIONS if sources is None else sources)
     if phase == 1:
         return [("human", "human")]
     if phase == 2:
         return [(c, c) for c in ("human", "random_human", pilot_llm)]
     if phase == 3:
-        return [(c, c) for c in CONDITIONS]
+        return [(c, c) for c in sources]
     controls = {"human", "random_human"}
     first64 = [
-        (s, c) for s, c in all_pairs() if s == c or s in controls or c in controls
+        (s, c)
+        for s, c in product(sources, repeat=2)
+        if s == c or s in controls or c in controls
     ]
     if phase == 4:
         return first64
     if phase == 5:
-        return [(s, c) for s, c in all_pairs() if (s, c) not in first64]
+        return [(s, c) for s, c in product(sources, repeat=2) if (s, c) not in first64]
     raise ValueError("phase must be 1..5")
 
 
-def planned_jobs(output):
+def planned_jobs(output, config=None, include_deferred=False):
     output = Path(output)
     semantic = [
         {
@@ -85,6 +105,17 @@ def planned_jobs(output):
         }
         for (s, c), seed in product(all_pairs(), range(4))
     ]
+    if config is not None:
+        active = set(source_cohort(config, include_deferred))
+        for job in semantic + context:
+            if (
+                job["semantic_source"] not in active
+                or job.get("context_source", "human") not in active
+            ):
+                job["status"] = "deferred"
+                job["deferral_reason"] = config.get(
+                    "deferral_reason", "Explicitly deferred in configuration"
+                )
     return {"semantic": semantic, "context": context}
 
 
@@ -114,22 +145,28 @@ def execution_plan(
     context_source=None,
     seed=None,
     config=None,
+    include_deferred=False,
 ):
     config = config or load_config()
+    active = source_cohort(config, include_deferred)
     for value in [condition, semantic_source, context_source]:
         if value is not None and value not in CONDITIONS:
             raise ValueError(f"Unknown source: {value}")
+        if value is not None and value not in active:
+            raise ValueError(
+                f"Source {value} is deferred; use --include-deferred for deliberate opt-in"
+            )
     if seed is not None and seed not in range(4):
         raise ValueError("seed must be 0..3")
     if phase not in range(1, 6):
         raise ValueError("phase must be 1..5")
     output = Path(output)
-    jobs = planned_jobs(output)
+    jobs = planned_jobs(output, config, include_deferred)
     pilot_sources = {"human", "random_human", config["pilot_llm_condition"]}
     semantic_sources = (
-        {"human"} if phase == 1 else pilot_sources if phase == 2 else set(CONDITIONS)
+        {"human"} if phase == 1 else pilot_sources if phase == 2 else set(active)
     )
-    pairs = set(phase_pairs(phase, config["pilot_llm_condition"]))
+    pairs = set(phase_pairs(phase, config["pilot_llm_condition"], active))
     selected_semantic = [
         j for j in jobs["semantic"] if j["semantic_source"] in semantic_sources
     ]
@@ -210,6 +247,14 @@ def execution_plan(
         "stage": stage,
         "phase": phase,
         "design": {
+            "sources": len(active),
+            "source_pairs": len(active) ** 2,
+            "semantic_models": 4 * len(active),
+            "context_models": 4 * len(active) ** 2,
+            "seeds": config["seeds"],
+            "randomization_realizations": 1,
+        },
+        "full_design": {
             "sources": 14,
             "source_pairs": 196,
             "semantic_models": 56,
@@ -217,6 +262,8 @@ def execution_plan(
             "seeds": config["seeds"],
             "randomization_realizations": 1,
         },
+        "enabled_conditions": active,
+        "deferred_conditions": [c for c in CONDITIONS if c not in active],
         "jobs": selected,
         "semantic_training": training,
         "schedule_locked": config["semantic"]["schedule_locked"],

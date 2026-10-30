@@ -4,6 +4,8 @@
   "output_directory": "artifacts/semantic_retraining_20261028_32_corrected",
   "report_directory": "reports/semantic_retraining_20261028_32_corrected",
   "pilot_llm_condition": "v3_1_B",
+  "deferred_conditions": ["v4_ensemble_locked_v2", "v4_ensemble_calibrated"],
+  "deferral_reason": "Investigator deferred full V4 ensemble categorization for computational cost, before new behavioral evaluation. Smaller fixed-B and source-only controls remain enabled.",
   "seeds": [0, 1, 2, 3],
   "auxiliary_tasks": [],
   "classifier": {

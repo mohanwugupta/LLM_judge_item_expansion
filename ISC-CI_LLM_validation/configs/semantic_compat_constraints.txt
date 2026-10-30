@@ -1,0 +1,3 @@
+# Match the pandas version used for the frozen validation and local fidelity gate.
+# pandas 3 removed errors.SettingWithCopyWarning, referenced by unedited helpers.
+pandas==2.3.2

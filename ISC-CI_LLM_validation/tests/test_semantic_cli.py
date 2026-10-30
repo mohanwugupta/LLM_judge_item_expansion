@@ -22,7 +22,7 @@ def test_dry_run_does_not_make_output_directory_or_model_calls(tmp_path, capsys)
         == 0
     )
     plan = json.loads(capsys.readouterr().out)
-    assert plan["blocked"] and len(plan["jobs"]) == 56
+    assert plan["blocked"] and len(plan["jobs"]) == 48
     assert not destination.exists()
 
 
@@ -127,4 +127,61 @@ def test_unconverged_stage_returns_failure_to_cluster_scheduler(
             ]
         )
         == 2
+    )
+
+
+@pytest.mark.parametrize("stage", ["classify", "freeze"])
+def test_default_classification_and_freeze_do_not_require_large_ensembles(
+    tmp_path, monkeypatch, capsys, stage
+):
+    import semantic_retraining.cli as cli
+
+    directory = tmp_path / "classification"
+    directory.mkdir()
+    (directory / "model_fingerprint.json").write_text('{"revision":"fixture"}')
+    monkeypatch.setattr(cli, "verify_gate", lambda *a: None)
+    monkeypatch.setattr(cli, "gate_signature", lambda *a: {})
+    selected = []
+
+    def classify(*args):
+        selected.extend(args[-1])
+        return {"passed": True}
+
+    def freeze(*args):
+        selected.extend(args[-1])
+        return {"passed": True}
+
+    monkeypatch.setattr(cli, "classify_catalog", classify)
+    monkeypatch.setattr(cli, "freeze_catalog", freeze)
+    assert main(["--stage", stage, "--output-dir", str(tmp_path)]) == 0
+    assert len(selected) == 12
+    assert (
+        "v4_ensemble_locked_v2" not in selected
+        and "v4_ensemble_calibrated" not in selected
+    )
+    assert "v4_ensemble_source_only" in selected
+
+
+def test_phase_five_evaluation_does_not_reintroduce_deferred_models(
+    tmp_path, monkeypatch, capsys
+):
+    import semantic_retraining.cli as cli
+    import semantic_retraining.evaluate_crosses as evaluation
+
+    monkeypatch.setattr(cli, "require_training_gates", lambda *a: None)
+    selected = []
+
+    def evaluate(root, output, jobs, config, phase):
+        selected.extend(jobs)
+        return {"complete": True}
+
+    monkeypatch.setattr(evaluation, "evaluate_context_models", evaluate)
+    assert (
+        main(["--stage", "evaluate", "--phase", "5", "--output-dir", str(tmp_path)])
+        == 0
+    )
+    assert len(selected) == 576
+    assert all(
+        "v4_ensemble_locked_v2" not in (j["semantic_source"], j["context_source"])
+        for j in selected
     )

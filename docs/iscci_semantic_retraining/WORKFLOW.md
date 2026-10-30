@@ -13,6 +13,43 @@ classification and human review have not yet run. The full semantic schedule is
 intentionally **unlocked** until a training-only human pilot and resource checks
 justify it. Code completion is not completion of the scientific experiment.
 
+## Active Cohort and Deferred Ensembles
+
+The investigator deferred full V4 ensemble task classification for computational
+cost on 2026-10-30, before new behavioral evaluation. Default classify/freeze,
+semantic training, downstream training and evaluation now use **12 sources**:
+human, random_human, V2, all three V3 and V3.1 prompts, both fixed-B V4 matrices,
+and V4 ensemble source-only. Only `v4_ensemble_locked_v2` (87,315 features) and
+`v4_ensemble_calibrated` (80,699 features) are temporarily deferred.
+
+The active sources require **2,751 unique descriptions**, versus 87,679 for the
+full design (96.9% fewer descriptions, not a measured runtime saving). Existing
+exact-description caches remain reusable. No feature is removed from any saved
+matrix and no threshold is changed. Inventory and preservation still verify all
+14 frozen sources; that CPU check does not classify the deferred features.
+
+`CLASSIFY_CONDITION=all` means all **enabled** sources. The default production
+launcher still starts with human only, allowing review and the human pilot first.
+After that gate, the following covers all currently enabled labels:
+
+```bash
+sbatch --export=ALL,SMOKE_TEST=0,CLASSIFY_CONDITION=all ISC-CI_LLM_validation/run_semantic_classification.sh
+```
+
+With four seeds, the active factorial has 48 semantic models and 576 downstream
+models across 144 pairs. Phase 4 has 54 pairs; phase 5 adds the remaining 90.
+Reports retain all 196 original pairs and 840 models, marking unscheduled cells
+`deferred` rather than missing, failed or completed. Active-cohort completion is
+reported separately from completion of the full 14-source design. The original
+full-factorial analysis is not silently redefined as a 12-source analysis.
+
+Do not resume the large ensembles unless explicitly intended. Opt in with
+`--include-deferred` in the CLI, or `INCLUDE_DEFERRED=1` in either Slurm launcher.
+Explicitly selecting a deferred source without that flag fails. This is a
+scheduling decision only: all review, fidelity and training gates remain active.
+After a code/configuration update, refresh preflight before running new work;
+the locked-run safeguards still reject incompatible resumes.
+
 Run commands from `LLM_judge_item_expansion`. The verified local interpreter is
 `/Users/mg9965/.pyenv/versions/3.11.8/bin/python3`. Commands below use `python`
 for the existing scientific/cluster environment.
@@ -45,8 +82,66 @@ payload is not needed for this extension. Old checkpoints are historical fidelit
 inputs only; no old semantic weights enter new semantic learning.
 
 Python dependencies are the existing NumPy, pandas, PyTorch, SciPy, scikit-learn,
-matplotlib, Pillow, and pytest stack. Cluster classification additionally uses the
+matplotlib, Pillow, PyArrow, and pytest stack. Cluster classification additionally uses the
 already established vLLM/Transformers environment. No new API account is needed.
+
+## Cluster Python Environment
+
+Login-node commands must use the same `PromptControlText` environment as the
+Slurm launcher, not whichever system Python is initially on PATH:
+
+```bash
+module load anaconda3/2025.6
+eval "$(conda shell.bash hook)"
+conda activate PromptControlText
+python -c 'import sys; print(sys.executable); print(sys.version)'
+python -c 'import pyarrow.parquet; print("PyArrow Parquet import OK")'
+```
+
+If the final import fails, install the missing dependency **inside that activated
+environment**, using its interpreter:
+
+```bash
+python -m pip install pyarrow
+python ISC-CI_LLM_validation/run_semantic_retraining.py --stage prepare
+python ISC-CI_LLM_validation/run_semantic_retraining.py --stage preflight
+```
+
+PyArrow is needed because the complete regression suite imports the existing
+`audit_v4_feature_profiles.py` Parquet helper during test collection. Deferring
+large V4 categorization does not disable these regressions or run a full V4 audit.
+Do not remove the test or bypass the fidelity gate to work around a missing
+package. No scientific code or dataset needs to change for this environment fix.
+The locally verified interpreter is Python 3.11.8 with PyArrow 26.0.0; the
+previous cluster logs used Python 3.13 in PromptControlText. The reported failure
+showed `/usr/lib64/python3.9/`, so check the actual interpreter before installing.
+See [official PyArrow installation instructions](https://arrow.apache.org/docs/python/install.html).
+
+### pandas Compatibility
+
+If preflight raises `AttributeError: module 'pandas.errors' has no attribute
+'SettingWithCopyWarning'`, the original fidelity helper is running against an
+incompatible pandas API. pandas 3 removed that warning class. Keep the frozen
+helper and its checksum unchanged; use pandas 2.3.2, the version in the passing
+local validation environment:
+
+```bash
+conda activate PromptControlText
+python -m pip install 'pandas==2.3.2'
+python -c 'import pandas as pd; print(pd.__version__, pd.__file__); assert hasattr(pd.errors, "SettingWithCopyWarning")'
+python ISC-CI_LLM_validation/run_semantic_retraining.py --stage preflight
+```
+
+This pin has Linux CPython 3.13 wheels. The reusable compatibility constraint is
+`ISC-CI_LLM_validation/configs/semantic_compat_constraints.txt`; for future installs
+use `python -m pip install -c ISC-CI_LLM_validation/configs/semantic_compat_constraints.txt pandas pyarrow`.
+This is a targeted compatibility constraint, not a full environment lockfile.
+Confirm the actual imported version/path, especially when user-site packages
+under `~/.local/lib/python3.13/` are also visible in the Conda environment.
+Do not remove warnings code, change original source checksums, skip graph-drift
+tests, or loosen the 1e-5 fidelity tolerance to bypass this environment mismatch.
+See [pandas 3 release notes](https://pandas.pydata.org/docs/whatsnew/v3.0.0.html)
+and [pandas 2.3.2 distributions](https://pypi.org/project/pandas/2.3.2/).
 
 ## Install the Complete Frozen Inputs
 
@@ -137,6 +232,39 @@ history: install the complete bundle above to supply those dependencies.
 Once both checks pass, submit the Qwen smoke job below. No thresholds, feature
 memberships, or existing model results need to change to fix this error.
 
+## Diagnose a Failed Preflight
+
+`Tests or preservation failed` is a summary, not a diagnosis. Before resubmitting
+GPUs, print the saved pytest output from the failed cluster run. From the project
+root, this command uses only the standard library and works with older records:
+
+```bash
+python - <<'PY'
+import json
+from pathlib import Path
+root = Path("ISC-CI_LLM_validation")
+config = json.loads((root / "configs/semantic_retraining.json").read_text())
+path = root / config["output_directory"] / "gates/preflight.json"
+record = json.loads(path.read_text())
+print("Record:", path)
+print("Pytest exit code:", record.get("returncode"))
+print("Tests passed:", record.get("tests_passed", "not recorded"))
+print("Preservation passed:", record.get("preservation_passed", "not recorded"))
+print(record.get("stdout", ""))
+print(record.get("stderr", ""))
+print("Preservation error:", record.get("preservation_error"))
+print("Changed files:", record.get("preservation_changes", []))
+PY
+```
+
+If the job used `OUTPUT_DIR` / `--output-dir`, use that directory instead when
+locating the record. Provide this output, not the much larger full JSON containing
+all preserved source hashes. Do not set passed=true or bypass the check.
+
+The current implementation also prints failed pytest output directly to stderr,
+records separate test/preservation status and changed-file hashes, and includes
+the full record path in the error. These diagnostics do not change pass criteria.
+
 ## Initial Checks
 
 ```bash
@@ -214,7 +342,7 @@ classification evidence, human review, source/model hashes, and class/object/
 feature coverage audits. No sparse class or feature is discarded. Inactive class
 IDs remain stable and generate no empty-positive training examples.
 
-Later classify V3.1-B for the matched pilot, or all remaining descriptions:
+Later classify V3.1-B for the matched pilot, or all enabled descriptions:
 
 ```bash
 sbatch --export=ALL,SMOKE_TEST=0,CLASSIFY_CONDITION=v3_1_B ISC-CI_LLM_validation/run_semantic_classification.sh
@@ -283,17 +411,17 @@ python ISC-CI_LLM_validation/run_semantic_retraining.py --stage semantic-evaluat
 python ISC-CI_LLM_validation/run_semantic_retraining.py --stage context --phase 2 --workers 4 --resume
 python ISC-CI_LLM_validation/run_semantic_retraining.py --stage evaluate --phase 2
 
-# Phase 3: all 14 semantic sources and all 14 matched diagonal pairs.
+# Phase 3: all 12 enabled semantic sources and matched diagonal pairs.
 python ISC-CI_LLM_validation/run_semantic_retraining.py --stage semantic --phase 3 --workers 4 --resume
 python ISC-CI_LLM_validation/run_semantic_retraining.py --stage semantic-evaluate --phase 3
 python ISC-CI_LLM_validation/run_semantic_retraining.py --stage context --phase 3 --workers 4 --resume
 python ISC-CI_LLM_validation/run_semantic_retraining.py --stage evaluate --phase 3
 
-# Phase 4: diagonals plus either-axis human/random controls, 64 unique pairs.
+# Phase 4: diagonals plus either-axis human/random controls, 54 enabled pairs.
 python ISC-CI_LLM_validation/run_semantic_retraining.py --stage context --phase 4 --workers 4 --resume
 python ISC-CI_LLM_validation/run_semantic_retraining.py --stage evaluate --phase 4
 
-# Phase 5: train the remaining 132 pairs; evaluate the complete 196-pair cohort.
+# Phase 5: train the remaining 90 enabled pairs; evaluate all 144 enabled pairs.
 python ISC-CI_LLM_validation/run_semantic_retraining.py --stage context --phase 5 --workers 4 --resume
 python ISC-CI_LLM_validation/run_semantic_retraining.py --stage evaluate --phase 5
 python ISC-CI_LLM_validation/run_semantic_retraining.py --stage report --phase 5

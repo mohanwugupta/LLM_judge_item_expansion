@@ -10,7 +10,7 @@ from scipy.spatial.distance import squareform
 from iscci_validation.behavior import safe_correlation
 from .inventory import CONDITIONS, sha256
 from .provenance import atomic_json, code_hashes, validate_output_directory, digest
-from .run_crosses import all_pairs, planned_jobs
+from .run_crosses import all_pairs, planned_jobs, source_cohort
 
 
 def read_table(path):
@@ -36,7 +36,7 @@ def recorded_job(job, sources):
     directory = Path(job["directory"])
     path = directory / "manifest.json"
     if not path.exists():
-        return "planned"
+        return job.get("status", "planned")
     record = json.loads(path.read_text())
     sources[str(path)] = sha256(path)
     if not record.get("complete"):
@@ -358,7 +358,7 @@ def make_figures(output, destination, summary, semantic, context):
     return made
 
 
-def report(root, output, destination, config, phase):
+def report(root, output, destination, config, phase, include_deferred=False):
     output, destination = Path(output), Path(destination)
     validate_output_directory(destination)
     sources = {}
@@ -366,7 +366,7 @@ def report(root, output, destination, config, phase):
     context = verified_evaluation(
         output / f"evaluations/context/phase_{phase}", sources
     )
-    jobs = planned_jobs(output)
+    jobs = planned_jobs(output, config, include_deferred)
     statuses = {
         job["id"]: recorded_job(job, sources)
         for group in jobs.values()
@@ -414,8 +414,8 @@ def report(root, output, destination, config, phase):
                     "partial"
                     if completed
                     else (
-                        "planned"
-                        if pair_states == {"planned"}
+                        next(iter(pair_states))
+                        if pair_states in ({"planned"}, {"deferred"})
                         else "blocked:" + ",".join(sorted(pair_states - {"planned"}))
                     )
                 )
@@ -424,7 +424,9 @@ def report(root, output, destination, config, phase):
         if not raw.empty:
             for source, prefix in [(s, "semantic_input"), (c, "context_input")]:
                 selected = raw[raw["condition"] == source]
-                row[f"{prefix}_leuven_rdm_spearman"] = selected.iloc[0]["spearman"]
+                row[f"{prefix}_leuven_rdm_spearman"] = (
+                    selected.iloc[0]["spearman"] if not selected.empty else np.nan
+                )
         if not sem_repr.empty:
             selected = sem_repr[
                 (sem_repr["condition"] == s) & (sem_repr["scope"] == "all")
@@ -534,6 +536,27 @@ def report(root, output, destination, config, phase):
         and ctx_count == 784
         and bool(context and context["complete"] and len(context["models"]) == 784)
     )
+    enabled = source_cohort(config, include_deferred)
+    active_sem_count = sum(
+        statuses[j["id"]] == "complete"
+        for j in jobs["semantic"]
+        if j["status"] != "deferred"
+    )
+    active_ctx_count = sum(
+        statuses[j["id"]] == "complete"
+        for j in jobs["context"]
+        if j["status"] != "deferred"
+    )
+    active_complete = (
+        active_sem_count == 4 * len(enabled)
+        and active_ctx_count == 4 * len(enabled) ** 2
+        and bool(
+            context
+            and context["complete"]
+            and len(context["models"]) == 4 * len(enabled) ** 2
+        )
+    )
+    deferred = [c for c in CONDITIONS if c not in enabled]
     text = f"""# Independent ISC Semantic Retraining
 
 ## Status
@@ -542,6 +565,11 @@ Approved 32-class reconstruction with corrected complete semantic targets.
 Semantic models: {sem_count}/56 complete. ISC-CI models: {ctx_count}/784 complete.
 The factorial contains 196 related source pairs; missing runs are not omitted.
 Experiment complete: {complete}. A generated report is not evidence that training ran.
+Active cohort: {len(enabled)} sources / {len(enabled) ** 2} pairs;
+{active_sem_count}/{4 * len(enabled)} semantic and {active_ctx_count}/{4 * len(enabled) ** 2} ISC-CI models complete.
+Active cohort complete: {active_complete}.
+Temporarily deferred for computational cost: {', '.join(deferred) if deferred else 'none'}.
+Deferred is not failed, excluded for behavior, or completed; existing matrices remain unchanged.
 
 ## Separate Evaluation Levels
 
@@ -591,6 +619,10 @@ Generated figure families: {', '.join(figures) if figures else 'none; required m
         "experiment_complete": complete,
         "semantic_models_complete": sem_count,
         "context_models_complete": ctx_count,
+        "active_cohort_complete": active_complete,
+        "enabled_sources": len(enabled),
+        "active_source_pairs": len(enabled) ** 2,
+        "deferred_conditions": deferred,
         "source_pairs": 196,
         "figures": figures,
         "inputs": sources,

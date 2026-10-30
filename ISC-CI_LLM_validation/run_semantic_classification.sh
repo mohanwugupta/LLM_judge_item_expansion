@@ -21,6 +21,7 @@ VLLM_PORT=${VLLM_PORT:-8024}
 TENSOR_PARALLEL_SIZE=${TENSOR_PARALLEL_SIZE:-4}
 SMOKE_TEST=${SMOKE_TEST:-1}
 CLASSIFY_CONDITION=${CLASSIFY_CONDITION:-human}
+INCLUDE_DEFERRED=${INCLUDE_DEFERRED:-0}
 OUTPUT_DIR=${OUTPUT_DIR:-$PROJECT_DIR/ISC-CI_LLM_validation/artifacts/semantic_retraining_20261028_32_corrected}
 
 cd "$PROJECT_DIR"
@@ -110,6 +111,9 @@ if [ "$READY" -ne 1 ]; then
 fi
 
 ARGS=(--output-dir "$OUTPUT_DIR" --endpoint "http://localhost:$VLLM_PORT/v1" --resume)
+if [ "$INCLUDE_DEFERRED" = 1 ]; then
+    ARGS+=(--include-deferred)
+fi
 if [ "$SMOKE_TEST" = 1 ]; then
     python "$RUNNER" --stage classify-smoke "${ARGS[@]}"
 else

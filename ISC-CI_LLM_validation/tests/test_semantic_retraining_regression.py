@@ -81,3 +81,62 @@ def test_plotting_only_changes_do_not_invalidate_semantic_training_provenance(
     )
     assert code_hashes("semantic") == training
     assert code_hashes() != everything
+
+
+@pytest.mark.parametrize("failure", ["tests", "preservation", "preservation_error"])
+def test_preflight_failure_exposes_output_and_keeps_gate_failed(
+    tmp_path, monkeypatch, capsys, failure
+):
+    from types import SimpleNamespace
+    import semantic_retraining.gates as gates
+
+    calls = []
+
+    def history(*args):
+        calls.append(True)
+        if len(calls) == 2 and failure == "preservation_error":
+            raise ValueError("Frozen input changed: frozen.csv")
+        return {
+            "frozen.csv": (
+                "new" if len(calls) == 2 and failure == "preservation" else "original"
+            )
+        }
+
+    monkeypatch.setattr(gates, "verify_history", history)
+    monkeypatch.setattr(gates, "gate_signature", lambda *a: {"code": "fixture"})
+    monkeypatch.setattr(gates, "sha256", lambda *a: "fixture")
+    monkeypatch.setattr(
+        gates.subprocess,
+        "run",
+        lambda *a, **k: SimpleNamespace(
+            returncode=1 if failure == "tests" else 0,
+            stdout=(
+                "FAILED test_example: actionable test explanation"
+                if failure == "tests"
+                else "tests passed"
+            ),
+            stderr="dependency details" if failure == "tests" else "",
+        ),
+    )
+    output = tmp_path / "output"
+    with pytest.raises(ValueError) as error:
+        gates.preflight(
+            tmp_path, output, {}, {"frozen_behavior_manifest": "history.json"}
+        )
+    path = output / "gates/preflight.json"
+    assert str(path) in str(error.value)
+    record = json.loads(path.read_text())
+    assert record["passed"] is False
+    assert record["tests_passed"] == (failure != "tests")
+    assert record["preservation_passed"] == (failure == "tests")
+    logs = capsys.readouterr().err
+    if failure == "tests":
+        assert "actionable test explanation" in logs and "dependency details" in logs
+    elif failure == "preservation":
+        assert "frozen.csv" in logs
+        assert record["preservation_changes"] == [
+            {"path": "frozen.csv", "before": "original", "after": "new"}
+        ]
+    else:
+        assert "Frozen input changed" in logs
+        assert record["preservation_error"] == "Frozen input changed: frozen.csv"

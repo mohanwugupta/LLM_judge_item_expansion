@@ -16,6 +16,7 @@ CONDA_ENV=${CONDA_ENV:-PromptControlText}
 PIPELINE_STAGE=${PIPELINE_STAGE:-smoke}
 PHASE=${PHASE:-1}
 WORKERS=${WORKERS:-4}
+INCLUDE_DEFERRED=${INCLUDE_DEFERRED:-0}
 OUTPUT_DIR=${OUTPUT_DIR:-$PROJECT_DIR/ISC-CI_LLM_validation/artifacts/semantic_retraining_20261028_32_corrected}
 SEED=${SEED:-${SLURM_ARRAY_TASK_ID:-}}
 
@@ -33,6 +34,9 @@ export OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1
 export PYTHONPATH="$PROJECT_DIR${PYTHONPATH:+:$PYTHONPATH}"
 export MPLCONFIGDIR="$OUTPUT_DIR/runtime/matplotlib"
 ARGS=(--stage "$PIPELINE_STAGE" --phase "$PHASE" --workers "$WORKERS" --output-dir "$OUTPUT_DIR" --resume)
+if [ "$INCLUDE_DEFERRED" = 1 ]; then
+    ARGS+=(--include-deferred)
+fi
 for entry in "CONDITION:--condition" "SEMANTIC_SOURCE:--semantic-source" "CONTEXT_SOURCE:--context-source"; do
     variable=${entry%%:*}
     option=${entry#*:}

@@ -131,11 +131,33 @@ def preflight(root, output, taxonomy, config):
     before = verify_history(root, config)
     command = [sys.executable, "-m", "pytest", "-q", str(root / "tests")]
     result = subprocess.run(command, cwd=root.parent, capture_output=True, text=True)
-    after = verify_history(root, config)
-    passed = result.returncode == 0 and before == after
+    preservation_error = None
+    try:
+        after = verify_history(root, config)
+    except (ValueError, FileNotFoundError) as error:
+        after = None
+        preservation_error = str(error)
+    changes = (
+        [
+            {"path": path, "before": before.get(path), "after": after.get(path)}
+            for path in sorted(set(before) | set(after))
+            if before.get(path) != after.get(path)
+        ]
+        if after is not None
+        else []
+    )
+    tests_passed = result.returncode == 0
+    preservation_passed = preservation_error is None and before == after
+    passed = tests_passed and preservation_passed
     record = {
         "signature": gate_signature(output, taxonomy),
         "passed": passed,
+        "tests_passed": tests_passed,
+        "preservation_passed": preservation_passed,
+        "preservation_changes": changes,
+        "preservation_error": preservation_error,
+        "python_executable": sys.executable,
+        "python_version": sys.version,
         "test_command": command,
         "returncode": result.returncode,
         "stdout": result.stdout,
@@ -145,7 +167,21 @@ def preflight(root, output, taxonomy, config):
             root / config["frozen_behavior_manifest"]
         ),
     }
-    atomic_json(output / "gates/preflight.json", record)
+    path = output / "gates/preflight.json"
+    atomic_json(path, record)
     if not passed:
-        raise ValueError("Tests or preservation failed; see gates/preflight.json")
+        print(f"Preflight failed. Full record: {path}", file=sys.stderr, flush=True)
+        if not tests_passed:
+            print(result.stdout, file=sys.stderr, flush=True)
+            print(result.stderr, file=sys.stderr, flush=True)
+        if not preservation_passed:
+            print(
+                "Preservation failure: " + (preservation_error or json.dumps(changes)),
+                file=sys.stderr,
+                flush=True,
+            )
+        raise ValueError(
+            f"Preflight failed (pytest exit {result.returncode}; "
+            f"preservation passed={preservation_passed}); see {path}"
+        )
     return record

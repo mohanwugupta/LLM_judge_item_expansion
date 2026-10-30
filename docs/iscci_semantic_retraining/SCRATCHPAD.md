@@ -528,3 +528,192 @@ Next cluster action: pull the fix and only the frozen-input LFS bundle, run
 run_semantic_inputs.py --install, then prepare/preflight on the login node before
 submitting the Qwen smoke job. Do not delete differing cluster results: the
 installer intentionally stops for a comparison instead of overwriting them.
+
+## 2026-10-30: Investigator Defers Full V4 Categorization
+
+Investigator requested postponing the full V4 task-categorization workload while
+running other conditions. Interpreted full V4 as the two 80k-plus completed
+ensemble inventories, not the smaller fixed-B or source-only controls. Explicit
+default config defers v4_ensemble_locked_v2 and v4_ensemble_calibrated. All 14
+frozen matrices, original checkpoints and scientific results remain unchanged.
+This is a compute-driven scheduling decision, not behavioral model selection.
+
+Readonly exact-text count: enabled 12 sources require 2,751 descriptions versus
+87,679 in the full design, a 96.86% reduction in descriptions, not a runtime
+benchmark. Human-only pilot default remains unchanged. CLASSIFY_CONDITION=all
+now means enabled sources; INCLUDE_DEFERRED=1 / --include-deferred is a deliberate
+override. Freeze, training, Phase-5 cumulative evaluation and reporting use the
+same cohort. Never wait for ensemble classifications to freeze the active set.
+
+RED command: M0 interpreter `-m pytest -q
+ISC-CI_LLM_validation/tests/test_semantic_crosses.py
+ISC-CI_LLM_validation/tests/test_semantic_cli.py -k
+'defer or default_cohort or default_classification or invalid_deferral'`.
+Ten failures confirmed missing cohort selection, unguarded deferred sources,
+classify/freeze requesting all labels and phase-5 evaluation reintroducing all
+784 downstream models. Added shared validated source selection and explicit
+override; targeted GREEN: 10 passed (2.56 s).
+
+Reporting RED: unrun report listed only planned; partial geometry crashed on an
+absent source's iloc[0]. Reports now retain deferred rows and missing geometry,
+with active-cohort completeness separate from full-design completeness. Full
+registry remains 56 semantic / 784 context models; 8 / 208 respectively are
+deferred. Active design: 48 semantic / 576 context, 144 pairs; staged control
+phase 54 pairs and remaining phase 90. Prespecified 14-source factorial statistics
+are not silently redefined. Combined planner/CLI/report GREEN: 22 passed (5.59 s).
+
+Updated the old default dry-plan expectation from 56 to 48 to match the approved
+schedule; the original full-design dry-run assertion is retained under explicit
+include_deferred=True. Added guards against removing human/random/pilot baselines,
+unknown IDs or duplicate deferrals. Classification workflow/prompts/cache schema
+are unchanged, preserving existing exact-description cache provenance. No model
+requests, real training or cluster submissions were performed. Full regression
+and actual plan/report checks follow below.
+
+Final full preflight GREEN: **148 passed (33.21 s)**, no stderr; all 316 frozen
+historical files unchanged. Gate signature:
+`0e36b0b347043b751fe21552610b047ce01ec104c0419939253b9a0303a51c6f`.
+Both Slurm launchers pass bash -n; git diff --check passes. Actual CLI dry-run
+selects 48 semantic jobs with 12 active sources and both large ensembles listed
+as deferred; no scientific artifacts are written by planning. Planned-only
+report generation retains 196 pairs and shows the 144-pair active cohort,
+without claiming any new model completion. Changes are local, not committed or
+pushed in this turn; no production job has been launched.
+
+## 2026-10-30: Expose Cluster Preflight Failure Details
+
+Investigator reported only the generic Tests or preservation failed message.
+This does not identify a failed test or prove a changed scientific input. The
+cluster's saved stdout/stderr/returncode are still required to diagnose the real
+failure; do not assume a dependency or numerical-tolerance issue without them.
+
+Added failing regressions before changes for three outcomes: pytest failure,
+before/after preservation mismatch, and preservation verification raising after
+tests. RED command: M0 interpreter `-m pytest -q
+ISC-CI_LLM_validation/tests/test_semantic_retraining_regression.py -k preflight_failure`.
+All three failed because the raised error omitted the actual record path; tests
+also require captured failure details and an explicit failed saved gate.
+
+gates.preflight now records separate tests_passed/preservation_passed flags,
+changed paths and before/after hashes, a preservation error if any, and Python
+identity. It prints actual pytest failure output to stderr and cites the full
+record path. Post-test preservation exceptions persist a failed gate rather than
+leaving an older successful record. No acceptance criterion or tolerance changed.
+WORKFLOW.md supplies an older-version-compatible standard-library command to
+print the failed cluster record without dumping all source hashes.
+
+These diagnostics and the prior compute-driven V4 deferral remain local/unpushed.
+No claim that the user's underlying cluster failure is fixed is justified until
+the saved test output is inspected. Verification results follow below.
+
+GREEN preservation/diagnostic regressions: 9 passed (1.40 s). Full actual local
+preflight: **151 passed (33.46 s)**, no stderr, preservation_passed true with
+zero changed files and all 316 frozen sources preserved. Signature:
+`702d9ccdf41e69c8f04bba4101f63d91c5e0ec5212b0b82dff0f61e2659f6e36`.
+The local success does not reproduce or diagnose the cluster's failure. Next:
+obtain the cluster's saved stdout/stderr/returncode before choosing any fix.
+
+## 2026-10-30: Cluster Failure Identified as Missing PyArrow
+
+Investigator supplied saved pytest output: returncode 2, collection aborted in
+test_v4_downstream_reports.py -> audit_v4_feature_profiles.py -> import
+pyarrow.parquet, raising ModuleNotFoundError: No module named pyarrow. This is
+a test-collection/environment failure, not evidence of a scientific tolerance
+failure. Old records' None preservation fields do not certify a new check.
+
+The traceback uses `/usr/lib64/python3.9/`; earlier cluster model logs used Python
+3.13 under PromptControlText. Verified launcher explicitly activates that Conda
+environment. First activate it and inspect sys.executable/version, then install
+PyArrow there if missing. Use python -m pip, not system pip or sudo. Do not
+upgrade Torch/vLLM or change scientific acceptance criteria to fix this import.
+
+Inspected pyproject.toml: only pytest settings, no dependency declaration. Updated
+WORKFLOW dependency list and explicit login-node activation/import/install
+commands. Deferred V4 task classification does not remove legacy Parquet audit
+tests from full preflight. No frozen scientific helper was edited or test skipped.
+Local pip metadata confirms PyArrow 26.0.0 / Python 3.11.8; checked Apache Arrow's
+official installation documentation. This is an environment-only remedy requiring
+no repository update on the cluster. No cluster package installation or job
+submission can be claimed from this Mac; investigator must rerun the import and
+preflight in the activated cluster environment. Existing code verification remains
+151 local tests / 316 preserved inputs; this turn changes documentation only.
+
+## 2026-10-30: Two Cluster Fidelity Tests Hit pandas API Removal
+
+Read investigator attachment 64970fac-2bbe-4b84-8c3e-597ee56e46cf/Pasted text.txt.
+Conda interpreter is now correct. Cluster preflight collected tests and reported
+135 passed / 2 failed: test_item_probe_matches_unedited_original and
+test_fidelity_detects_model_graph_drift. Both raise AttributeError at
+pd.errors.SettingWithCopyWarning before the original/reconstructed comparison.
+This is a pandas compatibility failure, not observed prediction disagreement.
+
+Verified unchanged behavior_fidelity.py references the warning at line 56 and
+that the passing local runtime is Python 3.11.8 / pandas 2.3.2 with that attribute.
+Official pandas 3 release notes document removal; pandas 2.3.2 publishes Linux
+CPython 3.13 wheels. Do not alter this hash-frozen scientific helper or the saved
+manifest to handle the environment mismatch. Pin pandas to 2.3.2 in the activated
+cluster environment and verify the actual imported path/version before preflight.
+
+Added a narrow reusable constraints file and documented immediate pip command,
+including the risk that visible user-site packages can differ from the Conda
+prefix. This is not a full environment lock. No Torch/vLLM upgrade, scientific
+source edit, skipped test or changed tolerance is authorized by this fix. The
+cluster remedy uses a direct package pin and needs no repository update. Local
+recheck of the two reported failing tests follows below; cluster verification
+remains the investigator's next action.
+
+Local targeted recheck with pandas 2.3.2: **2 passed (5.21 s)**. The drift test
+still rejects deliberately altered predictions; the unchanged reference probe
+passes with the original 1e-5 tolerance. Whitespace check passed. No cluster
+package change or successful cluster preflight has been claimed.
+
+## 2026-10-30: Investigator Confirms Successful Cluster Preflight
+
+Investigator installed pandas 2.3.2 and verified its imported path under
+`/home/mg9965/.conda/envs/PromptControlText/lib/python3.13/site-packages/`.
+The subsequently supplied cluster record reports **137 passed (119.73 s)**,
+pytest returncode 0, empty stderr, passed true and **316 preserved sources**.
+Published-code signature:
+`66faef6b785e65d7aeb18d8337e787681fea052cd90382783b3821c97567050b`.
+Historical fidelity manifest SHA remains
+`bd1a3d078106cc73944b7bbba42771b31721cbe88352e92fe9648f38e1b810be`.
+This confirms the cluster environment remedy without changing frozen scientific
+code, tolerance or inputs. It is not a completed classification or training run.
+
+Next: eight-description Qwen smoke via SMOKE_TEST=1. The compute-driven V4
+deferral, improved failure diagnostics and compatibility constraint remain
+local/unpushed; avoid CLASSIFY_CONDITION=all on the current cluster revision
+until the deferral update has been published and retrieved. Human-only smoke
+and human-only classification do not request the full V4 ensembles. No Slurm
+job was submitted by this agent and no new model calls were made in this turn.
+
+## 2026-10-30: Qwen Smoke Passed / Publish Production Cohort
+
+Investigator reported the cluster eight-description Qwen smoke passed, with
+smoke_only true, features 8, and production_labels_modified false. HTTP health
+and completion calls returned 200; server/worker shutdown is normal cleanup.
+This validates the endpoint, output parsing and isolated smoke transport, not
+the full classification/review or scientific training stages.
+
+Investigator now requests the production command. Checked published HEAD:
+CLASSIFY_CONDITION=all still selects all 14 there; therefore publish the already
+requested/tested deferral changes before recommending that command. Publication
+also includes the accumulated actionable preflight diagnostics and pandas
+compatibility constraint/documentation. No frozen scientific helper, checkpoint,
+feature membership or numeric tolerance is changed.
+
+Production command after a successful pull uses SMOKE_TEST=0,
+CLASSIFY_CONDITION=all, INCLUDE_DEFERRED=0: all 12 enabled conditions / 2,751
+unique descriptions, not the two large completed V4 ensembles. Four 80-GB GPUs,
+8 CPUs, 32-GB RAM and existing job time limit remain unchanged. The launcher
+refreshes inputs/preflight before model startup and resumes valid cached batches.
+The job only classifies/adjudicates features; stratified human review and freeze,
+training-only pilot, and explicit full-schedule lock still precede real training.
+No cluster job is submitted by this agent. Current regression confirmation is
+recorded below before commit/push.
+
+Publication preflight: **151 passed (24.52 s)**, no stderr, preservation passed
+with zero changes across 316 sources. Gate signature remains
+`702d9ccdf41e69c8f04bba4101f63d91c5e0ec5212b0b82dff0f61e2659f6e36`.
+Both Slurm launchers passed bash -n, and whitespace checks passed. GitHub main
+was confirmed at ed51a40 before publication; use a normal fast-forward push.

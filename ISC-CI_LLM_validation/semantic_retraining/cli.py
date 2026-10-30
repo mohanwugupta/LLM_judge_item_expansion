@@ -320,6 +320,11 @@ def main(argv=None):
     parser.add_argument("--device", default="cpu")
     parser.add_argument("--benchmark-steps", type=int, default=1)
     parser.add_argument("--reviews", type=Path)
+    parser.add_argument(
+        "--include-deferred",
+        action="store_true",
+        help="Explicitly opt into the temporarily deferred full V4 ensembles",
+    )
     args = parser.parse_args(argv)
     if args.workers < 1 or args.benchmark_steps < 1:
         parser.error("workers and benchmark-steps must be positive")
@@ -337,6 +342,7 @@ def main(argv=None):
             args.context_source,
             args.seed,
             config,
+            include_deferred=args.include_deferred,
         )
         if args.dry_run or args.stage == "plan":
             print(json.dumps(plan, indent=2))
@@ -389,7 +395,9 @@ def main(argv=None):
                     Path(__file__).with_name("classification_workflow.py")
                 ),
             }
-            conditions = [args.condition] if args.condition else None
+            conditions = (
+                [args.condition] if args.condition else plan["enabled_conditions"]
+            )
             from .provenance import run_lock
 
             with run_lock(output / "classification"):
@@ -411,7 +419,7 @@ def main(argv=None):
             conditions = (
                 ["human", "random_human"]
                 if args.condition in {"human", "random_human"}
-                else [args.condition] if args.condition else None
+                else [args.condition] if args.condition else plan["enabled_conditions"]
             )
             result = freeze_catalog(
                 output,
@@ -528,6 +536,7 @@ def main(argv=None):
                 args.condition,
                 args.semantic_source,
                 config=config,
+                include_deferred=args.include_deferred,
             )["jobs"]
             result = evaluate_semantics(
                 ROOT, output, sorted({j["semantic_source"] for j in jobs}), config
@@ -545,12 +554,16 @@ def main(argv=None):
                 args.context_source,
                 args.seed,
                 config,
+                include_deferred=args.include_deferred,
             )["jobs"]
             if args.phase == 5:
                 jobs = [
                     job
-                    for job in planned_jobs(output)["context"]
-                    if (
+                    for job in planned_jobs(output, config, args.include_deferred)[
+                        "context"
+                    ]
+                    if (job["status"] != "deferred")
+                    and (
                         args.semantic_source is None
                         or job["semantic_source"] == args.semantic_source
                     )
@@ -574,6 +587,7 @@ def main(argv=None):
                 args.report_dir or ROOT / config["report_directory"],
                 config,
                 args.phase,
+                include_deferred=args.include_deferred,
             )
         display = {
             key: value
