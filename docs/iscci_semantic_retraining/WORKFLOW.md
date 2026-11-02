@@ -323,6 +323,43 @@ transactionally to SQLite; resubmission continues completed work. A changed
 model fingerprint/protocol cannot silently reuse the cache. Malformed responses
 stop without committing their batch, while prior valid batches remain reusable.
 
+### Description Echo Formatting
+
+The 2026-10-30 production run stopped because the source description
+`"has big claws "` contains a trailing space and Qwen echoed `"has big claws"`.
+All eight records were present. This is an identifier-format mismatch, not missing
+features or a failed semantic model comparison.
+
+The validator now accepts only a unique leading/trailing-whitespace match back
+to a requested description. It restores the **original exact source key**, never
+strips a matrix column or pools distinct feature memberships. Task IDs,
+uncertainty flags and explanations are unchanged by this parser repair. Exact
+matches take precedence. Ambiguous trimmed identities, duplicate/missing rows,
+case/punctuation/internal-whitespace changes and invalid task IDs still fail.
+
+Every repaired batch gets a `format_recoveries/*.json` record under the initial
+or adjudication cache directory, containing received/accepted rows and the
+`unambiguous-outer-whitespace-only-v1` policy. All batch validation precedes any
+cache insert. These records document validation; they are not a substitute for
+the SQLite transaction or the planned human review of substantive category choices.
+
+On resumed production classification, existing raw responses are copied byte for
+byte to content-hashed files under `classification/request_history/` before a
+repeated request can replace its transport-log filename. Original logs remain
+in place; identical archived evidence is skipped, changed archives are rejected.
+Existing accepted cache rows and classifier signature remain valid because the
+model, prompt, taxonomy, transport implementation and batch settings are unchanged.
+The failed uncached batch is requested again; this does not replay its saved
+response offline. Resubmit the same production job using the same OUTPUT_DIR:
+
+```bash
+git pull --ff-only
+sbatch --export=ALL,SMOKE_TEST=0,CLASSIFY_CONDITION=all,INCLUDE_DEFERRED=0 ISC-CI_LLM_validation/run_semantic_classification.sh
+```
+
+Only submit after the pull succeeds. The launcher refreshes preflight and skips
+accepted cached descriptions. Keep the SQLite databases and request evidence.
+
 ## Human Review and Freezing
 
 Review `classification/human_review.csv` within the new output directory.

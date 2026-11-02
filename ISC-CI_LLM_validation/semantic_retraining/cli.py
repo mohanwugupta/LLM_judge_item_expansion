@@ -21,6 +21,7 @@ from .classification_workflow import (
     freeze_catalog,
     classification_smoke,
 )
+from .classify_features import archive_classifier_requests
 from .extract_representations import extract, load_run, train_run
 from .gates import (
     gate_signature,
@@ -401,6 +402,8 @@ def main(argv=None):
             from .provenance import run_lock
 
             with run_lock(output / "classification"):
+                if args.stage == "classify":
+                    archive_classifier_requests(output / "classification")
                 result = (
                     classification_smoke(
                         output, taxonomy, classifier, classifier["endpoint"]

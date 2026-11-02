@@ -6,7 +6,8 @@ import sqlite3
 import logging
 from pathlib import Path
 
-from .provenance import atomic_json, digest
+from .provenance import atomic_json, atomic_file, digest
+from .inventory import sha256
 from .taxonomy import taxonomy_hash, validate_taxonomy
 
 INSTRUCTION = (
@@ -57,6 +58,61 @@ def validate_record(row, descriptions, task_ids):
         raise ValueError("Classification requires explicit uncertainty and evidence")
 
 
+def reconcile_batch_response(rows, batch, task_ids):
+    message = "Classifier response must cover each batch description once"
+    if not isinstance(rows, list) or len(rows) != len(batch):
+        raise ValueError(message)
+    accepted, repairs = [], []
+    for row in rows:
+        if not isinstance(row, dict) or not isinstance(row.get("description"), str):
+            raise ValueError(message)
+        returned = row["description"]
+        original = returned
+        if returned not in batch:
+            candidates = [
+                description
+                for description in batch
+                if description.strip() == returned.strip()
+            ]
+            if len(candidates) > 1:
+                raise ValueError(
+                    message + f"; ambiguous whitespace match for {returned!r}"
+                )
+            if not candidates:
+                raise ValueError(message + f"; unexpected description {returned!r}")
+            original = candidates[0]
+            repairs.append(
+                {"returned_description": returned, "original_description": original}
+            )
+        accepted.append({**row, "description": original})
+    if {row["description"] for row in accepted} != set(batch):
+        raise ValueError(message + "; duplicate or missing description")
+    for row in accepted:
+        validate_record(row, batch, task_ids)
+    return accepted, repairs
+
+
+def archive_classifier_requests(directory):
+    directory = Path(directory)
+    archived = 0
+    for phase in ["initial", "adjudication"]:
+        for path in sorted((directory / "requests" / phase).glob("*.json")):
+            # The transport keys logs by request, so a repeated attempt can reuse its filename.
+            checksum = sha256(path)
+            destination = (
+                directory / "request_history" / phase / f"{path.stem}.{checksum}.json"
+            )
+            if destination.exists():
+                if sha256(destination) != checksum:
+                    raise ValueError(
+                        f"Archived classifier evidence changed: {destination}"
+                    )
+                continue
+            atomic_file(destination, lambda stream: stream.write(path.read_bytes()))
+            archived += 1
+    return archived
+
+
 def classify_descriptions(
     descriptions,
     taxonomy,
@@ -105,17 +161,27 @@ def classify_descriptions(
                 "taxonomy": taxonomy["classes"],
                 "instruction": instruction,
             }
-            rows = classifier(payload)
-            if (
-                not isinstance(rows, list)
-                or len(rows) != len(batch)
-                or {r.get("description") for r in rows} != set(batch)
-            ):
-                raise ValueError(
-                    "Classifier response must cover each batch description once"
+            received = classifier(payload)
+            rows, repairs = reconcile_batch_response(
+                received, batch, set(range(len(taxonomy["classes"])))
+            )
+            if repairs:
+                record = {
+                    "policy": "unambiguous-outer-whitespace-only-v1",
+                    "classifier_signature_sha256": digest(signature),
+                    "requested_descriptions": batch,
+                    "received_rows": received,
+                    "accepted_rows": rows,
+                    "repairs": repairs,
+                    "status": "validated_before_cache_commit",
+                }
+                path = directory / "format_recoveries" / f"{digest(record)}.json"
+                atomic_json(path, record)
+                logging.getLogger(__name__).warning(
+                    "Reconciled %s outer-whitespace description echoes; audit: %s",
+                    len(repairs),
+                    path,
                 )
-            for row in rows:
-                validate_record(row, batch, set(range(len(taxonomy["classes"]))))
             with db:
                 for row in rows:
                     db.execute(

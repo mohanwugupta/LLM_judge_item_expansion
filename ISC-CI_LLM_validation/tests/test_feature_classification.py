@@ -129,3 +129,219 @@ def test_separate_adjudication_prompt_is_auditable(tmp_path):
         instruction="Separate ambiguity review",
     )
     assert not result["flies"]["uncertain"]
+
+
+@pytest.mark.parametrize(
+    "original,returned",
+    [
+        ("has big claws ", "has big claws"),
+        (" has a tail", "has a tail"),
+        ("has bones", " has bones\t"),
+    ],
+)
+def test_outer_whitespace_echo_is_recovered_with_original_key_and_audit(
+    tmp_path, original, returned
+):
+    import copy
+    import json
+
+    taxonomy = load_taxonomy(TAXONOMY)
+    config = {"model": "fixture", "revision": "fixed-1", "temperature": 0, "seed": 0}
+    response = [
+        {
+            "description": returned,
+            "task_id": 8,
+            "uncertain": False,
+            "explanation": "Original model explanation",
+        }
+    ]
+    before = copy.deepcopy(response)
+    result = classify_descriptions(
+        [original], taxonomy, config, tmp_path, lambda p: response
+    )
+    assert response == before
+    assert result == {original: {**before[0], "description": original}}
+    audit_paths = list((tmp_path / "format_recoveries").glob("*.json"))
+    assert len(audit_paths) == 1
+    audit = json.loads(audit_paths[0].read_text())
+    assert audit["policy"] == "unambiguous-outer-whitespace-only-v1"
+    assert audit["received_rows"] == before
+    assert audit["accepted_rows"] == [result[original]]
+
+    def must_not_call(payload):
+        pytest.fail("Recovered exact cache key must be reused")
+
+    assert (
+        classify_descriptions([original], taxonomy, config, tmp_path, must_not_call)
+        == result
+    )
+
+
+@pytest.mark.parametrize(
+    "returned", ["has big  claws", "Has big claws", "has big claws.", "has claws"]
+)
+def test_substantive_echo_changes_remain_rejected(tmp_path, returned):
+    import sqlite3
+
+    taxonomy = load_taxonomy(TAXONOMY)
+    config = {"model": "fixture", "revision": "fixed-1", "temperature": 0, "seed": 0}
+
+    def classifier(payload):
+        return [
+            {
+                "description": returned,
+                "task_id": 8,
+                "uncertain": False,
+                "explanation": "fixture",
+            }
+        ]
+
+    with pytest.raises(ValueError, match="cover each batch description once"):
+        classify_descriptions(
+            ["has big claws "], taxonomy, config, tmp_path, classifier
+        )
+    with sqlite3.connect(tmp_path / "cache.sqlite3") as db:
+        assert db.execute("SELECT COUNT(*) FROM labels").fetchone()[0] == 0
+
+
+def test_ambiguous_trimmed_descriptions_cannot_be_assigned_by_position(tmp_path):
+    taxonomy = load_taxonomy(TAXONOMY)
+    config = {"model": "fixture", "revision": "fixed-1", "temperature": 0, "seed": 0}
+
+    def classifier(payload):
+        return [
+            {
+                "description": d,
+                "task_id": 8,
+                "uncertain": False,
+                "explanation": "fixture",
+            }
+            for d in ["has big claws", "has big claws "]
+        ]
+
+    with pytest.raises(ValueError, match="[Aa]mbiguous"):
+        classify_descriptions(
+            [" has big claws", "has big claws "], taxonomy, config, tmp_path, classifier
+        )
+
+
+def test_failed_batch_rolls_back_but_preexisting_cache_and_signature_survive(tmp_path):
+    import json
+    import sqlite3
+
+    taxonomy = load_taxonomy(TAXONOMY)
+    config = {"model": "fixture", "revision": "fixed-1", "temperature": 0, "seed": 0}
+
+    def row(text, task=8):
+        return {
+            "description": text,
+            "task_id": task,
+            "uncertain": False,
+            "explanation": "fixture",
+        }
+
+    classify_descriptions(
+        ["already saved"], taxonomy, config, tmp_path, lambda p: [row("already saved")]
+    )
+    before = (tmp_path / "classifier_manifest.json").read_bytes()
+    with pytest.raises(ValueError, match="task ID"):
+        classify_descriptions(
+            ["already saved", "has big claws ", "has bones"],
+            taxonomy,
+            config,
+            tmp_path,
+            lambda p: [row("has big claws"), row("has bones", 999)],
+        )
+    with sqlite3.connect(tmp_path / "cache.sqlite3") as db:
+        assert dict(db.execute("SELECT description,response FROM labels")) == {
+            "already saved": json.dumps(row("already saved"), sort_keys=True)
+        }
+    assert not list((tmp_path / "format_recoveries").glob("*.json"))
+
+    def classifier(payload):
+        assert payload["features"] == ["has big claws ", "has bones"]
+        return [row("has big claws"), row("has bones")]
+
+    result = classify_descriptions(
+        ["already saved", "has big claws ", "has bones"],
+        taxonomy,
+        config,
+        tmp_path,
+        classifier,
+    )
+    assert len(result) == 3
+    assert (tmp_path / "classifier_manifest.json").read_bytes() == before
+
+
+def test_saved_raw_requests_are_archived_before_a_resumed_call_can_replace_them(
+    tmp_path,
+):
+    from semantic_retraining.classify_features import archive_classifier_requests
+
+    path = tmp_path / "requests/initial/request-hash.json"
+    path.parent.mkdir(parents=True)
+    original = b'{"response":"first attempt"}\n'
+    path.write_bytes(original)
+    assert archive_classifier_requests(tmp_path) == 1
+    copies = list((tmp_path / "request_history/initial").glob("*.json"))
+    assert len(copies) == 1 and copies[0].read_bytes() == original
+    assert path.read_bytes() == original
+    assert archive_classifier_requests(tmp_path) == 0
+    path.write_bytes(b'{"response":"second attempt"}\n')
+    assert archive_classifier_requests(tmp_path) == 1
+    assert copies[0].read_bytes() == original
+
+
+@pytest.mark.parametrize(
+    "descriptions", [None, ["one"], ["one", "one"], ["one", "extra"], [None, "two"]]
+)
+def test_shape_missing_extra_and_duplicate_rows_never_enter_cache(
+    tmp_path, descriptions
+):
+    import sqlite3
+
+    taxonomy = load_taxonomy(TAXONOMY)
+    config = {"model": "fixture", "revision": "fixed-1", "temperature": 0, "seed": 0}
+    rows = (
+        None
+        if descriptions is None
+        else [
+            {
+                "description": d,
+                "task_id": 5,
+                "uncertain": False,
+                "explanation": "fixture",
+            }
+            for d in descriptions
+        ]
+    )
+    with pytest.raises(ValueError, match="cover each batch description once"):
+        classify_descriptions(
+            ["one", "two"], taxonomy, config, tmp_path, lambda p: rows
+        )
+    with sqlite3.connect(tmp_path / "cache.sqlite3") as db:
+        assert db.execute("SELECT COUNT(*) FROM labels").fetchone()[0] == 0
+    assert not list((tmp_path / "format_recoveries").glob("*.json"))
+
+
+def test_exact_whitespace_variants_remain_distinct_when_returned_exactly(tmp_path):
+    taxonomy = load_taxonomy(TAXONOMY)
+    config = {"model": "fixture", "revision": "fixed-1", "temperature": 0, "seed": 0}
+    labels = ["has claws", "has claws "]
+    result = classify_descriptions(
+        labels,
+        taxonomy,
+        config,
+        tmp_path,
+        lambda p: [
+            {
+                "description": d,
+                "task_id": 5,
+                "uncertain": False,
+                "explanation": "fixture",
+            }
+            for d in labels
+        ],
+    )
+    assert list(result) == labels
+    assert not list((tmp_path / "format_recoveries").glob("*.json"))

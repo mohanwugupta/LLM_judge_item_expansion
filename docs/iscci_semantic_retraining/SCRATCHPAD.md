@@ -717,3 +717,58 @@ with zero changes across 316 sources. Gate signature remains
 `702d9ccdf41e69c8f04bba4101f63d91c5e0ec5212b0b82dff0f61e2659f6e36`.
 Both Slurm launchers passed bash -n, and whitespace checks passed. GitHub main
 was confirmed at ed51a40 before publication; use a normal fast-forward push.
+
+## 2026-11-02: Production Stopped on a Trailing-Space Description Echo
+
+Read investigator attachment d49176e9-ceec-49f0-a796-265d32df9f8c/Pasted text.txt.
+The cluster passed bootstrap (345 inputs), preparation (14 inventories), all
+151 preflight tests, model fingerprinting and Qwen startup. Initial classification
+targeted the intended 2,751 descriptions, not the deferred full V4 inventories.
+The last printed progress confirms at least 88 descriptions committed. Progress
+prints only every ten batches, so the exact saved count requires the SQLite DB.
+The error occurred before adjudication, review or scientific model training.
+Shutdown/resource-tracker warnings followed cleanup and are not the fatal error.
+
+Investigator provided request dff7fd6521613ac0368bea5ab554db3923663bcf89e91148ba1fd158c43d3541:
+eight features, finish_reason stop, eight response records. Requested
+`"has big claws "` versus returned `"has big claws"` is the sole identity mismatch.
+Do not change feature memberships, taxonomy assignments or task IDs to fix this.
+
+TDD RED command: M0 interpreter `-m pytest -q
+ISC-CI_LLM_validation/tests/test_feature_classification.py -k
+'whitespace or trimmed or failed_batch or saved_raw'`.
+Six intended failures exposed strict whitespace rejection, absent ambiguity
+diagnostic, validation stopping before the invalid-task check, and absent raw
+request archiving. No existing implementation was deliberately broken.
+
+Added unambiguous outer-whitespace-only response reconciliation, preserving exact
+source keys and all model-provided task/uncertainty/explanation fields. A complete
+batch must still cover every original identity once, with valid task labels.
+Repair audits preserve received and accepted rows and the versioned policy before
+cache commit. No fuzzy matching, positional assignment, semantic rewriting or
+normalization of the original matrices is introduced. Added raw-request archival
+inside the existing production run lock to retain prior attempts when the
+transport reuses a request-hash log filename.
+
+The classifier transport module, prompts, sampling/model settings and cache
+signature schema are unchanged. Existing accepted labels remain reusable; the
+failed batch is re-requested on resume, not silently repaired offline. Production
+request archives are content-hashed and idempotent. Test fixtures confirm no
+partial cache commit, prior-cache/signature preservation, original response
+immutability and no extra model call on cached keys. Added strict rejection tests
+for malformed/missing/extra/duplicate rows and substantive text changes, and a
+test preserving distinct exact whitespace variants when returned exactly.
+
+Initial combined classification/workflow/CLI GREEN: **27 passed (19.67 s)**.
+Full regression results follow below. No real Qwen call, cache modification on
+the cluster, scientific training, or new judgment was performed by this agent.
+
+Final full preflight: **167 passed (87.93 s)**, no stderr, preservation passed
+with zero changed files across all 316 frozen sources. Gate signature:
+`e2bf12a50585f5101ceaaeeffc460270876cd1567062cde13bc5c96ba80ea688`.
+Whitespace check passed. Diff is limited to classify_features.py, its CLI hook,
+focused tests, and these workflow/audit notes. In particular,
+classification_workflow.py and frozen scientific evaluation modules are unchanged,
+so existing classifier-client fingerprints and accepted cache entries remain valid.
+Publish this narrow repair and resubmit the same production command after a
+successful pull; keep the existing output directory and caches.
