@@ -92,6 +92,15 @@ No authoritative mapping of the retained 385 human features was found. Human
 assignments therefore require the same documented classification and review
 process as LLM descriptions; they are not original ground-truth annotations.
 
+**2026-11-03 correction:** Figure A1 (PDF page 114 / printed page 113) does name
+the missing class: **Associated object**. The previous table-only inspection
+missed this figure. The class name is now verified, although its released
+numeric ID is not. After disclosure, the investigator explicitly retained the
+32-class reconstruction for this run. R2 flags this known gap for review rather
+than inventing an ID or silently merging it into Location. See
+[Classifier R2 Source Rules](CLASSIFIER_R2_SOURCE_RULES.md) for evidence, exact
+source-string checks and the revised prompt/protocol.
+
 ### 2. Released Target Parser: Investigator-Approved Correction
 
 Original data.py line 142 uses `split()[:-1]` to remove what it treats as a separate

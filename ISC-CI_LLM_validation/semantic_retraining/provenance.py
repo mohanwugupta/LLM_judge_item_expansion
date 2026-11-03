@@ -66,6 +66,8 @@ def code_hashes(scope="all") -> dict:
         root.parent / "iscci_validation" / name
         for name in ["dataio.py", "modeling.py", "training.py"]
     ]
+    if scope == "all":
+        paths.append(root.parent / "configs/semantic_classifier_r2_prompt.txt")
     return {str(p.relative_to(root.parent)): sha256(p) for p in sorted(paths)}
 
 

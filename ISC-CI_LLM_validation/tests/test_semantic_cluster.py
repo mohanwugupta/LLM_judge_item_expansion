@@ -18,9 +18,12 @@ def test_classification_cluster_job_preserves_established_resource_and_launch_pa
         "--tensor-parallel-size",
         "--stage preflight",
         "--stage classify-smoke",
+        "CONFIG_PATH=${CONFIG_PATH:-ISC-CI_LLM_validation/configs/semantic_retraining_r2.json}",
+        '--config "$CONFIG_PATH"',
     ]:
         assert required in text
     assert text.index("--stage preflight") < text.index("python -m vllm")
+    assert "artifacts/semantic_retraining_20261028_32_corrected" not in text
     assert (
         subprocess.run(["bash", "-n", str(path)], capture_output=True).returncode == 0
     )

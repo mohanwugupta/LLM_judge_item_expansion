@@ -17,7 +17,7 @@ PIPELINE_STAGE=${PIPELINE_STAGE:-smoke}
 PHASE=${PHASE:-1}
 WORKERS=${WORKERS:-4}
 INCLUDE_DEFERRED=${INCLUDE_DEFERRED:-0}
-OUTPUT_DIR=${OUTPUT_DIR:-$PROJECT_DIR/ISC-CI_LLM_validation/artifacts/semantic_retraining_20261028_32_corrected}
+CONFIG_PATH=${CONFIG_PATH:-ISC-CI_LLM_validation/configs/semantic_retraining_r2.json}
 SEED=${SEED:-${SLURM_ARRAY_TASK_ID:-}}
 
 cd "$PROJECT_DIR"
@@ -32,6 +32,7 @@ else
 fi
 export OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1
 export PYTHONPATH="$PROJECT_DIR${PYTHONPATH:+:$PYTHONPATH}"
+OUTPUT_DIR=${OUTPUT_DIR:-$(python -c 'import json, pathlib, sys; root=pathlib.Path("ISC-CI_LLM_validation").resolve(); print(root / json.loads(pathlib.Path(sys.argv[1]).read_text())["output_directory"])' "$CONFIG_PATH")}
 export MPLCONFIGDIR="$OUTPUT_DIR/runtime/matplotlib"
 ARGS=(--stage "$PIPELINE_STAGE" --phase "$PHASE" --workers "$WORKERS" --output-dir "$OUTPUT_DIR" --resume)
 if [ "$INCLUDE_DEFERRED" = 1 ]; then

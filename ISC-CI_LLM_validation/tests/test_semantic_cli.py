@@ -153,7 +153,12 @@ def test_default_classification_and_freeze_do_not_require_large_ensembles(
 
     monkeypatch.setattr(cli, "classify_catalog", classify)
     monkeypatch.setattr(cli, "freeze_catalog", freeze)
-    assert main(["--stage", stage, "--output-dir", str(tmp_path)]) == 0
+    # Legacy dispatch remains available explicitly, without migrating its caches.
+    legacy = cli.ROOT / "configs/semantic_retraining.json"
+    assert (
+        main(["--stage", stage, "--config", str(legacy), "--output-dir", str(tmp_path)])
+        == 0
+    )
     assert len(selected) == 12
     assert (
         "v4_ensemble_locked_v2" not in selected

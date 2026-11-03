@@ -1,0 +1,70 @@
+Classify semantic feature descriptions using the supplied, investigator-approved
+32-class ISC reconstruction. The IDs are zero-based Table A1 row order, NOT the
+released model's numeric context IDs. Use only the supplied classes, not auxiliary
+size/name/category tasks or the full Wu and Barsalou taxonomy.
+
+Source hierarchy: ISC Table A1 defines the classes; ISC Figure A1 and the semantic
+training description clarify their use. Wu and Barsalou (2009), Appendix A,
+clarifies the component/property and entity/situation distinctions underlying
+this coding system. The Leuven feature norms supply descriptions, NOT verified
+task annotations. These rules are operational paraphrases, not recovered gold
+labels. A feature receives one task for its whole description; do not split it.
+
+Distinguish these neighbors by meaning, not by a single verb or keyword:
+
+- Behavior (5): an intrinsic, characteristic action the entity performs. The ISC
+  semantic-training example includes a dog's eating, running and barking.
+  Flying, eating and drinking by the entity are behaviors. 'Can' does not make
+  an action State of entity (14). Function (24) instead concerns the usual goal
+  or role the entity serves for an agent. Associated action (21) concerns what
+  an agent does with/to the entity, such as something being eaten or worn.
+- Outside part (6): a component normally on or partly on the surface, such as
+  wings, leaves or a tail. Internal part (9): a component normally enclosed
+  inside, such as a heart or seeds. Classify normal location, not whether a part
+  could be seen if exposed. A component is not a non-component property merely
+  because it is visible. Where anatomy/location is genuinely unclear, flag it.
+- Outside properties (7/8) and inside properties (10/11) describe attributes,
+  not parts. Use visible versus nonvisual, and exterior versus interior. Color,
+  shape and size are properties; touch, taste and smell are nonvisual. Material
+  (12) describes constituent substance. Physical state (29) describes physical
+  condition; State of entity (14) describes a broader systemic condition,
+  capacity or trait. Explain and flag genuinely competing readings.
+- Quantity (13) asserts count, frequency or intensity. A numbered limb count is
+  not just a part listing. A countable noun by itself is not Quantity. Do not
+  classify every size or measurement as Quantity without considering meaning.
+- Function (24) asserts a customary purpose, not merely any action or causal
+  result. Contingency (18) asserts dependency, requirement or causation. Manner
+  (27) describes how an action is performed, not just that it occurs.
+- Taxonomic relations distinguish a broader kind (0), coordinate comparison
+  (1), subtype (2), and equivalent name (3). A larger physical whole (15) is not
+  a broader category. Lexical associate (19) requires a word association rather
+  than an explicit semantic relation; lexical expression (20) is an expression.
+- In situational descriptions, distinguish buildings (22), places (23), events
+  (25), nonhuman living things (26), people (28), cultural abstract works or
+  institutions (30), and times (31). Do not turn every associated noun into a
+  location. Emotion (16) concerns an experienced response; evaluation (17)
+  concerns an appraisal; abstract property (4) concerns an abstract attribute.
+
+Known inventory gap: ISC Figure A1 includes Associated object, which is absent
+from the approved 32 classes. When a description primarily specifies an
+associated nonliving object (the figure's example is a carrot cooked in a pot),
+set out_of_inventory=true and uncertain=true. Give the closest allowed task_id
+only as an explicitly provisional placeholder and explain the missing class;
+human review must resolve it. Never invent task 32 or silently force Location.
+Other meanings inadequately represented by these 32 classes also require this
+flag. Do not add Wu and Barsalou's additional categories.
+
+For a compound feature, choose its primary assertion only if clear. The sources
+do not prescribe a universal 'part before material' or other modifier priority.
+If two classes remain plausible, set uncertain=true and name their IDs and the
+reason in the explanation. Do not manufacture certainty or discard the feature.
+Preserve negation and intended relation. Do not decide whether the feature is
+true of any object, consult object memberships, use human behavioral outcomes,
+normalize the inventory, or change feature text. Obvious typos may be understood
+for classification, but original strings remain immutable in the inventory.
+
+Return only {"labels": [...]} with one record for each supplied feature_id,
+using that exact ID, integer task_id 0..31, boolean uncertain, boolean
+out_of_inventory, and a concise explanation of the relation and distinction.
+Do NOT echo descriptions. The feature_id, not a rewritten description, identifies
+the feature. If out_of_inventory=true, uncertain must also be true.

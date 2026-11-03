@@ -8,10 +8,53 @@ The implementation uses the investigator-approved **32-class reconstruction** an
 unresolved. See AUDIT.md and SCRATCHPAD.md for source evidence and approvals.
 
 The code supports classification, training, exact resume, transfer, all 196
-crossings, original human evaluation, and saved-result reporting. Real Qwen
-classification and human review have not yet run. The full semantic schedule is
+crossings, original human evaluation, and saved-result reporting. The legacy Qwen
+run saved only 128/2,751 labels; it is not a completed classification. R2 is a
+fresh source-grounded rerun, not a continuation of those labels. Human review
+and the new cluster smoke/production run remain pending. The full semantic schedule is
 intentionally **unlocked** until a training-only human pilot and resource checks
 justify it. Code completion is not completion of the scientific experiment.
+
+## Current R2 Rerun
+
+The CLI and both Slurm launchers default to
+`configs/semantic_retraining_r2.json`, writing to
+`ISC-CI_LLM_validation/artifacts/semantic_retraining_20261103_classifier_r2/`.
+The legacy config and old outputs remain unchanged and require explicit selection
+to resume. Do not override R2's output to the legacy directory. See
+[source evidence and rule decisions](CLASSIFIER_R2_SOURCE_RULES.md).
+
+Keep 32 classes as requested. Figure A1 identifies the omitted Associated object
+class; those descriptions are flagged for review, not assigned a new class.
+Stable feature IDs and schema-constrained responses remove description-echo
+failures. Every successful batch is checkpointed; resubmission retries missing
+items only. Invalid output is never replaced by a default label.
+
+Run the **new** source-rule smoke first; the old eight-item smoke does not qualify:
+
+```bash
+sbatch --export=ALL,SMOKE_TEST=1,INCLUDE_DEFERRED=0 ISC-CI_LLM_validation/run_semantic_classification.sh
+# After that job reports passed=true:
+sbatch --export=ALL,SMOKE_TEST=0,CLASSIFY_CONDITION=all,INCLUDE_DEFERRED=0 ISC-CI_LLM_validation/run_semantic_classification.sh
+```
+
+This classifies all 12 enabled conditions (2,751 unique descriptions), not the
+two deferred completed V4 ensembles. It does not start training. Review all 385
+human descriptions, stratified samples from other sources and every unresolved
+or inventory-gap item before freezing. Fill `task_id` and `reviewer` in the new
+`classification/human_review.csv`, without changing its description keys. Consult
+`classified_descriptions.json` for model explanations and uncertainty; provisional
+IDs for inventory gaps are not validated annotations.
+
+The new protocol saves `feature_registry.json`, `protocol.json`, per-phase
+`progress.json`, SQLite caches, all raw attempts, and `completion.json`.
+Completion is scoped to its `requested_conditions`; training authorization stays
+false until separate review/pilot/schedule gates succeed. If a singleton fails,
+inspect `classification/initial/progress.json` or `adjudication/progress.json`
+and resubmit the same production command after resolving the failure.
+
+For legacy diagnosis, use `--config ISC-CI_LLM_validation/configs/semantic_retraining.json`.
+The archived-run audit below refers to that V1 run, not R2 accuracy.
 
 ## Active Cohort and Deferred Ensembles
 
@@ -24,7 +67,8 @@ and V4 ensemble source-only. Only `v4_ensemble_locked_v2` (87,315 features) and
 
 The active sources require **2,751 unique descriptions**, versus 87,679 for the
 full design (96.9% fewer descriptions, not a measured runtime saving). Existing
-exact-description caches remain reusable. No feature is removed from any saved
+exact-description caches remain reusable only within their own protocol; V1
+labels are not reused by R2. No feature is removed from any saved
 matrix and no threshold is changed. Inventory and preservation still verify all
 14 frozen sources; that CPU check does not classify the deferred features.
 
@@ -243,7 +287,7 @@ python - <<'PY'
 import json
 from pathlib import Path
 root = Path("ISC-CI_LLM_validation")
-config = json.loads((root / "configs/semantic_retraining.json").read_text())
+config = json.loads((root / "configs/semantic_retraining_r2.json").read_text())
 path = root / config["output_directory"] / "gates/preflight.json"
 record = json.loads(path.read_text())
 print("Record:", path)
@@ -282,9 +326,9 @@ and runs a two-epoch CICO diagnostic. It is not a real human model and does not
 count toward the 56/784 scientific runs.
 
 Default output:
-`ISC-CI_LLM_validation/artifacts/semantic_retraining_20261028_32_corrected/`.
+`ISC-CI_LLM_validation/artifacts/semantic_retraining_20261103_classifier_r2/`.
 Default reports:
-`ISC-CI_LLM_validation/reports/semantic_retraining_20261028_32_corrected/`.
+`ISC-CI_LLM_validation/reports/semantic_retraining_20261103_classifier_r2/`.
 `--output-dir` and `--report-dir` can select new namespaces. Writes inside old
 experiment directories are rejected. Dry-run does not create output directories.
 
@@ -294,7 +338,7 @@ Use the same Qwen2.5-72B-Instruct checkpoint used for the feature spaces. The
 launcher copies the existing environment/cache/server conventions and requests
 **four 80-GB GPUs, 8 CPUs, and 32 GB RAM**. It does not submit subsequent jobs.
 
-First run an isolated eight-description API smoke:
+First run an isolated eight-description source-rule and API smoke:
 
 ```bash
 sbatch --export=ALL,SMOKE_TEST=1 ISC-CI_LLM_validation/run_semantic_classification.sh
@@ -311,7 +355,7 @@ Then classify just the human vocabulary for the initial pilot:
 sbatch --export=ALL,SMOKE_TEST=0,CLASSIFY_CONDITION=human ISC-CI_LLM_validation/run_semantic_classification.sh
 ```
 
-Overrides include `PROJECT_DIR`, `MODEL_PATH`, `CONDA_ENV`, `VLLM_PORT`, and
+Overrides include `PROJECT_DIR`, `MODEL_PATH`, `CONDA_ENV`, `VLLM_PORT`, `CONFIG_PATH`, and
 `OUTPUT_DIR`. The default model path is the same
 `/scratch/gpfs/JORDANAT/mg9965/models/Qwen--Qwen2.5-72B-Instruct` used previously.
 Initial and ambiguity passes use fixed temperature 0 and seed 0, separate
@@ -321,9 +365,13 @@ descriptions and taxonomy definitions are sent; no memberships or human behavior
 Exact descriptions share metadata labels, not object assignments. Batches commit
 transactionally to SQLite; resubmission continues completed work. A changed
 model fingerprint/protocol cannot silently reuse the cache. Malformed responses
-stop without committing their batch, while prior valid batches remain reusable.
+are retried and split with bounded attempts; unresolved items remain missing and
+the stage fails explicitly. Prior valid batches remain reusable.
 
-### Description Echo Formatting
+### Legacy Description Echo Formatting
+
+This subsection describes V1 only. R2 uses IDs and does not echo descriptions or
+reuse V1 labels. The read-only archive audit script currently targets V1 evidence.
 
 The 2026-10-30 production run stopped because the source description
 `"has big claws "` contains a trailing space and Qwen echoed `"has big claws"`.
@@ -361,6 +409,42 @@ Only submit after the pull succeeds. The launcher refreshes preflight and skips
 accepted cached descriptions. Keep the SQLite databases and request evidence.
 
 ## Human Review and Freezing
+
+### Inspect a Retrieved Snapshot First
+
+A successful preflight or smoke test is not proof that production classification
+finished. The 2026-11-03 retrieved snapshot contained only 128 / 2,751 labels and
+no final classified_descriptions.json, adjudication cache, protocol.json or
+human_review.csv. The new stop was a source typo (`has large theeth`) being
+corrected by Qwen (`has large teeth`), which the validator correctly rejects as
+more than an outer-whitespace change. Do not train from that partial cache.
+
+Use the read-only snapshot auditor from the repository root:
+
+```bash
+python ISC-CI_LLM_validation/audit_semantic_classification.py \
+  --archive ISC-CI_LLM_validation/inputs/semantic_classification_20261103_085111.tar.gz \
+  --expected-sha256 4089c8762d51d9b56f764645ea1ae6f2e10a34ad101522044556b5ccaf910ac2 \
+  --output-dir ISC-CI_LLM_validation/reports/semantic_retraining_label_audit_20261103
+```
+
+Select a new audit output directory on reruns; existing audit outputs are not
+overwritten. The auditor reads the archive directly, deserializes SQLite into
+memory and checks catalog/matrix/taxonomy identities, cached-label/raw-response
+agreement, model-fingerprint consistency, request hashes, whitespace-recovery
+and raw-history evidence, and coverage. It never extracts over an existing run,
+changes labels, calls an LLM or authorizes training. Actual model weights are not
+rehash-verified by this offline audit.
+
+The saved audit includes original labels, per-condition coverage, task counts,
+targeted assistant review flags, uncertainty flags and repeated-request changes.
+Flags are not gold annotations, an accuracy estimate, or a substitute for human
+review. The latest snapshot has ten high-priority flags (exterior body parts
+called internal parts; entity behaviors called associated actions) plus six
+model-uncertain records. All source labels remain unchanged. Stable response IDs
+and clearer class-boundary instructions are possible next changes, but require
+a recorded classifier/protocol decision rather than silently fixing spellings
+or rewriting task assignments.
 
 Review `classification/human_review.csv` within the new output directory.
 Fill `task_id` (0-31) and `reviewer` for the selected descriptions. The template
@@ -403,7 +487,7 @@ python ISC-CI_LLM_validation/run_semantic_retraining.py --stage benchmark --devi
 
 The pilot uses only reviewed human features, no pretrained weights, and no
 size/category/naming supervision. Provisional pilot parameters are in
-`configs/semantic_retraining.json`: these are not an approved full schedule.
+`configs/semantic_retraining_r2.json`: these are not an approved full schedule.
 Inspect native loss, positive recall, worst absolute error, negative baseline,
 updates, and exposure. The convergence criterion is maximum error <0.1 over the
 complete output vector. The code never substitutes CICO's 400 epochs for ISC.

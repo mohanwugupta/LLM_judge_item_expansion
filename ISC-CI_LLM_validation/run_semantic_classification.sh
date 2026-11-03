@@ -22,7 +22,7 @@ TENSOR_PARALLEL_SIZE=${TENSOR_PARALLEL_SIZE:-4}
 SMOKE_TEST=${SMOKE_TEST:-1}
 CLASSIFY_CONDITION=${CLASSIFY_CONDITION:-human}
 INCLUDE_DEFERRED=${INCLUDE_DEFERRED:-0}
-OUTPUT_DIR=${OUTPUT_DIR:-$PROJECT_DIR/ISC-CI_LLM_validation/artifacts/semantic_retraining_20261028_32_corrected}
+CONFIG_PATH=${CONFIG_PATH:-ISC-CI_LLM_validation/configs/semantic_retraining_r2.json}
 
 cd "$PROJECT_DIR"
 module load anaconda3/2025.6
@@ -35,6 +35,9 @@ else
     source activate "$CONDA_ENV"
 fi
 export PYTHONPATH="$PROJECT_DIR${PYTHONPATH:+:$PYTHONPATH}"
+OUTPUT_DIR=${OUTPUT_DIR:-$(python -c 'import json, pathlib, sys; root=pathlib.Path("ISC-CI_LLM_validation").resolve(); print(root / json.loads(pathlib.Path(sys.argv[1]).read_text())["output_directory"])' "$CONFIG_PATH")}
+echo "Classification config: $CONFIG_PATH"
+echo "Classification output: $OUTPUT_DIR"
 export HF_HOME=/scratch/gpfs/JORDANAT/mg9965/hf_cache
 export HF_DATASETS_CACHE="$HF_HOME/datasets"
 export TRANSFORMERS_CACHE="$HF_HOME"
@@ -67,10 +70,10 @@ RUNNER=ISC-CI_LLM_validation/run_semantic_retraining.py
 # Restore missing frozen inputs only; matching files are verified and conflicts stop the job.
 python ISC-CI_LLM_validation/run_semantic_inputs.py --install
 # Fail on missing matrices, upstream data, package/tests, or stale originals before loading Qwen.
-python "$RUNNER" --stage prepare --output-dir "$OUTPUT_DIR"
-python "$RUNNER" --stage preflight --output-dir "$OUTPUT_DIR"
+python "$RUNNER" --stage prepare --config "$CONFIG_PATH" --output-dir "$OUTPUT_DIR"
+python "$RUNNER" --stage preflight --config "$CONFIG_PATH" --output-dir "$OUTPUT_DIR"
 # Hash all actual local weight shards, not an unverified model-name string.
-python "$RUNNER" --stage fingerprint --model-path "$MODEL_PATH" --output-dir "$OUTPUT_DIR"
+python "$RUNNER" --stage fingerprint --config "$CONFIG_PATH" --model-path "$MODEL_PATH" --output-dir "$OUTPUT_DIR"
 
 python -m vllm.entrypoints.openai.api_server \
     --model "$MODEL_PATH" \
@@ -110,7 +113,7 @@ if [ "$READY" -ne 1 ]; then
     exit 1
 fi
 
-ARGS=(--output-dir "$OUTPUT_DIR" --endpoint "http://localhost:$VLLM_PORT/v1" --resume)
+ARGS=(--config "$CONFIG_PATH" --output-dir "$OUTPUT_DIR" --endpoint "http://localhost:$VLLM_PORT/v1" --resume)
 if [ "$INCLUDE_DEFERRED" = 1 ]; then
     ARGS+=(--include-deferred)
 fi

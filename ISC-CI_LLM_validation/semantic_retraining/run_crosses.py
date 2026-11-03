@@ -14,7 +14,7 @@ ROOT = Path(__file__).resolve().parents[1]
 
 def load_config(path=None):
     config = json.loads(
-        Path(path or ROOT / "configs/semantic_retraining.json").read_text()
+        Path(path or ROOT / "configs/semantic_retraining_r2.json").read_text()
     )
     if (
         config["protocol"] != "isc-independent-32-corrected-targets-v1"
@@ -26,6 +26,11 @@ def load_config(path=None):
         )
     if config["pilot_llm_condition"] not in set(CONDITIONS) - {"human", "random_human"}:
         raise ValueError("Unknown prespecified pilot source")
+    if config["classifier"].get("response_protocol") not in {
+        None,
+        "stable-feature-id-v2",
+    }:
+        raise ValueError("Unknown classifier response protocol")
     source_cohort(config)
     from .transfer_embeddings import SETTINGS
 

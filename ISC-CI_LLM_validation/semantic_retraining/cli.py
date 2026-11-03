@@ -387,13 +387,25 @@ def main(argv=None):
                     versions[package] = importlib.metadata.version(package)
                 except importlib.metadata.PackageNotFoundError:
                     versions[package] = "not installed in client environment"
+            is_r2 = (
+                config["classifier"].get("response_protocol") == "stable-feature-id-v2"
+            )
+            classify = classify_catalog
+            smoke = classification_smoke
+            implementation = "classification_workflow.py"
+            if is_r2:
+                from . import classification_r2
+
+                classify = classification_r2.classify_catalog
+                smoke = classification_r2.classification_smoke
+                implementation = "classification_r2.py"
             classifier = {
                 **config["classifier"],
                 "revision": fingerprint["revision"],
                 "endpoint": args.endpoint or config["classifier"]["endpoint"],
                 "runtime_versions": versions,
                 "client_implementation_sha256": sha256(
-                    Path(__file__).with_name("classification_workflow.py")
+                    Path(__file__).with_name(implementation)
                 ),
             }
             conditions = (
@@ -405,11 +417,9 @@ def main(argv=None):
                 if args.stage == "classify":
                     archive_classifier_requests(output / "classification")
                 result = (
-                    classification_smoke(
-                        output, taxonomy, classifier, classifier["endpoint"]
-                    )
+                    smoke(output, taxonomy, classifier, classifier["endpoint"])
                     if args.stage == "classify-smoke"
-                    else classify_catalog(
+                    else classify(
                         output,
                         taxonomy,
                         classifier,
@@ -424,7 +434,10 @@ def main(argv=None):
                 if args.condition in {"human", "random_human"}
                 else [args.condition] if args.condition else plan["enabled_conditions"]
             )
-            result = freeze_catalog(
+            freeze = freeze_catalog
+            if config["classifier"].get("response_protocol") == "stable-feature-id-v2":
+                from .classification_r2 import freeze_catalog as freeze
+            result = freeze(
                 output,
                 taxonomy,
                 args.reviews or output / "classification/human_review.csv",

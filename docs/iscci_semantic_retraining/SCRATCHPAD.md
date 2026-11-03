@@ -772,3 +772,155 @@ classification_workflow.py and frozen scientific evaluation modules are unchange
 so existing classifier-client fingerprints and accepted cache entries remain valid.
 Publish this narrow repair and resubmit the same production command after a
 successful pull; keep the existing output directory and caches.
+
+## 2026-11-03: Read-Only Audit of Retrieved Labels and New Failure
+
+Investigator retrieved semantic_classification_20261103_085111.tar.gz (Git commit
+a2b7095). Its actual SHA-256 matches the LFS object:
+`4089c8762d51d9b56f764645ea1ae6f2e10a34ad101522044556b5ccaf910ac2`.
+The investigator explicitly confirmed this is the latest run, not an older
+snapshot. Standard git status initially attempted a disallowed LFS tmp write;
+used read-only filter-disabled status and independently verified archive bytes.
+No artifact was reverted, restaged or modified.
+
+The snapshot is incomplete: **128 / 2,751** active descriptions (4.65%), with
+**2,623 remaining**. SQLite integrity is OK. All cached records have valid task
+IDs, original exact description keys, uncertainty fields and explanations and
+match accepted raw response evidence. All 14 matrix records and the complete
+catalog match local frozen sources. All **316** archived preservation hashes
+verify locally. Preflight's 167 tests passed at job startup, which does not imply
+completion. No final combined labels, protocol.json, adjudication cache or human
+review CSV exists in the snapshot. Six cached descriptions are uncertain.
+
+Current raw requests: 16 accepted batches / 128 descriptions plus one rejected
+eight-feature batch. Whitespace-only recovery is correctly audited once; the
+earlier 15 raw attempts are preserved in content-hashed history. One genuine
+repeated failed request changed the on/off-switch label from task 14 to task 6
+between calls; the accepted cache matches the later response. Byte-identical
+backups are not independent repeats. This selected retry is not a general
+stability estimate or evidence of an overwritten accepted label.
+
+Latest raw request fdaf48ec04b3c2c091c46382677321b29f2f43b6f122f609281c19997cd5f8b3:
+source `has large theeth` -> returned `has large teeth`, finish_reason stop.
+The current parser intentionally rejects this substantive spelling difference.
+Investigator then supplied SLURM job 16650321 logs (attachment
+093790a5-a778-4b0d-b66d-efedb9b6bfe1), confirming the same error after three
+HTTP-200 requests in the resumed job, not GPU exhaustion or test failure.
+The two validated batches added sixteen descriptions to the prior 112 saved
+records. Resource-tracker warnings follow cleanup. No raw data should be renamed
+or fuzzy matched merely to make this response pass.
+
+Semantic review found **10 targeted high-priority concerns**, all uncertain=false:
+has a tail / has claws -> internal part despite exterior-component definitions;
+builds nests, drinks water and six eats-* labels -> associated action despite
+describing behavior performed by the entity. Suggestions follow only the saved
+32-class definitions, not object applicability or human behavioral performance.
+They remain separate assistant flags, not human gold, an exhaustive error count
+or an accuracy estimate. No task assignment, matrix, official review or freeze
+was changed. Identity robustness and semantic classification quality are separate
+problems; stable IDs and clearer class instructions would require an explicitly
+recorded new protocol decision before any revised run.
+
+Added audit_semantic_classification.py and fixture tests. TDD RED:
+`python -m pytest -q ISC-CI_LLM_validation/tests/test_semantic_classification_audit.py`
+failed collection on the missing auditor. GREEN: **3 passed (2.32 s)**. Tests
+show a successful preflight cannot certify incomplete labels, invalid cached
+tasks cannot pass integrity checks, expected archive hashes are enforced, original
+label assignments survive qualitative flagging and source archive bytes do not
+change. Full preflight: **170 passed (36.42 s)** with 316 frozen files unchanged;
+signature remains e2bf12a50585f5101ceaaeeffc460270876cd1567062cde13bc5c96ba80ea688.
+
+Saved report and auditable JSON/CSV tables under
+`ISC-CI_LLM_validation/reports/semantic_retraining_label_audit_20261103/`.
+The report was generated with the exact archive hash above and uses memory-only
+SQLite. Raw archive and recorded scientific files are unchanged. Read-only
+auditor source/tests/docs are local/unpushed; no classifier implementation,
+sampling, taxonomy, feature judgments, accepted labels or training setting was
+changed and no cluster jobs or model API calls were made in this inspection.
+
+## 2026-11-03: Source-Grounded R2, Explicitly Retaining 32 Classes
+
+Investigator requested that new classification rules come from the original
+Leuven dataset and ISC paper, then rerun classification after transport fixes.
+Revisited Table A1, **visually inspected Figure A1** (PDF page 114 / printed 113),
+and checked the semantic-training example, Wu and Barsalou Appendix A, original
+`.ex` targets, and the Leuven XLS archive. Figure A1 names **Associated object**:
+the earlier table-only source audit missed this. Disclosed the correction and
+asked whether to restore 33 named classes. Investigator explicitly answered:
+**"Keep 32 classes for this run."** No taxonomy ID, matrix or training dimension
+was changed. The numeric name-to-ID dictionary remains unrecovered.
+
+Fresh source checks: 58 XLS books / 590 sheets; no taxonomy-like sheet names.
+The animal Type-II first sheet's English column B contains `has large theeth`
+at row 171 and `has big claws ` at row 543. These are genuine source strings,
+not corrupt downloads. The corrected terminator parse finds 2,541 semantic
+features, all 33 released numeric tasks, and zero features assigned to multiple
+tasks. This supports retaining whole-feature targets, not importing Wu's
+word-level multi-code annotation scheme. See CLASSIFIER_R2_SOURCE_RULES.md for
+sources/pages, operational versus reconstruction rules, and limitations.
+
+Added configs/semantic_classifier_r2_prompt.txt and separate
+configs/semantic_retraining_r2.json. The model-facing prompt distinguishes
+intrinsic behavior / action performed on the entity / customary purpose;
+normal outside/internal components / non-component attributes; quantity / size;
+causal dependencies; and situational neighbors. Compounds without a clear primary
+assertion require uncertainty, not an invented universal priority rule. The known
+Associated object gap requires out_of_inventory=true, uncertain=true and review;
+any allowed ID is provisional, not an authorized class merge or feature deletion.
+
+New stable-feature-id-v2 uses a frozen sorted registry of exact descriptions,
+server-side JSON Schema output, and independent strict client-side checks.
+IDs, not model-echoed strings, are response identifiers. No fuzzy spelling repair
+or source normalization is added. Both raw transport logs and validation-attempt
+logs retain distinct files per attempt. Two attempts per batch, then bounded
+binary splitting for malformed output; good leaves commit transactionally.
+Missing singleton labels remain missing and fail the stage. Network retries are
+bounded without expanding into every singleton; permanent HTTP errors fail fast.
+Resumes request only uncached descriptions. Protocol/registry/model changes reject
+cache reuse. Prompt text is snapshotted per process and included in preflight's
+hashes as well as classification manifests.
+
+An isolated eight-item source-rule smoke covers six anchor distinctions, the
+known missing class, and misspelling transport. A matching passing smoke is
+required before production. It is conformance evidence, not measured classifier
+accuracy. Review now requires all 385 human descriptions plus the existing
+stratified and uncertain/gap sample; no human reviews were filled by the agent.
+Legacy implementation and taxonomy remain unchanged. The V1 archive auditor
+explicitly rejects R2 instead of misinterpreting ID-based evidence.
+
+CLI and both Slurm launchers default to R2, deriving output from selected config
+and forwarding CONFIG_PATH consistently. GPU resource/model/server settings
+remain four 80-GB GPUs, 8 CPUs, 32 GB RAM, Qwen2.5-72B-Instruct and 24 hours.
+Fresh output is artifacts/semantic_retraining_20261103_classifier_r2 under the
+validation root. The old 128 labels and archive are not reused or edited.
+The two large V4 completed ensembles remain deferred. All 12 enabled sources
+still total **2,751** unique descriptions; maximum exact description length 82.
+Inventory preparation still verifies all 14 sources (87,679 descriptions).
+
+TDD RED: new test_semantic_classifier_r2.py failed collection because the R2
+module did not exist. GREEN fixture checks cover exact strings/ID order,
+unknown/duplicate/missing IDs, strict types, inventory-gap uncertainty, retry
+splitting/checkpoint/resume, protocol mismatch, bounded network failure, complete
+raw-attempt retention, JSON Schema requests, smoke/production separation,
+all-human review gating, default config and training/cohort preservation.
+Existing CLI legacy dispatch remains tested explicitly. Slurm bash syntax and
+git diff whitespace checks pass; formatting uses the existing Black tool.
+
+Final R2 preflight: **186 passed (24.88 s)**, no stderr, no preservation changes
+across **316** frozen files. Gate signature:
+`013939f1b614fb891d283b69c8609f4847280bf065a2b523471a18090961a080`.
+Historical fidelity manifest still:
+`bd1a3d078106cc73944b7bbba42771b31721cbe88352e92fe9648f38e1b810be`.
+Original label archive still:
+`4089c8762d51d9b56f764645ea1ae6f2e10a34ad101522044556b5ccaf910ac2`.
+Prompt SHA-256:
+`970973e37fa77b1ffb4cfa97b0b477b436a1ddb62d8af70c3fa0a5ab7ba913c6`.
+Unmodified 32-class taxonomy SHA-256:
+`8cb2b973e19230d7c59f58cf91be9c6b2646495fb466b992bd215dbf58531c67`.
+
+Only local inventory preparation, dry planning, fixtures and preflight ran.
+No real Qwen request, production cache, cluster submission, human review,
+scientific training or new behavioral evaluation was performed. Local changes
+have not been pushed. Next: sync code, run the new cluster smoke, then production
+with SMOKE_TEST=0, CLASSIFY_CONDITION=all, INCLUDE_DEFERRED=0. Classification
+completion does not bypass review, human pilot, or the still-unlocked full schedule.
