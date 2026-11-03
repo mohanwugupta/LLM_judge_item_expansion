@@ -12,3 +12,4 @@ ISC-CI_LLM_validation/artifacts/random_feature_control_20261028/validation/data_
 ISC-CI_LLM_validation/inputs/semantic_frozen_inputs.tar.gz filter=lfs diff=lfs merge=lfs -text
 ISC-CI_LLM_validation/inputs/semantic_classification_20261103_085111.tar.gz filter=lfs diff=lfs merge=lfs -text
 ISC-CI_LLM_validation/inputs/semantic_classification_20261103_144250.tar.gz filter=lfs diff=lfs merge=lfs -text
+ISC-CI_LLM_validation/inputs/semantic_classification_r2_20261103_144630.tar.gz filter=lfs diff=lfs merge=lfs -text
