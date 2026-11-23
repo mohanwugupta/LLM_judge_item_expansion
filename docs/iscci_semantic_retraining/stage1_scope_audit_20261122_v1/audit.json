@@ -1,0 +1,88 @@
+{
+  "audit_scope": "Read-only dataset and implementation inspection; no fitting, behavioral evaluation, label generation or configuration edits",
+  "coverage": {
+    "current_unverified": 27,
+    "missing_does_not_mean_negative": true,
+    "original_other_identity_reviews": 26,
+    "original_uncovered": 84,
+    "original_uncovered_fruit_vegetable": 58,
+    "verified_one_to_one": 266
+  },
+  "date": "2026-11-22",
+  "full_v4_completed_ensembles": "Remain deferred; not requested for new training",
+  "isc_commit": "4ecc76d4817fb927d2ad79dfbe1ff44ea72affc0",
+  "iscci_commit": "29e1c672215b8cbe3dc6bfbfd1d414fbf8915d14",
+  "source_verification": "Pinned local git trees; tracked files clean. Live GitHub web retrieval unavailable (cache miss).",
+  "sources_sha256": {
+    "ISC-CI_LLM_validation/artifacts/semantic_retraining_human_behavior_20261103/direct/object_crosswalk.csv": "c21e6d273e2a8075cac975f3b824cd2c03b5f5be7e85d85fb81e544f46210e9b",
+    "ISC-CI_LLM_validation/configs/isc_training.json": "c851737419d319f4aa06d73b83ca0c72c852fd1a645883c098279f73399f5bef",
+    "ISC-CI_LLM_validation/inputs/semantic_classification_r2_20261103_144630.tar.gz": "7fe7e9ffc7cbaed52a56387b559a305c5f3708042e06b851139d3b105d10bf34",
+    "ISC-CI_LLM_validation/isc_training.py": "db298141705c9a6a702dfc209760ac8bfc46bb7dae8d7a5f4c205a0203322190",
+    "ISC-CI_LLM_validation/reports/isc_training_completed_20261122_v1/verification.json": "390131b81dc05cc615aabbad22b24978a595cf3a1548986d0050a709a9084020",
+    "ISC-CI_LLM_validation/semantic_retraining/inventory.py": "b7141db1668ff59cbe14a5c83001204e93632e0bea34c914168e7329d5d061d7",
+    "ISC-CI_LLM_validation/semantic_retraining/native_isc.py": "e1c5b533a3e96ed00f040ea9e632f9b582b9f4f2915a9fe3f63c6bd7488707ed",
+    "ISC-CI_LLM_validation/semantic_retraining/training_adapter.py": "58b5050db2de7af99dd90730d6e0eda0085c76ee0cbe4135e8be9c3644b5856a",
+    "ISC-CI_LLM_validation/upstream/IntegratedSemanticsControl/data.py": "0ff1f8a168c69d8c527f200b138f6e5d944417a7b9b4555e8d02c1dc5801f893",
+    "ISC-CI_LLM_validation/upstream/IntegratedSemanticsControl/data/leuven_rum_nozeroes.ex": "f91a3e3a5af19b35e51f5fb5a77a9e8a34756ad8f63c67408eddc609a11e9aeb",
+    "ISC-CI_LLM_validation/upstream/IntegratedSemanticsControl/data/leuven_size.csv": "13725c29979ffa24518c19a08c1fc97365a381cbfa89c955a70a78ee78d73630",
+    "ISC-CI_LLM_validation/upstream/IntegratedSemanticsControl/models.py": "dfe42e77d70e32e6fac266bb97077adddfa1d1895ade77959d78c421c69d3c6c",
+    "ISC-CI_LLM_validation/upstream/IntegratedSemanticsControlContextInference/data.py": "ea724374b10f4f2eea9c133790830ba59633e805534216f6427b72839bb7a0b8",
+    "ISC-CI_LLM_validation/upstream/IntegratedSemanticsControlContextInference/data/leuven_dataset/leuven_combined_features_consolidated.csv": "0c99ceb4e28f58150d0886c99c5b012f0e12b658fa6f965e6cc32ca85dc3102a",
+    "ISC-CI_LLM_validation/upstream/IntegratedSemanticsControlContextInference/models.py": "efc2652d06a64100dba7bc5e7df4fc58a27e7159e25400d52b49ebdff6737c15",
+    "ISC-CI_LLM_validation/upstream/IntegratedSemanticsControlContextInference/models/1and2shot_isc-seed0.pt": "8976c9d00c01cc684de6f95a6cc2a505e6a996060374e66d45a36387e5afbda4",
+    "artifacts/leuven_full_labels/leuven_full_v2/feature_resolutions.csv": "cec3b9c5ece8d84dc787ea6098963c2b8f0e3594e78441599fcae13cc8cd9128",
+    "data/leuven_combined_features_consolidated.csv": "b0efa9d7cb7e7bac212a4b783bad721a8e2ac5342de2d01d2397d9f91f5e7c9e"
+  },
+  "stage1": {
+    "auxiliary_outputs": 355,
+    "auxiliary_patterns": 1050,
+    "auxiliary_tasks": 3,
+    "corrected_empty_semantic_patterns": 0,
+    "corrected_semantic_positives": 37683,
+    "legacy_empty_semantic_patterns": 1532,
+    "legacy_semantic_positives": 31676,
+    "objects": 350,
+    "semantic_features": 2541,
+    "semantic_patterns": 6007,
+    "semantic_tasks": 33,
+    "total_outputs": 2896,
+    "total_patterns": 7057
+  },
+  "stage2": {
+    "actual_upstream_matrix_matches_project_values_and_order": true,
+    "object_cutoff_strictly_greater_than": 3,
+    "rater_cutoff_strictly_greater_than": 3,
+    "raw_features": 1995,
+    "raw_objects": 293,
+    "retained_features": 385,
+    "retained_matches_adapted_human_exactly": true
+  },
+  "v2_resolution_audit": {
+    "all_existing_feature_texts": 1995,
+    "duplicates": 0,
+    "expected": 584535,
+    "invalid_final_scores": 0,
+    "missing_cells": [
+      {
+        "feature_id": "380",
+        "object": "vulture",
+        "text": "intelligent"
+      },
+      {
+        "feature_id": "1440",
+        "object": "piranha",
+        "text": "looks tough"
+      },
+      {
+        "feature_id": "1671",
+        "object": "alligator",
+        "text": "is many women's nightmare"
+      }
+    ],
+    "observed": 584532,
+    "old_32_class_labels_not_33_class_approval": true,
+    "scores_are_ordinal_0_to_4_not_binary": true,
+    "texts_with_old_32_class_labels": 423,
+    "texts_without_old_32_class_labels": 1572
+  }
+}

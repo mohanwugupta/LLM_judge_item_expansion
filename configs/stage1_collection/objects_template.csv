@@ -1,0 +1,351 @@
+object_id,object_index,original_name,display_name,category,size,identity_reviewed,identity_evidence,legacy_current_object
+ISC0000,0,bee,bee,insect,0,true,verified one-to-one original crosswalk,bee
+ISC0001,1,leech,leech,insect,0,true,verified one-to-one original crosswalk,leech
+ISC0002,2,horsefly,horsefly,insect,0,true,verified one-to-one original crosswalk,horsefly
+ISC0003,3,centipede,centipede,insect,0,true,verified one-to-one original crosswalk,centipede
+ISC0004,4,fruit_fly,fruit fly,insect,0,true,verified one-to-one original crosswalk,fruit fly
+ISC0005,5,bumblebee,bumblebee,insect,0,true,verified one-to-one original crosswalk,bumblebee
+ISC0006,6,cockroach,cockroach,insect,0,true,verified one-to-one original crosswalk,cockroach
+ISC0007,7,beetle,beetle,insect,0,true,verified one-to-one original crosswalk,beetle
+ISC0008,8,cricket,cricket,insect,0,true,verified one-to-one original crosswalk,cricket
+ISC0009,9,dragonfly,dragonfly,insect,0,true,verified one-to-one original crosswalk,dragonfly
+ISC0010,10,ladybug,ladybug,insect,0,true,verified one-to-one original crosswalk,ladybug
+ISC0011,11,louse,louse,insect,0,true,verified one-to-one original crosswalk,louse
+ISC0012,12,maybug,maybug,insect,0,true,verified one-to-one original crosswalk,maybug
+ISC0013,13,ant,ant,insect,0,true,verified one-to-one original crosswalk,ant
+ISC0014,14,moth,moth,insect,0,true,verified one-to-one original crosswalk,moth
+ISC0015,15,mosquito,mosquito,insect,0,true,verified one-to-one original crosswalk,mosquito
+ISC0016,16,earwig,earwig,insect,0,true,verified one-to-one original crosswalk,earwig
+ISC0017,17,wood_louse,wood louse,insect,0,true,verified one-to-one original crosswalk,wood louse
+ISC0018,18,caterpillar,caterpillar,insect,0,true,verified one-to-one original crosswalk,caterpillar
+ISC0019,19,spider,spider,insect,0,true,verified one-to-one original crosswalk,spider
+ISC0020,20,grashopper,grashopper,insect,0,false,,
+ISC0021,21,fly,fly,insect,0,true,verified one-to-one original crosswalk,fly
+ISC0022,22,butterfly,butterfly,insect,0,true,verified one-to-one original crosswalk,butterfly
+ISC0023,23,flee,flee,insect,0,true,verified one-to-one original crosswalk,flee
+ISC0024,24,wasp,wasp,insect,0,true,verified one-to-one original crosswalk,wasp
+ISC0025,25,worm,worm,insect,0,true,verified one-to-one original crosswalk,worm
+ISC0026,26,anchovy,anchovy,fish,0,true,verified one-to-one original crosswalk,anchovy
+ISC0027,27,dolphin,dolphin,fish,0,true,verified one-to-one original crosswalk,dolphin
+ISC0028,28,trout,trout,fish,0,true,verified one-to-one original crosswalk,trout
+ISC0029,29,goldfish,goldfish,fish,0,true,verified one-to-one original crosswalk,goldfish
+ISC0030,30,shark,shark,fish,1,true,verified one-to-one original crosswalk,shark
+ISC0031,31,herring,herring,fish,0,true,verified one-to-one original crosswalk,herring
+ISC0032,32,squid,squid,fish,0,true,verified one-to-one original crosswalk,squid
+ISC0033,33,cod,cod,fish,0,true,verified one-to-one original crosswalk,cod
+ISC0034,34,carp,carp,fish,0,true,verified one-to-one original crosswalk,carp
+ISC0035,35,orca,orca,fish,0,true,verified one-to-one original crosswalk,orca
+ISC0036,36,eel,eel,fish,0,true,verified one-to-one original crosswalk,eel
+ISC0037,37,piranha,piranha,fish,0,true,verified one-to-one original crosswalk,piranha
+ISC0038,38,plaice,plaice,fish,0,true,verified one-to-one original crosswalk,plaice
+ISC0039,39,flatfish,flatfish,fish,0,true,verified one-to-one original crosswalk,flatfish
+ISC0040,40,sperm_whale,sperm whale,fish,1,true,verified one-to-one original crosswalk,sperm whale
+ISC0041,41,ray,ray,fish,0,true,verified one-to-one original crosswalk,ray
+ISC0042,42,sardine,sardine,fish,0,true,verified one-to-one original crosswalk,sardine
+ISC0043,43,pike,pike,fish,0,true,verified one-to-one original crosswalk,pike
+ISC0044,44,stickleback,stickleback,fish,0,true,verified one-to-one original crosswalk,stickleback
+ISC0045,45,whale,whale,fish,1,true,verified one-to-one original crosswalk,whale
+ISC0046,46,salmon,salmon,fish,0,true,verified one-to-one original crosswalk,salmon
+ISC0047,47,swordfish,swordfish,fish,0,true,verified one-to-one original crosswalk,swordfish
+ISC0048,48,alligator,alligator,reptile,1,true,verified one-to-one original crosswalk,alligator
+ISC0049,49,boa,boa,reptile,0,true,verified one-to-one original crosswalk,boa
+ISC0050,50,cobra,cobra,reptile,0,true,verified one-to-one original crosswalk,cobra
+ISC0051,51,dinosaur,dinosaur,reptile,1,true,verified one-to-one original crosswalk,dinosaur
+ISC0052,52,gecko,gecko,reptile,0,true,verified one-to-one original crosswalk,gecko
+ISC0053,53,lizard,lizard,reptile,0,true,verified one-to-one original crosswalk,lizard
+ISC0054,54,blindworm,blindworm,reptile,0,true,verified one-to-one original crosswalk,blindworm
+ISC0055,55,caiman,caiman,reptile,0,true,verified one-to-one original crosswalk,caiman
+ISC0056,56,chameleon,chameleon,reptile,0,true,verified one-to-one original crosswalk,chameleon
+ISC0057,57,frog,frog,reptile,0,true,verified one-to-one original crosswalk,frog
+ISC0058,58,crocodile,crocodile,reptile,1,true,verified one-to-one original crosswalk,crocodile
+ISC0059,59,iguana,iguana,reptile,0,true,verified one-to-one original crosswalk,iguana
+ISC0060,60,toad,toad,reptile,0,true,verified one-to-one original crosswalk,toad
+ISC0061,61,python,python,reptile,0,true,verified one-to-one original crosswalk,python
+ISC0062,62,salamander,salamander,reptile,0,true,verified one-to-one original crosswalk,salamander
+ISC0063,63,tortoise,tortoise,reptile,0,true,verified one-to-one original crosswalk,tortoise
+ISC0064,64,snake,snake,reptile,0,true,verified one-to-one original crosswalk,snake
+ISC0065,65,monitor_lizard,monitor lizard,reptile,0,true,verified one-to-one original crosswalk,monitor lizard
+ISC0066,66,turtle,turtle,reptile,0,true,verified one-to-one original crosswalk,turtle
+ISC0067,67,eagle,eagle,bird,0,true,verified one-to-one original crosswalk,eagle
+ISC0068,68,dove,dove,bird,0,true,verified one-to-one original crosswalk,dove
+ISC0069,69,duck,duck,bird,0,true,verified one-to-one original crosswalk,duck
+ISC0070,70,magpie,magpie,bird,0,true,verified one-to-one original crosswalk,magpie
+ISC0071,71,pheasant,pheasant,bird,0,true,verified one-to-one original crosswalk,pheasant
+ISC0072,72,vulture,vulture,bird,0,true,verified one-to-one original crosswalk,vulture
+ISC0073,73,rooster,rooster,bird,0,true,verified one-to-one original crosswalk,rooster
+ISC0074,74,turkey,turkey,bird,0,true,verified one-to-one original crosswalk,turkey
+ISC0075,75,canary,canary,bird,0,true,verified one-to-one original crosswalk,canary
+ISC0076,76,chicken,chicken,bird,0,true,verified one-to-one original crosswalk,chicken
+ISC0077,77,cuckoo,cuckoo,bird,0,true,verified one-to-one original crosswalk,cuckoo
+ISC0078,78,crow,crow,bird,0,true,verified one-to-one original crosswalk,crow
+ISC0079,79,chickadee,chickadee,bird,0,true,verified one-to-one original crosswalk,chickadee
+ISC0080,80,seagull,seagull,bird,0,true,verified one-to-one original crosswalk,seagull
+ISC0081,81,blackbird,blackbird,bird,0,true,verified one-to-one original crosswalk,blackbird
+ISC0082,82,sparrow,sparrow,bird,0,true,verified one-to-one original crosswalk,sparrow
+ISC0083,83,stork,stork,bird,0,true,verified one-to-one original crosswalk,stork
+ISC0084,84,parrot,parrot,bird,0,true,verified one-to-one original crosswalk,parrot
+ISC0085,85,parakeet,parakeet,bird,0,true,verified one-to-one original crosswalk,parakeet
+ISC0086,86,peacock,peacock,bird,0,true,verified one-to-one original crosswalk,peacock
+ISC0087,87,pelican,pelican,bird,0,true,verified one-to-one original crosswalk,pelican
+ISC0088,88,penguin,penguin,bird,0,true,verified one-to-one original crosswalk,penguin
+ISC0089,89,heron,heron,bird,0,true,verified one-to-one original crosswalk,heron
+ISC0090,90,robin,robin,bird,0,true,verified one-to-one original crosswalk,robin
+ISC0091,91,woodpecker,woodpecker,bird,0,true,verified one-to-one original crosswalk,woodpecker
+ISC0092,92,ostrich,ostrich,bird,0,true,verified one-to-one original crosswalk,ostrich
+ISC0093,93,owl,owl,bird,0,true,verified one-to-one original crosswalk,owl
+ISC0094,94,falcon,falcon,bird,0,true,verified one-to-one original crosswalk,falcon
+ISC0095,95,swan,swan,bird,0,true,verified one-to-one original crosswalk,swan
+ISC0096,96,swallow,swallow,bird,0,true,verified one-to-one original crosswalk,swallow
+ISC0097,97,monkey,monkey,mammal,0,true,verified one-to-one original crosswalk,monkey
+ISC0098,98,beaver,beaver,mammal,0,true,verified one-to-one original crosswalk,beaver
+ISC0099,99,bison,bison,mammal,1,true,verified one-to-one original crosswalk,bison
+ISC0100,100,dromedary,dromedary,mammal,1,true,verified one-to-one original crosswalk,dromedary
+ISC0101,101,squirrel,squirrel,mammal,0,true,verified one-to-one original crosswalk,squirrel
+ISC0102,102,hedgehog,hedgehog,mammal,0,true,verified one-to-one original crosswalk,hedgehog
+ISC0103,103,donkey,donkey,mammal,0,true,verified one-to-one original crosswalk,donkey
+ISC0104,104,giraffe,giraffe,mammal,1,true,verified one-to-one original crosswalk,giraffe
+ISC0105,105,hamster,hamster,mammal,0,true,verified one-to-one original crosswalk,hamster
+ISC0106,106,deer,deer,mammal,1,true,verified one-to-one original crosswalk,deer
+ISC0107,107,dog,dog,mammal,0,true,verified one-to-one original crosswalk,dog
+ISC0108,108,polar_bear,polar bear,mammal,1,true,verified one-to-one original crosswalk,polar bear
+ISC0109,109,kangaroo,kangaroo,mammal,1,true,verified one-to-one original crosswalk,kangaroo
+ISC0110,110,cat,cat,mammal,0,true,verified one-to-one original crosswalk,cat
+ISC0111,111,cow,cow,mammal,1,true,verified one-to-one original crosswalk,cow
+ISC0112,112,rabbit,rabbit,mammal,0,true,verified one-to-one original crosswalk,rabbit
+ISC0113,113,llama,llama,mammal,0,true,verified one-to-one original crosswalk,llama
+ISC0114,114,lion,lion,mammal,0,true,verified one-to-one original crosswalk,lion
+ISC0115,115,mouse,mouse,mammal,0,true,verified one-to-one original crosswalk,mouse
+ISC0116,116,rhinoceros,rhinoceros,mammal,1,true,verified one-to-one original crosswalk,rhinoceros
+ISC0117,117,hippopotamus,hippopotamus,mammal,1,true,verified one-to-one original crosswalk,hippopotamus
+ISC0118,118,elephant,elephant,mammal,1,true,verified one-to-one original crosswalk,elephant
+ISC0119,119,horse,horse,mammal,1,true,verified one-to-one original crosswalk,horse
+ISC0120,120,sheep,sheep,mammal,0,true,verified one-to-one original crosswalk,sheep
+ISC0121,121,tiger,tiger,mammal,0,true,verified one-to-one original crosswalk,tiger
+ISC0122,122,pig,pig,mammal,0,true,verified one-to-one original crosswalk,pig
+ISC0123,123,bat,bat,mammal,0,true,verified one-to-one original crosswalk,bat
+ISC0124,124,fox,fox,mammal,0,true,verified one-to-one original crosswalk,fox
+ISC0125,125,wolf,wolf,mammal,0,true,verified one-to-one original crosswalk,wolf
+ISC0126,126,zebra,zebra,mammal,1,true,verified one-to-one original crosswalk,zebra
+ISC0127,127,red_currant,red currant,fruit,0,true,original unambiguous fruit/vegetable stimulus name,
+ISC0128,128,strawberry,strawberry,fruit,0,true,original unambiguous fruit/vegetable stimulus name,
+ISC0129,129,apricot,apricot,fruit,0,true,original unambiguous fruit/vegetable stimulus name,
+ISC0130,130,pineapple,pineapple,fruit,0,true,original unambiguous fruit/vegetable stimulus name,
+ISC0131,131,apple,apple,fruit,0,true,original unambiguous fruit/vegetable stimulus name,
+ISC0132,132,banana,banana,fruit,0,true,original unambiguous fruit/vegetable stimulus name,
+ISC0133,133,blueberry,blueberry,fruit,0,true,original unambiguous fruit/vegetable stimulus name,
+ISC0134,134,blackberry,blackberry,fruit,0,true,original unambiguous fruit/vegetable stimulus name,
+ISC0135,135,lemon,lemon,fruit,0,true,original unambiguous fruit/vegetable stimulus name,
+ISC0136,136,clementine,clementine,fruit,0,true,original unambiguous fruit/vegetable stimulus name,
+ISC0137,137,dates,dates,fruit,0,true,original unambiguous fruit/vegetable stimulus name,
+ISC0138,138,grape,grape,fruit,0,true,original unambiguous fruit/vegetable stimulus name,
+ISC0139,139,raspberry,raspberry,fruit,0,true,original unambiguous fruit/vegetable stimulus name,
+ISC0140,140,cherry,cherry,fruit,0,true,original unambiguous fruit/vegetable stimulus name,
+ISC0141,141,kiwi,kiwi,fruit,0,true,original unambiguous fruit/vegetable stimulus name,
+ISC0142,142,coconut,coconut,fruit,0,true,original unambiguous fruit/vegetable stimulus name,
+ISC0143,143,lime,lime,fruit,0,true,original unambiguous fruit/vegetable stimulus name,
+ISC0144,144,litchi,litchi,fruit,0,true,original unambiguous fruit/vegetable stimulus name,
+ISC0145,145,mango,mango,fruit,0,true,original unambiguous fruit/vegetable stimulus name,
+ISC0146,146,melon,melon,fruit,0,true,original unambiguous fruit/vegetable stimulus name,
+ISC0147,147,nectarine,nectarine,fruit,0,true,original unambiguous fruit/vegetable stimulus name,
+ISC0148,148,papaya,papaya,fruit,0,true,original unambiguous fruit/vegetable stimulus name,
+ISC0149,149,passion_fruit,passion fruit,fruit,0,true,original unambiguous fruit/vegetable stimulus name,
+ISC0150,150,pear,pear,fruit,0,true,original unambiguous fruit/vegetable stimulus name,
+ISC0151,151,peach,peach,fruit,0,true,original unambiguous fruit/vegetable stimulus name,
+ISC0152,152,grapefruit,grapefruit,fruit,0,true,original unambiguous fruit/vegetable stimulus name,
+ISC0153,153,pumpkin,pumpkin,fruit,0,true,original unambiguous fruit/vegetable stimulus name,
+ISC0154,154,plum,plum,fruit,0,true,original unambiguous fruit/vegetable stimulus name,
+ISC0155,155,orange,orange,fruit,0,true,original unambiguous fruit/vegetable stimulus name,
+ISC0156,156,fig,fig,fruit,0,true,original unambiguous fruit/vegetable stimulus name,
+ISC0157,157,potato,potato,vegetable,0,true,original unambiguous fruit/vegetable stimulus name,
+ISC0158,158,onions,onions,vegetable,0,true,original unambiguous fruit/vegetable stimulus name,
+ISC0159,159,asparagus,asparagus,vegetable,0,true,original unambiguous fruit/vegetable stimulus name,
+ISC0160,160,eggplant,eggplant,vegetable,0,true,original unambiguous fruit/vegetable stimulus name,
+ISC0161,161,gherkins,gherkins,vegetable,0,true,original unambiguous fruit/vegetable stimulus name,
+ISC0162,162,beet,beet,vegetable,0,true,original unambiguous fruit/vegetable stimulus name,
+ISC0163,163,cauliflower,cauliflower,vegetable,0,true,original unambiguous fruit/vegetable stimulus name,
+ISC0164,164,beans,beans,vegetable,0,true,original unambiguous fruit/vegetable stimulus name,
+ISC0165,165,mushrooms,mushrooms,vegetable,0,true,original unambiguous fruit/vegetable stimulus name,
+ISC0166,166,zucchini,zucchini,vegetable,0,true,original unambiguous fruit/vegetable stimulus name,
+ISC0167,167,peas,peas,vegetable,0,true,original unambiguous fruit/vegetable stimulus name,
+ISC0168,168,chervil,chervil,vegetable,0,true,original unambiguous fruit/vegetable stimulus name,
+ISC0169,169,cucumber,cucumber,vegetable,0,true,original unambiguous fruit/vegetable stimulus name,
+ISC0170,170,garlic,garlic,vegetable,0,true,original unambiguous fruit/vegetable stimulus name,
+ISC0171,171,corn,corn,vegetable,0,true,original unambiguous fruit/vegetable stimulus name,
+ISC0172,172,pepper,pepper,vegetable,0,true,original unambiguous fruit/vegetable stimulus name,
+ISC0173,173,parsley,parsley,vegetable,0,true,original unambiguous fruit/vegetable stimulus name,
+ISC0174,174,leek,leek,vegetable,0,true,original unambiguous fruit/vegetable stimulus name,
+ISC0175,175,radish,radish,vegetable,0,true,original unambiguous fruit/vegetable stimulus name,
+ISC0176,176,black_salsify,black salsify,vegetable,0,true,original unambiguous fruit/vegetable stimulus name,
+ISC0177,177,celery,celery,vegetable,0,true,original unambiguous fruit/vegetable stimulus name,
+ISC0178,178,lettuce,lettuce,vegetable,0,true,original unambiguous fruit/vegetable stimulus name,
+ISC0179,179,spinach,spinach,vegetable,0,true,original unambiguous fruit/vegetable stimulus name,
+ISC0180,180,Brussels_sprouts,Brussels sprouts,vegetable,0,true,original unambiguous fruit/vegetable stimulus name,
+ISC0181,181,tomato,tomato,vegetable,0,true,original unambiguous fruit/vegetable stimulus name,
+ISC0182,182,(water)cress,(water)cress,vegetable,0,true,original unambiguous fruit/vegetable stimulus name,
+ISC0183,183,endive,endive,vegetable,0,true,original unambiguous fruit/vegetable stimulus name,
+ISC0184,184,carrot,carrot,vegetable,0,true,original unambiguous fruit/vegetable stimulus name,
+ISC0185,185,anvil,anvil,tool,0,true,verified one-to-one original crosswalk,anvil
+ISC0186,186,chisel,chisel,tool,0,true,verified one-to-one original crosswalk,chisel
+ISC0187,187,axe2,axe2,tool,0,false,,
+ISC0188,188,drill,drill,tool,0,true,verified one-to-one original crosswalk,drill
+ISC0189,189,crowbar,crowbar,tool,0,true,verified one-to-one original crosswalk,crowbar
+ISC0190,190,lawn_mower,lawn mower,tool,0,true,verified one-to-one original crosswalk,lawn mower
+ISC0191,191,hammer,hammer,tool,0,true,verified one-to-one original crosswalk,hammer
+ISC0192,192,spanner,spanner,tool,0,false,,
+ISC0193,193,pickaxe,pickaxe,tool,0,true,verified one-to-one original crosswalk,pickaxe
+ISC0194,194,crowbar2,crowbar2,tool,0,false,,
+ISC0195,195,wheelbarrow,wheelbarrow,tool,0,true,verified one-to-one original crosswalk,wheelbarrow
+ISC0196,196,knife,knife,tool,0,true,verified one-to-one original crosswalk,knife
+ISC0197,197,wrench,wrench,tool,0,true,verified one-to-one original crosswalk,wrench
+ISC0198,198,oil_can,oil can,tool,0,false,,
+ISC0199,199,filling_knife,filling knife,tool,0,true,verified one-to-one original crosswalk,filling knife
+ISC0200,200,plough,plough,tool,0,true,verified one-to-one original crosswalk,plough
+ISC0201,201,plane,plane,tool,0,true,verified one-to-one original crosswalk,plane
+ISC0202,202,shovel,shovel,tool,0,true,verified one-to-one original crosswalk,shovel
+ISC0203,203,screwdriver,screwdriver,tool,0,true,verified one-to-one original crosswalk,screwdriver
+ISC0204,204,grinding_disc,grinding disc,tool,0,true,verified one-to-one original crosswalk,grinding disc
+ISC0205,205,nail,nail,tool,0,true,verified one-to-one original crosswalk,nail
+ISC0206,206,wire_brush,wire brush,tool,0,true,verified one-to-one original crosswalk,wire brush
+ISC0207,207,vacuum_cleaner,vacuum cleaner,tool,0,true,verified one-to-one original crosswalk,vacuum cleaner
+ISC0208,208,tongs,tongs,tool,0,true,verified one-to-one original crosswalk,tongs
+ISC0209,209,paint_brush,paint brush,tool,0,true,verified one-to-one original crosswalk,paint brush
+ISC0210,210,file,file,tool,0,true,verified one-to-one original crosswalk,file
+ISC0211,211,level,level,tool,0,true,verified one-to-one original crosswalk,level
+ISC0212,212,saw,saw,tool,0,true,verified one-to-one original crosswalk,saw
+ISC0213,213,can_opener,can opener,kitchen,0,true,verified one-to-one original crosswalk,can opener
+ISC0214,214,plate,plate,kitchen,0,true,verified one-to-one original crosswalk,plate
+ISC0215,215,toaster,toaster,kitchen,0,true,verified one-to-one original crosswalk,toaster
+ISC0216,216,bottle,bottle,kitchen,0,true,verified one-to-one original crosswalk,bottle
+ISC0217,217,furnace,furnace,kitchen,1,false,,
+ISC0218,218,fridge,fridge,kitchen,1,true,verified one-to-one original crosswalk,fridge
+ISC0219,219,glass,glass,kitchen,0,true,verified one-to-one original crosswalk,glass
+ISC0220,220,towel,towel,kitchen,0,true,verified one-to-one original crosswalk,towel
+ISC0221,221,kettle,kettle,kitchen,0,true,verified one-to-one original crosswalk,kettle
+ISC0222,222,whisk,whisk,kitchen,0,true,verified one-to-one original crosswalk,whisk
+ISC0223,223,coffee_maker,coffee maker,kitchen,0,false,,
+ISC0224,224,spoon,spoon,kitchen,0,true,verified one-to-one original crosswalk,spoon
+ISC0225,225,butterknife,butterknife,kitchen,0,false,,
+ISC0226,226,microwave_oven,microwave oven,kitchen,0,true,verified one-to-one original crosswalk,microwave oven
+ISC0227,227,mixer,mixer,kitchen,0,true,verified one-to-one original crosswalk,mixer
+ISC0228,228,nutcracker,nutcracker,kitchen,0,true,verified one-to-one original crosswalk,nutcracker
+ISC0229,229,place_mat,place mat,kitchen,0,true,verified one-to-one original crosswalk,place mat
+ISC0230,230,oven,oven,kitchen,0,true,verified one-to-one original crosswalk,oven
+ISC0231,231,pan,pan,kitchen,0,true,verified one-to-one original crosswalk,pan
+ISC0232,232,jar,jar,kitchen,0,false,,
+ISC0233,233,grater,grater,kitchen,0,true,verified one-to-one original crosswalk,grater
+ISC0234,234,scissors,scissors,kitchen,0,true,verified one-to-one original crosswalk,scissors
+ISC0235,235,apron,apron,kitchen,0,true,verified one-to-one original crosswalk,apron
+ISC0236,236,spatula,spatula,kitchen,0,true,verified one-to-one original crosswalk,spatula
+ISC0237,237,mug,mug,kitchen,0,true,verified one-to-one original crosswalk,mug
+ISC0238,238,teaspoon,teaspoon,kitchen,0,true,verified one-to-one original crosswalk,teaspoon
+ISC0239,239,colander,colander,kitchen,0,true,verified one-to-one original crosswalk,colander
+ISC0240,240,fork,fork,kitchen,0,true,verified one-to-one original crosswalk,fork
+ISC0241,241,electric_kettle,electric kettle,kitchen,0,true,verified one-to-one original crosswalk,electric kettle
+ISC0242,242,scales,scales,kitchen,0,true,verified one-to-one original crosswalk,scales
+ISC0243,243,wok,wok,kitchen,0,true,verified one-to-one original crosswalk,wok
+ISC0244,244,sieve,sieve,kitchen,0,true,verified one-to-one original crosswalk,sieve
+ISC0245,245,accordion,accordion,instrument,0,true,verified one-to-one original crosswalk,accordion
+ISC0246,246,banjo,banjo,instrument,0,true,verified one-to-one original crosswalk,banjo
+ISC0247,247,bass(guitar),bass(guitar),instrument,0,false,,
+ISC0248,248,cello,cello,instrument,1,true,verified one-to-one original crosswalk,cello
+ISC0249,249,cymbals,cymbals,instrument,0,true,verified one-to-one original crosswalk,cymbals
+ISC0250,250,contrabass,contrabass,instrument,1,false,,
+ISC0251,251,bagpipe,bagpipe,instrument,0,true,verified one-to-one original crosswalk,bagpipe
+ISC0252,252,drum_set,drum set,instrument,1,true,verified one-to-one original crosswalk,drum set
+ISC0253,253,flute,flute,instrument,0,true,verified one-to-one original crosswalk,flute
+ISC0254,254,bassoon,bassoon,instrument,1,true,verified one-to-one original crosswalk,bassoon
+ISC0255,255,flute2,flute2,instrument,0,false,,
+ISC0256,256,guitar,guitar,instrument,0,true,verified one-to-one original crosswalk,guitar
+ISC0257,257,harp_,harp,instrument,1,true,verified one-to-one original crosswalk,harp
+ISC0258,258,clarinet,clarinet,instrument,0,true,verified one-to-one original crosswalk,clarinet
+ISC0259,259,harpsichord,harpsichord,instrument,1,true,verified one-to-one original crosswalk,harpsichord
+ISC0260,260,harmonica,harmonica,instrument,0,true,verified one-to-one original crosswalk,harmonica
+ISC0261,261,organ,organ,instrument,1,true,verified one-to-one original crosswalk,organ
+ISC0262,262,panpipe,panpipe,instrument,0,false,,
+ISC0263,263,piano,piano,instrument,1,true,verified one-to-one original crosswalk,piano
+ISC0264,264,saxophone,saxophone,instrument,1,true,verified one-to-one original crosswalk,saxophone
+ISC0265,265,synthesizer,synthesizer,instrument,1,true,verified one-to-one original crosswalk,synthesizer
+ISC0266,266,tambourine,tambourine,instrument,0,true,verified one-to-one original crosswalk,tambourine
+ISC0267,267,triangle,triangle,instrument,0,true,verified one-to-one original crosswalk,triangle
+ISC0268,268,trombone,trombone,instrument,0,true,verified one-to-one original crosswalk,trombone
+ISC0269,269,drum,drum,instrument,0,true,verified one-to-one original crosswalk,drum
+ISC0270,270,trumpet,trumpet,instrument,0,true,verified one-to-one original crosswalk,trumpet
+ISC0271,271,violin,violin,instrument,0,true,verified one-to-one original crosswalk,violin
+ISC0272,272,bra,bra,clothing,0,true,verified one-to-one original crosswalk,bra
+ISC0273,273,blouse,blouse,clothing,0,true,verified one-to-one original crosswalk,blouse
+ISC0274,274,pants,pants,clothing,0,true,verified one-to-one original crosswalk,pants
+ISC0275,275,tie,tie,clothing,0,true,verified one-to-one original crosswalk,tie
+ISC0276,276,shirt,shirt,clothing,0,true,verified one-to-one original crosswalk,shirt
+ISC0277,277,hat,hat,clothing,0,true,verified one-to-one original crosswalk,hat
+ISC0278,278,coat,coat,clothing,0,true,verified one-to-one original crosswalk,coat
+ISC0279,279,jeans,jeans,clothing,0,true,verified one-to-one original crosswalk,jeans
+ISC0280,280,jogging,jogging,clothing,0,false,,
+ISC0281,281,dress,dress,clothing,0,true,verified one-to-one original crosswalk,dress
+ISC0282,282,costume,costume,clothing,0,false,,
+ISC0283,283,boots,boots,clothing,0,true,verified one-to-one original crosswalk,boots
+ISC0284,284,cap,cap,clothing,0,true,verified one-to-one original crosswalk,cap
+ISC0285,285,hat2,hat2,clothing,0,false,,
+ISC0286,286,pyjamas,pyjamas,clothing,0,true,verified one-to-one original crosswalk,pyjamas
+ISC0287,287,belt,belt,clothing,0,true,verified one-to-one original crosswalk,belt
+ISC0288,288,skirt,skirt,clothing,0,true,verified one-to-one original crosswalk,skirt
+ISC0289,289,dungarees,dungarees,clothing,0,true,verified one-to-one original crosswalk,dungarees
+ISC0290,290,shoes,shoes,clothing,0,true,verified one-to-one original crosswalk,shoes
+ISC0291,291,shorts,shorts,clothing,0,true,verified one-to-one original crosswalk,shorts
+ISC0292,292,scarf,scarf,clothing,0,true,verified one-to-one original crosswalk,scarf
+ISC0293,293,panties,panties,clothing,0,true,verified one-to-one original crosswalk,panties
+ISC0294,294,socks,socks,clothing,0,true,verified one-to-one original crosswalk,socks
+ISC0295,295,sweater,sweater,clothing,0,true,verified one-to-one original crosswalk,sweater
+ISC0296,296,top,top,clothing,0,true,verified one-to-one original crosswalk,top
+ISC0297,297,sweater2,sweater2,clothing,0,false,,
+ISC0298,298,t-shirt,t-shirt,clothing,0,true,verified one-to-one original crosswalk,t-shirt
+ISC0299,299,mittens,mittens,clothing,0,true,verified one-to-one original crosswalk,mittens
+ISC0300,300,bathing_suit,bathing suit,clothing,0,true,verified one-to-one original crosswalk,bathing suit
+ISC0301,301,bazooka,bazooka,weapon,0,true,verified one-to-one original crosswalk,bazooka
+ISC0302,302,axe,axe,weapon,0,false,,
+ISC0303,303,bowl,bowl,weapon,0,false,,
+ISC0304,304,dagger,dagger,weapon,0,true,verified one-to-one original crosswalk,dagger
+ISC0305,305,rifle,rifle,weapon,0,true,verified one-to-one original crosswalk,rifle
+ISC0306,306,grenade,grenade,weapon,0,true,verified one-to-one original crosswalk,grenade
+ISC0307,307,canon,canon,weapon,0,true,verified one-to-one original crosswalk,canon
+ISC0308,308,slingshot,slingshot,weapon,0,true,verified one-to-one original crosswalk,slingshot
+ISC0309,309,club,club,weapon,0,true,verified one-to-one original crosswalk,club
+ISC0310,310,machinegun,machinegun,weapon,0,false,,
+ISC0311,311,pistol,pistol,weapon,0,true,verified one-to-one original crosswalk,pistol
+ISC0312,312,shield,shield,weapon,0,true,verified one-to-one original crosswalk,shield
+ISC0313,313,spear,spear,weapon,0,true,verified one-to-one original crosswalk,spear
+ISC0314,314,stick,stick,weapon,0,true,verified one-to-one original crosswalk,stick
+ISC0315,315,tank,tank,weapon,1,true,verified one-to-one original crosswalk,tank
+ISC0316,316,rope,rope,weapon,0,false,,
+ISC0317,317,doublegun,doublegun,weapon,0,false,,
+ISC0318,318,sword,sword,weapon,0,true,verified one-to-one original crosswalk,sword
+ISC0319,319,whip,whip,weapon,0,true,verified one-to-one original crosswalk,whip
+ISC0320,320,car,car,vehicle,1,true,verified one-to-one original crosswalk,car
+ISC0321,321,boat,boat,vehicle,1,true,verified one-to-one original crosswalk,boat
+ISC0322,322,scooter,scooter,vehicle,0,true,verified one-to-one original crosswalk,scooter
+ISC0323,323,motorbike,motorbike,vehicle,0,true,verified one-to-one original crosswalk,motorbike
+ISC0324,324,bus,bus,vehicle,1,true,verified one-to-one original crosswalk,bus
+ISC0325,325,truck,truck,vehicle,1,true,verified one-to-one original crosswalk,truck
+ISC0326,326,delivery_van,delivery van,vehicle,1,false,,
+ISC0327,327,trailer,trailer,vehicle,1,true,verified one-to-one original crosswalk,trailer
+ISC0328,328,submarine,submarine,vehicle,1,true,verified one-to-one original crosswalk,submarine
+ISC0329,329,bicycle,bicycle,vehicle,0,true,verified one-to-one original crosswalk,bicycle
+ISC0330,330,go-cart,go-cart,vehicle,0,true,verified one-to-one original crosswalk,go-cart
+ISC0331,331,helicopter,helicopter,vehicle,1,true,verified one-to-one original crosswalk,helicopter
+ISC0332,332,hovercraft,hovercraft,vehicle,1,true,verified one-to-one original crosswalk,hovercraft
+ISC0333,333,jeep,jeep,vehicle,1,true,verified one-to-one original crosswalk,jeep
+ISC0334,334,cart,cart,vehicle,1,true,verified one-to-one original crosswalk,cart
+ISC0335,335,carriage,carriage,vehicle,1,true,verified one-to-one original crosswalk,carriage
+ISC0336,336,(hot_air)_balloon,(hot air) balloon,vehicle,1,true,verified one-to-one original crosswalk,(hot air) balloon
+ISC0337,337,subway_train,subway train,vehicle,1,true,verified one-to-one original crosswalk,subway train
+ISC0338,338,motorbike2,motorbike2,vehicle,1,false,,
+ISC0339,339,rocket,rocket,vehicle,1,true,verified one-to-one original crosswalk,rocket
+ISC0340,340,skateboard,skateboard,vehicle,0,true,verified one-to-one original crosswalk,skateboard
+ISC0341,341,sled,sled,vehicle,0,true,verified one-to-one original crosswalk,sled
+ISC0342,342,moped,moped,vehicle,1,false,,
+ISC0343,343,taxi,taxi,vehicle,1,true,verified one-to-one original crosswalk,taxi
+ISC0344,344,tractor,tractor,vehicle,1,true,verified one-to-one original crosswalk,tractor
+ISC0345,345,tram,tram,vehicle,1,true,verified one-to-one original crosswalk,tram
+ISC0346,346,train,train,vehicle,1,true,verified one-to-one original crosswalk,train
+ISC0347,347,airplane,airplane,vehicle,1,true,verified one-to-one original crosswalk,airplane
+ISC0348,348,truck2,truck2,vehicle,1,false,,
+ISC0349,349,Zeppelin,zeppelin,vehicle,1,true,verified one-to-one original crosswalk,zeppelin

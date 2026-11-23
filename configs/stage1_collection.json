@@ -1,0 +1,19 @@
+{
+  "protocol": "isc-stage1-v2-v3-collection-1",
+  "output_directory": "artifacts/isc_stage1_collection_20261122_v1",
+  "model": "Qwen2.5-72B-Instruct",
+  "generation_versions": ["v3", "v3.1"],
+  "responses_per_word": 20,
+  "generation_temperature": 0.8,
+  "base_seed": 20260801,
+  "generation_max_tokens": 500,
+  "judge_max_tokens": 400,
+  "classification_max_tokens": 2048,
+  "classification_batch_size": 8,
+  "stage1_objects": 350,
+  "v2_original_features": 2541,
+  "legacy_reuse": "none automatically: old runs lack a verified matching local model revision",
+  "task_taxonomy_status": "33-class collection reconstruction; historical numeric correspondence unverified",
+  "training_authorized": false,
+  "v4_ensembles": "deferred; not collected by this workflow"
+}

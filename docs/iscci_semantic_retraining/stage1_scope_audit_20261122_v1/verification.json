@@ -1,0 +1,19 @@
+{
+  "audit_outputs_sha256": {
+    "audit.json": "ac5512ae1a9038f0dc611b0106a5bb81078246a7e6245cfba63bfdcdd6fbe39e",
+    "current_objects_without_verified_identity.csv": "ff2966fd581626f2ca1b7c6ad6bdc619dc8b91d0b17f98bbcb312e5d23095723",
+    "existing_inventory_extension_workload.csv": "9b2d29e68fce0c10f85b511652fa9fa38f5bb39d7ad68cbd33beede2f870fdae",
+    "original_objects_without_verified_reuse.csv": "a49b9eb40bbec5f20198cc17f4b4e2241bf9192ca637b789297a0c8aa265dd9f"
+  },
+  "audit_source_hashes_verified": 18,
+  "current_unverified_rows_verified": 27,
+  "fixed_inventory_workload_rows_verified": 11,
+  "full_test_suite_rerun": false,
+  "no_retraining_or_behavioral_evaluation": true,
+  "original_uncovered_rows_verified": 84,
+  "passed": true,
+  "plan_not_implemented": true,
+  "prior_cohort_source_checkpoint_activation_hashes_verified": 185,
+  "reason_no_test_suite_rerun": "Documentation and static data audit only; no scientific code/configuration changed",
+  "scope": "Audit consistency and immutable-source checks; not a retraining readiness gate"
+}

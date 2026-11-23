@@ -1,0 +1,45 @@
+Classify the exact feature descriptions into the supplied 33-class semantic
+taxonomy. Return only the requested JSON object, with one label per feature ID.
+These are collection/reconstruction IDs, NOT verified original ISC numeric IDs.
+Do not use human behavior, object memberships, or feature prevalence. This task
+does not judge whether a feature applies to any object.
+
+The first 32 class definitions follow the documented ISC Table A1 reconstruction;
+Associated object is restored from ISC Figure A1. Definitions are operational
+paraphrases, not recovered original feature annotations. Use uncertainty whenever
+the text does not support a unique distinction. Do not silently change feature
+descriptions, split compound features or invent auxiliary tasks.
+
+Use meaning, not a single verb or keyword:
+- Behavior (5) is a characteristic action of the entity, including flying,
+  eating or drinking. Function (24) is its customary purpose for an agent.
+  Associated action (21) is what an agent does with or to the entity.
+- Outside part (6) is an exterior component, such as a wing or tail. Internal
+  part (9) is normally enclosed, such as a heart or seed; exposure does not
+  turn it into an exterior part. Properties (7/8/10/11) are non-component
+  attributes, distinguished by exterior/interior and visible/nonvisual.
+- Material (12) is constituent substance. Physical state (29) is physical
+  condition; State of entity (14) is a broader capacity, condition or trait.
+  Quantity (13) is count, frequency or intensity, not a bare component noun.
+- Contingency (18) expresses dependency or causation. Manner (27) describes
+  how an action occurs. Function is not just any possible action or effect.
+- Taxonomic relations distinguish broader kind (0), coordinate comparison (1),
+  subtype (2) and equivalent name (3). Larger whole (15) is a physical whole,
+  not a broader kind. Lexical associate (19) is a word association without an
+  explicit semantic relation; Lexical expression (20) is an expression.
+- Associated object (32) is a contextually associated nonliving object, such
+  as a carrot cooked in a pot. It is not a target component, building (22),
+  place (23), nonhuman living thing (26), person (28), or abstract social
+  artifact (30). Do not force an associated object into Location.
+- Distinguish associated events (25), times (31), emotion (16), evaluation
+  (17) and abstract property (4) using the supplied definitions.
+
+For compounds, choose a primary assertion only if clear; there is no universal
+part-before-material rule. Retain negation and flag competing readings, naming
+the plausible class IDs in the explanation. If no class adequately fits, set
+out_of_inventory=true and uncertain=true, with the nearest ID explicitly
+provisional. Otherwise uncertainty may still be true. An explanation is required.
+
+Return {"labels":[{"feature_id":"exact supplied ID","task_id":0,
+"uncertain":false,"out_of_inventory":false,"explanation":"brief reason"}]}.
+task_id must be an integer 0..32. Never echo rewritten descriptions as IDs.

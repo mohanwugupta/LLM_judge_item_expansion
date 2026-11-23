@@ -1,5 +1,20 @@
 # ISC-CI LLM Validation
 
+## Stage 1 Collection
+
+The separate V2/V3/V3.1 full-domain collection workflow is implemented in
+`leuven_expansion/stage1_collection.py`, with GPU launcher
+`run_stage1_collection.sh`. See
+[STAGE1_COLLECTION.md](../docs/iscci_semantic_retraining/STAGE1_COLLECTION.md)
+for input review, smoke/production commands, retries and export. It preserves
+the original 350 objects, collects no V4 ensembles and never trains a model.
+Production waits for 26 identity reviews; V2 also requires a verified original
+2541-feature text dictionary. Smoke can run first in an isolated namespace.
+
+**Stage 1 correction:** the historical retraining commands below do not
+implement the corrected full-domain comparison. Use the collection guide
+above for the new workflow; no new model training is authorized by it.
+
 The independent semantic-retraining extension is under `semantic_retraining/`.
 See `../docs/iscci_semantic_retraining/AUDIT.md` and `SCRATCHPAD.md` in that
 documentation directory for staged implementation status and investigator decisions.

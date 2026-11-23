@@ -1,0 +1,28 @@
+current_object,current_index,match_reason
+sole,79,name_unmatched
+grasshopper,103,name_unmatched
+viper,109,name_unmatched
+stove,133,name_unmatched
+percolator,139,name_unmatched
+bowl,140,category_conflict
+pot,148,name_unmatched
+tracksuit,169,name_unmatched
+suit,171,name_unmatched
+beanie,173,name_unmatched
+pullover,186,name_unmatched
+bass guitar,192,name_unmatched
+double bass,195,name_unmatched
+recorder,200,name_unmatched
+pan flute,207,name_unmatched
+van,223,name_unmatched
+motorcycle,235,name_unmatched
+kick scooter,239,name_unmatched
+knuckle dusters,247,name_unmatched
+bow,248,name_unmatched
+machine gun,255,name_unmatched
+double barrelled shotgun,261,name_unmatched
+axe,266,category_conflict
+adjustable spanner,269,name_unmatched
+clamp,272,name_unmatched
+oilcan,277,name_unmatched
+rope,288,category_conflict

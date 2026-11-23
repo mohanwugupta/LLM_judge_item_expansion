@@ -1,0 +1,12 @@
+condition,features,original_objects,verified_reusable_objects,uncovered_objects,uncovered_cells_upper_bound,full_cells,scope,note
+v2_retained,382,350,266,84,32088,133700,fixed existing inventory only; not a corrected Stage-1 inventory,"Generation, not atomic completion, for source-only conditions; legacy unknowns require separate audit"
+v3_A_retained,94,350,266,84,7896,32900,fixed existing inventory only; not a corrected Stage-1 inventory,"Generation, not atomic completion, for source-only conditions; legacy unknowns require separate audit"
+v3_B_retained,115,350,266,84,9660,40250,fixed existing inventory only; not a corrected Stage-1 inventory,"Generation, not atomic completion, for source-only conditions; legacy unknowns require separate audit"
+v3_C_retained,121,350,266,84,10164,42350,fixed existing inventory only; not a corrected Stage-1 inventory,"Generation, not atomic completion, for source-only conditions; legacy unknowns require separate audit"
+v3_1_A_retained,88,350,266,84,7392,30800,fixed existing inventory only; not a corrected Stage-1 inventory,"Generation, not atomic completion, for source-only conditions; legacy unknowns require separate audit"
+v3_1_B_retained,175,350,266,84,14700,61250,fixed existing inventory only; not a corrected Stage-1 inventory,"Generation, not atomic completion, for source-only conditions; legacy unknowns require separate audit"
+v3_1_C_retained,128,350,266,84,10752,44800,fixed existing inventory only; not a corrected Stage-1 inventory,"Generation, not atomic completion, for source-only conditions; legacy unknowns require separate audit"
+v4_fixed_B_locked_retained,175,350,266,84,14700,61250,fixed existing inventory only; not a corrected Stage-1 inventory,"Generation, not atomic completion, for source-only conditions; legacy unknowns require separate audit"
+v4_fixed_B_calibrated_retained,175,350,266,84,14700,61250,fixed existing inventory only; not a corrected Stage-1 inventory,"Generation, not atomic completion, for source-only conditions; legacy unknowns require separate audit"
+v4_ensemble_source_only_retained,2356,350,266,84,197904,824600,fixed existing inventory only; not a corrected Stage-1 inventory,"Generation, not atomic completion, for source-only conditions; legacy unknowns require separate audit"
+v2_all_existing_candidates,1995,350,266,84,167580,698250,fixed existing inventory only; not a corrected Stage-1 inventory,"Generation, not atomic completion, for source-only conditions; legacy unknowns require separate audit"

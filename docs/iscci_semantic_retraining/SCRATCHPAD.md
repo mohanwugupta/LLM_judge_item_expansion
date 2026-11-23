@@ -924,3 +924,170 @@ scientific training or new behavioral evaluation was performed. Local changes
 have not been pushed. Next: sync code, run the new cluster smoke, then production
 with SMOKE_TEST=0, CLASSIFY_CONDITION=all, INCLUDE_DEFERRED=0. Classification
 completion does not bypass review, human pilot, or the still-unlocked full schedule.
+
+## 2026-11-22: Stage 1 Dataset Confound and Correction Plan
+
+User correctly identified that adapted human 293x385 is a Stage 2 inventory, not
+the original Stage 1 dataset. Rechecked pinned original ISC and ISC-CI git trees
+(4ecc76d / 29e1c67), both without tracked source changes. Live GitHub fetches via
+web were attempted but unavailable; no assertion of current HEAD verification.
+Original ISC loader uses 350objects,2541semantic+355auxiliary outputs,36tasks,
+6007semantic+1050auxiliary examples. Actual original ISC-CI raw CSV is293x1995;
+both original strict cutoffs3produce exactly the adapted human293x385 matrix,
+including row/column order and values. Saved original ISC-CI checkpoint metadata
+also confirms385contexts,294embedding rows includingpadding and bothcutoffs3.
+
+The full-data `original_human` reference already exists and is correctly sourced.
+It is distinct from `human` in the adapted registry. The mistake was continuing
+to treat restricted-data human/LLM adaptation as an adequately controlled Stage1
+feature-source replacement study. Prior audits noticed the dimensions but that
+did not repair the design. Engine fidelity is not input-design fidelity. The
+observed representation gap is consistent with this confound, not a unique
+causal demonstration of its effect.
+
+Wrote `STAGE1_DATASET_CORRECTION_PLAN.md` with exact source lines, proposed full
+human baselines, matching rules, unresolved prerequisites and pretraining gates.
+Added `stage1_scope_audit_20261122_v1/` with source hashes, all84uncovered original
+rows,27unverified current identities and per-inventory extension workloads.
+Independent crosswalk inspection:266verified one-to-one matches;58original
+fruit/vegetable rows absent and26other original identities need review or new
+data. Do not call it simply57missing rows or reuse tensor-identified aliases as
+approved concept matches. Under current verified reuse,84x1995=167580candidate
+cells need filling for the old V2 inventory, before added features/legacy gaps.
+
+Raw V2 audit:584532unique cells versus584535expected,0duplicates and0invalid
+0-4scores. Three missing: vulture/intelligent(380),piranha/looks tough(1440),
+alligator/is many women's nightmare(1671). Valid fractional values are ordinal
+scores, not failures. Old32class archive covers423of1995rawV2descriptions,not
+the entire inventory. Full2541feature text/ID mapping is not established by
+the1995downstream features; the released pickle containsnumeric arrays. Novel
+discovery inventories also need full350coverage and a prespecified Stage1
+retention policy, not inherited Stage2cutoffs.
+
+Original human numeric33task assignments need noQwenclassification. Existing
+32class annotations do not satisfy matched33task grouping. New taxonomy review
+and possible reclassification remain prerequisites; do not guess the numeric
+IDofAssociatedobject. Full V4completedensembles staydeferred.
+
+Parser-policy audit reconfirmed:literal31676semanticpositives vsfull37683;
+6007restoredIDs,1532literalemptysemanticrows vs0corrected,identical7057ordered
+pairs and identical auxiliaries. Plan retainsliteralfullhumanforreplication,
+and proposesfullhumanwithapprovedcomplete-targetfixasmatchedscientific
+comparator forfull-targetLLMconditions. No asymmetricbuggyhuman/fixedLLM
+comparison, and no arbitrarydiscardofLLMfeatures to mimicserialization.
+
+New plan fixes350identity/metadata scope and33+3task system, keeps original
+architecture/initialization/optimizer/loss/batch64/30epochs, and documents
+inherent featureinventory/examplecount differences. Retained385human/random
+andoldLLMfits remain immutable restricted-datadiagnostics. Added prominent
+notices to READMEandISC_TRAINING.md thatv1commands are not the corrected design.
+
+This turn: audit/documentation only. No code/config changes, training, new
+labels, behavioral evaluation, checkpoint overwrites, archive moves or cluster
+submission. Review the plan before implementing any new Stage1training path.
+
+Audit verification passed:18source fingerprints and185previous cohort source,
+checkpoint and activation hashes unchanged. Checked84unique unresolved original
+rows,27current unverified identities and11fixed-inventory workload rows.
+Saved `stage1_scope_audit_20261122_v1/verification.json`; this is an audit
+consistency check, not a training-readiness gate. No full pytest rerun was needed
+for documentation/static audit changes, and no new implementation tests are
+claimed to pass.
+
+## 2026-11-22: Implemented Separate Stage 1 V2/V3 Collection
+
+User authorized implementation of the collection plan and explicitly selected
+both original V3 and V3.1 A/B/C. Added `leuven_expansion/stage1_collection.py`,
+`run_stage1_collection.sh`, frozen collection settings/templates under
+`configs/stage1_collection*`, and `STAGE1_COLLECTION.md`. No new training path,
+ISC/ISC-CI fits, label-generation calls, behavioral evaluation or cluster jobs
+were run locally. Full V4 completed ensembles remain deferred.
+
+Tracked templates derive from pinned original ISC: all 350 original object IDs,
+indices, category and size metadata; all 2541 feature IDs and original numeric
+task assignments. Independent comparison to actual original CSV/.ex confirmed
+every row/assignment. 266 existing verified matches plus 58 unambiguous original
+fruit/vegetable names have source identity evidence. 26 ambiguous names remain
+explicitly unreviewed; user must review display names/evidence before production.
+All original feature descriptions remain blank rather than invented. V2 requires
+a verified full ID-to-text mapping; the old 1995 features are never substituted.
+V3 can proceed without that dictionary once its identity manifest is reviewed.
+
+The model-independent prepare/preflight stages produce a new default namespace:
+`artifacts/isc_stage1_collection_20261122_v1/`. Actual local preflight: smoke ready;
+generation blocked on26identityreviews; V2 blocked on26reviews and2541feature
+descriptions. Preparation preserves existing reviewed input edits and makes no
+model calls. Small tracked templates avoid reliance on ignored old cluster data.
+
+Collection reuses original V3/V3.1 prompt loaders, job/paired-seed construction,
+response parser, V2 judges and resolver. Isolated smoke uses three original
+stimuli, six synthetic applicability cells and two synthetic task descriptions;
+it cannot populate production. Production counts:42000participant responses;
+889350V2cells, with2668050first-pass calls plus any adjudication/retries. No
+Stage2rater/object filters, newcascade, positiveverification or semanticmerge.
+Raw generation memberships retain all six prompt/version identities. Exact
+phrase normalization only builds a candidate catalog for classification; final
+semantic consolidation and scientific readiness remain separate.
+
+New33classcollectionreconstruction restoresAssociatedobject ascollectionID32,
+without claiming it isoriginalnumericID32. The original32classfile remains
+unchanged. Candidateclassification retains uncertainty/out-of-inventory flags;
+training_authorized=false remains explicit even after successful collection.
+V2 keeps existingoriginalfeaturetasks and doesnot needQwentaskreclassification.
+
+This implementation deliberately starts fresh full-domain data, not automatic
+legacyresponse reuse:oldruns lack verified matching weightrevision provenance.
+The earlier84-row workload was conditional on approved reuse, not the cost of
+this protocol. This distinction and the full request counts are prominent in
+the workflow. No hidden source-only-to-completion conversion was introduced.
+
+Cluster launcher preserves working Conda/vLLM setup,4x80GB GPUs,8CPUs,32GB hostRAM,
+TP4and24hwalltime. Preflight and invalid-index checks occur before serving Qwen.
+Actual local weights are fingerprinted using the existing helper. Array count
+is derived fromSlurm; partial retries must explicitly preserve SHARD_COUNT.
+One SQLite database and advisory lock per shard, no shared GPFS WAL. Requests
+are transactionally durable; failures stay pending; completed units are skipped.
+Bounded submission prevents materializing all889350requestfutures. Every raw
+response/failed/truncated attempt is journaled. Per-shard status/progress and
+CPU status queries support inspection. A resubmitted complete shard still starts
+its server but makes no new requests; docs recommend retrying only incomplete
+indices. CPU finalizers verify protocols, database hashes and global coverage.
+Checksummed export/verification includes partial-status disclosure and rejects
+symlink/path traversal. No automatic training/dependency submission occurs.
+
+TDD RED: new module initially missing; later status test failed on missing
+collection_status. GREEN/REFACTOR:17newtests pass in8.09s. Coverage includes
+350/2541scope, canonical metadata, no invented descriptions, original tasks,
+identity collisions, protocol mutation, deterministic sharding, failed retries,
+zero-repeat completed requests, exact original prompts/seeds, truncated response
+rejection/raw preservation, isolated smoke, export roundtrip, missing/corrupt
+shards, and full350-object fake-client generation across two shards followed by
+candidate classification/finalization. The fake full-domain test uses a one-
+response fixture only, not altered production settings. It caught a hardcoded
+response-count call site; fixed to honor the frozen config before final tests.
+No live Qwen/vLLM/GPU smoke has been run here.
+
+Regression: root suite224passed,1pre-existingfailure in
+`test_v4_atomic_resources_and_frozen_shards`:testexpectsarray0-31%4,whilethe
+unchanged HEAD `run_leuven_v4_atomic.sh` usesarray0-31. Neither file was edited.
+Separate ISC validation suite324passedin47.38s. Root tests initially stalled
+reading old Box-hosted pytest .pyc files; interrupted those collection attempts
+and used a temporary PYTHONPYCACHEPREFIX, after which the suite completed in
+21.24s. No tests were represented as passed from interrupted attempts.
+Black checks, bash syntax and git diff whitespace checks pass. All185previous
+scientific source/checkpoint/activation hashes and eight prior report-output
+hashes remain unchanged. No commit/push performed.
+
+Reproduction from project root, using the existing cluster environment:
+
+```bash
+python -m leuven_expansion.stage1_collection --stage prepare
+sbatch --export=ALL,COLLECTION_STAGE=smoke run_stage1_collection.sh
+python -m leuven_expansion.stage1_collection --stage preflight --task generate
+python -m leuven_expansion.stage1_collection --stage preflight --task judge
+```
+
+After input review and passing smoke, generation:
+`sbatch --array=0-3%1 --export=ALL,COLLECTION_STAGE=generate run_stage1_collection.sh`.
+V2 submission, candidate classification, shard retries, CPUfinalization and
+download/archive verification commands are in `STAGE1_COLLECTION.md`.

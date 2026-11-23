@@ -1,0 +1,9 @@
+{
+  "source_commit": "4ecc76d4817fb927d2ad79dfbe1ff44ea72affc0",
+  "original_sources_sha256": {
+    "data/leuven_size.csv": "13725c29979ffa24518c19a08c1fc97365a381cbfa89c955a70a78ee78d73630",
+    "data/leuven_rum_nozeroes.ex": "f91a3e3a5af19b35e51f5fb5a77a9e8a34756ad8f63c67408eddc609a11e9aeb"
+  },
+  "metadata_scope": "Canonical original 350-object Stage 1 metadata and numeric feature tasks; no applicability labels generated",
+  "taxonomy_status": "33-class collection reconstruction, not a verified original numeric task dictionary; training not authorized"
+}
